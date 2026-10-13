@@ -1,0 +1,276 @@
+# Evaluator Driven — the custody record
+
+**Version 0.9.1 · candidate · 2026-10-12** · Predicate type `https://evaluatordriven.com/custody/v1`
+Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
+
+Sections marked *(normative)* define conformance. Everything else explains it.
+
+---
+
+## 0. Status
+
+Early. One reference checker exists, in this repository. The evidence base is narrow and its limits are
+listed in `README.md`. Comments and failing records are welcome under `CONTRIBUTING.md`.
+
+---
+
+## 1. Scope *(normative)*
+
+This specification defines the **custody record**: a record kept with a piece of work that shows what the
+work was measured against, who measured it, what they found, and who decided.
+
+It standardizes the record, not the process that produced the work. How work is made, revised or
+iterated is out of scope.
+
+A conforming record makes work **answerable, not correct**. No requirement here claims, or may be read
+as claiming, that conforming work is good.
+
+A signature or content credential on the artifact describes where the artifact came from. It is never an
+outcome for a dimension.
+
+---
+
+## 2. Terms *(normative)*
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+"RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14
+(RFC 2119, RFC 8174) when, and only when, they appear in all capitals.
+
+| Term | Meaning |
+|---|---|
+| **artifact** | The work being evaluated, identified by the digests in the record's `subject`. |
+| **bar** | The written statement of what good means for the artifact: its dimensions and, for each, what conforming looks like. Frozen before the work starts. |
+| **dimension** | One part of the bar, judged on its own. |
+| **maker** | The party that produced the artifact. |
+| **evaluator** | A person, model, or script that reads the artifact against the bar. An evaluator did not make the artifact and did not author the bar. |
+| **buyer** | The party the work is for. The buyer's test is whether the work does the job it was meant to do. |
+| **specialist** | The party that knows the field well enough to say what good means. |
+| **check** | One evaluator's reading of one dimension in one run. |
+| **outcome** | The result of a check: `conforms`, `does_not_conform`, or `unobserved`. |
+| **instrument** | The written rubric an evaluator reads by, and the runner that applies it. |
+| **record** | The custody record defined here: an in-toto Statement whose predicate is `custody/v1`. |
+| **disposition** | The decision about the artifact — `given`, `not_yet_given`, or `declined` — made by a named person, the approver. |
+
+**Plain-language equivalents** used on evaluatordriven.com:
+
+| This specification | evaluatordriven.com |
+|---|---|
+| specialist | subject matter expert |
+| `unobserved` | not observed |
+| `given` / `not_yet_given` / `declined` | accepted / not yet accepted / declined |
+
+---
+
+## 3. The four moves
+
+The record carries evidence of four moves. Section 5 states what each requires.
+
+| Move | What the record shows | Requirements |
+|---|---|---|
+| Set the bar | The bar existed, unchanged, before the work; its buyer and specialist approved that exact bar | CL1-1 to CL1-3 |
+| Produce | Who made the work, by what method, against which bar, with which instrument | CL1-4, CL1-5 |
+| Evaluate independently | Who read it, against what, with what outcome, beside a control | CL1-6 to CL1-10, CL1-15 |
+| Keep the record | What failed, what separation was missing, where the record lives, who decided | CL1-11 to CL1-14 |
+
+---
+
+## 4. The record *(normative)*
+
+A record MUST be an in-toto Statement v1 whose `predicateType` is
+`https://evaluatordriven.com/custody/v1` and whose `predicate` has the fields below. A field listed as
+required MUST be present; a required list MAY be empty only where this table says so. Absence never
+means a default.
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `specVersion` | string | yes | This document's version, e.g. `0.9.1` |
+| `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
+| `bar.digest` | digest | yes | sha256 of the frozen bar document |
+| `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |
+| `bar.author` | string | yes | |
+| `bar.dimensions[]` | list, non-empty | yes | `id`, `criterion`; `scale` when scored |
+| `bar.dimensions[].scale` | object or `null` | yes | `anchors`, `threshold`, `floor` |
+| `bar.approvals[]` | list | yes | `role` (`buyer`·`specialist`), `by`, `barDigest`, `at`, `adopted` |
+| `bar.publishedAt` | URI or `null` | yes | |
+| `bar.groundTruth[]` | list, may be empty | yes | `name`, `version`, `digest` — each reference the bar judges against |
+| `bar.dissent[]` | list, may be empty | yes | `by`, `note` — where the buyer and specialist disagree about the bar, recorded, never averaged |
+| `maker` | object | yes | `name`, `version`, `method` (digest), `model` (or `null`) |
+| `producedAt` | timestamp | yes | |
+| `readsBeforeFreeze[]` | list, may be empty | baseline claims (BL-1) | |
+| `instrument` | object | yes | `rubric` (digest), `runner` (digest) |
+| `evaluators[]` | list, non-empty | yes | `id`, `name`, `kind` (`person`·`model`·`script`), `model` (or `null`); `script` (`name`, `author`, `digest`) when `kind` is `script` |
+| `checks[]` | list, non-empty | yes | `dimension`, `evaluator`, `run`, `batch`, `at`, `outcome`, `score`, `failureCondition`, `evidence`, `unobserved` |
+| `controls[]` | list, non-empty | yes | `id`, `batch`, `evaluator`, `case` (digest), `expected`, `outcome` |
+| `spread[]` | list | CL2 and above | `dimension`, `evaluator`, `runs`, `agreement` |
+| `disagreements[]` | list, may be empty | yes | `dimension`, `checks` (indexes into `checks[]`), `note` |
+| `violations[]` | list, may be empty | yes | `dimension`, `description` |
+| `separationGaps[]` | list, may be empty | yes | strings |
+| `retention` | object | yes | `location`, `public` (boolean) |
+| `demonstrations[]` | list | CL3 | `dimension`, `evaluator`, `planted` (digest), `outcome`, `at` |
+| `external[]` | list, may be empty | yes | `requirement` (`CL1-15`, or its 0.x name `CL2-4`; `CL3-3`), `subject` (the evaluator's `id` for CL1-15; `record` for CL3-3), `evidence` (`name`, `sha256`), `readBy` |
+| `disposition` | object | yes | `state`, `by`, `at`, `acknowledgesUnobserved[]` |
+
+Every check in a record is read against `bar.digest`; a reading against any other bar belongs in another
+record. A filed check is not edited: a correction is a new check with a later `at`, and both stay in
+`checks`. A record is plain JSON, readable without any tool.
+
+A **digest** is an object `{"sha256": "<64 lowercase hex>"}`. `model`, wherever it appears, is `null` or
+an object with `family`, `identifier`, `endpoint`, and `readOnly` (boolean).
+
+`schema/custody-v1.schema.json` encodes this table for JSON Schema 2020-12 validators. Where the schema
+and this section differ, this section governs.
+
+---
+
+## 5. Requirements *(normative)*
+
+A record MUST meet every requirement of the level it claims and of every level below it. A record that
+claims `baseline` MUST meet CR-1, CR-2, BL-1, and CL1-2 to CL1-14. CR-1, CR-2 and BL-1 apply to every record.
+
+Each requirement has a stable ID and a **check class**:
+
+- **structural** — decidable from the record's shape alone;
+- **semantic** — decidable from the record's content, and from supplied files where noted;
+- **external** — needs evidence outside the record, read by a named party.
+
+**When evidence is missing:** a structural or semantic requirement that the record breaks reads
+`FAILED`. A semantic requirement that needs files no one supplied reads `NOT-CHECKABLE`. An external
+requirement reads `OK` only when its evidence file is supplied, its digest matches, and `readBy` names a
+party who is not the maker; a mismatched digest reads `FAILED`; evidence read only by the maker is
+self-report and reads `NOT-CHECKABLE`; a named file that was not supplied reads `NOT-CHECKABLE`. When the record names **no** evidence at all, the two
+external requirements differ: independence (CL1-15) is a claim about the world, so an unevidenced claim
+reads `NOT-CHECKABLE`; a signature (CL3-3) is a property of the record, so its absence reads `FAILED`. A
+field that only asserts independence never satisfies a requirement on its own.
+
+### 5.1 Every record
+
+| ID | Requirement | Class |
+|---|---|---|
+| CR-1 | The record is an in-toto Statement v1: `_type` is `https://in-toto.io/Statement/v1`; `subject` is non-empty and every entry has a `name` and a sha256 digest; `predicateType` is exactly `https://evaluatordriven.com/custody/v1`. | structural |
+| CR-2 | Every field section 4 requires is present with its stated type, except the fields CL1-4, CL1-5, CL1-11 and CL1-12 check themselves. | structural |
+
+### 5.2 CL1 — the four moves
+
+| ID | Requirement | Class |
+|---|---|---|
+| CL1-1 | `bar.frozenAt` is earlier than `producedAt`. A record whose bar was frozen after the work can claim only `baseline` (BL-1); a bar frozen at the same instant as the work fits neither. | semantic |
+| CL1-2 | The bar names its author and at least one dimension. Every dimension has a unique `id` and a `criterion`. A dimension whose checks carry scores declares a `scale` with `anchors`, a `threshold`, and a `floor`. | structural |
+| CL1-3 | `bar.approvals` holds one `buyer` and one `specialist` approval, each naming who approved, when, and a `barDigest` equal to `bar.digest`. A specialist that is a published document is recorded with `adopted` naming the document and its version (a shape CR-2 checks), and `by` naming the person who adopted it. | semantic |
+| CL1-4 | The maker is named with a version, and `maker.method` is the digest of the written rules used to make the artifact. | structural |
+| CL1-5 | The instrument is pinned: `instrument.rubric` and `instrument.runner` are digests, and every evaluator of kind `script` names its script, its script's author, and its digest. | structural |
+| CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
+| CL1-7 | Every dimension on the bar has at least one check. A dimension with no check fails the record: its evidence is not attributable. | semantic |
+| CL1-8 | Every check names a dimension on the bar and a listed evaluator, gives a run, batch, and time, and declares its `failureCondition` — what would have made it return `does_not_conform`. A `conforms` or `does_not_conform` outcome cites an evidence digest. An `unobserved` outcome names the channel tried and why it could not observe, and carries no score. | semantic |
+| CL1-9 | Every batch that holds a check also holds at least one control, read by an evaluator in that batch, with its expected and actual outcome recorded. A control is a case whose correct outcome is known in advance. | semantic |
+| CL1-10 | Where checks of one dimension return different outcomes, `disagreements` names that dimension and the checks. Outcomes are never averaged into one. | semantic |
+| CL1-11 | Every dimension with a `does_not_conform` check appears in `violations`. `violations` and `separationGaps` are present even when empty. | semantic |
+| CL1-12 | `retention` states where the full record is kept and whether it is public. A record need not be public; it is kept, and it can be produced on request. | structural |
+| CL1-13 | The disposition is `given`, `not_yet_given`, or `declined`, with the approver's name and time. If any check is `unobserved`, the record's overall result is not "all conform", and a `given` disposition lists each unobserved dimension in `acknowledgesUnobserved`. | semantic |
+| CL1-14 | Each `subject` digest matches the supplied artifact file of that name. Without the files this reads `NOT-CHECKABLE`. | semantic |
+| CL1-15 | For every model evaluator, `external` holds evidence of its configuration — for example a harness log showing which model and endpoint answered — read by a named party who is not the maker. A model's own settings block (`model`) is a claim, not evidence. | external |
+
+### 5.3 CL2 — independent
+
+| ID | Requirement | Class |
+|---|---|---|
+| CL2-1 | Every evaluator reads every dimension it checks in at least two runs, and `spread` gives, for each such pair, the number of runs and how many agreed. | semantic |
+| CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
+| CL2-3 | If the maker is a model, no model evaluator shares its `family` or `endpoint`. | semantic |
+
+### 5.4 CL3 — proven
+
+| ID | Requirement | Class |
+|---|---|---|
+| CL3-1 | For every evaluator and dimension it checked, `demonstrations` holds a planted case on which that evaluator returned `does_not_conform`, timed before its first check of that dimension. The planted case is held out from the maker; the record carries only its digest. | semantic |
+| CL3-2 | The bar is published: `bar.publishedAt` is a URI. | structural |
+| CL3-3 | The record is signed and logged in a transparency log, and `external` holds the verification output, read by a named party who is not the maker. | external |
+
+### 5.5 Baseline
+
+| ID | Requirement | Class |
+|---|---|---|
+| BL-1 | A record that claims `baseline` has a `bar.frozenAt` strictly later than `producedAt`, and lists in `readsBeforeFreeze` what was read before the bar was frozen. A baseline record carries no conformance level: a bar written afterward is a description, not a standard. | semantic |
+
+### 5.6 The four observation states
+
+| State | Effect |
+|---|---|
+| A dimension with **no check** | The record fails (CL1-7) |
+| A check with outcome **`unobserved`** | The record stays valid; the dimension is not scored; the overall result cannot be "all conform"; the record goes to the approver (CL1-8, CL1-13) |
+| **`conforms`** / **`does_not_conform`** | As read |
+| **Disposition** | Always separate from outcomes, never rewriting them |
+
+---
+
+## 6. Verifying a record *(normative)*
+
+A verifier reports, for each requirement in scope, `OK`, `FAILED`, or `NOT-CHECKABLE`, and then:
+
+- **verdict** — `FAILED` if any requirement failed; otherwise `NOT-CHECKABLE` if any could not be checked;
+  otherwise `OK`;
+- **level achieved** — the highest claimed-or-lower level whose requirements, and those of every level
+  below it, are all `OK`; `baseline` when a baseline claim passes; `none` otherwise;
+- **routing** — `to approver` when any check is `unobserved` or the disposition is `not_yet_given`;
+  otherwise `none`.
+
+A verifier MUST NOT report a level the record does not claim, and MUST NOT turn an `unobserved` outcome
+into any other outcome.
+
+`checker/check.py` is a reference verifier. It is not normative: where it and this document differ, this
+document governs, and the difference is a bug in the checker.
+
+---
+
+## 7. Security and privacy considerations *(normative)*
+
+**The record can be separated from the artifact.** Kept beside the work, a record can be dropped by
+anyone who copies the work. CL1-14 binds the record to the artifact by digest; CL3-3 adds a signature
+and a transparency-log entry so a stripped record can be found again.
+
+**Held-out cases stay held out.** At CL3 the record carries only the digest of each planted case. A
+planted case published with the record teaches the next maker to write to it.
+
+**Publication is optional.** CL1-12 requires the record be kept and producible, not public. Evidence can
+name people and contain confidential work; a record holder MAY withhold evidence files and publish only
+digests.
+
+**Names are personal data.** `by`, `author`, and `name` fields identify people. Record holders are
+responsible for the law that applies to them.
+
+---
+
+## 8. Versioning *(normative)*
+
+This specification follows Semantic Versioning 2.0.0. A record names the version it was written to in
+`specVersion`. A change that would turn an `OK` record into a `FAILED` one is a major change; the
+predicate type's version changes with the major version. An identifier renamed within a major version keeps
+its old value valid until the next major version: `CL2-4` is accepted wherever `CL1-15` is. Each release is
+a git tag and is citable by commit. No implementation is part of the specification.
+
+---
+
+## Appendix A. Why a new predicate *(non-normative)*
+
+in-toto asks a new predicate to explain why existing ones do not cover its use. Read against the
+predicates vetted in the in-toto Attestation Framework at tag `v1.2.0` and the SLSA Verification Summary
+specification (the draft in the SLSA repository at commit `3cd3fdd`):
+
+| Existing predicate | What it records | What `custody/v1` needs that it does not carry |
+|---|---|---|
+| **SLSA Verification Summary** (`slsa.dev/verification_summary/v1`) | A verifier's `PASSED`/`FAILED` against a policy, with SLSA levels | A bar frozen *before* the work; buyer and specialist approval of that bar; per-dimension outcomes including `unobserved`; controls; a named human disposition separate from the result |
+| **Test Result** (`in-toto.io/attestation/test-result/v0.1`) | One test-suite run: `PASSED`/`WARNED`/`FAILED` and test names | Judgment by evaluators who are not the maker; the bar's provenance; a third outcome that refuses to score; disagreement between readers |
+| **Simple Verification Result** (`in-toto.io/attestation/svr/v0.1`) | Properties a trusted verifier confirmed | It lists only passing properties and states it does not carry information to reproduce the result; custody needs every outcome and enough to reconstruct the decision |
+| **SCAI** (`in-toto.io/attestation/scai`) | Attributes of software and its supply chain, with evidence | No bar, no evaluator separation, no disposition |
+| **Human review** | No human-review predicate is in the vetted list at `v1.2.0`; one appears only as an example in SLSA material | — |
+
+`custody/v1` can reference any of these as evidence in a check. It does not replace them.
+
+## Appendix B. Lineage *(non-normative)*
+
+This specification was condensed from a private working corpus (`e-di`, archived at commit `a48a464`)
+and checked against the commitments published on evaluatordriven.com. That corpus is **lineage, not
+evidence**: nothing here depends on it, and readers cannot inspect it.
+
+## Appendix C. Patent non-assertion *(non-normative pointer)*
+
+See `PATENTS.md`.

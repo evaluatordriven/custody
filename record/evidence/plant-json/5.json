@@ -1,0 +1,8 @@
+{
+  "gate": "D6",
+  "class": "omission only: an Appendix B commitment silently dropped",
+  "intent": "Delete Appendix B's lineage/evidence commitment with no contradicting sentence standing in its place.",
+  "file": "SPEC.md",
+  "find": "and checked against the commitments published on evaluatordriven.com. That corpus is **lineage, not\nevidence**: nothing here depends on it, and readers cannot inspect it.",
+  "replace": "and checked against the commitments published on evaluatordriven.com."
+}

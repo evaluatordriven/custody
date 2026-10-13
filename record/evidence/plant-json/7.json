@@ -1,0 +1,8 @@
+{
+  "gate": "D8",
+  "class": "a failing fixture that fails for a second, unnamed reason",
+  "intent": "Remove the violations field from the CL1-7 fixture, so it fails CR-2 as well as its named CL1-7.",
+  "file": "fixtures/cl1-fail-no-check-for-dimension.json",
+  "find": "    \"disagreements\": [],\n    \"violations\": [],\n    \"separationGaps\": [],",
+  "replace": "    \"disagreements\": [],\n    \"separationGaps\": [],"
+}

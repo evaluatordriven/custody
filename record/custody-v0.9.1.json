@@ -1,0 +1,1258 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": ".github/workflows/ci.yml",
+      "digest": {
+        "sha256": "5ed0b86713ceea370b9f0a5e406f5b664e6423150221d9c435432d57952984c1"
+      }
+    },
+    {
+      "name": ".gitignore",
+      "digest": {
+        "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+      }
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "digest": {
+        "sha256": "e290dc936d442de51c4658523d5cc91a2cbaef4e44ebc14e0cf8ecdea6fc9544"
+      }
+    },
+    {
+      "name": "LICENSE",
+      "digest": {
+        "sha256": "8b6bd9eb140a1c958fcd1d5cb0253ca86633e07dc318d8c52f708c4b5fd7d032"
+      }
+    },
+    {
+      "name": "LICENSE-CODE",
+      "digest": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    },
+    {
+      "name": "NOTICE",
+      "digest": {
+        "sha256": "8742ab1948bf66bce6640c275ed1f3d23d87efbc530913bd3bfe02fe3ec7b21c"
+      }
+    },
+    {
+      "name": "PATENTS.md",
+      "digest": {
+        "sha256": "9177910bbe6126b0fc78cc4c76e5dd4b5ea667cbe69b80096837fad4c5fce0fd"
+      }
+    },
+    {
+      "name": "README.md",
+      "digest": {
+        "sha256": "003f6ef4738961afecd9ec76b9305a9c0463158d949e08ea05b88c6254bafd90"
+      }
+    },
+    {
+      "name": "SPEC.md",
+      "digest": {
+        "sha256": "b3796b63bb10175f76a9a5febb471e04b24ae05b1e60ebe6ce59dac1f35b5a36"
+      }
+    },
+    {
+      "name": "checker/check.py",
+      "digest": {
+        "sha256": "67c0d37f332462b54866832e0be38c8b3df090cd392fb0be36afcbae02b97430"
+      }
+    },
+    {
+      "name": "examples/minimal/bar.md",
+      "digest": {
+        "sha256": "61c50d19fda2f8bf2e20ca8524d5dfa8f215d4f27e5951715601f047820abfbe"
+      }
+    },
+    {
+      "name": "examples/minimal/control-case.md",
+      "digest": {
+        "sha256": "19899b12f2ef66a0b8a3dd383a2303f981281f77d4646ab134b551c7f48fa459"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D1.md",
+      "digest": {
+        "sha256": "2ce170d58dacce55444929e57137063a6e1bc8fbd7b41069ead32263194c499f"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D2.md",
+      "digest": {
+        "sha256": "dec9158ec2a45295c39bea4064c87ab8c6100ad126c247fd4a93bdd7914f81a2"
+      }
+    },
+    {
+      "name": "examples/minimal/inputs.json",
+      "digest": {
+        "sha256": "cdc07209a6aae461ddb55cd5bd2f13faa128bc466a45f250600cb0d56ae3bdc6"
+      }
+    },
+    {
+      "name": "examples/minimal/memo.md",
+      "digest": {
+        "sha256": "6f98d74080d8d419a3f77771fb6cb468f5d94926d6bbef057b56e2b39f9af774"
+      }
+    },
+    {
+      "name": "examples/minimal/method.md",
+      "digest": {
+        "sha256": "dadfad99b1a7d632ea246b72ac445f867dcfb1265d182ae733b165316070b1a9"
+      }
+    },
+    {
+      "name": "examples/minimal/procedure.md",
+      "digest": {
+        "sha256": "38d6039853da0d1189a65a6840574143c913ce053a07e29ddf453186a7bc8efc"
+      }
+    },
+    {
+      "name": "examples/minimal/record.json",
+      "digest": {
+        "sha256": "c77452937155f1f71f09dfdf3ce0453de5ac9e5c791fc9dd9a319c04974261db"
+      }
+    },
+    {
+      "name": "examples/minimal/rubric.md",
+      "digest": {
+        "sha256": "70215f416d493c067b5958212f8c6252499b548469b86ce1c063654c14b805df"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-bar-frozen-at-same-instant.json",
+      "digest": {
+        "sha256": "90b291e9d7b1d2ceac5b86f0ea6c96d60199dd66ea254b9a971857ba31f0b363"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-no-reads-listed.json",
+      "digest": {
+        "sha256": "fec9c0ad8d2768f77536b016a875dad97b7a6bf237d6599d53c3e1bc52379494"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass.json",
+      "digest": {
+        "sha256": "0e1f09155b2974a1207c46f654e2762728a16811d9639dd7646ea9845e272b83"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-approval-bound-to-other-bar.json",
+      "digest": {
+        "sha256": "f6ac30ec092474c0a300c472343bdabbc573abd993572b71e8f22f1f63288db8"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-late.json",
+      "digest": {
+        "sha256": "2fd738b35d6df2bb96fe296f03b587db5dec3a79f32af5e06a711be4bec13b88"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-conforms-without-evidence.json",
+      "digest": {
+        "sha256": "ce932eaf27ceb562fb46129768479d1cc992e4417cbc3e30ef6900006ab3ad08"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-disagreement-not-recorded.json",
+      "digest": {
+        "sha256": "dee6aaf2fa5f5b0b345e198e0b425498558a27dbc867e09153f72e9e98d3d8ec"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-is-bar-author.json",
+      "digest": {
+        "sha256": "d2834152ec344d4ea0d9dd0c6ba85f7d7a3eb9c9c4bf0ef478cdecc2d86c2fe5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-instrument-not-pinned.json",
+      "digest": {
+        "sha256": "0d828adcad439b547d51dcc12a70722f9d15fdc890125e39dab6b8158c77a369"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-method-missing.json",
+      "digest": {
+        "sha256": "82367f07c97d5ff17a3a9db3429c1e30eb5d3fb4f10a4853d29fa55349821557"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-disagreements-field.json",
+      "digest": {
+        "sha256": "f3f9ba897185ae70f2e5e1c5e7c154efe519d3013cf187d1ee45770b37e54310"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-violations-field.json",
+      "digest": {
+        "sha256": "6f86cccfff3563c8cc56fcebc045d625877d894d0e335969dbde8066057aa1d2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-check-for-dimension.json",
+      "digest": {
+        "sha256": "a7e2a3edccf83fda7438a50126b1a3a66558b6689567deca286f67363dd4fba6"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-control-in-batch.json",
+      "digest": {
+        "sha256": "8d11ce0f4faa6c7c623f97383aa5698431fd7563671a1ebe3ceab7235fd12d57"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-not-a-custody-statement.json",
+      "digest": {
+        "sha256": "65c434a4b0a653557ca2c41e4934b4108dafeea7c09e9b74c6e1ef8aa995c1f3"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-retention-missing.json",
+      "digest": {
+        "sha256": "8e712326f283789cd6794a5e726f94237d41f87aca7979051f839ba57444a6a0"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-scored-without-scale.json",
+      "digest": {
+        "sha256": "5d10013da35b18a6111cc7b27f2646dc1879b9d6801f7eaa2ec8fcdffcc01544"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-evaluator-unpinned.json",
+      "digest": {
+        "sha256": "8173461b641a72235808acf0fd0741dc11aca67def4484777c93da85f64a33a4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-written-by-maker.json",
+      "digest": {
+        "sha256": "1223abeca5688c0d795631caa00a0dbe5bec84d33e7e5437435bfd86dc16b26e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-tampered-artifact.json",
+      "digest": {
+        "sha256": "710eee45fbad6648ac99d3b745b7277418e129968dcf81a1685d07aa8d4adcd4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-unobserved-not-acknowledged.json",
+      "digest": {
+        "sha256": "997e77f8d3c248972080eab29e56bc224d4cbb5811637369c878657b09ca1657"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-violation-not-recorded.json",
+      "digest": {
+        "sha256": "683b9adf6e8d9883dafc4afc8b0327e9e5c77bd5b4a78484b3b71be85991e4b7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "ccb9da0ef5257d1a1edd7b00f985338290d7ba9c29eba0b13cdee785eebf90c4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-basic.json",
+      "digest": {
+        "sha256": "ece8b87935afbc1b8624b394305e1553ee147bd8a88e51fb50ac2c41f5ba0348"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-legacy-no-script-field.json",
+      "digest": {
+        "sha256": "d55ebb5082e49a1d16694425c761c533c0c1c92a9f4d575cf286753c6fabef71"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-not-yet-given-with-violation.json",
+      "digest": {
+        "sha256": "c4637fde322dc226d1e19eb56e827752dae91f3763c3bcffda0a3cf3064265d0"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-script-evaluator.json",
+      "digest": {
+        "sha256": "b5bdd4dc8a8122c6666d83e24071028ac9d5197749f6207d8797370cfc066bf6"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-acknowledged.json",
+      "digest": {
+        "sha256": "7d499f2c0fd1691db9841f67182d5536a0b3424f631c2416341cba5d943e273a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-model-evaluator-settings-only.json",
+      "digest": {
+        "sha256": "dd8e801b0a814ec4f52abd9b2de2634054698382c5e5fe9997cb6108e425ceeb"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evaluator-not-read-only.json",
+      "digest": {
+        "sha256": "cf9e0674afe413533b894f68df11a1b7c022f4807c6c54c44fe90c5e5ad37f02"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "1cfeb6e62263b8236fac844f2e976eb9a0e189738ffb918cedf5ba1f027c776e"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evidence-digest-mismatch.json",
+      "digest": {
+        "sha256": "04282e12811f664143331d11109bf9ec42d11ba44ca110bcb91751b27dc94451"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-one-run-only.json",
+      "digest": {
+        "sha256": "70a7bc696b98c53c613594e68b4417c491002362ec68328058028f91b696ad97"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-basic.json",
+      "digest": {
+        "sha256": "7ddd6bfc1eb8175d6df80070cce7166831dd65ea5962c186b0be22ff57bbf435"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-legacy-evidence-tag.json",
+      "digest": {
+        "sha256": "7e7c9763aab38b8728bd40e0454d9331803a78d234237d07365cc55faa366d24"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-is-other-model.json",
+      "digest": {
+        "sha256": "4445b5f24a80588bf8f8ab3c08507be259c8558b2f459cd1fde45b3c9aa1aeaa"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-runs-disagree-recorded.json",
+      "digest": {
+        "sha256": "53761dd829196309312922c0e77af9bac10a392d12c8efa13c7d04e71f37e8ff"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-asserted-only.json",
+      "digest": {
+        "sha256": "6b252a20a07e1971b940a8bf64ae038b5472a77d1b64c5b92e2727345f758f18"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-read-by-maker.json",
+      "digest": {
+        "sha256": "64155ca7c04517556a3cbeef581b846ab4b0f863244ae26d8e50d05e9d3d75e1"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-bar-not-published.json",
+      "digest": {
+        "sha256": "480b5cb79715c30a130f31271cd4d955f1ec7bf83128aa9178eb121b8d37f1d8"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-demonstration-after-check.json",
+      "digest": {
+        "sha256": "feb68388bdda3e617114ede92a5a62ab5ed2a1bdf0795eb9f4641986907a9da9"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-no-signature-entry.json",
+      "digest": {
+        "sha256": "aed35d891e2e0781bf3085d5c19e74661bae3b137ccf5362ba9906850ac41377"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "aa4480ebc35c8687e513ffae23bf3899cefbe0d4240388eef744d230bb4e1132"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-basic.json",
+      "digest": {
+        "sha256": "019e75e19c6c5112231ce0c360eb24bc8bdbac283046699072d191cd928c7b15"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-unobserved-not-yet-given.json",
+      "digest": {
+        "sha256": "bb6cfcc67aab989d9354777571e253d976d5b725d0ace5d690e620907aac7aa3"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-read-by-maker.json",
+      "digest": {
+        "sha256": "4b3545d5177d1bd53e33024ea0038b24012c4779dbd03fce21350d83a9e6d41a"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gemini.log",
+      "digest": {
+        "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gpt.log",
+      "digest": {
+        "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+      }
+    },
+    {
+      "name": "fixtures/evidence/signature-verification.txt",
+      "digest": {
+        "sha256": "af312ebd12640a99f164ebd3a0ed8463f6b3a9734d04cc39f95b6ad1024a3eba"
+      }
+    },
+    {
+      "name": "fixtures/expected.json",
+      "digest": {
+        "sha256": "6950673547aa51f4d2521a2bd1418bfb4193b9a5217b641acda44ed68e93bcb4"
+      }
+    },
+    {
+      "name": "fixtures/files/report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    },
+    {
+      "name": "fixtures/generate.py",
+      "digest": {
+        "sha256": "88d24a994c63a19da629ba52aeaf66f81929627c1fea6bde6cbfaf2021fca970"
+      }
+    },
+    {
+      "name": "schema/custody-v1.schema.json",
+      "digest": {
+        "sha256": "3a3828b7dbb07b66e6bd8f44a7911be1dd7f94b0d7c3a734b0e405fdbfe2be9e"
+      }
+    },
+    {
+      "name": "tests/red_counts.py",
+      "digest": {
+        "sha256": "2b88b177f4f9aad44f2da208510b09aea61972dca1e67484949eae4173d3bad5"
+      }
+    },
+    {
+      "name": "tests/run_fixtures.py",
+      "digest": {
+        "sha256": "708b215780fa25e7ccab4ccbc13cbee3e2f8edf79d001cf706cc1b860d39ef24"
+      }
+    },
+    {
+      "name": "tests/schema_check.py",
+      "digest": {
+        "sha256": "ff2b63289e0b46497ca2e2a14cf970745d19065fc11bb7fb34d447e50c0915cc"
+      }
+    },
+    {
+      "name": "tools/count.py",
+      "digest": {
+        "sha256": "6e57abcf6417c2ad2c46300e6ef7d95d2847f59da3f212078a1c8d5d58c2e6b6"
+      }
+    },
+    {
+      "name": "tools/make_record.py",
+      "digest": {
+        "sha256": "0d66909803d2e5b8148ce31d08423c233e41cdb9710d27758e674a59298589db"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.1",
+    "levelClaimed": "CL1",
+    "bar": {
+      "digest": {
+        "sha256": "4c835b8088af5696cf0417dc076517e200e483ca0daaa73ac94c8f0c3367c020"
+      },
+      "frozenAt": "2026-10-13T12:55:01Z",
+      "author": "Claude Opus 5.5",
+      "dimensions": [
+        {
+          "id": "D1",
+          "criterion": "Gate D1 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D2",
+          "criterion": "Gate D2 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D3",
+          "criterion": "Gate D3 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D4",
+          "criterion": "Gate D4 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D5",
+          "criterion": "Gate D5 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D6",
+          "criterion": "Gate D6 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D7",
+          "criterion": "Gate D7 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D8",
+          "criterion": "Gate D8 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D9",
+          "criterion": "Gate D9 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D10",
+          "criterion": "Gate D10 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D11",
+          "criterion": "Gate D11 of frozen v0.9.1 bar",
+          "scale": null
+        },
+        {
+          "id": "D12",
+          "criterion": "Gate D12 of frozen v0.9.1 bar",
+          "scale": null
+        }
+      ],
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Steve Moitozo II",
+          "barDigest": {
+            "sha256": "4c835b8088af5696cf0417dc076517e200e483ca0daaa73ac94c8f0c3367c020"
+          },
+          "at": "2026-10-13T12:55:01Z",
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Steve Moitozo II",
+          "barDigest": {
+            "sha256": "4c835b8088af5696cf0417dc076517e200e483ca0daaa73ac94c8f0c3367c020"
+          },
+          "at": "2026-10-13T12:55:01Z",
+          "adopted": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [],
+      "dissent": []
+    },
+    "maker": {
+      "name": "Claude Opus 5.5",
+      "version": "5.5",
+      "method": {
+        "sha256": "4c835b8088af5696cf0417dc076517e200e483ca0daaa73ac94c8f0c3367c020"
+      },
+      "model": {
+        "family": "Claude",
+        "identifier": "Claude Opus 5.5",
+        "endpoint": "Anthropic (not independently verified)",
+        "readOnly": false
+      }
+    },
+    "producedAt": "2026-10-13T20:37:32Z",
+    "instrument": {
+      "rubric": {
+        "sha256": "4c835b8088af5696cf0417dc076517e200e483ca0daaa73ac94c8f0c3367c020"
+      },
+      "runner": {
+        "sha256": "13a59d5b919418767dd3cc4ba0185ade10f2c0f607f831ba737b9da444cb96d2"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "GLM53",
+        "name": "GLM 5.3",
+        "kind": "model",
+        "model": {
+          "family": "GLM",
+          "identifier": "z-ai/glm-5.3",
+          "endpoint": "https://openrouter.ai/api/v1 (Z.AI pinned)",
+          "readOnly": true
+        },
+        "script": null
+      },
+      {
+        "id": "ORCH-SCRIPT",
+        "name": "ORCH-SCRIPT",
+        "kind": "script",
+        "model": null,
+        "script": {
+          "name": "rebuild_custody.py",
+          "author": "VizH (Orchestrator)",
+          "digest": {
+            "sha256": "13a59d5b919418767dd3cc4ba0185ade10f2c0f607f831ba737b9da444cb96d2"
+          }
+        }
+      }
+    ],
+    "checks": [
+      {
+        "dimension": "D1",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T19:12:34.848768Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any cold run differs from its authorized key.",
+        "evidence": {
+          "sha256": "07e58d90f7b066c13ab6498e810cb3232b6207a4b5bb6e4add4dcf99c4331b1c"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D3",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:22.770232Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "49051a274d2c487bc32df20ee17b59ac3e7e597d80908c4460aa67c3a5b98b3d"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D3",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:22.884981Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "2da5a28be79c109ab50879b2ad518653b916b2230fa43e4cc1ec85bd09f5f8b8"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D4",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:26.861705Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "4fa96a2c7952810f7f3b7dee6fe757b668cfb96989066304304d7f37abb0de68"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D4",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:32.893063Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "0f0eafa37fd5733ec808b0813db19b965b05ae4c1fa8f0baf62d12f367817fc5"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:26.861705Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "4fa96a2c7952810f7f3b7dee6fe757b668cfb96989066304304d7f37abb0de68"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:32.893063Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "0f0eafa37fd5733ec808b0813db19b965b05ae4c1fa8f0baf62d12f367817fc5"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:26.861705Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "4fa96a2c7952810f7f3b7dee6fe757b668cfb96989066304304d7f37abb0de68"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:32.893063Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "0f0eafa37fd5733ec808b0813db19b965b05ae4c1fa8f0baf62d12f367817fc5"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D8",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:28.050562Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "acb5ac4dbadd0860715aa3af31063b24720bd3ab37eb932a268f176662783469"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D8",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:33.172304Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "9d80e1ca11ac584b96bcb9fc2c64bc358ee9fb80ece68fffaade01c237451ce6"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:26.861705Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "4fa96a2c7952810f7f3b7dee6fe757b668cfb96989066304304d7f37abb0de68"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:32.893063Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any required mechanical command fails.",
+        "evidence": {
+          "sha256": "0f0eafa37fd5733ec808b0813db19b965b05ae4c1fa8f0baf62d12f367817fc5"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D9",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:32.828067Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any key tuple or mapped FAILED attribution differs.",
+        "evidence": {
+          "sha256": "1805e537509c7c762b1623e855b62714bad054f6bc426aa856b6a507ec3afd2b"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D9",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 2,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T18:58:36.054343Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Any key tuple or mapped FAILED attribution differs.",
+        "evidence": {
+          "sha256": "e8c5176205eea80b3e4ffc959199c8e7f917347837f74d05f9e74625fe2e9594"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "GLM53",
+        "run": 1,
+        "batch": "v091-reader-stage",
+        "at": "2026-10-13T16:57:00.444577Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "Reader matches the key and detects every aimed plant.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "GLM53",
+        "run": 2,
+        "batch": "v091-reader-stage",
+        "at": "2026-10-13T17:49:03.451195Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "Reader matches the key and detects every aimed plant.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "GLM53",
+        "run": 1,
+        "batch": "v091-reader-stage",
+        "at": "2026-10-13T18:11:12.954486Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "Reader matches the key and detects every aimed plant.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "GLM53",
+        "run": 2,
+        "batch": "v091-reader-stage",
+        "at": "2026-10-13T18:15:00.412195Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "Reader matches the key and detects every aimed plant.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D6",
+        "evaluator": "GLM53",
+        "run": 1,
+        "batch": "v091-reader-stage",
+        "at": "2026-10-13T18:35:27.927353Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "Reader matches the key and detects every aimed plant.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 3,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T19:12:34.931701Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "The qualified reader reads real and planted copies.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 3,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T19:12:34.937973Z",
+        "outcome": "unobserved",
+        "score": null,
+        "failureCondition": "The qualified reader reads real and planted copies.",
+        "evidence": null,
+        "unobserved": {
+          "channel": "reader",
+          "reason": "frozen fallback: the one qualified reader passed a planted copy"
+        }
+      },
+      {
+        "dimension": "D11",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-prior-diagnostic",
+        "at": "2026-10-13T15:36:34Z",
+        "outcome": "does_not_conform",
+        "score": null,
+        "failureCondition": "Prior record reads OK at its claimed level.",
+        "evidence": {
+          "sha256": "0fd9cdb8713241c7df13150fe5b19de55fb124c772f9f56c28f44be85929b862"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D12",
+        "evaluator": "ORCH-SCRIPT",
+        "run": 1,
+        "batch": "v091-rev1-mechanical",
+        "at": "2026-10-13T19:12:34.946811Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "Decision cap exceeded or friction event logged.",
+        "evidence": {
+          "sha256": "34a382324956c14c22c342fda51eb13f677b81bd5f531b7a58087008967aac23"
+        },
+        "unobserved": null
+      }
+    ],
+    "controls": [
+      {
+        "id": "rev1-mechanical-plant-1",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "5ab142b58845d0a9c7b32fa2865cbfc8bf97de30c458bf2ab1ffcdc81e475b33"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-2",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "bbc893f9af46f250eb61d239e6585766e43826be8767408a9b09ae5e571c2960"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-6",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "fa7d36ec941a8e44e920ec13495c863a5633ded8fa0b97726404dba76c2fd53e"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-7",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "9ebdb4389071606a666b4f9f19390daea1069ca6b1036e8417d3e78adb20d590"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-8",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "57265ad3816df8a8e926a8a308045e702389aabd18b827c588226cef4206a866"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-10",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "dc4f243ade48e12eb073e03df7c8c2b838842c86d7b6d538b94df7fcf24b0578"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "rev1-mechanical-plant-11",
+        "batch": "v091-rev1-mechanical",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "a35941f06adf91b8d5ec370af6a00c4dbd05553c48d50bea7e791b7dc07d1a24"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "D5-r1-Copy-A",
+        "batch": "v091-reader-stage",
+        "evaluator": "GLM53",
+        "case": {
+          "sha256": "482a4c664dd3fac0be3152ca0736a1c0891a5b09cfebd4911de08df28932aa12"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "D5-r2-Copy-B",
+        "batch": "v091-reader-stage",
+        "evaluator": "GLM53",
+        "case": {
+          "sha256": "482a4c664dd3fac0be3152ca0736a1c0891a5b09cfebd4911de08df28932aa12"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "D6-r1-Copy-B",
+        "batch": "v091-reader-stage",
+        "evaluator": "GLM53",
+        "case": {
+          "sha256": "1bba0b0cb496266811a843d4110eaf2e480fc29ab29a5d77fa00eaca0fbe0767"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "D6-r1-Copy-C",
+        "batch": "v091-reader-stage",
+        "evaluator": "GLM53",
+        "case": {
+          "sha256": "d35bb46f03b46c98b2a3c92908c4576601db3fb9c9bcf448c83cdfe314b298ec"
+        },
+        "expected": "does_not_conform",
+        "outcome": "conforms"
+      },
+      {
+        "id": "prior-D11-covered-file-tamper",
+        "batch": "v091-prior-diagnostic",
+        "evaluator": "ORCH-SCRIPT",
+        "case": {
+          "sha256": "2f85bbe2171b7ded75b1e4b5fda205af64a03497a63ff779ced5e29d0aa25a1f"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      }
+    ],
+    "disagreements": [
+      {
+        "dimension": "D7",
+        "checks": [
+          7,
+          8,
+          20
+        ],
+        "note": "Observed mechanical and reader channels differ; the frozen fallback makes the gate unobserved."
+      },
+      {
+        "dimension": "D5",
+        "checks": [
+          5,
+          6,
+          17,
+          18
+        ],
+        "note": "Observed mechanical and reader channels differ; the frozen fallback makes the gate unobserved."
+      },
+      {
+        "dimension": "D10",
+        "checks": [
+          11,
+          12,
+          21
+        ],
+        "note": "Observed mechanical and reader channels differ; the frozen fallback makes the gate unobserved."
+      }
+    ],
+    "violations": [
+      {
+        "dimension": "D11",
+        "description": "A historical prior-candidate diagnostic failed; it does not establish a successful revision-1 D11 reading."
+      }
+    ],
+    "spread": [
+      {
+        "dimension": "D1",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 1,
+        "agreement": 1
+      },
+      {
+        "dimension": "D3",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D4",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 3,
+        "agreement": 2
+      },
+      {
+        "dimension": "D8",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 3,
+        "agreement": 2
+      },
+      {
+        "dimension": "D9",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "GLM53",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D5",
+        "evaluator": "GLM53",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D6",
+        "evaluator": "GLM53",
+        "runs": 1,
+        "agreement": 1
+      },
+      {
+        "dimension": "D11",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 1,
+        "agreement": 1
+      },
+      {
+        "dimension": "D12",
+        "evaluator": "ORCH-SCRIPT",
+        "runs": 1,
+        "agreement": 1
+      }
+    ],
+    "separationGaps": [
+      "Architect = Maker (Claude Opus 5.5).",
+      "Steve Moitozo II is Owner, Buyer proxy and Specialist adopter; approver is not an evaluator.",
+      "One qualified model reader missed an omission plant; reader gates are unobserved.",
+      "The maker's method is the job's bar; no separate method note was written before the build.",
+      "Typed dates in the freeze record were corrected against clock readings (freeze entry 14).",
+      "The evidence pack cites a bar file time of 12:55:06Z, but the local copy has creation/modification time 13:10:19Z; the ratification clock is retained as the asserted event time, not corroborated by this local copy.",
+      "D11 cannot attest its own checker result without a circular statement.",
+      "D11 prior diagnostic concerns the initial candidate, not revision 1; the revision-1 checker result is stored beside this record.",
+      "Only one actual GLM D6 run and no GLM D7/D10 reader run; CL2-1 cannot verify."
+    ],
+    "retention": {
+      "location": "/Users/smoitozo/evaluatordriven/results-v091-rev3/assembled/evaluatordriven/record",
+      "public": false
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "GLM53",
+        "evidence": {
+          "name": "smoke/IDENTITY/meta.json",
+          "sha256": "a801c96fd937c37037021ffc835ccfcda26094c66f1e9c5a71f9882705373085"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "GLM53",
+        "evidence": {
+          "name": "smoke/CONTROL-FAIL/meta.json",
+          "sha256": "882e1aa4bcd4c9e66a9e05a43559260d708fe0a82006c5b6634ac27bc1a8ca55"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "GLM53",
+        "evidence": {
+          "name": "smoke/CONTROL-PASS/meta.json",
+          "sha256": "dbc0e560e76be568ab88f681f2890285f49cff461cb4c29de5d879ccd0280023"
+        },
+        "readBy": "Steve Moitozo II"
+      }
+    ],
+    "disposition": {
+      "state": "given",
+      "by": "Steve Moitozo II",
+      "at": "2026-10-13T20:51:07Z",
+      "acknowledgesUnobserved": [
+        "D2",
+        "D5",
+        "D6",
+        "D7",
+        "D10"
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "gate": "D6",
+  "class": "a spec sentence contradicting the snapshot or the map",
+  "intent": "Make a SPEC.md sentence contradict Appendix B's own 'lineage, not evidence' commitment.",
+  "file": "SPEC.md",
+  "find": "nothing here depends on it, and readers cannot inspect it.",
+  "replace": "every requirement here depends on it, and readers may inspect it."
+}

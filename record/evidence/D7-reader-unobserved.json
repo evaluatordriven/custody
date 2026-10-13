@@ -1,0 +1,11 @@
+{
+  "dimension": "D7",
+  "fallback": {
+    "gate": "D6",
+    "run": 1,
+    "reason": "planted copy read conforms; all reader gates unobserved",
+    "timestamp": "2026-10-13T18:35:28.294108+00:00"
+  },
+  "observed_call_count": 0,
+  "at": "2026-10-13T19:12:34.931701Z"
+}

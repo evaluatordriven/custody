@@ -1,0 +1,31 @@
+{
+  "key": "D5-r2",
+  "gate": "D5",
+  "run": 2,
+  "result": {
+    "Copy-A": {
+      "outcome": "conforms",
+      "evidence_quote": "**Version 0.9.1 · candidate · 2026-10-12** · Predicate type `https://evaluatordriven.com/custody/v1`\nAuthor: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`",
+      "failure_condition": ""
+    },
+    "Copy-B": {
+      "outcome": "does_not_conform",
+      "evidence_quote": "## Licenses\n\nSee v0.9.7 for the previous release.",
+      "failure_condition": "Violates 'No two files contradict each other' on the machine-comparable version statement: the README's Licenses section says 'See v0.9.7 for the previous release.', contradicting SPEC.md ('Version 0.9.1 · candidate · 2026-10-12', with fixtures writing specVersion 0.9.1) and the README's own Status section ('Status: v0.9.1, candidate.' and 'When v0.9.1 is tagged, `record/` will hold this repository's own custody record') — the current version is 0.9.1 and is not yet tagged, so 0.9.7 (a higher version, mentioned in no other file) cannot be a previous release; the README contradicts both SPEC.md and itself. All other gate conditions (BCP 14 caps confined to normative SPEC.md sections, stable requirement IDs, single-home term definitions, distinguishable requirements/examples/rationale, and agreement on level, outcome, disposition and license values) hold in this copy."
+    }
+  },
+  "labels": {
+    "Copy-A": "real",
+    "Copy-B": "3"
+  },
+  "file_list": [
+    "SPEC.md",
+    "README.md",
+    "CONTRIBUTING.md",
+    "PATENTS.md",
+    "LICENSE",
+    "schema/custody-v1.schema.json",
+    "fixtures/generate.py"
+  ],
+  "timestamp": "2026-10-13T18:15:00.412195+00:00"
+}

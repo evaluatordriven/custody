@@ -1,0 +1,8 @@
+{
+  "gate": "D7",
+  "class": "a requirement with no evidence path",
+  "intent": "Add a SPEC.md section 5 requirement row with no class, so it has no evidence path.",
+  "file": "SPEC.md",
+  "find": "| CR-2 | Every field section 4 requires is present with its stated type, except the fields CL1-4, CL1-5 and CL1-12 check themselves. | structural |",
+  "replace": "| CR-2 | Every field section 4 requires is present with its stated type, except the fields CL1-4, CL1-5 and CL1-12 check themselves. | structural |\n| CR-9 | A planted requirement with no evidence path. |  |"
+}

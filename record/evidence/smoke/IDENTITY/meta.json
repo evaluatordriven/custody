@@ -1,0 +1,28 @@
+{
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "http_status": 200,
+  "utc_timestamp": "2026-10-12T19:58:35.799719+00:00",
+  "latency_ms": 2687.3,
+  "attempts_count": 1,
+  "retries": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "utc_timestamp": "2026-10-12T19:58:35.796493+00:00",
+      "http_status": 200,
+      "latency_ms": 2687.3,
+      "request_id": "a498ae116f0467cc-MIA",
+      "retry": false
+    }
+  ],
+  "output_cap": 2000,
+  "request_id": "a498ae116f0467cc-MIA",
+  "returned_model": "z-ai/glm-5.3",
+  "provider": "Z.AI",
+  "expected_provider": "Z.AI",
+  "tools_sent": false,
+  "parsed_answer": "READY",
+  "pass": true,
+  "test": "IDENTITY",
+  "expected": "READY"
+}

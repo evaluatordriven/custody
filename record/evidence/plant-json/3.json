@@ -1,0 +1,8 @@
+{
+  "gate": "D5",
+  "class": "cross-file: README states a version that SPEC.md contradicts",
+  "intent": "State a version in README.md that disagrees with SPEC.md's version.",
+  "file": "README.md",
+  "find": "## Licenses\n",
+  "replace": "## Licenses\n\nSee v0.9.7 for the previous release.\n"
+}

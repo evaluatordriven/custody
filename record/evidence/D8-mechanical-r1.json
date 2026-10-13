@@ -1,0 +1,14 @@
+[
+  {
+    "label": "run1-tests/run_fixtures.py",
+    "command": [
+      "/Users/smoitozo/.hermes/cache/scratch/v091-mech-8wukumyv/validator-venv/bin/python3",
+      "tests/run_fixtures.py"
+    ],
+    "cwd": "/Users/smoitozo/.hermes/cache/scratch/v091-mech-8wukumyv/candidate/evaluatordriven",
+    "started": "2026-10-13T18:58:26.980699+00:00",
+    "exit": 0,
+    "stdout": "ok   cl1-pass-basic\nok   cl1-pass-unobserved-acknowledged\nok   cl1-pass-not-yet-given-with-violation\nok   cl1-pass-adopted-specialist\nok   cl1-fail-no-check-for-dimension\nok   cl1-fail-approval-bound-to-other-bar\nok   cl1-fail-evaluator-is-bar-author\nok   cl1-fail-violation-not-recorded\nok   cl1-fail-missing-disagreements-field\nok   cl1-fail-missing-violations-field\nok   cl1-fail-no-control-in-batch\nok   cl1-fail-unobserved-not-acknowledged\nok   cl1-fail-tampered-artifact\nok   cl1-fail-bar-frozen-late\nok   cl1-fail-maker-method-missing\nok   cl1-fail-not-a-custody-statement\nok   cl1-fail-scored-without-scale\nok   cl1-fail-instrument-not-pinned\nok   cl1-fail-conforms-without-evidence\nok   cl1-fail-disagreement-not-recorded\nok   cl1-fail-retention-missing\nok   cl1-pass-script-evaluator\nok   cl1-fail-script-evaluator-unpinned\nok   cl1-fail-script-written-by-maker\nok   cl1-pass-legacy-no-script-field\nok   baseline-pass\nok   baseline-fail-no-reads-listed\nok   baseline-fail-bar-frozen-at-same-instant\nok   cl1-unchecked-model-evaluator-settings-only\nok   cl2-pass-basic\nok   cl2-pass-runs-disagree-recorded\nok   cl2-pass-legacy-evidence-tag\nok   cl2-pass-maker-is-other-model\nok   cl2-fail-one-run-only\nok   cl2-fail-evaluator-not-read-only\nok   cl2-fail-evaluator-shares-maker-family\nok   cl2-fail-evidence-digest-mismatch\nok   cl2-unchecked-independence-asserted-only\nok   cl3-pass-basic\nok   cl3-pass-unobserved-not-yet-given\nok   cl3-pass-adopted-specialist\nok   cl3-fail-demonstration-after-check\nok   cl3-fail-bar-not-published\nok   cl3-fail-no-signature-entry\nok   cl3-unchecked-signature-read-by-maker\nok   cl2-unchecked-independence-read-by-maker\n46 of 46 fixtures as expected\n",
+    "stderr": ""
+  }
+]

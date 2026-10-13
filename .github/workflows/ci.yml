@@ -1,0 +1,28 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Fixtures are up to date
+        run: python fixtures/generate.py && git diff --exit-code fixtures/
+      - name: Checker matches every fixture
+        run: python tests/run_fixtures.py
+      - name: Quickstart works, standard library only
+        run: |
+          python tools/make_record.py examples/minimal/inputs.json /tmp/record.json
+          python checker/check.py /tmp/record.json --files examples/minimal
+      - name: Size limits and cross-file agreement
+        run: python tools/count.py && python tests/red_counts.py
+      - name: Third-party JSON Schema 2020-12 validation
+        run: |
+          pip install "jsonschema==4.26.0" "check-jsonschema==0.38.2"
+          check-jsonschema --check-metaschema schema/custody-v1.schema.json
+          python tests/schema_check.py

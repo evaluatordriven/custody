@@ -1,0 +1,8 @@
+{
+  "gate": "D9",
+  "class": "the checker returns OK on an answer-key failing case",
+  "intent": "Stop the checker failing a maker-as-evaluator, so answer-key case AK2-03 (expected FAILED) reads OK.",
+  "file": "checker/check.py",
+  "find": "            raise Fail(f\"evaluator {e['id']} is, or was written by, the maker\")",
+  "replace": "            pass  # PLANT D9: maker-as-evaluator no longer fails"
+}

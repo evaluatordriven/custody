@@ -1,0 +1,8 @@
+{
+  "gate": "D5",
+  "class": "a BCP 14 keyword outside SPEC.md",
+  "intent": "Put an all-caps BCP 14 keyword in README.md, where only SPEC.md normative text may carry one.",
+  "file": "README.md",
+  "find": "## Quickstart\n",
+  "replace": "## Quickstart\n\nImplementers MUST read `SPEC.md` before writing a record.\n"
+}

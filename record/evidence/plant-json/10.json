@@ -1,0 +1,6 @@
+{
+  "gate": "D10",
+  "class": "a missing code license",
+  "intent": "Remove the code license file, so Apache-2.0 code ships without its license.",
+  "delete": "LICENSE-CODE"
+}

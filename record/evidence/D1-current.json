@@ -1,0 +1,6 @@
+{
+  "source": "/Users/smoitozo/evaluatordriven/results-v091/other/d1-checker-results.json",
+  "sha256": "9b6294abbd163df2abb9e7f40400295deaec2110bc3ea4ec3a85bde357fa5e3e",
+  "checked_at": "2026-10-13T19:12:34.848768Z",
+  "assertion": "two agents, both tasks per agent, all expected fields match"
+}
