@@ -1,6 +1,0 @@
-{
-  "event": "Orchestrator filed a not_yet_given disposition status; no Owner disposition asserted",
-  "at": "2026-10-13T19:12:34.777605Z",
-  "source": "this rebuild run",
-  "custodyEvidenceSha256": "cade83d085e781261eb8920096f435a3ea21590093b043628dbb2a69a87c925e"
-}

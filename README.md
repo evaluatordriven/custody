@@ -3,13 +3,16 @@
 A specification for the record kept with a piece of evaluated work: what the work was measured against,
 who measured it, what they found, and who decided. The record makes work answerable, not correct.
 
+Why the name: see "Why this name" in `SPEC.md`.
+
 **Who this is for**
 - **Implementers** who want work they hand off, or receive, to carry its own account.
 - **Reviewers** in procurement, security, or legal who need to check that account.
 
-**Status: v0.9.1, candidate.** Early. One reference checker exists, in this repository. Nobody is known
+**Status: v0.9.2, candidate.** Early. One reference checker exists, in this repository. Nobody is known
 to have adopted this specification, and nothing here implies endorsement by anyone. This repository's own
-custody record, in `record/`, claims CL1. It does not reach CL2; its separation gaps say why.
+custody record, in `record/`, claims CL1. It does not reach CL2; its separation gaps say why. Each
+release's record stays with that release's tag.
 
 **Limits, stated first**
 - The evidence base is one author's work and a handful of jobs.
@@ -17,8 +20,8 @@ custody record, in `record/`, claims CL1. It does not reach CL2; its separation 
   reading was honest; that is what independent evaluators and the approver are for.
 - External evidence (CL1-15, CL3-3) is only as good as the party who read it.
 - No signing tool ships here yet. CL3 records point to verification output produced elsewhere.
-- Reader-judged checks for v0.9.1 are unobserved: the one model judge that qualified missed a planted
-  defect during evaluation. Human readers are part of the v1.0 gate.
+- Reader-judged checks in the previous release were unobserved: the one model judge that qualified missed
+  a planted defect. How this release's reader-judged checks were read is in its record.
 
 ## Quickstart
 
@@ -36,6 +39,17 @@ checks it and prints a report; exit code 0 means `OK`, 1 `FAILED`, 2 `NOT-CHECKA
 To make your own: copy `examples/minimal/`, replace the files with yours, edit `inputs.json`, and run
 the same two commands.
 
+## Record as you go
+
+`tools/record.py` keeps a custody log while the work happens: each event gets the clock time and the
+digests of the files it names, chained so that an edited, reordered or missing event is caught.
+
+```
+python3 tools/record.py init job.jsonl --job "Q3 vendor report"
+python3 tools/record.py add job.jsonl bar-frozen --actor "Casey Park" --file bar.md
+python3 tools/make_record.py inputs.json record.json --log job.jsonl
+```
+
 ## What is here
 
 | Path | What it is |
@@ -43,12 +57,13 @@ the same two commands.
 | `SPEC.md` | The specification. Its *(normative)* sections define conformance. |
 | `schema/custody-v1.schema.json` | The record's shape, for JSON Schema 2020-12 validators |
 | `checker/check.py` | Reference verifier (not normative) |
-| `tools/make_record.py` | Builds a record from a plain inputs file |
+| `tools/make_record.py` | Builds a record from a plain inputs file, or from a custody log (`--log`) |
+| `tools/record.py` | Keeps the custody log as work happens |
 | `tools/count.py` | Checks this repository's own size limits and cross-file agreement |
 | `examples/minimal/` | A one-page memo, its bar, and a CL1 record |
 | `fixtures/` | Passing and failing records, one named reason per failure; `generate.py` rebuilds them |
 | `tests/` | Runs the checker over the fixtures |
-| `record/` | This repository's own custody record, which claims CL1 |
+| `record/` | This repository's own custody record (added at release), and the screening test's record |
 
 ## Levels at a glance
 

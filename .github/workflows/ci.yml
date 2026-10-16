@@ -19,6 +19,8 @@ jobs:
         run: |
           python tools/make_record.py examples/minimal/inputs.json /tmp/record.json
           python checker/check.py /tmp/record.json --files examples/minimal
+      - name: Custody log is tamper-evident and builds a valid record
+        run: python tests/log_check.py
       - name: Size limits and cross-file agreement
         run: python tools/count.py && python tests/red_counts.py
       - name: Third-party JSON Schema 2020-12 validation

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Turn a plain inputs file into a custody/v1 record by computing every digest for you.
 
-Usage: python3 tools/make_record.py INPUTS.json RECORD.json
+Usage: python3 tools/make_record.py INPUTS.json RECORD.json [--log JOB-LOG.jsonl]
 
 INPUTS.json is the record's predicate written by hand, with three conveniences. Paths are relative
 to INPUTS.json's folder.
@@ -9,6 +9,24 @@ to INPUTS.json's folder.
   {"evidenceFile": "harness.log"}  becomes {"name": "harness.log", "sha256": "<digest>"}
   "subject": {"files": ["a.md"]}   lists named files; {"dir": ".", "exclude": ["record/"]} lists
                                    every file under a folder except the excluded prefixes.
+
+With --log, the times and events come from a custody log kept by tools/record.py as the work happened,
+instead of being typed into INPUTS.json. The log must verify (an intact chain) or nothing is written.
+From the log:
+  bar.frozenAt   the time of the last `bar-frozen` event
+  bar.approvals  the `approval` events after it: {role, by: actor, at, barDigest, adopted}
+  producedAt     the time of the last `artifact-produced` event
+  checks, controls, external
+                 the `data` of each `check`, `control` and `external` event that carries that entry's
+                 own fields (a check needs dimension, evaluator, run, batch and outcome); other events
+                 of those types, such as screening readings, are skipped and counted. Checks and
+                 controls count only if recorded after the last `artifact-produced` event: earlier
+                 ones read an artifact that has since been replaced. A check's `at` is always its
+                 event's time.
+  disposition    the last `disposition` event: its data, with `by` = actor and `at` = its time. With
+                 no such event, the state comes from INPUTS.json, but `at` is the time the record is
+                 built: a typed time is never used.
+Fields the log does not supply come from INPUTS.json as before.
 Standard library only.
 """
 import hashlib
@@ -46,12 +64,64 @@ def subject(spec, base):
     return [{"name": n, "digest": {"sha256": digest(base / n)}} for n in names]
 
 
+def from_log(data, log):
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    import record  # tools/record.py
+    problems = record.verify(log)
+    if problems:
+        sys.exit("custody log does not verify; nothing written:\n" + "\n".join(problems))
+    events = record.read(log)
+    frozen = [i for i, e in enumerate(events) if e["type"] == "bar-frozen"]
+    if frozen:
+        data["bar"]["frozenAt"] = events[frozen[-1]]["at"]
+        data["bar"]["approvals"] = [
+            {"role": e["data"]["role"], "by": e["actor"], "at": e["at"],
+             "barDigest": {"sha256": e["data"]["barDigest"]}, "adopted": e["data"].get("adopted")}
+            for e in events[frozen[-1] + 1:] if e["type"] == "approval"]
+    produced = [e for e in events if e["type"] == "artifact-produced"]
+    if produced:
+        data["producedAt"] = produced[-1]["at"]
+    need = {"check": {"dimension", "evaluator", "run", "batch", "outcome"},
+            "control": {"id", "batch", "evaluator", "case", "expected", "outcome"},
+            "external": {"requirement", "subject", "evidence", "readBy"}}
+    built = max((i for i, e in enumerate(events) if e["type"] == "artifact-produced"), default=-1)
+    for kind, field in (("check", "checks"), ("control", "controls"), ("external", "external")):
+        typed = [e for i, e in enumerate(events) if e["type"] == kind
+                 and (kind == "external" or i > built)]
+        stale = sum(1 for i, e in enumerate(events) if e["type"] == kind and kind != "external"
+                    and i <= built)
+        if stale:
+            print(f"skipped {stale} '{kind}' event(s) recorded before the artifact was produced",
+                  file=sys.stderr)
+        fit = [e for e in typed if need[kind] <= set(e.get("data") or {})]
+        if len(fit) < len(typed):
+            print(f"skipped {len(typed) - len(fit)} '{kind}' event(s) without the record's fields",
+                  file=sys.stderr)
+        if fit:
+            data[field] = [dict(e["data"], at=e["at"]) if kind == "check" else dict(e["data"])
+                           for e in fit]
+    done = [e for e in events if e["type"] == "disposition"]
+    if done:
+        data["disposition"] = dict(done[-1]["data"], by=done[-1]["actor"], at=done[-1]["at"])
+    elif "disposition" in data:
+        data["disposition"] = dict(data["disposition"], at=record.now())
+    return data
+
+
 def main():
-    if len(sys.argv) != 3:
+    args = sys.argv[1:]
+    log = None
+    if "--log" in args:
+        i = args.index("--log")
+        log, args = args[i + 1], args[:i] + args[i + 2:]
+    if len(args) != 2:
         sys.exit(__doc__)
-    src = pathlib.Path(sys.argv[1])
+    sys.argv[1:] = args
+    src = pathlib.Path(args[0])
     base = src.resolve().parent
     data = json.loads(src.read_text(encoding="utf-8"))
+    if log:
+        data = from_log(data, log)
     record = {"_type": "https://in-toto.io/Statement/v1",
               "subject": subject(data.pop("subject"), base),
               "predicateType": "https://evaluatordriven.com/custody/v1",

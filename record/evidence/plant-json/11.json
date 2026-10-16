@@ -1,8 +1,0 @@
-{
-  "gate": "D10",
-  "class": "self-state: README claims a level no record supports",
-  "intent": "Have README claim the repository's record reaches CL3, which no record in record/ supports.",
-  "file": "README.md",
-  "find": "**Status: v0.9.1, candidate.** Early.",
-  "replace": "**Status: v0.9.1, candidate.** This repository's own record claims CL3. Early."
-}

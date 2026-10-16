@@ -18,6 +18,8 @@ PLANTS = [  # (file, text to append, words the problem report must contain)
     ("README.md", "\nSee v0.9.7.\n", "version 0.9.7"),
     ("SPEC.md", "\n## 9. Padding *(normative)*\n\n" + "word " * 2400, "normative words"),
     ("README.md", "\nThis repository claims CL3.\n", "claims CL3 but no record"),
+    ("SPEC.md", "\nFive reference checkers exist, in this repository.\n", "reference checker(s) exist"),
+    ("README.md", "\nThe code is also offered under the MIT license.\n", "names license MIT"),
     ("SPEC.md", "\n| CR-9 | A planted requirement with no class. |  |\n", "CR-9 has no valid class"),
 ]
 
@@ -39,7 +41,7 @@ def main():
             target = root / name
             target.parent.mkdir(exist_ok=True)
             if text is None:
-                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.1",
+                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.2",
                                                             "levelClaimed": "CL3"}}))
             else:
                 with open(target, "a", encoding="utf-8") as f:

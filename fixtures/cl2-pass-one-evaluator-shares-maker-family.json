@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.1",
+    "specVersion": "0.9.2",
     "levelClaimed": "CL2",
     "bar": {
       "digest": {
@@ -70,7 +70,7 @@
       },
       "model": {
         "family": "gpt",
-        "identifier": "gpt-6.1",
+        "identifier": "gpt-6.0",
         "endpoint": "api.other.example",
         "readOnly": false
       }

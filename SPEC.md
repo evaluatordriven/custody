@@ -1,9 +1,18 @@
 # Evaluator Driven — the custody record
 
-**Version 0.9.1 · candidate · 2026-10-12** · Predicate type `https://evaluatordriven.com/custody/v1`
+**Version 0.9.2 · candidate · 2026-10-14** · Predicate type `https://evaluatordriven.com/custody/v1`
 Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
 
 Sections marked *(normative)* define conformance. Everything else explains it.
+
+## Why this name *(non-normative)*
+
+If you want acceptable output from work with AI, you have to be able to show that the output meets a
+standard an independent evaluator can check, and that standard has to be informed by two people: the
+person who wants the output, and a specialist who knows the craft.
+
+Evaluator-driven because the evaluator, and the standard it applies, come first. Build them first and the
+work can be aimed at the standard. Build them afterward and you have a description, not a standard.
 
 ---
 
@@ -42,13 +51,13 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 | **bar** | The written statement of what good means for the artifact: its dimensions and, for each, what conforming looks like. Frozen before the work starts. |
 | **dimension** | One part of the bar, judged on its own. |
 | **maker** | The party that produced the artifact. |
-| **evaluator** | A person, model, or script that reads the artifact against the bar. An evaluator did not make the artifact and did not author the bar. |
+| **evaluator** | A person, a model session, or a script that reads the artifact against the bar. An evaluator did not make the artifact and did not author the bar. Each session of a model is a separate party, so a session of the maker's own model can evaluate at CL1 if the record declares it (CL1-6); at CL2 it may sit alongside other evaluators, provided at least one model evaluator differs from the maker in both family and endpoint (CL2-3). |
 | **buyer** | The party the work is for. The buyer's test is whether the work does the job it was meant to do. |
 | **specialist** | The party that knows the field well enough to say what good means. |
-| **check** | One evaluator's reading of one dimension in one run. |
-| **outcome** | The result of a check: `conforms`, `does_not_conform`, or `unobserved`. |
+| **check** | One evaluator's reading of one dimension in one run. Its outcome is `conforms`, `does_not_conform`, or `unobserved`. |
 | **instrument** | The written rubric an evaluator reads by, and the runner that applies it. |
 | **record** | The custody record defined here: an in-toto Statement whose predicate is `custody/v1`. |
+| **published** | Made available at a stable address to the people who rely on the record. Published need not mean public. |
 | **disposition** | The decision about the artifact — `given`, `not_yet_given`, or `declined` — made by a named person, the approver. |
 
 **Plain-language equivalents** used on evaluatordriven.com:
@@ -83,7 +92,7 @@ means a default.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `specVersion` | string | yes | This document's version, e.g. `0.9.1` |
+| `specVersion` | string | yes | This document's version, e.g. `0.9.2` |
 | `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
 | `bar.digest` | digest | yes | sha256 of the frozen bar document |
 | `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |
@@ -98,7 +107,7 @@ means a default.
 | `producedAt` | timestamp | yes | |
 | `readsBeforeFreeze[]` | list, may be empty | baseline claims (BL-1) | |
 | `instrument` | object | yes | `rubric` (digest), `runner` (digest) |
-| `evaluators[]` | list, non-empty | yes | `id`, `name`, `kind` (`person`·`model`·`script`), `model` (or `null`); `script` (`name`, `author`, `digest`) when `kind` is `script` |
+| `evaluators[]` | list, non-empty | yes | `id`, `name`, `kind` (`person`·`model`·`script`), `model` (or `null`); `script` (`name`, `author`, `digest`) when `kind` is `script`; optional `sameModelAsMaker` (boolean) |
 | `checks[]` | list, non-empty | yes | `dimension`, `evaluator`, `run`, `batch`, `at`, `outcome`, `score`, `failureCondition`, `evidence`, `unobserved` |
 | `controls[]` | list, non-empty | yes | `id`, `batch`, `evaluator`, `case` (digest), `expected`, `outcome` |
 | `spread[]` | list | CL2 and above | `dimension`, `evaluator`, `runs`, `agreement` |
@@ -147,7 +156,7 @@ field that only asserts independence never satisfies a requirement on its own.
 | ID | Requirement | Class |
 |---|---|---|
 | CR-1 | The record is an in-toto Statement v1: `_type` is `https://in-toto.io/Statement/v1`; `subject` is non-empty and every entry has a `name` and a sha256 digest; `predicateType` is exactly `https://evaluatordriven.com/custody/v1`. | structural |
-| CR-2 | Every field section 4 requires is present with its stated type, except the fields CL1-4, CL1-5, CL1-11 and CL1-12 check themselves. | structural |
+| CR-2 | Every field section 4 requires is present with its stated type, except the fields CL1-2 (each dimension's own fields), CL1-4, CL1-5, CL1-11 and CL1-12 check themselves. | structural |
 
 ### 5.2 CL1 — the four moves
 
@@ -158,7 +167,7 @@ field that only asserts independence never satisfies a requirement on its own.
 | CL1-3 | `bar.approvals` holds one `buyer` and one `specialist` approval, each naming who approved, when, and a `barDigest` equal to `bar.digest`. A specialist that is a published document is recorded with `adopted` naming the document and its version (a shape CR-2 checks), and `by` naming the person who adopted it. | semantic |
 | CL1-4 | The maker is named with a version, and `maker.method` is the digest of the written rules used to make the artifact. | structural |
 | CL1-5 | The instrument is pinned: `instrument.rubric` and `instrument.runner` are digests, and every evaluator of kind `script` names its script, its script's author, and its digest. | structural |
-| CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
+| CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. A model evaluator whose `identifier` equals the maker's declares `sameModelAsMaker: true`. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
 | CL1-7 | Every dimension on the bar has at least one check. A dimension with no check fails the record: its evidence is not attributable. | semantic |
 | CL1-8 | Every check names a dimension on the bar and a listed evaluator, gives a run, batch, and time, and declares its `failureCondition` — what would have made it return `does_not_conform`. A `conforms` or `does_not_conform` outcome cites an evidence digest. An `unobserved` outcome names the channel tried and why it could not observe, and carries no score. | semantic |
 | CL1-9 | Every batch that holds a check also holds at least one control, read by an evaluator in that batch, with its expected and actual outcome recorded. A control is a case whose correct outcome is known in advance. | semantic |
@@ -175,14 +184,14 @@ field that only asserts independence never satisfies a requirement on its own.
 |---|---|---|
 | CL2-1 | Every evaluator reads every dimension it checks in at least two runs, and `spread` gives, for each such pair, the number of runs and how many agreed. | semantic |
 | CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
-| CL2-3 | If the maker is a model, no model evaluator shares its `family` or `endpoint`. | semantic |
+| CL2-3 | If the maker is a model and the record has model evaluators, at least one of them differs from the maker's model in both `family` and `endpoint`. Others may share them. | semantic |
 
 ### 5.4 CL3 — proven
 
 | ID | Requirement | Class |
 |---|---|---|
 | CL3-1 | For every evaluator and dimension it checked, `demonstrations` holds a planted case on which that evaluator returned `does_not_conform`, timed before its first check of that dimension. The planted case is held out from the maker; the record carries only its digest. | semantic |
-| CL3-2 | The bar is published: `bar.publishedAt` is a URI. | structural |
+| CL3-2 | The bar is published: `bar.publishedAt` is a URI where the people who rely on the record can read it. | structural |
 | CL3-3 | The record is signed and logged in a transparency log, and `external` holds the verification output, read by a named party who is not the maker. | external |
 
 ### 5.5 Baseline

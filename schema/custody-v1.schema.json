@@ -400,6 +400,10 @@
                     }
                   }
                 ]
+              },
+              "sameModelAsMaker": {
+                "type": "boolean",
+                "description": "True when this model evaluator is a session of the maker's own model (CL1-6)."
               }
             },
             "allOf": [

@@ -1,8 +1,12 @@
-# Owner disposition — v0.9.1 candidate
+# Disposition — Evaluator-Driven v0.9.2
 
-Given, as a v0.9.1 candidate. Acknowledged as unobserved: D2, D5, D6, D7, D10 (the one qualified model reader missed a planted defect; frozen fallback). Acknowledged as not conforming: D11 (the release record verifies at CL1, not the CL2 the bar requires; the Maker's re-run prompt loosened that test without approval, recorded). Carried to the v1.0 gate: human readers, multi-reader agreement, and custody recorded as work happens.
+Release: evaluatordriven v0.9.2
+Owner: Steve Moitozo II
+Recorded (log event 335): 2026-10-16T13:09:42.950204Z
 
-Source: `V0.9.1-FREEZE.md`, entry 29 (sha256 `e02db945091d2af0c80f974be1c11ce3f84f3f9e4ca43d077855a6f196b5212c`).
-Recorded by the Maker at `2026-10-13T20:51:07Z` (entry 29).
-
-This is an Owner disposition beside the frozen gate readings; it does not change D11 or erase the unobserved checks.
+> Given, as a v0.9.2 candidate. Acknowledged as unobserved: D2, D6, and the reader parts of D5, D7 and
+> D10 (no reader panel could be seated; the bar's fallback), and D5's mechanical part (its license-name
+> control stayed green). Acknowledged as not conforming: D9, 2 of 35 cases, both under the family rules
+> deferred to the next bar; and D12, 11 Owner decisions against a cap of 10. The release record verifies
+> at CL1, under the bar's fallback. Carried to the next version: a reviewer's guide and full glossary, a
+> qualified panel of human and model readers, the deferred family rules, and the license-file check.

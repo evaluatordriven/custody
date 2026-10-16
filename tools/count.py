@@ -10,8 +10,11 @@
                external; each structural or semantic requirement is failed by at least one fixture
                in fixtures/expected.json; at most 5 requirements are external (D7)
   agreement    version, levels, outcomes and disposition states agree across SPEC.md, the schema,
-               the checker, README.md and any record in record/; README.md claims no level that
-               no record in record/ supports
+               the checker, README.md and every other current document (files under record/ are
+               kept records of earlier work, so they may name earlier versions), and any record in
+               record/; README.md claims no level that no record in record/ supports; the
+               documents' statements of how many reference checkers exist match checker/; and every
+               current document and NOTICE name only the licenses LICENSE and LICENSE-CODE carry
 
 Counting rules. Normative text = SPEC.md sections whose heading carries "(normative)", minus fenced
 code blocks; tables count. Words = whitespace-separated tokens. Key words are counted as written,
@@ -99,7 +102,8 @@ def main():
         if missing:
             problems.append(f"{key} missing from SPEC.md: {missing}")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    for path in md + [ROOT / "schema" / "custody-v1.schema.json"]:
+    current = [p for p in md if "record" not in p.relative_to(ROOT).parts[:1]]  # records are history
+    for path in current + [ROOT / "schema" / "custody-v1.schema.json"]:
         for v in set(re.findall(r"\b[vV]?(0\.\d+\.\d+)\b", path.read_text(encoding="utf-8"))):
             if v != version:
                 problems.append(f"version {v} in {path.relative_to(ROOT)} disagrees with SPEC.md {version}")
@@ -114,6 +118,39 @@ def main():
             problems.append(f"README.md does not state the record's claimed level ({level})")
     for level in set(re.findall(r"claims (CL[123]|baseline)\b", readme)) - recorded:
         problems.append(f"README.md claims {level} but no record in record/ claims it")
+
+    # Self-state: what the documents say this repository contains must match what it contains.
+    words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
+             "nine": 9, "ten": 10}
+    checkers = len([f for f in (ROOT / "checker").glob("*.py") if f.name != "__init__.py"])
+    for name, text in (("SPEC.md", spec), ("README.md", readme)):
+        for n in re.findall(r"\b(\w+) reference checkers? exists?\b", text, flags=re.I):
+            claimed = words.get(n.lower(), int(n) if n.isdigit() else None)
+            if claimed != checkers:
+                problems.append(f"{name} says {n} reference checker(s) exist; checker/ holds "
+                                f"{checkers}")
+
+    # Licenses: every current document names the same licenses the license files actually carry.
+    text_lic = "CC BY 4.0" if "Creative Commons Attribution 4.0" in (ROOT / "LICENSE").read_text(
+        encoding="utf-8") else None
+    code_lic = "Apache-2.0" if "Apache License" in (ROOT / "LICENSE-CODE").read_text(
+        encoding="utf-8") else None
+    known = {"CC BY 4.0": r"CC[ -]BY[ -]4\.0", "Apache-2.0": r"Apache[ -](?:License,? Version )?2\.0",
+             "MIT": r"\bMIT\b", "GPL": r"\bA?GPL", "BSD": r"\bBSD\b", "MPL": r"\bMPL",
+             "CC0": r"\bCC0\b", "CC BY-SA": r"CC[ -]BY[ -]SA", "Unlicense": r"\bUnlicense\b"}
+    allowed = {text_lic, code_lic}
+    for path in current + [ROOT / "NOTICE"]:
+        body = path.read_text(encoding="utf-8")
+        for lic, pat in known.items():
+            if lic not in allowed and re.search(pat, body):
+                problems.append(f"{path.relative_to(ROOT)} names license {lic}; this repository "
+                                f"carries {text_lic} (text) and {code_lic} (code)")
+    for path in (ROOT / "README.md", ROOT / "NOTICE"):
+        body = path.read_text(encoding="utf-8")
+        if not re.search(r"(?is)code.{0,150}?" + known[code_lic], body):
+            problems.append(f"{path.name} does not say the code is {code_lic}")
+        if not re.search(r"(?is)(text|SPEC\.md|documentation).{0,150}?" + known[text_lic], body):
+            problems.append(f"{path.name} does not say the text is {text_lic}")
     report["agreement"] = {"spec version": version, "levels": sorted(want["levels"])}
     print(json.dumps({"report": report, "problems": problems}, indent=2))
     return 1 if problems else 0

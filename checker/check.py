@@ -19,6 +19,11 @@ class Fail(Exception): """A requirement the record breaks."""  # noqa: E701
 class Unchecked(Exception): """A requirement that what was supplied cannot decide."""  # noqa
 
 
+def need(bad):
+    if bad:
+        raise Fail("; ".join(bad[:5]))
+
+
 when = lambda ts: datetime.fromisoformat(ts.replace("Z", "+00:00"))  # noqa: E731
 same = lambda a, b: a.strip().casefold() == b.strip().casefold()  # noqa: E731
 
@@ -50,7 +55,6 @@ ITEMS = {k: S(v) for k, v in {
     "bar": "digest:digest frozenAt:ts author:str dimensions:nonempty approvals:list "
            "publishedAt:str? groundTruth:list dissent:list",
     "bar.groundTruth": "name:str version:str digest:digest", "bar.dissent": "by:str note:str",
-    "bar.dimensions": "id:str criterion:str scale:dict?",
     "bar.approvals": "role:str by:str barDigest:digest at:ts adopted:dict?",
     "evaluators": "id:str name:str kind:str model:dict?",  # script: CL1-5
     "checks": "dimension:str evaluator:str run:int batch:str at:ts outcome:str score:num? "
@@ -62,6 +66,7 @@ ITEMS = {k: S(v) for k, v in {
     "spread": "dimension:str evaluator:str runs:int agreement:int",
     "demonstrations": "dimension:str evaluator:str planted:digest outcome:str at:ts"}.items()}
 VIOLATION = S("dimension:str description:str")
+DIMENSION = S("id:str criterion:str scale:dict?")
 SUB = {"model": S("family:str identifier:str endpoint:str readOnly:bool"),
        "scale": S("anchors:dict threshold:num floor:num"),
        "adopted": S("document:str version:str")}
@@ -93,8 +98,7 @@ def cr2(r, p, ctx):
         node = node.get(tail) if tail and isinstance(node, dict) else node
         for i, item in enumerate(node if isinstance(node, list) else [node] if node else []):
             fields(item if isinstance(item, dict) else {}, spec, f"{path}[{i}]", bad)
-    if bad:
-        raise Fail("; ".join(bad[:5]))
+    need(bad)
 
 
 # ---- requirements (SPEC.md section 5) -------------------------------------------------------
@@ -115,45 +119,46 @@ def cl1_1(r, p, ctx):
         raise Fail("bar.frozenAt is not earlier than producedAt: only a baseline claim fits")
 
 
-def cl1_2(r, p, ctx):
+def cl1_2(r, p, ctx):  # owns each dimension's fields, scale included (SPEC CR-2)
+    bad = []
+    for i, d in enumerate(x if isinstance(x, dict) else {} for x in p["bar"]["dimensions"]):
+        fields(d, DIMENSION, f"bar.dimensions[{i}]", bad)  # recurses into scale via SUB
+    need(bad)
     if len({d["id"] for d in p["bar"]["dimensions"]}) != len(p["bar"]["dimensions"]):
         raise Fail("dimension ids are not unique")
     scored = {c["dimension"] for c in p["checks"] if c["score"] is not None}
     for d in p["bar"]["dimensions"]:
-        s = d["scale"]
-        if d["id"] in scored and not (s and s.get("anchors") and "threshold" in s
-                                      and "floor" in s):
+        if d["id"] in scored and not d["scale"]:  # scale's own fields were checked above
             raise Fail(f"{d['id']} is scored but declares no anchors, threshold and floor")
 
 
 def cl1_3(r, p, ctx):
-    bar = p["bar"]
-    for role in ("buyer", "specialist"):
-        mine = [a for a in bar["approvals"] if a["role"] == role]
+    for role, mine in ((r_, [a for a in p["bar"]["approvals"] if a["role"] == r_])
+                       for r_ in ("buyer", "specialist")):
         if not mine:
             raise Fail(f"no {role} approval")
-        for a in mine:
-            if a["barDigest"]["sha256"] != bar["digest"]["sha256"]:
-                raise Fail(f"{role} approval is bound to a different bar")
+        if any(a["barDigest"]["sha256"] != p["bar"]["digest"]["sha256"] for a in mine):
+            raise Fail(f"{role} approval is bound to a different bar")
 
 
 def owned(rid, p):
     bad = []
     for key, spec in OWN[rid].items():
         fields(p.get(key) if isinstance(p.get(key), dict) else {}, spec, f"predicate.{key}", bad)
-    if bad:
-        raise Fail("; ".join(bad))
+    need(bad)
 
 
 
 
 def cl1_6(r, p, ctx):
-    for e in p["evaluators"]:
+    mk = p["maker"].get("model")
+    for e, m in ((e, e.get("model")) for e in p["evaluators"]):
         names = [e["name"]] + ([e["script"]["author"]] if e["kind"] == "script" else [])
-        if any(same(n, p["maker"]["name"]) for n in names):
-            raise Fail(f"evaluator {e['id']} is, or was written by, the maker")
-        if any(same(n, p["bar"]["author"]) for n in names):
-            raise Fail(f"evaluator {e['id']} is, or was written by, the bar's author")
+        for who, role in ((p["maker"]["name"], "maker"), (p["bar"]["author"], "bar author")):
+            if any(same(n, who) for n in names):
+                raise Fail(f"evaluator {e['id']} is, or was written by, the {role}")
+        if mk and m and same(m["identifier"], mk["identifier"]) and not e.get("sameModelAsMaker"):
+            raise Fail(f"evaluator {e['id']} is an undeclared session of the maker's model")
         if same(e["name"], p["disposition"]["by"]):
             raise Fail(f"the approver is evaluator {e['id']}")
 
@@ -170,8 +175,8 @@ def cl1_8(r, p, ctx):
     for where, c in ((f"checks[{i}]", c) for i, c in enumerate(p["checks"])):
         if c["dimension"] not in dims or c["evaluator"] not in evals:
             raise Fail(f"{where} names an unknown dimension or evaluator")
+        u = c["unobserved"]
         if c["outcome"] == "unobserved":
-            u = c["unobserved"]
             if not (u and u.get("channel") and u.get("reason")) or c["score"] is not None:
                 raise Fail(f"{where} is unobserved without channel and reason, or is scored")
         elif c["evidence"] is None or c["unobserved"] is not None:
@@ -179,8 +184,8 @@ def cl1_8(r, p, ctx):
 
 
 def cl1_9(r, p, ctx):
-    for b in sorted({c["batch"] for c in p["checks"]}):
-        readers = {c["evaluator"] for c in p["checks"] if c["batch"] == b}
+    for b, readers in ((b, {c["evaluator"] for c in p["checks"] if c["batch"] == b})
+                       for b in sorted({c["batch"] for c in p["checks"]})):
         if not any(k["batch"] == b and k["evaluator"] in readers for k in p["controls"]):
             raise Fail(f"batch {b} has no control read by one of its evaluators")
 
@@ -202,8 +207,7 @@ def cl1_11(r, p, ctx):  # owns violations and separationGaps, presence included 
     fields(p, S("violations:list separationGaps:list"), "predicate", bad)
     for i, v in enumerate(p.get("violations") or []):
         fields(v if isinstance(v, dict) else {}, VIOLATION, f"violations[{i}]", bad)
-    if bad:
-        raise Fail("; ".join(bad))
+    need(bad)
     failed = {c["dimension"] for c in p["checks"] if c["outcome"] == "does_not_conform"}
     missing = failed - {v["dimension"] for v in p["violations"]}
     if missing:
@@ -255,8 +259,7 @@ def cl2_1(r, p, ctx):
                 if (c["evaluator"], c["dimension"]) == (ev, dim)}
         if len(runs) < 2:
             raise Fail(f"{ev} read {dim} in fewer than two runs")
-        agree = Counter(runs.values()).most_common(1)[0][1]
-        s = spread.get((ev, dim))
+        agree, s = Counter(runs.values()).most_common(1)[0][1], spread.get((ev, dim))
         if not s or s["runs"] != len(runs) or s["agreement"] != agree:
             raise Fail(f"spread for {ev}/{dim} missing or wrong: {len(runs)} runs, {agree} agree")
 
@@ -267,11 +270,11 @@ def cl2_2(r, p, ctx):
             raise Fail(f"model evaluator {e['id']} lacks a model block with readOnly true")
 
 
-def cl2_3(r, p, ctx):
-    mk = p["maker"]["model"]
-    for e, m in ((e, e["model"]) for e in p["evaluators"]):
-        if mk and m and (same(m["family"], mk["family"]) or same(m["endpoint"], mk["endpoint"])):
-            raise Fail(f"evaluator {e['id']} shares the maker's model family or endpoint")
+def cl2_3(r, p, ctx):  # at least one model evaluator independent of the maker's model
+    mk, models = p["maker"]["model"], [e["model"] for e in p["evaluators"] if e["model"]]
+    if mk and models and not any(not same(m["family"], mk["family"]) and not same(
+            m["endpoint"], mk["endpoint"]) for m in models):
+        raise Fail("no model evaluator differs from the maker in both family and endpoint")
 
 
 def cl1_15(r, p, ctx):
@@ -294,8 +297,7 @@ def cl3_2(r, p, ctx):
         raise Fail("bar.publishedAt is not a URI")
 
 
-def cl3_3(r, p, ctx):
-    external(p, ctx, "CL3-3", "record", absent=Fail)  # a record that claims no signature lacks one
+cl3_3 = lambda r, p, ctx: external(p, ctx, "CL3-3", "record", absent=Fail)  # noqa: E731
 
 
 def bl_1(r, p, ctx):

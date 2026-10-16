@@ -1,8 +1,0 @@
-{
-  "gate": "D5",
-  "class": "a term defined twice",
-  "intent": "Define the already-defined term 'bar' a second time in README.md, so one home for terms is broken.",
-  "file": "README.md",
-  "find": "## Levels at a glance\n\nThe requirements live in `SPEC.md` section 5; this is only orientation.",
-  "replace": "## Levels at a glance\n\nThe requirements live in `SPEC.md` section 5; this is only orientation.\n\n**bar**: the written statement of what good means for the artifact, frozen before the work starts."
-}

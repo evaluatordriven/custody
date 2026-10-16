@@ -48,6 +48,12 @@
       "routing": "none",
       "fails": "CL1-11"
     },
+    "cl1-fail-dimension-scale-missing-floor": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-2"
+    },
     "cl1-fail-missing-disagreements-field": {
       "verdict": "FAILED",
       "levelAchieved": "none",
@@ -150,6 +156,24 @@
       "routing": "none",
       "fails": null
     },
+    "cl1-pass-same-model-session-declared": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-fail-same-model-session-undeclared": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-6"
+    },
+    "cl2-pass-same-model-session-declared": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
     "baseline-pass": {
       "verdict": "OK",
       "levelAchieved": "baseline",
@@ -210,7 +234,13 @@
       "routing": "none",
       "fails": "CL2-2"
     },
-    "cl2-fail-evaluator-shares-maker-family": {
+    "cl2-pass-one-evaluator-shares-maker-family": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-every-evaluator-shares-maker-family": {
       "verdict": "FAILED",
       "levelAchieved": "CL1",
       "routing": "none",
@@ -283,6 +313,7 @@
     "CL2|CL3": "cl3-fail-bar-not-published"
   },
   "schemaInvalid": [
-    "cl1-fail-missing-violations-field"
+    "cl1-fail-missing-violations-field",
+    "cl1-fail-dimension-scale-missing-floor"
   ]
 }

@@ -49,7 +49,7 @@ def base(level):
     model = lambda fam, ident, end: {"family": fam, "identifier": ident, "endpoint": end,
                                      "readOnly": True}
     p = {
-        "specVersion": "0.9.1", "levelClaimed": level,
+        "specVersion": "0.9.2", "levelClaimed": level,
         "bar": {"digest": bar, "frozenAt": "2026-10-01T09:00:00Z", "author": "Morgan Lee",
                 "dimensions": [{"id": "D1", "criterion": "Every figure cites its source", "scale": None},
                                {"id": "D2", "criterion": "The recommendation follows from the figures",
@@ -117,6 +117,17 @@ def unobs(p, i):
                           unobserved={"channel": "reader", "reason": "source not reachable"})
 
 
+def same_model(p, declared, level="CL1"):  # the evaluator E1 is a session of the maker's model
+    gpt = {"family": "gpt", "identifier": "gpt-6.1", "endpoint": "api.openai.example",
+           "readOnly": True}
+    p["maker"]["model"] = dict(gpt)
+    if level == "CL1":
+        p["evaluators"][0].update(kind="model", model=dict(gpt))
+        p["external"] = [ext("CL1-15", "E1", "harness-gpt.log")]
+    if declared:
+        p["evaluators"][0]["sameModelAsMaker"] = True
+
+
 def late_bar(p):
     p["bar"]["frozenAt"] = "2026-10-02T10:00:00Z"
 
@@ -145,6 +156,9 @@ CASES = {
         name="Morgan Lee"), "FAILED", "none", "none", "CL1-6"),
     "cl1-fail-violation-not-recorded": ("CL1", lambda r, p: p["checks"][0].update(
         outcome="does_not_conform"), "FAILED", "none", "none", "CL1-11"),
+    "cl1-fail-dimension-scale-missing-floor": ("CL1", lambda r, p: p["bar"]["dimensions"][0].update(
+        scale={"anchors": {"1": "poor", "5": "fully meets"}, "threshold": 3}),
+        "FAILED", "none", "none", "CL1-2"),
     "cl1-fail-missing-disagreements-field": ("CL1", lambda r, p: p.pop("disagreements"),
                                              "FAILED", "none", "none", "CR-2"),
     "cl1-fail-missing-violations-field": ("CL1", lambda r, p: p.pop("violations"),
@@ -188,6 +202,12 @@ CASES = {
         p["checks"].append(check("D1", "S1", 1))), "FAILED", "none", "none", "CL1-6"),
     "cl1-pass-legacy-no-script-field": ("CL1", lambda r, p: p["evaluators"][0].pop("script"),
                                         "OK", "CL1", "none", None),
+    "cl1-pass-same-model-session-declared": ("CL1", lambda r, p: same_model(p, True),
+                                             "OK", "CL1", "none", None),
+    "cl1-fail-same-model-session-undeclared": ("CL1", lambda r, p: same_model(p, False),
+                                               "FAILED", "none", "none", "CL1-6"),
+    "cl2-pass-same-model-session-declared": ("CL2", lambda r, p: same_model(p, True, "CL2"),
+                                             "OK", "CL2", "none", None),
     "baseline-pass": ("baseline", lambda r, p: (late_bar(p), p.update(
         readsBeforeFreeze=["draft v1"])), "OK", "baseline", "none", None),
     "baseline-fail-no-reads-listed": ("baseline", lambda r, p: late_bar(p),
@@ -210,9 +230,13 @@ CASES = {
                               "FAILED", "CL1", "none", "CL2-1"),
     "cl2-fail-evaluator-not-read-only": ("CL2", lambda r, p: p["evaluators"][1]["model"].update(
         readOnly=False), "FAILED", "CL1", "none", "CL2-2"),
-    "cl2-fail-evaluator-shares-maker-family": ("CL2", lambda r, p: p["maker"].update(model={
-        "family": "gpt", "identifier": "gpt-6.1", "endpoint": "api.other.example",
-        "readOnly": False}), "FAILED", "CL1", "none", "CL2-3"),
+    "cl2-pass-one-evaluator-shares-maker-family": ("CL2", lambda r, p: p["maker"].update(model={
+        "family": "gpt", "identifier": "gpt-6.0", "endpoint": "api.other.example",
+        "readOnly": False}), "OK", "CL2", "none", None),
+    "cl2-fail-every-evaluator-shares-maker-family": ("CL2", lambda r, p: (p["maker"].update(model={
+        "family": "gpt", "identifier": "gpt-6.0", "endpoint": "api.other.example",
+        "readOnly": False}), p["evaluators"][1]["model"].update(family="gpt")),
+        "FAILED", "CL1", "none", "CL2-3"),
     "cl2-fail-evidence-digest-mismatch": ("CL2", lambda r, p: p["external"][0]["evidence"].update(
         sha256="0" * 64), "FAILED", "none", "none", "CL1-15"),
     "cl2-unchecked-independence-asserted-only": ("CL2", lambda r, p: p.update(external=[]),
@@ -252,7 +276,7 @@ def main():
         expected[name] = {"verdict": verdict, "levelAchieved": achieved, "routing": routing,
                           "fails": fails}
     # schema-invalid by shape, though the failing requirement is CL1-11 (which owns these fields)
-    schema_invalid = ["cl1-fail-missing-violations-field"]
+    schema_invalid = ["cl1-fail-missing-violations-field", "cl1-fail-dimension-scale-missing-floor"]
     (HERE / "expected.json").write_text(json.dumps({"cases": expected, "boundaries": BOUNDARIES,
                                                     "schemaInvalid": schema_invalid},
                                                    indent=2) + "\n")
