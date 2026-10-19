@@ -55,7 +55,7 @@ def main():
         problems.append("an untouched log does not verify")
     out = ex / "from-log.json"
     run(MAKE, str(ex / "inputs.json"), str(out), "--log", log)
-    report = json.loads(run(CHECK, str(out), "--files", str(ex), ok=False).stdout)
+    report = json.loads(run(CHECK, str(out), "--files", str(ex), "--bar", str(ex / "bar.md"), ok=False).stdout)
     if (report["verdict"], report["levelAchieved"]) != ("OK", "CL1"):
         problems.append(f"record built from the log reads {report['verdict']}/{report['levelAchieved']}")
     if len(json.loads(out.read_text())["predicate"]["checks"]) != len(inputs["checks"]):

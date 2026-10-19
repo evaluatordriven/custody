@@ -26,6 +26,7 @@ def write_inputs():
     FILES.mkdir(exist_ok=True)
     EVIDENCE.mkdir(exist_ok=True)
     (FILES / "report.md").write_text("# Quarterly vendor report\n\nThree vendors, one recommendation.\n")
+    (FILES / "bar.md").write_text("bar: vendor report")  # every fixture's bar.digest is this file
     for name in ("harness-gpt.log", "harness-gemini.log", "signature-verification.txt"):
         (EVIDENCE / name).write_text(f"fixture evidence: {name}\nendpoint pinned; write tools off\n")
 
@@ -49,7 +50,7 @@ def base(level):
     model = lambda fam, ident, end: {"family": fam, "identifier": ident, "endpoint": end,
                                      "readOnly": True}
     p = {
-        "specVersion": "0.9.2", "levelClaimed": level,
+        "specVersion": "0.9.3", "levelClaimed": level,
         "bar": {"digest": bar, "frozenAt": "2026-10-01T09:00:00Z", "author": "Morgan Lee",
                 "dimensions": [{"id": "D1", "criterion": "Every figure cites its source", "scale": None},
                                {"id": "D2", "criterion": "The recommendation follows from the figures",
@@ -128,6 +129,23 @@ def same_model(p, declared, level="CL1"):  # the evaluator E1 is a session of th
         p["evaluators"][0]["sameModelAsMaker"] = True
 
 
+def panel(p, fams):  # CL2 evaluators by model family ("person" for a person); maker is gpt-6.0
+    p["maker"]["model"] = {"family": "gpt", "identifier": "gpt-6.0", "endpoint": "api.other.example",
+                           "readOnly": False}
+    ids = [f"E{i}" for i in range(1, len(fams) + 1)]
+    p["evaluators"] = [{"id": e, "name": f"Reader {e}", "kind": "person" if f == "person" else "model",
+                        "script": None, "model": None if f == "person" else {
+                            "family": f, "identifier": f"{f}-{e.lower()}", "endpoint": f"api.{f}.{e}",
+                            "readOnly": True}} for e, f in zip(ids, fams)]
+    p["checks"] = [check(d, e, r) for e in ids for d in ("D1", "D2") for r in (1, 2)]
+    p["controls"] = [{"id": f"K{e}", "batch": "B1", "evaluator": e, "case": text_digest("ctl"),
+                      "expected": "does_not_conform", "outcome": "does_not_conform"} for e in ids]
+    p["spread"] = [{"dimension": d, "evaluator": e, "runs": 2, "agreement": 2}
+                   for e in ids for d in ("D1", "D2")]
+    p["external"] = [ext("CL1-15", e, "harness-gpt.log" if f == "gpt" else "harness-gemini.log")
+                     for e, f in zip(ids, fams) if f != "person"]
+
+
 def late_bar(p):
     p["bar"]["frozenAt"] = "2026-10-02T10:00:00Z"
 
@@ -142,8 +160,27 @@ def runs_disagree(p):
 # name: (level, mutation, verdict, level achieved, routing, the one failing requirement or None)
 CASES = {
     "cl1-pass-basic": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
+    "cl1-fail-control-missed-checks-still-observed": ("CL1", lambda r, p: p["controls"][0].update(
+        outcome="conforms"), "FAILED", "none", "none", "CL1-9"),
+    "cl1-pass-control-missed-checks-unobserved": ("CL1", lambda r, p: (
+        p["controls"][0].update(outcome="conforms"), unobs(p, 0), unobs(p, 1),
+        p["disposition"].update(acknowledgesUnobserved=["D1", "D2"])),
+        "OK", "CL1", "acknowledged", None),
+    "cl1-pass-control-missed-its-dimension-unobserved": ("CL1", lambda r, p: (p["controls"][0].update(
+        outcome="conforms", dimension="D2"), unobs(p, 1), p["disposition"].update(
+            acknowledgesUnobserved=["D2"])), "OK", "CL1", "acknowledged", None),
+    "cl1-fail-control-missed-its-dimension-observed": ("CL1", lambda r, p: p["controls"][0].update(
+        outcome="unobserved", dimension="D1"), "FAILED", "none", "none", "CL1-9"),
+    "cl1-fail-bar-file-differs": ("CL1", lambda r, p: [x.update(text_digest("another bar")) for x in
+                                  [p["bar"]["digest"]] + [a["barDigest"] for a in p["bar"]["approvals"]]],
+                                  "FAILED", "none", "none", "CL1-14"),
+    "cl1-fail-buyer-is-maker-undisclosed": ("CL1", lambda r, p: p["bar"]["approvals"][0].update(
+        by="Drafting Agent"), "FAILED", "none", "none", "CL1-11"),
+    "cl1-pass-buyer-is-maker-disclosed": ("CL1", lambda r, p: (p["bar"]["approvals"][0].update(
+        by="Drafting Agent"), p["separationGaps"].append(
+            "Drafting Agent made the work and also approved the bar as buyer")), "OK", "CL1", "none", None),
     "cl1-pass-unobserved-acknowledged": ("CL1", lambda r, p: (unobs(p, 1), p["disposition"].update(
-        acknowledgesUnobserved=["D2"])), "OK", "CL1", "to approver", None),
+        acknowledgesUnobserved=["D2"])), "OK", "CL1", "acknowledged", None),
     "cl1-pass-not-yet-given-with-violation": ("CL1", lambda r, p: (dnc(p, 0), p["disposition"].update(
         state="not_yet_given")), "OK", "CL1", "to approver", None),
     "cl1-pass-adopted-specialist": ("CL1", lambda r, p: p["bar"]["approvals"][1].update(
@@ -204,12 +241,20 @@ CASES = {
                                         "OK", "CL1", "none", None),
     "cl1-pass-same-model-session-declared": ("CL1", lambda r, p: same_model(p, True),
                                              "OK", "CL1", "none", None),
+    "cl1-fail-same-model-declared-untruly": ("CL1", lambda r, p: (same_model(p, True), p["evaluators"][0][
+        "model"].update(identifier="gpt-6.0")), "FAILED", "none", "none", "CL1-6"),
+    "cl1-fail-same-model-declared-false": ("CL1", lambda r, p: (same_model(p, False), p["evaluators"][0]
+                                           .update(sameModelAsMaker=False)), "FAILED", "none", "none", "CL1-6"),
     "cl1-fail-same-model-session-undeclared": ("CL1", lambda r, p: same_model(p, False),
                                                "FAILED", "none", "none", "CL1-6"),
     "cl2-pass-same-model-session-declared": ("CL2", lambda r, p: same_model(p, True, "CL2"),
                                              "OK", "CL2", "none", None),
     "baseline-pass": ("baseline", lambda r, p: (late_bar(p), p.update(
         readsBeforeFreeze=["draft v1"])), "OK", "baseline", "none", None),
+    "baseline-pass-model-evaluator-without-external": ("baseline", lambda r, p: (late_bar(p), p.update(
+        readsBeforeFreeze=["draft v1"]), p["evaluators"][0].update(kind="model", model={
+            "family": "gpt", "identifier": "gpt-6.1", "endpoint": "api.openai.example",
+            "readOnly": True})), "OK", "baseline", "none", None),
     "baseline-fail-no-reads-listed": ("baseline", lambda r, p: late_bar(p),
                                       "FAILED", "none", "none", "BL-1"),
     "baseline-fail-bar-frozen-at-same-instant": ("baseline", lambda r, p: (
@@ -219,6 +264,16 @@ CASES = {
         kind="model", model={"family": "gpt", "identifier": "gpt-6.1", "endpoint": "api.example",
                              "readOnly": True}), "NOT-CHECKABLE", "none", "none", None),
     "cl2-pass-basic": ("CL2", lambda r, p: None, "OK", "CL2", "none", None),
+    "cl2-fail-buyer-is-maker": ("CL2", lambda r, p: (p["bar"]["approvals"][0].update(
+        by="Drafting Agent"), p["separationGaps"].append(
+            "Drafting Agent made the work and also approved the bar as buyer")),
+        "FAILED", "CL1", "none", "CL2-3"),
+    "cl2-pass-maker-family-two-of-four": ("CL2", lambda r, p: panel(p, ["gpt", "gpt", "gemini", "grok"]),
+                                          "OK", "CL2", "none", None),
+    "cl2-fail-maker-family-two-of-three": ("CL2", lambda r, p: panel(p, ["gpt", "gpt", "gemini"]),
+                                           "FAILED", "CL1", "none", "CL2-3"),
+    "cl2-fail-maker-family-outweighs-a-person": ("CL2", lambda r, p: panel(p, ["gpt", "gpt", "person"]),
+                                                 "FAILED", "CL1", "none", "CL2-3"),
     "cl2-pass-runs-disagree-recorded": ("CL2", lambda r, p: runs_disagree(p), "OK", "CL2", "none", None),
     "cl2-pass-legacy-evidence-tag": ("CL2", lambda r, p: [x.update(requirement="CL2-4")
                                                           for x in p["external"]],

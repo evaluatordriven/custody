@@ -13,8 +13,9 @@
                the checker, README.md and every other current document (files under record/ are
                kept records of earlier work, so they may name earlier versions), and any record in
                record/; README.md claims no level that no record in record/ supports; the
-               documents' statements of how many reference checkers exist match checker/; and every
-               current document and NOTICE name only the licenses LICENSE and LICENSE-CODE carry
+               documents' statements of how many reference checkers exist match checker/; LICENSE carries CC BY 4.0
+               and LICENSE-CODE carries Apache-2.0, each naming no other license; and every current
+               document and NOTICE name only those two
 
 Counting rules. Normative text = SPEC.md sections whose heading carries "(normative)", minus fenced
 code blocks; tables count. Words = whitespace-separated tokens. Key words are counted as written,
@@ -102,7 +103,8 @@ def main():
         if missing:
             problems.append(f"{key} missing from SPEC.md: {missing}")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    current = [p for p in md if "record" not in p.relative_to(ROOT).parts[:1]]  # records are history
+    current = [p for p in md if "record" not in p.relative_to(ROOT).parts[:1]  # records, and the
+               and p.name != "CHANGELOG.md"]  # changelog, are history: they name earlier versions
     for path in current + [ROOT / "schema" / "custody-v1.schema.json"]:
         for v in set(re.findall(r"\b[vV]?(0\.\d+\.\d+)\b", path.read_text(encoding="utf-8"))):
             if v != version:
@@ -130,14 +132,25 @@ def main():
                 problems.append(f"{name} says {n} reference checker(s) exist; checker/ holds "
                                 f"{checkers}")
 
-    # Licenses: every current document names the same licenses the license files actually carry.
-    text_lic = "CC BY 4.0" if "Creative Commons Attribution 4.0" in (ROOT / "LICENSE").read_text(
-        encoding="utf-8") else None
-    code_lic = "Apache-2.0" if "Apache License" in (ROOT / "LICENSE-CODE").read_text(
-        encoding="utf-8") else None
-    known = {"CC BY 4.0": r"CC[ -]BY[ -]4\.0", "Apache-2.0": r"Apache[ -](?:License,? Version )?2\.0",
+    # Licenses: the license files carry what the documents say, and nothing else (v0.9.3 S5).
+    known = {"CC BY 4.0": r"CC[ -]BY[ -]4\.0|Creative Commons Attribution 4\.0",
+             "Apache-2.0": r"Apache[ -](?:License,? Version )?2\.0|Apache License",
              "MIT": r"\bMIT\b", "GPL": r"\bA?GPL", "BSD": r"\bBSD\b", "MPL": r"\bMPL",
-             "CC0": r"\bCC0\b", "CC BY-SA": r"CC[ -]BY[ -]SA", "Unlicense": r"\bUnlicense\b"}
+             "CC0": r"\bCC0\b", "CC BY-SA": r"CC[ -]BY[ -]SA|Attribution-ShareAlike",
+             "CC BY-NC": r"CC[ -]BY[ -]NC|NonCommercial", "Unlicense": r"\bUnlicense\b"}
+    lic_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    lic_code = (ROOT / "LICENSE-CODE").read_text(encoding="utf-8")
+    text_lic, code_lic = "CC BY 4.0", "Apache-2.0"
+    for name, body, own, need in (("LICENSE", lic_text, text_lic, (r"Creative Commons Attribution 4\.0",
+                                                                     r"CC BY 4\.0")),
+                                  ("LICENSE-CODE", lic_code, code_lic, (r"Apache License",
+                                                                        r"Version 2\.0"))):
+        for pat in need:
+            if not re.search(pat, body):
+                problems.append(f"{name} does not carry {own} (missing '{pat.replace(chr(92), '')}')")
+        for lic, pat in known.items():  # LICENSE may point to the code license, nothing else
+            if lic != own and not (name == "LICENSE" and lic == code_lic) and re.search(pat, body):
+                problems.append(f"{name} names license {lic}; it should carry only {own}")
     allowed = {text_lic, code_lic}
     for path in current + [ROOT / "NOTICE"]:
         body = path.read_text(encoding="utf-8")
@@ -145,11 +158,11 @@ def main():
             if lic not in allowed and re.search(pat, body):
                 problems.append(f"{path.relative_to(ROOT)} names license {lic}; this repository "
                                 f"carries {text_lic} (text) and {code_lic} (code)")
-    for path in (ROOT / "README.md", ROOT / "NOTICE"):
+    for path in (ROOT / "README.md", ROOT / "NOTICE", ROOT / "LICENSE"):
         body = path.read_text(encoding="utf-8")
-        if not re.search(r"(?is)code.{0,150}?" + known[code_lic], body):
+        if not re.search(r"(?is)code.{0,150}?(?:" + known[code_lic] + ")", body):
             problems.append(f"{path.name} does not say the code is {code_lic}")
-        if not re.search(r"(?is)(text|SPEC\.md|documentation).{0,150}?" + known[text_lic], body):
+        if not re.search(r"(?is)(text|SPEC\.md|documentation).{0,150}?(?:" + known[text_lic] + ")", body):
             problems.append(f"{path.name} does not say the text is {text_lic}")
     report["agreement"] = {"spec version": version, "levels": sorted(want["levels"])}
     print(json.dumps({"report": report, "problems": problems}, indent=2))

@@ -1,6 +1,6 @@
 # Evaluator Driven — the custody record
 
-**Version 0.9.2 · candidate · 2026-10-14** · Predicate type `https://evaluatordriven.com/custody/v1`
+**Version 0.9.3 · candidate · 2026-10-16** · Predicate type `https://evaluatordriven.com/custody/v1`
 Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
 
 Sections marked *(normative)* define conformance. Everything else explains it.
@@ -92,7 +92,7 @@ means a default.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `specVersion` | string | yes | This document's version, e.g. `0.9.2` |
+| `specVersion` | string | yes | This document's version, e.g. `0.9.3` |
 | `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
 | `bar.digest` | digest | yes | sha256 of the frozen bar document |
 | `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |
@@ -124,7 +124,10 @@ record. A filed check is not edited: a correction is a new check with a later `a
 `checks`. A record is plain JSON, readable without any tool.
 
 A **digest** is an object `{"sha256": "<64 lowercase hex>"}`. `model`, wherever it appears, is `null` or
-an object with `family`, `identifier`, `endpoint`, and `readOnly` (boolean).
+an object with `family`, `identifier`, `endpoint`, and `readOnly` (boolean). `family` is the model line
+as its builder names it, in lowercase and without a version (for example `gpt` or `qwen`); `identifier`
+is the exact model version; `endpoint` is the host name of the service that answered. A `control` may
+also carry a `dimension`, naming the one dimension it tests.
 
 `schema/custody-v1.schema.json` encodes this table for JSON Schema 2020-12 validators. Where the schema
 and this section differ, this section governs.
@@ -167,15 +170,15 @@ field that only asserts independence never satisfies a requirement on its own.
 | CL1-3 | `bar.approvals` holds one `buyer` and one `specialist` approval, each naming who approved, when, and a `barDigest` equal to `bar.digest`. A specialist that is a published document is recorded with `adopted` naming the document and its version (a shape CR-2 checks), and `by` naming the person who adopted it. | semantic |
 | CL1-4 | The maker is named with a version, and `maker.method` is the digest of the written rules used to make the artifact. | structural |
 | CL1-5 | The instrument is pinned: `instrument.rubric` and `instrument.runner` are digests, and every evaluator of kind `script` names its script, its script's author, and its digest. | structural |
-| CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. A model evaluator whose `identifier` equals the maker's declares `sameModelAsMaker: true`. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
+| CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. A model evaluator whose `identifier` equals the maker's declares `sameModelAsMaker: true`, and one whose `identifier` differs does not. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
 | CL1-7 | Every dimension on the bar has at least one check. A dimension with no check fails the record: its evidence is not attributable. | semantic |
 | CL1-8 | Every check names a dimension on the bar and a listed evaluator, gives a run, batch, and time, and declares its `failureCondition` — what would have made it return `does_not_conform`. A `conforms` or `does_not_conform` outcome cites an evidence digest. An `unobserved` outcome names the channel tried and why it could not observe, and carries no score. | semantic |
-| CL1-9 | Every batch that holds a check also holds at least one control, read by an evaluator in that batch, with its expected and actual outcome recorded. A control is a case whose correct outcome is known in advance. | semantic |
+| CL1-9 | Every batch that holds a check also holds at least one control, read by an evaluator in that batch, with its expected and actual outcome recorded. A control is a case whose correct outcome is known in advance. A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension. | semantic |
 | CL1-10 | Where checks of one dimension return different outcomes, `disagreements` names that dimension and the checks. Outcomes are never averaged into one. | semantic |
-| CL1-11 | Every dimension with a `does_not_conform` check appears in `violations`. `violations` and `separationGaps` are present even when empty. | semantic |
+| CL1-11 | Every dimension with a `does_not_conform` check appears in `violations`. `violations` and `separationGaps` are present even when empty. If the maker approved the bar as buyer or specialist, an entry in `separationGaps` names the maker. | semantic |
 | CL1-12 | `retention` states where the full record is kept and whether it is public. A record need not be public; it is kept, and it can be produced on request. | structural |
 | CL1-13 | The disposition is `given`, `not_yet_given`, or `declined`, with the approver's name and time. If any check is `unobserved`, the record's overall result is not "all conform", and a `given` disposition lists each unobserved dimension in `acknowledgesUnobserved`. | semantic |
-| CL1-14 | Each `subject` digest matches the supplied artifact file of that name. Without the files this reads `NOT-CHECKABLE`. | semantic |
+| CL1-14 | Each `subject` digest matches the supplied artifact file of that name, and `bar.digest` matches the supplied bar file. Without those files this reads `NOT-CHECKABLE`. | semantic |
 | CL1-15 | For every model evaluator, `external` holds evidence of its configuration — for example a harness log showing which model and endpoint answered — read by a named party who is not the maker. A model's own settings block (`model`) is a claim, not evidence. | external |
 
 ### 5.3 CL2 — independent
@@ -184,7 +187,7 @@ field that only asserts independence never satisfies a requirement on its own.
 |---|---|---|
 | CL2-1 | Every evaluator reads every dimension it checks in at least two runs, and `spread` gives, for each such pair, the number of runs and how many agreed. | semantic |
 | CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
-| CL2-3 | If the maker is a model and the record has model evaluators, at least one of them differs from the maker's model in both `family` and `endpoint`. Others may share them. | semantic |
+| CL2-3 | If the maker is a model and the record has model evaluators, at least one of them differs from the maker's model in both `family` and `endpoint`. Others may share them, but for each dimension, evaluators from the maker's model `family` are no more than half of the evaluators that read it; persons and scripts count toward that total. No buyer or specialist approval is by the maker. | semantic |
 
 ### 5.4 CL3 — proven
 
@@ -213,14 +216,16 @@ field that only asserts independence never satisfies a requirement on its own.
 
 ## 6. Verifying a record *(normative)*
 
-A verifier reports, for each requirement in scope, `OK`, `FAILED`, or `NOT-CHECKABLE`, and then:
+A verifier is given the record, the artifact's files, the bar file, and any external evidence. It reports,
+for each requirement in scope, `OK`, `FAILED`, or `NOT-CHECKABLE`, and then:
 
 - **verdict** — `FAILED` if any requirement failed; otherwise `NOT-CHECKABLE` if any could not be checked;
   otherwise `OK`;
 - **level achieved** — the highest claimed-or-lower level whose requirements, and those of every level
   below it, are all `OK`; `baseline` when a baseline claim passes; `none` otherwise;
-- **routing** — `to approver` when any check is `unobserved` or the disposition is `not_yet_given`;
-  otherwise `none`.
+- **routing** — `to approver` when the disposition is `not_yet_given`, or when a check is `unobserved` and
+  no `given` disposition acknowledges every unobserved dimension; `acknowledged` when a check is
+  `unobserved` and a `given` disposition acknowledges every unobserved dimension; otherwise `none`.
 
 A verifier MUST NOT report a level the record does not claim, and MUST NOT turn an `unobserved` outcome
 into any other outcome.
@@ -252,8 +257,10 @@ responsible for the law that applies to them.
 
 This specification follows Semantic Versioning 2.0.0. A record names the version it was written to in
 `specVersion`. A change that would turn an `OK` record into a `FAILED` one is a major change; the
-predicate type's version changes with the major version. An identifier renamed within a major version keeps
-its old value valid until the next major version: `CL2-4` is accepted wherever `CL1-15` is. Each release is
+predicate type's version changes with the major version. Before 1.0.0, any release may make such a
+change, and CHANGELOG.md lists it. An identifier renamed within a major version keeps its old value valid
+until the next major version: `CL2-4` is not a requirement of its own; it is the former name of `CL1-15`,
+accepted wherever `CL1-15` is. Each release is
 a git tag and is citable by commit. No implementation is part of the specification.
 
 ---

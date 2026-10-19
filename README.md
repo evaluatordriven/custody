@@ -7,12 +7,14 @@ Why the name: see "Why this name" in `SPEC.md`.
 
 **Who this is for**
 - **Implementers** who want work they hand off, or receive, to carry its own account.
-- **Reviewers** in procurement, security, or legal who need to check that account.
+- **Reviewers** in procurement, security, or legal who need to check that account. Start with the
+  [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
+  [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.2, candidate.** Early. One reference checker exists, in this repository. Nobody is known
-to have adopted this specification, and nothing here implies endorsement by anyone. This repository's own
-custody record, in `record/`, claims CL1. It does not reach CL2; its separation gaps say why. Each
-release's record stays with that release's tag.
+**Status: v0.9.3, candidate.** Early. One reference checker exists, in this repository. Nobody is known
+to have adopted this specification, and nothing here implies endorsement by anyone. Each release carries
+its own custody record in `record/`, kept with that release's tag; this release's record claims CL1,
+and states why not higher.
 
 **Limits, stated first**
 - The evidence base is one author's work and a handful of jobs.
@@ -20,8 +22,10 @@ release's record stays with that release's tag.
   reading was honest; that is what independent evaluators and the approver are for.
 - External evidence (CL1-15, CL3-3) is only as good as the party who read it.
 - No signing tool ships here yet. CL3 records point to verification output produced elsewhere.
-- Reader-judged checks in the previous release were unobserved: the one model judge that qualified missed
-  a planted defect. How this release's reader-judged checks were read is in its record.
+- Reader-judged checks in the previous release were unobserved: no reader panel could be seated. How
+  this release's reader-judged checks were read is in its record.
+- There is no certifying body, assessor or registry. A record certifies nothing; see GOVERNANCE.md.
+- One person maintains the specification. GOVERNANCE.md says how it continues without him.
 
 ## Quickstart
 
@@ -30,11 +34,11 @@ Python 3.10 or newer, standard library only:
 ```sh
 git clone https://github.com/smoitozo/evaluatordriven && cd evaluatordriven
 python3 tools/make_record.py examples/minimal/inputs.json examples/minimal/record.json
-python3 checker/check.py examples/minimal/record.json --files examples/minimal
+python3 checker/check.py examples/minimal/record.json --files examples/minimal --bar examples/minimal/bar.md
 ```
 
 The second command turns a hand-written inputs file into a record, computing every digest. The third
-checks it and prints a report; exit code 0 means `OK`, 1 `FAILED`, 2 `NOT-CHECKABLE`.
+checks it against the work's files and the bar, and prints a report; exit code 0 means `OK`, 1 `FAILED`, 2 `NOT-CHECKABLE`.
 
 To make your own: copy `examples/minimal/`, replace the files with yours, edit `inputs.json`, and run
 the same two commands.
@@ -60,6 +64,11 @@ python3 tools/make_record.py inputs.json record.json --log job.jsonl
 | `tools/make_record.py` | Builds a record from a plain inputs file, or from a custody log (`--log`) |
 | `tools/record.py` | Keeps the custody log as work happens |
 | `tools/count.py` | Checks this repository's own size limits and cross-file agreement |
+| `tools/explain.py` | Prints a record in plain words, for reviewers, with the checker's answer |
+| `tools/readability.py` | Checks the reviewer's guide against its reading target |
+| `docs/REVIEWERS-GUIDE.md` | A plain-language guide for people who review records rather than build them |
+| `docs/GLOSSARY.md` | Every word the specification uses, explained in plain language |
+| `CHANGELOG.md`, `GOVERNANCE.md`, `SECURITY.md` | What changed in each release; who decides and how it continues; how to report a flaw |
 | `examples/minimal/` | A one-page memo, its bar, and a CL1 record |
 | `fixtures/` | Passing and failing records, one named reason per failure; `generate.py` rebuilds them |
 | `tests/` | Runs the checker over the fixtures |

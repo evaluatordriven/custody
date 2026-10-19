@@ -1,0 +1,148 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.3",
+    "levelClaimed": "CL1",
+    "bar": {
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      },
+      "frozenAt": "2026-10-01T09:00:00Z",
+      "author": "Morgan Lee",
+      "dimensions": [
+        {
+          "id": "D1",
+          "criterion": "Every figure cites its source",
+          "scale": null
+        },
+        {
+          "id": "D2",
+          "criterion": "The recommendation follows from the figures",
+          "scale": null
+        }
+      ],
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Avery Chen",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:00:00Z",
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Priya Nair",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:30:00Z",
+          "adopted": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [
+        {
+          "name": "Q3 vendor price sheet",
+          "version": "2026-09-30",
+          "digest": {
+            "sha256": "a7690520f1332f96d616a67dc934b0aa345802b46f394cb8df70370eab039765"
+          }
+        }
+      ],
+      "dissent": []
+    },
+    "maker": {
+      "name": "Drafting Agent",
+      "version": "1.4",
+      "method": {
+        "sha256": "5b7e6bf2dc4a32a6aa4770cd5639c2c7af890fc86c273b5c8567fe5382086bf3"
+      },
+      "model": null
+    },
+    "producedAt": "2026-10-02T09:00:00Z",
+    "instrument": {
+      "rubric": {
+        "sha256": "49672f0ef3b3a542b3b86b475936cc9adf1ddf60369e9b120ba33900294c99d8"
+      },
+      "runner": {
+        "sha256": "527aa9f431539da8e151d5434d1d5e611d973f601d8e970790882624554146b0"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "E1",
+        "name": "Sam Ortiz",
+        "kind": "person",
+        "model": null,
+        "script": null
+      }
+    ],
+    "checks": [
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "sha256": "31da705acc3dbece764b7ef58c4ef28e579222ffa80e054810715470bd45c1ff"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "sha256": "993c6ce302f9867983d400b2e4c270c8f7b4dff1203c5ef61940d2991647f616"
+        },
+        "unobserved": null
+      }
+    ],
+    "controls": [
+      {
+        "id": "K1",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "0fcd568a5cb9bdb4677b69354b11ee415af8f784519cff3da49a26f84eaee7f2"
+        },
+        "expected": "does_not_conform",
+        "outcome": "conforms"
+      }
+    ],
+    "disagreements": [],
+    "violations": [],
+    "separationGaps": [],
+    "retention": {
+      "location": "s3://records/vendor-report",
+      "public": false
+    },
+    "external": [],
+    "disposition": {
+      "state": "given",
+      "by": "Avery Chen",
+      "at": "2026-10-04T09:00:00Z",
+      "acknowledgesUnobserved": []
+    }
+  }
+}

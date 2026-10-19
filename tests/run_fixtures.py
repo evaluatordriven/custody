@@ -20,7 +20,7 @@ def main():
     bad = 0
     for name, want in expected["cases"].items():
         record = json.loads((FIX / f"{name}.json").read_text())
-        got = verify(record, str(FIX / "files"), str(FIX / "evidence"))
+        got = verify(record, str(FIX / "files"), str(FIX / "evidence"), str(FIX / "files" / "bar.md"))
         failed = sorted(k for k, v in got["requirements"].items() if v["status"] == "FAILED")
         problems = []
         for key in ("verdict", "levelAchieved", "routing"):

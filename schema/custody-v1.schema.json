@@ -530,6 +530,10 @@
               "id": {
                 "$ref": "#/$defs/name"
               },
+              "dimension": {
+                "description": "Optional: the dimension this control tests (CL1-9).",
+                "type": ["string", "null"]
+              },
               "batch": {
                 "$ref": "#/$defs/name"
               },

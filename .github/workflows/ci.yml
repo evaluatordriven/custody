@@ -28,3 +28,11 @@ jobs:
           pip install "jsonschema==4.26.0" "check-jsonschema==0.38.2"
           check-jsonschema --check-metaschema schema/custody-v1.schema.json
           python tests/schema_check.py
+      - name: Plain view describes every record
+        run: python tests/explain_check.py
+      - name: Reviewer's guide meets the reading target
+        run: |
+          pip install "textstat==0.7.13"
+          python -m nltk.downloader cmudict
+          python tools/readability.py
+          python tests/red_readability.py

@@ -6,10 +6,52 @@
       "routing": "none",
       "fails": null
     },
+    "cl1-fail-control-missed-checks-still-observed": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-pass-control-missed-checks-unobserved": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "acknowledged",
+      "fails": null
+    },
+    "cl1-pass-control-missed-its-dimension-unobserved": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "acknowledged",
+      "fails": null
+    },
+    "cl1-fail-control-missed-its-dimension-observed": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-fail-bar-file-differs": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-14"
+    },
+    "cl1-fail-buyer-is-maker-undisclosed": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-11"
+    },
+    "cl1-pass-buyer-is-maker-disclosed": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
     "cl1-pass-unobserved-acknowledged": {
       "verdict": "OK",
       "levelAchieved": "CL1",
-      "routing": "to approver",
+      "routing": "acknowledged",
       "fails": null
     },
     "cl1-pass-not-yet-given-with-violation": {
@@ -162,6 +204,18 @@
       "routing": "none",
       "fails": null
     },
+    "cl1-fail-same-model-declared-untruly": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-6"
+    },
+    "cl1-fail-same-model-declared-false": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-6"
+    },
     "cl1-fail-same-model-session-undeclared": {
       "verdict": "FAILED",
       "levelAchieved": "none",
@@ -175,6 +229,12 @@
       "fails": null
     },
     "baseline-pass": {
+      "verdict": "OK",
+      "levelAchieved": "baseline",
+      "routing": "none",
+      "fails": null
+    },
+    "baseline-pass-model-evaluator-without-external": {
       "verdict": "OK",
       "levelAchieved": "baseline",
       "routing": "none",
@@ -203,6 +263,30 @@
       "levelAchieved": "CL2",
       "routing": "none",
       "fails": null
+    },
+    "cl2-fail-buyer-is-maker": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl2-pass-maker-family-two-of-four": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-maker-family-two-of-three": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl2-fail-maker-family-outweighs-a-person": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
     },
     "cl2-pass-runs-disagree-recorded": {
       "verdict": "OK",

@@ -12,7 +12,7 @@ import sys
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PLANTS = [  # (file, text to append, words the problem report must contain)
+PLANTS = [  # (file, text to append or (old, new) to change, words the report must contain)
     ("README.md", "\nImplementers MUST read this.\n", "keyword MUST outside"),
     ("CONTRIBUTING.md", "\n| **bar** | a second meaning |\n", "term 'bar' defined again"),
     ("README.md", "\nSee v0.9.7.\n", "version 0.9.7"),
@@ -20,6 +20,9 @@ PLANTS = [  # (file, text to append, words the problem report must contain)
     ("README.md", "\nThis repository claims CL3.\n", "claims CL3 but no record"),
     ("SPEC.md", "\nFive reference checkers exist, in this repository.\n", "reference checker(s) exist"),
     ("README.md", "\nThe code is also offered under the MIT license.\n", "names license MIT"),
+    ("LICENSE", ("(CC BY 4.0)", "(CC BY-SA 4.0)"), "LICENSE names license CC BY-SA"),
+    ("LICENSE-CODE", ("                                 Apache License\n",
+                      "                                 MIT License\n"), "LICENSE-CODE names license MIT"),
     ("SPEC.md", "\n| CR-9 | A planted requirement with no class. |  |\n", "CR-9 has no valid class"),
 ]
 
@@ -40,8 +43,11 @@ def main():
             shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git"))
             target = root / name
             target.parent.mkdir(exist_ok=True)
-            if text is None:
-                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.2",
+            if isinstance(text, tuple):  # a change inside the file, not an addition to it
+                target.write_text(target.read_text(encoding="utf-8").replace(*text, 1),
+                                  encoding="utf-8")
+            elif text is None:
+                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.3",
                                                             "levelClaimed": "CL3"}}))
             else:
                 with open(target, "a", encoding="utf-8") as f:

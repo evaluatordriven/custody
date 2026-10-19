@@ -1,0 +1,1545 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": ".github/workflows/ci.yml",
+      "digest": {
+        "sha256": "f01ac6c74510319a074eeef2b2548c534bde19d72e27a998360f2cac5537ff57"
+      }
+    },
+    {
+      "name": ".gitignore",
+      "digest": {
+        "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+      }
+    },
+    {
+      "name": "CHANGELOG.md",
+      "digest": {
+        "sha256": "97ea0160b6ff99925265b28b6cecc66f47ef61f98a0a107667c64872b297b8be"
+      }
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "digest": {
+        "sha256": "e290dc936d442de51c4658523d5cc91a2cbaef4e44ebc14e0cf8ecdea6fc9544"
+      }
+    },
+    {
+      "name": "GOVERNANCE.md",
+      "digest": {
+        "sha256": "880c0b5d6c1d993110f399a358c62139d01fbfba583c019b4ab905a9fa9b457f"
+      }
+    },
+    {
+      "name": "LICENSE",
+      "digest": {
+        "sha256": "8b6bd9eb140a1c958fcd1d5cb0253ca86633e07dc318d8c52f708c4b5fd7d032"
+      }
+    },
+    {
+      "name": "LICENSE-CODE",
+      "digest": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    },
+    {
+      "name": "NOTICE",
+      "digest": {
+        "sha256": "8742ab1948bf66bce6640c275ed1f3d23d87efbc530913bd3bfe02fe3ec7b21c"
+      }
+    },
+    {
+      "name": "PATENTS.md",
+      "digest": {
+        "sha256": "9177910bbe6126b0fc78cc4c76e5dd4b5ea667cbe69b80096837fad4c5fce0fd"
+      }
+    },
+    {
+      "name": "README.md",
+      "digest": {
+        "sha256": "9700e27d10f1973f7ebdb8c3880e73489ec89fd3acea1d832e80191c55a44935"
+      }
+    },
+    {
+      "name": "SECURITY.md",
+      "digest": {
+        "sha256": "c399df9b397a6632300ae8d71d907448af7b86f27df257ec23b62f64f1c1bce8"
+      }
+    },
+    {
+      "name": "SPEC.md",
+      "digest": {
+        "sha256": "68612c835bfab240e5b671e57cd107d5f82e6eaf5a70572ab25b033370b8953b"
+      }
+    },
+    {
+      "name": "checker/check.py",
+      "digest": {
+        "sha256": "724b524f34b93b5fdb0bd3ad96e95caad87217bfa87fc6d8ac3cf56182a08d9a"
+      }
+    },
+    {
+      "name": "docs/GLOSSARY.md",
+      "digest": {
+        "sha256": "867ba119b750e834529090eba4d87eba5de6e63874c6582cb2fb402390fc5cac"
+      }
+    },
+    {
+      "name": "docs/REVIEWERS-GUIDE.md",
+      "digest": {
+        "sha256": "5549432e3f81840813e7adecd34b40530da58a14f89af3e507730cc5235b00b7"
+      }
+    },
+    {
+      "name": "examples/minimal/bar.md",
+      "digest": {
+        "sha256": "61c50d19fda2f8bf2e20ca8524d5dfa8f215d4f27e5951715601f047820abfbe"
+      }
+    },
+    {
+      "name": "examples/minimal/control-case.md",
+      "digest": {
+        "sha256": "19899b12f2ef66a0b8a3dd383a2303f981281f77d4646ab134b551c7f48fa459"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D1.md",
+      "digest": {
+        "sha256": "2ce170d58dacce55444929e57137063a6e1bc8fbd7b41069ead32263194c499f"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D2.md",
+      "digest": {
+        "sha256": "dec9158ec2a45295c39bea4064c87ab8c6100ad126c247fd4a93bdd7914f81a2"
+      }
+    },
+    {
+      "name": "examples/minimal/inputs.json",
+      "digest": {
+        "sha256": "62d6cb6880c3b452ee5d62e8aee7ace49b29d6d4e71ff83ff2782fe7303b40ce"
+      }
+    },
+    {
+      "name": "examples/minimal/memo.md",
+      "digest": {
+        "sha256": "6f98d74080d8d419a3f77771fb6cb468f5d94926d6bbef057b56e2b39f9af774"
+      }
+    },
+    {
+      "name": "examples/minimal/method.md",
+      "digest": {
+        "sha256": "dadfad99b1a7d632ea246b72ac445f867dcfb1265d182ae733b165316070b1a9"
+      }
+    },
+    {
+      "name": "examples/minimal/procedure.md",
+      "digest": {
+        "sha256": "38d6039853da0d1189a65a6840574143c913ce053a07e29ddf453186a7bc8efc"
+      }
+    },
+    {
+      "name": "examples/minimal/record.json",
+      "digest": {
+        "sha256": "38c7ae333610fa3e2489e661b36d36870a37616477cbe5ace31f98fbc09ce1cf"
+      }
+    },
+    {
+      "name": "examples/minimal/rubric.md",
+      "digest": {
+        "sha256": "70215f416d493c067b5958212f8c6252499b548469b86ce1c063654c14b805df"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-bar-frozen-at-same-instant.json",
+      "digest": {
+        "sha256": "d3368fbae4034f9e9b5d6f4dd57f84d411e0c6d716b590ce6e2379a31df948ac"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-no-reads-listed.json",
+      "digest": {
+        "sha256": "f05dc670c41ab51941ffd9ee6a29c955306a526bf5b1ddc8eb1f9194397c25bd"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass-model-evaluator-without-external.json",
+      "digest": {
+        "sha256": "ac68253985b093c4d6fbfb8351c333ceb22df014f7c8dbdd08358644d6bd48a5"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass.json",
+      "digest": {
+        "sha256": "edd2fa6bae09aa82c7359d9dea286b73905298eb5d40e1742d82b6735749f6b8"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-approval-bound-to-other-bar.json",
+      "digest": {
+        "sha256": "1cce5b4890ce76fa5f6f640023d81e211edbc0875305d8e8f53092069ac917a1"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-file-differs.json",
+      "digest": {
+        "sha256": "cd78ed1242cc86bb3f53a6bee7af6de66648f01cb131a30e8fb8bffc71a3868f"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-late.json",
+      "digest": {
+        "sha256": "110b87d0a6a141b738c4f54b421b819dbaba0c62a9d799603f8ea0c3659d2383"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-buyer-is-maker-undisclosed.json",
+      "digest": {
+        "sha256": "7fb2176538656c147db2e746b33589b748df0e4b4f0383b8b0dc73f36e439383"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-conforms-without-evidence.json",
+      "digest": {
+        "sha256": "3c615caebd82695b9c84410e5959744d99a3bd1e113ef715347ffb165bf358b9"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-checks-still-observed.json",
+      "digest": {
+        "sha256": "036198cda48c163ed42bc1629d61936775dbade7e96d4a63de50a38f693a90ac"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-its-dimension-observed.json",
+      "digest": {
+        "sha256": "10f465a22d2b3e0b1acafeba9b8c247e398cc69b8924a7bcf2c26b6f5b33d93d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-dimension-scale-missing-floor.json",
+      "digest": {
+        "sha256": "66c7d9bc179c734e691d6605a099574d686041b807a70024990cc06e08214642"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-disagreement-not-recorded.json",
+      "digest": {
+        "sha256": "7b95015b9fa84908dfaf63c2e08c8ed38dd32573a65006354a218b0511c49df1"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-is-bar-author.json",
+      "digest": {
+        "sha256": "c31c9400747fdd0e012bb92e6447f0cd02fa2df601ac02855bc4ab8ce53c2d42"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-instrument-not-pinned.json",
+      "digest": {
+        "sha256": "76bbbd56fcc71004bb29efbee56983915c0a4f5aef341bd7fbd1f2cddd7aa33d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-method-missing.json",
+      "digest": {
+        "sha256": "6866ca1ef98e3096027477787939789e2573b0b74658c02ef4c8344205a961c0"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-disagreements-field.json",
+      "digest": {
+        "sha256": "650492484bb611eccaf921572c63b10998124be464044eb556d4288b68c5cd30"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-violations-field.json",
+      "digest": {
+        "sha256": "809981ed73d050cc7eeeaaef170cb1e9de7eabd100672c5e7e1ad714e3e2b4cf"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-check-for-dimension.json",
+      "digest": {
+        "sha256": "7868f92fa57d437f2e117927905ddcbba70be1f86731680c932941c353bdaa7b"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-control-in-batch.json",
+      "digest": {
+        "sha256": "ac4032d158be054674f977d23671dc726184f5015e15ff98bd88f18a985d04f4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-not-a-custody-statement.json",
+      "digest": {
+        "sha256": "f09089188784103f681929de7e3db942571ee6b7abc37f632036aa902b34a6fc"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-retention-missing.json",
+      "digest": {
+        "sha256": "4bffe7b4193a224c4b644c21d5fdfe76b4adf4a25bd38fe598d61788814b0b61"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-false.json",
+      "digest": {
+        "sha256": "1aa6b186237acea884138ef4a806c59c6d6dde13ec6ba29c431891eca92755de"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-untruly.json",
+      "digest": {
+        "sha256": "415a4461e04cea2ca8274ad49280325ddbed0060641e3c1bf137a66769474702"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-session-undeclared.json",
+      "digest": {
+        "sha256": "3905f44a2819e4de0c67778c8126eafd91af2aaa506c08af65e2e7877d237b76"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-scored-without-scale.json",
+      "digest": {
+        "sha256": "a833eb577189d989bbb3257598296d698910aad642171be42ea5b5f6acde32f1"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-evaluator-unpinned.json",
+      "digest": {
+        "sha256": "b023fa3033859850213b7b50ef1a0940addb225c1854703d418d02bce9764508"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-written-by-maker.json",
+      "digest": {
+        "sha256": "12afd6a81422f06d89019cff1df73b3fad93f624fa8bf1d65f1ad4c846ff1c0b"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-tampered-artifact.json",
+      "digest": {
+        "sha256": "3dbec8535066783064847e9ed731abb982a3ec055a3ad925bcd0b2c2bc9a6ea8"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-unobserved-not-acknowledged.json",
+      "digest": {
+        "sha256": "06fee3870240711cd00601fa8d7b36c653770639fe637a8e415f17d7c459eeee"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-violation-not-recorded.json",
+      "digest": {
+        "sha256": "ad2230737ebc073dc547420f931e17032dafef9eda2226d3687f67bccc4af616"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "0137c64aa8259b92316658ef3b5b7b8cfb666183b604d080e63c0b726feaf180"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-basic.json",
+      "digest": {
+        "sha256": "83e661591896071d11790ea4d2f06e6e04fc9b3d0de10cfd4122b13485529a28"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-buyer-is-maker-disclosed.json",
+      "digest": {
+        "sha256": "9b1f6751d32e35e91270d32ff04a4f6c177b4ca49b39ac4870440baa08fb5a9a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-checks-unobserved.json",
+      "digest": {
+        "sha256": "3a701a7f7cfd245168da6143f74bae011aef10e009012157b75acb4849f45ed7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-its-dimension-unobserved.json",
+      "digest": {
+        "sha256": "95e548355c9ccc04898d2abf67defeb5fcf1626712666cc5c977fbdb8c99d0d2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-legacy-no-script-field.json",
+      "digest": {
+        "sha256": "155349bdeb95939755d13ef3892f47f9043a0b855189ca51b82f4d7ba90777ee"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-not-yet-given-with-violation.json",
+      "digest": {
+        "sha256": "e81305f8d23b3b15136b47721fce54731ac26aea552b3a2580b1f9e99c67d442"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "b336073a77a4e743e8e6142de80da94806add28883de51720cf498c22a8eea70"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-script-evaluator.json",
+      "digest": {
+        "sha256": "cdd2598026515cd75f8fb7b4f812f426719925ad3f91ea5e476b016b3f93cb63"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-acknowledged.json",
+      "digest": {
+        "sha256": "af8c385443f16e268876e1e3593dd450bebf7beca3bb1822a5fbd6578e5503f5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-model-evaluator-settings-only.json",
+      "digest": {
+        "sha256": "8035edcba6919154cbceb36c49c2c587ff828e857b28fcac76852fea19302e86"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-buyer-is-maker.json",
+      "digest": {
+        "sha256": "e483c8a74a0a56dea2ff9ed6e99ebdfe55d2e2af868dcd531589ab4d180beb54"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evaluator-not-read-only.json",
+      "digest": {
+        "sha256": "63831830fe3103f95993b97dc920f2f424f6427142324eb74925dc51765f889e"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-every-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "a94c0ef22c34b79bff58e3a893c3b02b257de16ab0f1fae578cbe8fae9f51dbb"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evidence-digest-mismatch.json",
+      "digest": {
+        "sha256": "67e3ca62213d3e91067f31b9eb4637b6c418daddb5ac8bc6a3e15b2557281e3a"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-outweighs-a-person.json",
+      "digest": {
+        "sha256": "880a27b576c2de0f73604cb7086bfe1b9385c10f191e702abf5bac96f8ca41f8"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-two-of-three.json",
+      "digest": {
+        "sha256": "8ce05eb71a2c89028f343f5344ba018a9a7b772709ea307ed584bc258d2109e4"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-one-run-only.json",
+      "digest": {
+        "sha256": "c9e71754da69d04c9b762f23b34e67ff514a69f024c7f49eb481451fd8b48b3e"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-basic.json",
+      "digest": {
+        "sha256": "13a0f2d74025dce56b36378410351546c6e61c90765d2951f690f73c1d23dfba"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-legacy-evidence-tag.json",
+      "digest": {
+        "sha256": "1b4f8eab47ebcaf731ed7e54a84b6d4bf91682576bd5ffe21b6896c2f62cc7d1"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-family-two-of-four.json",
+      "digest": {
+        "sha256": "cb3ec7c04464e0ad3ef0c87765aac1c22a74319bfc8be5b0cfa5166ce3191305"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-is-other-model.json",
+      "digest": {
+        "sha256": "b2717727d30d0da78fa1d57e1a74a79f3129a11448325d055d5015cc76f0ca0c"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-one-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "c13001e6a680179965943041ca6f327b0a1f6ddb440b197b7e4f1bb2271b5b52"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-runs-disagree-recorded.json",
+      "digest": {
+        "sha256": "60dd3cef3a7fb1747724d8881388ad4541a5498ec96f4916396b65dd650d5897"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "d0d6d40fa5ec966bc332b34d9be9e2063e1fe5c0c1fee20ffc727f9cdd3de094"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-asserted-only.json",
+      "digest": {
+        "sha256": "e7e2796c40cced63b1309bcd8553d63f8c27e87d2c475c9a149209553b6dc1d9"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-read-by-maker.json",
+      "digest": {
+        "sha256": "dfcfa5e17bd2891841127d2ceff65081f23a626c7a190d94b08904fa333a6ab2"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-bar-not-published.json",
+      "digest": {
+        "sha256": "cc1452b05a0f1de358323b164be5f581c012a76c551f0c17dc53ddbe8a68ad27"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-demonstration-after-check.json",
+      "digest": {
+        "sha256": "d2e237da1a3513ea18506e6bd6dc6235c4e809997fc2d70897f73df6f69fe518"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-no-signature-entry.json",
+      "digest": {
+        "sha256": "1d4fbaf0a898a8f1ed33368aecc64e056e32957d4fe979c00816d25d05ffea84"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "ad75e7acd24afd2ddf441871b17040b357810b64addd3cc75f3628b46a9cc244"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-basic.json",
+      "digest": {
+        "sha256": "45317d600dc79ea85b9449c7a2d90772b257921429ffb1fadae8a8458a20cfc3"
+      }
+    },
+    {
+      "name": "fixtures/cl3-pass-unobserved-not-yet-given.json",
+      "digest": {
+        "sha256": "b2484f254bd7d90ca2c1ce584fe8d1f22a66532ba101da191545eadc2d18e37d"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-read-by-maker.json",
+      "digest": {
+        "sha256": "4e517ae1ac51a08ff4a3d9066f007c0562bd503f1d4db6fb82429b929a5019f6"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gemini.log",
+      "digest": {
+        "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gpt.log",
+      "digest": {
+        "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+      }
+    },
+    {
+      "name": "fixtures/evidence/signature-verification.txt",
+      "digest": {
+        "sha256": "af312ebd12640a99f164ebd3a0ed8463f6b3a9734d04cc39f95b6ad1024a3eba"
+      }
+    },
+    {
+      "name": "fixtures/expected.json",
+      "digest": {
+        "sha256": "be382ca4b11630e3908361c296be82e7b6820788c408f2222a182bb371db5f46"
+      }
+    },
+    {
+      "name": "fixtures/files/bar.md",
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      }
+    },
+    {
+      "name": "fixtures/files/report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    },
+    {
+      "name": "fixtures/generate.py",
+      "digest": {
+        "sha256": "f5bd3d3ecf511ab5c647372a748d504ef4dfe5d9cd461f6aa5ff511a41e7976e"
+      }
+    },
+    {
+      "name": "schema/custody-v1.schema.json",
+      "digest": {
+        "sha256": "219aa70af49eb5339b9763d43344e1f05d36af95c3102dc5039ed8749e0c261d"
+      }
+    },
+    {
+      "name": "tests/explain_check.py",
+      "digest": {
+        "sha256": "e9eb3dc1c5b82ff5d43d7afa06f161f6ec68a3818e920210c743ee44d0fef33e"
+      }
+    },
+    {
+      "name": "tests/log_check.py",
+      "digest": {
+        "sha256": "32d37c387f9dc822e01daa85abe49ebe4f9644778da51aa439bc4950e3b2df53"
+      }
+    },
+    {
+      "name": "tests/red_counts.py",
+      "digest": {
+        "sha256": "55f1944a7f051e1a8ea2a8fb5e6a49c5dc434619f9fc498c3e268b2e55f41b2b"
+      }
+    },
+    {
+      "name": "tests/red_readability.py",
+      "digest": {
+        "sha256": "f38ed42485e770384d5cae8a0c1cdb3a8647626b2174a04ad8c1e307cd3f569f"
+      }
+    },
+    {
+      "name": "tests/run_fixtures.py",
+      "digest": {
+        "sha256": "4c053963a9bc08a5ac8e6a6228969f3e73ba30ff7c206f84fa44b4b72887e943"
+      }
+    },
+    {
+      "name": "tests/schema_check.py",
+      "digest": {
+        "sha256": "ff2b63289e0b46497ca2e2a14cf970745d19065fc11bb7fb34d447e50c0915cc"
+      }
+    },
+    {
+      "name": "tools/count.py",
+      "digest": {
+        "sha256": "4a345be7f93de14e2d621a281ddb7607701a83fb7bbb0878c3ae8d5186f0fb9d"
+      }
+    },
+    {
+      "name": "tools/explain.py",
+      "digest": {
+        "sha256": "34900fb942d12d6178491def8d10acaa80f94e4eeac6b5ca8e23d52e6d0ca29b"
+      }
+    },
+    {
+      "name": "tools/make_record.py",
+      "digest": {
+        "sha256": "8d2870479e4cb8ae7a126968a3e03e56c275d7d8a3e973c8e86fa2ddfee5c10f"
+      }
+    },
+    {
+      "name": "tools/readability.py",
+      "digest": {
+        "sha256": "99d004a523de14f6e0bfca4130d910598cd1157bfc6b853bdf866b385ae5f1d7"
+      }
+    },
+    {
+      "name": "tools/record.py",
+      "digest": {
+        "sha256": "1937bb041466d3ee3da41192854a189a1b2624271b9067c778d95d8d6ffc5341"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.3",
+    "levelClaimed": "CL1",
+    "bar": {
+      "digest": {
+        "sha256": "6a513461d04515814efd386597f0dd3aa4653fe0399144e7491c3fd523b74cf4"
+      },
+      "author": "Claude Opus 5.5",
+      "dimensions": [
+        {
+          "id": "D1",
+          "criterion": "Cold record creation: participants with no prior exposure produce CL1 records matching the answer key",
+          "scale": null
+        },
+        {
+          "id": "D2",
+          "criterion": "Reviewer-verifiable: a reader who did not implement assigns verdict, level and governing requirement matching the answer key",
+          "scale": null
+        },
+        {
+          "id": "D3",
+          "criterion": "Quickstart: the README's first section states what, who, status and limits; the quickstart runs on clean Python >= 3.10",
+          "scale": null
+        },
+        {
+          "id": "D4",
+          "criterion": "Size budget: normative words, key words, terms and checker lines within the limits",
+          "scale": null
+        },
+        {
+          "id": "D5",
+          "criterion": "One home, clearly separated: key words only in normative sections; no term defined twice; no two files contradict",
+          "scale": null
+        },
+        {
+          "id": "D6",
+          "criterion": "Faithful to the site's commitments: every Appendix B item maps to a dispositioned Appendix A row",
+          "scale": null
+        },
+        {
+          "id": "D7",
+          "criterion": "Every requirement has an evidence path: a check class and an outcome when evidence is missing",
+          "scale": null
+        },
+        {
+          "id": "D8",
+          "criterion": "Levels are red-first: fixtures fail each level for one named reason; the schema is verified by a third-party validator",
+          "scale": null
+        },
+        {
+          "id": "D9",
+          "criterion": "Checker correct against the answer key on every held-out case",
+          "scale": null
+        },
+        {
+          "id": "D10",
+          "criterion": "Honest front matter: no adoption claims; licenses and self-state match the repository",
+          "scale": null
+        },
+        {
+          "id": "D11",
+          "criterion": "Dogfooded, with a digest boundary: the release carries this job's own custody/v1 record, verified at CL1",
+          "scale": null
+        },
+        {
+          "id": "D12",
+          "criterion": "Owner attention: decisions within bounds and every friction event answered",
+          "scale": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [
+        {
+          "name": "V0.9.3-BAR.md",
+          "version": "v0.9.3",
+          "digest": {
+            "sha256": "c8581ca112f448887849a9a80fe8f48328df988aebc279c43124ba65cf748c95"
+          }
+        },
+        {
+          "name": "V0.9.3-BAR-AMENDMENT-1.md",
+          "version": "Amendment 1",
+          "digest": {
+            "sha256": "6a513461d04515814efd386597f0dd3aa4653fe0399144e7491c3fd523b74cf4"
+          }
+        },
+        {
+          "name": "evaluatordriven-spec-v0.9-bar-v5.1.md",
+          "version": "v5.1",
+          "digest": {
+            "sha256": "c81d6aed96ab36a327b9100a2bf67a9d0e59197d90acd0b5de29119de309b514"
+          }
+        },
+        {
+          "name": "v093-answer-key-FINAL-v093.jsonl",
+          "version": "v093-final",
+          "digest": {
+            "sha256": "dbf7e203ef5eac2ccf59b6240245972f63e374026e1e39c0ca7e80cd4f77f3e3"
+          }
+        }
+      ],
+      "dissent": [],
+      "frozenAt": "2026-10-17T15:37:15.257860Z",
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-17T15:37:15.263275Z",
+          "barDigest": {
+            "sha256": "6a513461d04515814efd386597f0dd3aa4653fe0399144e7491c3fd523b74cf4"
+          },
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-17T15:37:15.268969Z",
+          "barDigest": {
+            "sha256": "6a513461d04515814efd386597f0dd3aa4653fe0399144e7491c3fd523b74cf4"
+          },
+          "adopted": null
+        }
+      ]
+    },
+    "maker": {
+      "name": "Claude Opus 5.5",
+      "version": "evaluatordriven-v0.9.3-candidate-rev1",
+      "method": {
+        "sha256": "c8581ca112f448887849a9a80fe8f48328df988aebc279c43124ba65cf748c95"
+      },
+      "model": {
+        "family": "Claude",
+        "identifier": "claude-opus-5.5",
+        "endpoint": "anthropic",
+        "readOnly": false
+      }
+    },
+    "instrument": {
+      "rubric": {
+        "sha256": "78c81ce175c2641055005106e1dc91e7ddc9deedaf5382aa95bf3ada703fedf5"
+      },
+      "runner": {
+        "sha256": "724b524f34b93b5fdb0bd3ad96e95caad87217bfa87fc6d8ac3cf56182a08d9a"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "ORCH-SCRIPT",
+        "name": "ORCH-SCRIPT",
+        "kind": "script",
+        "model": null,
+        "script": {
+          "name": "evaluatordriven batch runner",
+          "author": "DeepSeek v4.1",
+          "digest": {
+            "sha256": "78c81ce175c2641055005106e1dc91e7ddc9deedaf5382aa95bf3ada703fedf5"
+          }
+        },
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "gpt-6.1-sol",
+        "name": "gpt-6.1-sol",
+        "kind": "model",
+        "model": {
+          "family": "GPT",
+          "identifier": "openai/gpt-6.1-sol",
+          "endpoint": "OpenRouter",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "grok-4.7",
+        "name": "grok-4.7",
+        "kind": "model",
+        "model": {
+          "family": "Grok",
+          "identifier": "x-ai/grok-4.7",
+          "endpoint": "OpenRouter",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "glm-5.3",
+        "name": "glm-5.3",
+        "kind": "model",
+        "model": {
+          "family": "GLM",
+          "identifier": "z-ai/glm-5.3",
+          "endpoint": "OpenRouter",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "qwen-3.8",
+        "name": "qwen-3.8",
+        "kind": "model",
+        "model": {
+          "family": "Qwen",
+          "identifier": "qwen/qwen3.8-2.4t-a95b",
+          "endpoint": "OpenRouter",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "R1",
+        "name": "Reviewer R1",
+        "kind": "person",
+        "model": null,
+        "script": null,
+        "sameModelAsMaker": false
+      },
+      {
+        "id": "nova-pro",
+        "name": "Nova Pro",
+        "kind": "model",
+        "model": {
+          "family": "Nova",
+          "identifier": "amazon/nova-pro-v1",
+          "endpoint": "Amazon Bedrock",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": false
+      }
+    ],
+    "disagreements": [
+      {
+        "dimension": "D5",
+        "checks": [
+          7,
+          9
+        ],
+        "note": "the mechanical reading (conforms) and the reader reading (does not conform) differ; outcomes are never averaged"
+      },
+      {
+        "dimension": "D1",
+        "checks": [
+          0,
+          26
+        ],
+        "note": "two cold implementers produced the expected records; Nova Pro's cold run observed nothing, so its reading is unobserved rather than averaged in"
+      }
+    ],
+    "violations": [
+      {
+        "dimension": "D2",
+        "description": "a check filed does_not_conform for this dimension"
+      },
+      {
+        "dimension": "D5",
+        "description": "a check filed does_not_conform for this dimension"
+      },
+      {
+        "dimension": "D6",
+        "description": "a check filed does_not_conform for this dimension"
+      },
+      {
+        "dimension": "D9",
+        "description": "a check filed does_not_conform for this dimension"
+      }
+    ],
+    "separationGaps": [
+      "the bar's author (Claude Opus 5.5) is also the maker (the Architect = Maker conflict, recorded again);",
+      "one person (Steve Moitozo II) holds the Owner, buyer-proxy and specialist-adopter seats, and approved the bar in both approval roles;",
+      "the human reader had not returned readings when this record was built, so the human half of D1 and the human reading of the reader gates are not in it;",
+      "the exposed case and the orchestrator-specified case are not blind (the orchestrator supplied their content after reading the candidate and the checker), so both are held out of D9's verdict and reported separately; and the first Decision-6 key pass is not blind (its clean-room input carried the checker's own per-case output), so it is logged as superseded and its corrections are not used;",
+      "an interrogatory that probed instrument internals was answered in the Owner channel with held-out detail before its recipient was established; the Owner confirmed none of it reached the maker (log events 45-46), a near-miss, recorded;",
+      "the evaluator scripts' author (DeepSeek v4.1, the orchestrator) also handled the key and the plants;",
+      "the seated reader panel is four AI models from the same provider path as the makers' reviewers, and the gate readings rest on a split panel (D2 and D5/D6 differ across readers).",
+      "The guide test (S1) had no planted control; its reviewer's reading is uncalibrated.",
+      "The human reader did not return readings; the bar's fallback applied, and four models read."
+    ],
+    "retention": {
+      "location": "record/custody-v0.9.3.json",
+      "public": true
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "gpt-6.1-sol",
+        "evidence": {
+          "name": "panel-run-results.json",
+          "sha256": "e1d6ecc015ca7ccec4c06b8ea67abe38240204cdda264cf07020a61cce7c4dac"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "grok-4.7",
+        "evidence": {
+          "name": "panel-run-results.json",
+          "sha256": "e1d6ecc015ca7ccec4c06b8ea67abe38240204cdda264cf07020a61cce7c4dac"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "glm-5.3",
+        "evidence": {
+          "name": "panel-run-results.json",
+          "sha256": "e1d6ecc015ca7ccec4c06b8ea67abe38240204cdda264cf07020a61cce7c4dac"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "qwen-3.8",
+        "evidence": {
+          "name": "panel-run-results.json",
+          "sha256": "e1d6ecc015ca7ccec4c06b8ea67abe38240204cdda264cf07020a61cce7c4dac"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "nova-pro",
+        "evidence": {
+          "name": "nova-pro-cold-run.txt",
+          "sha256": "9b2478609e6adced9f568eb1ac9085ceef9ecf5f2510f25feacca9e962d19573"
+        },
+        "readBy": "Steve Moitozo II"
+      }
+    ],
+    "disposition": {
+      "acknowledgesUnobserved": [
+        "D1"
+      ],
+      "state": "given",
+      "by": "Steve Moitozo II",
+      "at": "2026-10-19T22:14:05.317213Z"
+    },
+    "producedAt": "2026-10-18T21:12:21.041588Z",
+    "checks": [
+      {
+        "batch": "v093-batch",
+        "dimension": "D1",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "A cold-run task-1 record does not read OK at CL1, or the task-2 record does not match its key line",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.079245Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D1",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "A cold-run task-1 record does not read OK at CL1, or the task-2 record does not match its key line",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.103419Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D2",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "58bdf0f10176351543108d0d06bc7d64349ce1d45865f18f14e2a5edaffb3148"
+        },
+        "failureCondition": "A reader who did not implement assigns verdict, level and governing requirement not matching the answer key",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.132191Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D3",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "38c9d790eca8df5cd16af5f0e25929c55856ddbd59b7070cf44914746df76cac"
+        },
+        "failureCondition": "A quickstart command exits non-zero on clean Python >= 3.10, or the README's first section omits what, who, status or limits",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.159571Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D3",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "38c9d790eca8df5cd16af5f0e25929c55856ddbd59b7070cf44914746df76cac"
+        },
+        "failureCondition": "A quickstart command exits non-zero on clean Python >= 3.10, or the README's first section omits what, who, status or limits",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.183184Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D4",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "A size limit is exceeded: normative words > 4500, strong key words > 20, terms > 12, or checker > 300 lines or a line > 100 chars",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.210910Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D4",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "A size limit is exceeded: normative words > 4500, strong key words > 20, terms > 12, or checker > 300 lines or a line > 100 chars",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.235697Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "count.py flags a keyword outside SPEC.md normative text, a term defined twice, or a cross-file contradiction; or a required license file is absent",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.259730Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "count.py flags a keyword outside SPEC.md normative text, a term defined twice, or a cross-file contradiction; or a required license file is absent",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.282492Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D5",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "e46e96a5f537aaad79af4e1c0bd5901160dde07930ebbaa887c54a13adc4423d"
+        },
+        "failureCondition": "count.py flags a keyword outside SPEC.md normative text, a term defined twice, or a cross-file contradiction; or a required license file is absent",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.304380Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D6",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "e46e96a5f537aaad79af4e1c0bd5901160dde07930ebbaa887c54a13adc4423d"
+        },
+        "failureCondition": "An Appendix B commitment has no dispositioned Appendix A row, or a spec sentence contradicts the site snapshot",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.327938Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "A structural or semantic requirement has no fixture, or more than 5 requirements are external",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.350803Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "A structural or semantic requirement has no fixture, or more than 5 requirements are external",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.373839Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D7",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "e46e96a5f537aaad79af4e1c0bd5901160dde07930ebbaa887c54a13adc4423d"
+        },
+        "failureCondition": "A structural or semantic requirement has no fixture, or more than 5 requirements are external",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.397042Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D8",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "6b5eb3c3bf67b6aa136c6a1aedc5927b7b053a4177a498b7c076a162d2e4a027"
+        },
+        "failureCondition": "A fixture fails for a second unnamed reason, or a level boundary fixture is missing, or the schema fails third-party validation",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.419774Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D8",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "6b5eb3c3bf67b6aa136c6a1aedc5927b7b053a4177a498b7c076a162d2e4a027"
+        },
+        "failureCondition": "A fixture fails for a second unnamed reason, or a level boundary fixture is missing, or the schema fails third-party validation",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.443345Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D9",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "1fbe3da4530a8c342432b22292f9094f99a5c643dcf25b6da15ab445eed2ca8e"
+        },
+        "failureCondition": "Any blind rendered case fails its decision-6/7 comparison against the answer key",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.466371Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D9",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "1fbe3da4530a8c342432b22292f9094f99a5c643dcf25b6da15ab445eed2ca8e"
+        },
+        "failureCondition": "Any blind rendered case fails its decision-6/7 comparison against the answer key",
+        "outcome": "does_not_conform",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.488664Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "count.py flags an adoption/self-state claim, a license-name mismatch, or a missing license file",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.511717Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "84b43af2463beb98206537585ba7f64a0a6898655c35eff2a580e31047bd80e6"
+        },
+        "failureCondition": "count.py flags an adoption/self-state claim, a license-name mismatch, or a missing license file",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.533925Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D10",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "e46e96a5f537aaad79af4e1c0bd5901160dde07930ebbaa887c54a13adc4423d"
+        },
+        "failureCondition": "count.py flags an adoption/self-state claim, a license-name mismatch, or a missing license file",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.555276Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D11",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "The job's own record, built from the log, does not verify OK at CL1 under the candidate's checker",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.579264Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D11",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "The job's own record, built from the log, does not verify OK at CL1 under the candidate's checker",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.603288Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D12",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "Owner decisions used > 10, or a friction event is unanswered",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.626232Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D12",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "sha256": "a5067c328a59dcb838aa16e421c442e357030f940b55ccf9c7b261a6d7acfa79"
+        },
+        "failureCondition": "Owner decisions used > 10, or a friction event is unanswered",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-18T21:12:21.649239Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D2",
+        "evaluator": "R1",
+        "evidence": {
+          "sha256": "f31eadef00679ad4c260c5349c70f77db4d9a4a2cc54119b7e9bdc71921deb69"
+        },
+        "failureCondition": "the reviewer's answers miss a rubric fact, or rest on something the record does not say",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-19T22:14:05.211066Z"
+      },
+      {
+        "batch": "v093-batch",
+        "dimension": "D1",
+        "evaluator": "nova-pro",
+        "evidence": null,
+        "failureCondition": "A cold-run record does not read OK at CL1, or does not match its key line",
+        "outcome": "unobserved",
+        "run": 1,
+        "score": null,
+        "unobserved": {
+          "channel": "cold-run harness: two clean-room attempts, then one clean re-run",
+          "reason": "it never read SPEC.md, examples/minimal/inputs.json or schema/custody-v1.schema.json; it invented a schema from the prompt alone and produced no valid records"
+        },
+        "at": "2026-10-19T22:14:05.259893Z"
+      }
+    ],
+    "controls": [
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "ce7f1d8125f64e13c3bba99d7ad55313b874921fe53b468f99d55319530efabe"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D9-flip",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "724b61fd15c5ebd7aee03e21667e15ccda8ca2b6265406f0f0ce094a13aef096"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-S7-missed-control",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "cb7711dd23ff9857993080533f6ff62798a4eb82d6c185e92322deaf830d7f2a"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-S8-bar-mismatch",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "9c5b1f148b11b8b75a550e38513ae34438dfa972a8480702b8be3e8e9119fd3b"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-S1-long-sentence",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "290ae43f6913166a94073e029d7bcb3f56145dc76722b404ec5ee8f4f660b34d"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-S1-used-before-gloss",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "91d7bee57654ad2b7609c6ef61093e0552616930e63970b14d6e4dc145fa45d7"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-S5-license-name",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "33938c7e5b52ca0d701a986f50f528d2b823948c0ef89a77dc5d24b8b44b0c53"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D10-license-removed",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "f63c7e24b3e351392ca95aa6ad35ba6aa66ca27fb8eaa05036957e5359aae441"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D10-selfstate",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "dd14138997da9af900c809736ea0e34864c1e19972e15532056a8a9942231792"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D5-term-twice",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "012714a238c789019a6e4c949ed051ce7d703d5e22f8b825cbfdd0323912f530"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D5-keyword-outside",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "e4cd6b2b20d05b9ed096d890a882db21c7c9f0a520c9dd184763a6c8f5e5771a"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D8-second-reason",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "a58e967ead8c4e625b8350a2b0f54f137f00233fc8dccae841281d754d2dc9ef"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "plant-D7-no-evidence",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "efe208c7075ea15dbafef522636ae3be1cf0bde46cd65bccfade06466db80780"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "ctrl-C03",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "e749f075eeee87e4a6728638ccef45d02fe531a73cc9750acbbaf6662e94c131"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "ctrl-C08",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "5b92d7e15a046f3a87cc30aae4c7e3e4d39cda38ea0af2071378067bbd8629b8"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "ctrl-C10",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "v093-batch",
+        "case": {
+          "sha256": "7f71fd393d7c54a6c09b694718f51dc5b45aa299724ef63327117c23e59ecf4b"
+        },
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "ctrl-C12",
+        "outcome": "does_not_conform"
+      }
+    ]
+  }
+}
