@@ -2,7 +2,7 @@ name: ci
 on: [push, pull_request]
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python: ["3.10", "3.12"]
@@ -18,7 +18,7 @@ jobs:
       - name: Quickstart works, standard library only
         run: |
           python tools/make_record.py examples/minimal/inputs.json /tmp/record.json
-          python checker/check.py /tmp/record.json --files examples/minimal
+          python checker/check.py /tmp/record.json --files examples/minimal --bar examples/minimal/bar.md
       - name: Custody log is tamper-evident and builds a valid record
         run: python tests/log_check.py
       - name: Size limits and cross-file agreement
