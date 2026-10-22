@@ -1,2 +1,0 @@
-fixture evidence: signature-verification.txt
-endpoint pinned; write tools off

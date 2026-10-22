@@ -55,9 +55,10 @@ A record answers six questions. You can ask them in this order.
 
 1. **What was made?** The record names the work, and holds a fingerprint of each file. A fingerprint is a
    short code worked out from the file itself. If the file changes, the fingerprint no longer matches.
-2. **What was it measured against?** The record holds the bar, and the time it was fixed. It shows who
-   approved it, and when.
-3. **Who made it?** The record names the maker. If the maker was an AI model, it names the model.
+2. **What was it measured against?** The record holds the bar, the time it was fixed, and the time the
+   work started. It shows who approved it, and when.
+3. **Who made it?** The record names the maker, and says whether it was a person, an AI model or a
+   script. If it was an AI model, it names the model.
 4. **Who checked it, and were they independent?** The record lists every evaluator, and what kind each one
    is. It says if an evaluator is a fresh session of the same AI model that made the work.
 5. **What did they find?** The record lists every check, with its outcome and its evidence.
@@ -98,7 +99,8 @@ is good. Only the checks, read against the bar, can tell you that.
 
 You can sign off on work when these answers satisfy you.
 
-1. Was the bar written and approved before the work started? Look at the dates.
+1. Was the bar written and approved before the work started? Look at the dates. The plain view says
+   whether the bar was fixed before, at the same moment as, or after the work started.
 2. Does the bar say what you care about? If something important is missing from it, no check can cover
    it.
 3. Was each part of the bar read by someone who did not make the work?

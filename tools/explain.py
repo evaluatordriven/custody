@@ -11,9 +11,11 @@ import importlib.util
 import json
 import pathlib
 import sys
+from datetime import datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 STATE = {"given": "accepted", "not_yet_given": "not yet accepted", "declined": "declined"}
+MADE_BY = {"person": "made by a person", "model": "made by an AI model", "script": "made by a script"}
 OUTCOME = {"conforms": "conforms", "does_not_conform": "does not conform", "unobserved": "not observed"}
 
 
@@ -37,10 +39,18 @@ def explain(r, report):
     subj = r.get("subject", [])
     out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
     out += [f"   - and {len(subj) - 6} more files, each with its own fingerprint"] if len(subj) > 6 else []
-    out += [f"   Finished: {p.get('producedAt', '?')}", ""]
+    out += [f"   Started: {p.get('startedAt', '?')}", f"   Finished: {p.get('producedAt', '?')}", ""]
     out.append("2. What was it measured against?")
     out.append(f"   The bar was written by {bar.get('author', '?')} and fixed at "
                f"{bar.get('frozenAt', '?')} (fingerprint {fp(bar.get('digest'))}).")
+    try:
+        frozen, started = (datetime.fromisoformat(str(x).replace("Z", "+00:00"))
+                           for x in (bar.get("frozenAt"), p.get("startedAt")))
+        order = ("before" if frozen < started else "at the same moment as" if frozen == started
+                 else "after")
+        out.append(f"   The bar was fixed {order} the work started.")
+    except ValueError:
+        out.append("   The record does not say when the work started.")
     for d in bar.get("dimensions", []):
         out.append(f"   - {d.get('id')}: {d.get('criterion')}")
     for a in bar.get("approvals", []):
@@ -54,7 +64,8 @@ def explain(r, report):
     out.append("")
     out.append("3. Who made it?")
     model = mk.get("model") or {}
-    out.append(f"   {mk.get('name', '?')}, version {mk.get('version', '?')}"
+    out.append(f"   {MADE_BY.get(mk.get('kind'), 'made by a maker of unstated kind').capitalize()}: "
+               f"{mk.get('name', '?')}, version {mk.get('version', '?')}"
                + (f", using AI model {model.get('identifier')} ({model.get('family')} family)"
                   if model else ""))
     out += ["", "4. Who checked it?"]

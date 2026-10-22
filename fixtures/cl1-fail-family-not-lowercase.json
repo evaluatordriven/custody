@@ -1,0 +1,183 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.4",
+    "levelClaimed": "CL1",
+    "bar": {
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      },
+      "frozenAt": "2026-10-01T09:00:00Z",
+      "author": "Morgan Lee",
+      "dimensions": [
+        {
+          "id": "D1",
+          "criterion": "Every figure cites its source",
+          "scale": null
+        },
+        {
+          "id": "D2",
+          "criterion": "The recommendation follows from the figures",
+          "scale": null
+        }
+      ],
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Avery Chen",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:00:00Z",
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Priya Nair",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:30:00Z",
+          "adopted": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [
+        {
+          "name": "Q3 vendor price sheet",
+          "version": "2026-09-30",
+          "digest": {
+            "sha256": "a7690520f1332f96d616a67dc934b0aa345802b46f394cb8df70370eab039765"
+          }
+        }
+      ],
+      "dissent": []
+    },
+    "maker": {
+      "name": "Drafting Agent",
+      "kind": "model",
+      "version": "1.4",
+      "method": {
+        "sha256": "5b7e6bf2dc4a32a6aa4770cd5639c2c7af890fc86c273b5c8567fe5382086bf3"
+      },
+      "model": {
+        "family": "gpt",
+        "identifier": "gpt-6.1",
+        "endpoint": "api.openai.example",
+        "readOnly": true
+      }
+    },
+    "startedAt": "2026-10-01T10:00:00Z",
+    "producedAt": "2026-10-02T09:00:00Z",
+    "instrument": {
+      "rubric": {
+        "sha256": "49672f0ef3b3a542b3b86b475936cc9adf1ddf60369e9b120ba33900294c99d8"
+      },
+      "runner": {
+        "sha256": "527aa9f431539da8e151d5434d1d5e611d973f601d8e970790882624554146b0"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "E1",
+        "name": "Sam Ortiz",
+        "kind": "model",
+        "model": {
+          "family": "GPT",
+          "identifier": "gpt-6.1",
+          "endpoint": "api.openai.example",
+          "readOnly": true
+        },
+        "script": null,
+        "sameModelAsMaker": true
+      }
+    ],
+    "checks": [
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E1-1.md",
+          "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E1-1.md",
+          "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
+        },
+        "unobserved": null
+      }
+    ],
+    "controls": [
+      {
+        "id": "K1",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "deed06749c0b34891abba735d8902e2699668b85869d06aaf9fbd87464a06fb3"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "K2",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "bb258a52e05f3223b741a68183a080aa1bc381814586c7f733c077d79cbb8c6b"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      }
+    ],
+    "disagreements": [],
+    "violations": [],
+    "separationGaps": [],
+    "retention": {
+      "location": "s3://records/vendor-report",
+      "public": false
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "E1",
+        "readBy": "Dana Reyes",
+        "evidence": {
+          "name": "harness-gpt.log",
+          "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+        }
+      }
+    ],
+    "disposition": {
+      "state": "given",
+      "by": "Avery Chen",
+      "at": "2026-10-04T09:00:00Z",
+      "acknowledgesUnobserved": []
+    }
+  }
+}

@@ -246,12 +246,6 @@
       "routing": "none",
       "fails": "BL-1"
     },
-    "baseline-fail-bar-frozen-at-same-instant": {
-      "verdict": "FAILED",
-      "levelAchieved": "none",
-      "routing": "none",
-      "fails": "BL-1"
-    },
     "cl1-unchecked-model-evaluator-settings-only": {
       "verdict": "NOT-CHECKABLE",
       "levelAchieved": "none",
@@ -300,7 +294,7 @@
       "routing": "none",
       "fails": null
     },
-    "cl2-pass-maker-is-other-model": {
+    "cl2-pass-maker-is-person": {
       "verdict": "OK",
       "levelAchieved": "CL2",
       "routing": "none",
@@ -342,21 +336,21 @@
       "routing": "none",
       "fails": null
     },
-    "cl3-pass-basic": {
-      "verdict": "OK",
-      "levelAchieved": "CL3",
+    "cl3-unchecked-signature-not-verified": {
+      "verdict": "NOT-CHECKABLE",
+      "levelAchieved": "CL2",
       "routing": "none",
       "fails": null
     },
-    "cl3-pass-unobserved-not-yet-given": {
-      "verdict": "OK",
-      "levelAchieved": "CL3",
+    "cl3-unchecked-unobserved-not-yet-given": {
+      "verdict": "NOT-CHECKABLE",
+      "levelAchieved": "CL2",
       "routing": "to approver",
       "fails": null
     },
-    "cl3-pass-adopted-specialist": {
-      "verdict": "OK",
-      "levelAchieved": "CL3",
+    "cl3-unchecked-adopted-specialist": {
+      "verdict": "NOT-CHECKABLE",
+      "levelAchieved": "CL2",
       "routing": "none",
       "fails": null
     },
@@ -389,6 +383,240 @@
       "levelAchieved": "none",
       "routing": "none",
       "fails": null
+    },
+    "cl1-fail-evaluator-on-no-check-or-control": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-16"
+    },
+    "cl1-fail-control-names-unlisted-evaluator": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-16"
+    },
+    "cl1-fail-readings-filed-under-runner": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-16"
+    },
+    "cl1-fail-reader-without-control": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-fail-no-clean-control": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-pass-unobserved-reader-needs-no-control": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "acknowledged",
+      "fails": null
+    },
+    "cl1-fail-evidence-file-differs": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-8"
+    },
+    "cl1-unchecked-evidence-file-not-supplied": {
+      "verdict": "NOT-CHECKABLE",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-fail-evidence-name-not-relative": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-family-not-lowercase": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-family-with-version": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-endpoint-not-a-host": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-check-endpoint-not-a-host": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-model-evaluator-without-model-block": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-6"
+    },
+    "cl2-pass-check-endpoint-recorded": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-check-answered-by-makers-endpoint": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl2-fail-undisclosed-family-counts-as-makers": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl2-pass-undisclosed-family-beside-others": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-fail-bar-frozen-after-start": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-1"
+    },
+    "cl1-fail-bar-frozen-at-start": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-1"
+    },
+    "cl1-fail-started-after-produced": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-1"
+    },
+    "cl1-fail-started-at-missing": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-maker-kind-missing": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-4"
+    },
+    "baseline-pass-bar-frozen-mid-work": {
+      "verdict": "OK",
+      "levelAchieved": "baseline",
+      "routing": "none",
+      "fails": null
+    },
+    "baseline-fail-bar-frozen-at-same-instant": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "BL-1"
+    },
+    "cl2-fail-model-maker-without-model-block": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl1-pass-scored": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-pass-scored-below-threshold": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "to approver",
+      "fails": null
+    },
+    "cl1-fail-score-contradicts-outcome": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-17"
+    },
+    "cl1-fail-score-meets-threshold-reads-does-not-conform": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "to approver",
+      "fails": "CL1-17"
+    },
+    "cl1-fail-score-above-scale": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-17"
+    },
+    "cl1-fail-threshold-above-scale": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-2"
+    },
+    "cl1-fail-maker-wrote-bar-undisclosed": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-11"
+    },
+    "cl1-pass-maker-wrote-bar-disclosed": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-maker-wrote-bar": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl1-fail-run-zero": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl1-fail-anchors-empty": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-2"
+    },
+    "cl1-pass-extension-fields": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-pass-refiled-with-provenance": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
     }
   },
   "boundaries": {
@@ -398,6 +626,8 @@
   },
   "schemaInvalid": [
     "cl1-fail-missing-violations-field",
-    "cl1-fail-dimension-scale-missing-floor"
+    "cl1-fail-dimension-scale-missing-floor",
+    "cl1-fail-anchors-empty",
+    "cl1-fail-maker-kind-missing"
   ]
 }

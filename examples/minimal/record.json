@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.3",
+    "specVersion": "0.9.4",
     "levelClaimed": "CL1",
     "bar": {
       "digest": {
@@ -56,12 +56,14 @@
     },
     "maker": {
       "name": "Alex Kim",
+      "kind": "person",
       "version": "n/a (person)",
       "method": {
         "sha256": "dadfad99b1a7d632ea246b72ac445f867dcfb1265d182ae733b165316070b1a9"
       },
       "model": null
     },
+    "startedAt": "2026-10-05T10:00:00Z",
     "producedAt": "2026-10-06T15:00:00Z",
     "instrument": {
       "rubric": {
@@ -91,6 +93,7 @@
         "score": null,
         "failureCondition": "A figure without a named source and date",
         "evidence": {
+          "name": "reading-D1.md",
           "sha256": "2ce170d58dacce55444929e57137063a6e1bc8fbd7b41069ead32263194c499f"
         },
         "unobserved": null
@@ -105,6 +108,7 @@
         "score": null,
         "failureCondition": "A recommendation that needs facts the memo does not give",
         "evidence": {
+          "name": "reading-D2.md",
           "sha256": "dec9158ec2a45295c39bea4064c87ab8c6100ad126c247fd4a93bdd7914f81a2"
         },
         "unobserved": null
@@ -120,6 +124,16 @@
         },
         "expected": "does_not_conform",
         "outcome": "does_not_conform"
+      },
+      {
+        "id": "K2",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "bb539f973b93178f73d41e0f996f50c1a7f8e08c490a4813f161925dc69fb9fd"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
       }
     ],
     "disagreements": [],

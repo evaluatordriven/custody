@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.3",
+    "specVersion": "0.9.4",
     "levelClaimed": "CL1",
     "bar": {
       "digest": {
@@ -64,12 +64,14 @@
     },
     "maker": {
       "name": "Drafting Agent",
+      "kind": "model",
       "version": "1.4",
       "method": {
         "sha256": "5b7e6bf2dc4a32a6aa4770cd5639c2c7af890fc86c273b5c8567fe5382086bf3"
       },
       "model": null
     },
+    "startedAt": "2026-10-01T10:00:00Z",
     "producedAt": "2026-10-02T09:00:00Z",
     "instrument": {
       "rubric": {
@@ -99,7 +101,8 @@
         "score": null,
         "failureCondition": "D1 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "31da705acc3dbece764b7ef58c4ef28e579222ffa80e054810715470bd45c1ff"
+          "name": "reading-D1-E1-1.md",
+          "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
         },
         "unobserved": null
       },
@@ -125,10 +128,20 @@
         "batch": "B1",
         "evaluator": "E1",
         "case": {
-          "sha256": "0fcd568a5cb9bdb4677b69354b11ee415af8f784519cff3da49a26f84eaee7f2"
+          "sha256": "deed06749c0b34891abba735d8902e2699668b85869d06aaf9fbd87464a06fb3"
         },
         "expected": "does_not_conform",
         "outcome": "does_not_conform"
+      },
+      {
+        "id": "K2",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "bb258a52e05f3223b741a68183a080aa1bc381814586c7f733c077d79cbb8c6b"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
       }
     ],
     "disagreements": [],

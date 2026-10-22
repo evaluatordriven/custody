@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """The custody recorder must catch tampering, and make_record --log must build a record that verifies.
 
-Builds a small log from the minimal example: bar frozen, two approvals, the work produced, every check
-and control, a disposition. It checks that the record built from it reads OK at CL1, that its times come
-from the log, and that an edited, reordered or truncated log is refused. Standard library only.
+Builds a small log from the minimal example: bar frozen, two approvals, work started, the work produced,
+every check and control, a disposition. It checks that the record built from it reads OK at CL1, that its
+times come from the log, and that an edited, reordered or truncated log is refused. Standard library
+only.
 """
 import json
 import pathlib
@@ -37,6 +38,7 @@ def main():
     for role, who in (("buyer", "Casey Park"), ("specialist", "Riley Moss")):
         run(REC, "add", log, "approval", "--actor", who, "--data",
             json.dumps({"role": role, "barDigest": bar}))
+    run(REC, "add", log, "work-started", "--actor", "Alex Kim")
     stale = dict(inputs["checks"][0], outcome="does_not_conform")
     run(REC, "add", log, "check", "--actor", stale["evaluator"], "--data", json.dumps(stale))
     run(REC, "add", log, "artifact-produced", "--actor", "Drafting Agent")
@@ -55,7 +57,8 @@ def main():
         problems.append("an untouched log does not verify")
     out = ex / "from-log.json"
     run(MAKE, str(ex / "inputs.json"), str(out), "--log", log)
-    report = json.loads(run(CHECK, str(out), "--files", str(ex), "--bar", str(ex / "bar.md"), ok=False).stdout)
+    report = json.loads(run(CHECK, str(out), "--files", str(ex), "--bar", str(ex / "bar.md"),
+                            "--evidence", str(ex / "evidence"), ok=False).stdout)
     if (report["verdict"], report["levelAchieved"]) != ("OK", "CL1"):
         problems.append(f"record built from the log reads {report['verdict']}/{report['levelAchieved']}")
     if len(json.loads(out.read_text())["predicate"]["checks"]) != len(inputs["checks"]):
@@ -63,7 +66,9 @@ def main():
                         "record's checks")
     events = [json.loads(x) for x in pathlib.Path(log).read_text().splitlines()]
     pred = json.loads(out.read_text())["predicate"]
-    if pred["bar"]["frozenAt"] != events[1]["at"] or pred["disposition"]["at"] != events[-1]["at"]:
+    started = next(e["at"] for e in events if e["type"] == "work-started")
+    if (pred["bar"]["frozenAt"] != events[1]["at"] or pred["disposition"]["at"] != events[-1]["at"]
+            or pred["startedAt"] != started):
         problems.append("record times do not come from the log")
 
     lines = pathlib.Path(log).read_text().splitlines()

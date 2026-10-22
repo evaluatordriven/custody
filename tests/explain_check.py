@@ -17,7 +17,9 @@ def main():
             continue
         r = json.loads(path.read_text(encoding="utf-8"))
         files = ROOT / ("examples/minimal" if "examples" in path.parts else "fixtures/files")
-        args = [str(path), "--files", str(files), "--bar", str(files / "bar.md")]
+        evidence = files / "evidence" if "examples" in path.parts else ROOT / "fixtures" / "evidence"
+        args = [str(path), "--files", str(files), "--bar", str(files / "bar.md"),
+                "--evidence", str(evidence)]
         p = subprocess.run([sys.executable, str(ROOT / "tools" / "explain.py"), *args],
                            capture_output=True, text=True)
         verdict = subprocess.run([sys.executable, str(ROOT / "checker" / "check.py"), *args],

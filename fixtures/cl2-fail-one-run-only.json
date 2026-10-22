@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.3",
+    "specVersion": "0.9.4",
     "levelClaimed": "CL2",
     "bar": {
       "digest": {
@@ -64,12 +64,19 @@
     },
     "maker": {
       "name": "Drafting Agent",
+      "kind": "model",
       "version": "1.4",
       "method": {
         "sha256": "5b7e6bf2dc4a32a6aa4770cd5639c2c7af890fc86c273b5c8567fe5382086bf3"
       },
-      "model": null
+      "model": {
+        "family": "claude",
+        "identifier": "opus-5.5",
+        "endpoint": "api.anthropic.example",
+        "readOnly": false
+      }
     },
+    "startedAt": "2026-10-01T10:00:00Z",
     "producedAt": "2026-10-02T09:00:00Z",
     "instrument": {
       "rubric": {
@@ -116,7 +123,8 @@
         "score": null,
         "failureCondition": "D1 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "31da705acc3dbece764b7ef58c4ef28e579222ffa80e054810715470bd45c1ff"
+          "name": "reading-D1-E1-1.md",
+          "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
         },
         "unobserved": null
       },
@@ -130,7 +138,8 @@
         "score": null,
         "failureCondition": "D1 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "c4b54ae51bea4e718b0a3e56fd2754a2d3c91d9bfea1736dcb695561ac202fc6"
+          "name": "reading-D1-E1-2.md",
+          "sha256": "22fd565d00f33e79120a992f18c7eaeff83d975480b3b4a633b1177e8f5b505d"
         },
         "unobserved": null
       },
@@ -144,7 +153,8 @@
         "score": null,
         "failureCondition": "D2 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "993c6ce302f9867983d400b2e4c270c8f7b4dff1203c5ef61940d2991647f616"
+          "name": "reading-D2-E1-1.md",
+          "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
         },
         "unobserved": null
       },
@@ -158,7 +168,8 @@
         "score": null,
         "failureCondition": "D2 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "3bd8a1962243c1fdc8d59b550219973be93453760041c0aed0a3cea9da606120"
+          "name": "reading-D2-E1-2.md",
+          "sha256": "995f3be5a2a1f3e45ced565827e6fb9d52c627f9294f4238b290db2c685aff42"
         },
         "unobserved": null
       },
@@ -172,7 +183,8 @@
         "score": null,
         "failureCondition": "D1 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "f02efc7a067ea9df0018869b10cd024da6cdf96681eeae23f6d78084f05825ba"
+          "name": "reading-D1-E2-1.md",
+          "sha256": "d953cf62a22041889d4d304babbf260ffc6ea4b459a71e18fc9824c10445d6b7"
         },
         "unobserved": null
       },
@@ -186,7 +198,8 @@
         "score": null,
         "failureCondition": "D2 reads does_not_conform if its criterion is not met",
         "evidence": {
-          "sha256": "7281b6fe772a010387bc261f7520b0f0b733bfcc7f2ea89aac1280521b2804c6"
+          "name": "reading-D2-E2-1.md",
+          "sha256": "4e7cbe41b4b14071918bf0b248b7beb8fdc14b52eb7c898f59c5b00db7850cc1"
         },
         "unobserved": null
       }
@@ -197,7 +210,7 @@
         "batch": "B1",
         "evaluator": "E1",
         "case": {
-          "sha256": "8d64666b3a57b53101d5ec122525a781485120c5ee7be962ba492bef42096341"
+          "sha256": "f6336245720505873f07865fb3e3c2af5c0b02b3c09e6c14e0b4d68ece0d5b4c"
         },
         "expected": "does_not_conform",
         "outcome": "does_not_conform"
@@ -207,10 +220,20 @@
         "batch": "B1",
         "evaluator": "E2",
         "case": {
-          "sha256": "8d64666b3a57b53101d5ec122525a781485120c5ee7be962ba492bef42096341"
+          "sha256": "0b230e8e30a11a1f85d53492319e4d2dd3d5ed27a86e191254b29d39a40f4394"
         },
         "expected": "does_not_conform",
         "outcome": "does_not_conform"
+      },
+      {
+        "id": "KC",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "a75f9de16e1d7ced1db51ed599c49f43b16c0b9499ac6113a499803792c62954"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
       }
     ],
     "disagreements": [],

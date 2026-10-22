@@ -1,0 +1,1292 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": ".github/workflows/ci.yml",
+      "digest": {
+        "sha256": "777c8afc6fc893dbddfc155f19ce2de45037755833900a026c629feb1afba0da"
+      }
+    },
+    {
+      "name": ".gitignore",
+      "digest": {
+        "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+      }
+    },
+    {
+      "name": "CHANGELOG.md",
+      "digest": {
+        "sha256": "adf9b5309dde37b67a7c673edf97a3456ba1ccc3ad7caff6424ac061def05ead"
+      }
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "digest": {
+        "sha256": "e290dc936d442de51c4658523d5cc91a2cbaef4e44ebc14e0cf8ecdea6fc9544"
+      }
+    },
+    {
+      "name": "GOVERNANCE.md",
+      "digest": {
+        "sha256": "880c0b5d6c1d993110f399a358c62139d01fbfba583c019b4ab905a9fa9b457f"
+      }
+    },
+    {
+      "name": "LICENSE",
+      "digest": {
+        "sha256": "8b6bd9eb140a1c958fcd1d5cb0253ca86633e07dc318d8c52f708c4b5fd7d032"
+      }
+    },
+    {
+      "name": "LICENSE-CODE",
+      "digest": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    },
+    {
+      "name": "NOTICE",
+      "digest": {
+        "sha256": "8742ab1948bf66bce6640c275ed1f3d23d87efbc530913bd3bfe02fe3ec7b21c"
+      }
+    },
+    {
+      "name": "PATENTS.md",
+      "digest": {
+        "sha256": "9177910bbe6126b0fc78cc4c76e5dd4b5ea667cbe69b80096837fad4c5fce0fd"
+      }
+    },
+    {
+      "name": "README.md",
+      "digest": {
+        "sha256": "21736447a5e588404a3e72b48e7b95a9e28a8f41f92911cf5ce17f0d70b06cb3"
+      }
+    },
+    {
+      "name": "SECURITY.md",
+      "digest": {
+        "sha256": "c399df9b397a6632300ae8d71d907448af7b86f27df257ec23b62f64f1c1bce8"
+      }
+    },
+    {
+      "name": "SPEC.md",
+      "digest": {
+        "sha256": "98b02e6014962c27f19e38c1c89581064aa462c66a5f8c0c9935e97729b8ddaa"
+      }
+    },
+    {
+      "name": "checker/check.py",
+      "digest": {
+        "sha256": "94bfe45c409432f6e910776db2f9647a31d577da9c64f412d6850a1ce6ce7a1a"
+      }
+    },
+    {
+      "name": "docs/GLOSSARY.md",
+      "digest": {
+        "sha256": "00a0a82a22b332621b0c22955907ab3754150ee219b29c22b48078eb22afe15a"
+      }
+    },
+    {
+      "name": "docs/REVIEWERS-GUIDE.md",
+      "digest": {
+        "sha256": "c0cedb192718efe1e9f2e6d999271cd7bb77a224de78c99fe95f3c5ca5c586dc"
+      }
+    },
+    {
+      "name": "examples/minimal/bar.md",
+      "digest": {
+        "sha256": "61c50d19fda2f8bf2e20ca8524d5dfa8f215d4f27e5951715601f047820abfbe"
+      }
+    },
+    {
+      "name": "examples/minimal/control-case.md",
+      "digest": {
+        "sha256": "19899b12f2ef66a0b8a3dd383a2303f981281f77d4646ab134b551c7f48fa459"
+      }
+    },
+    {
+      "name": "examples/minimal/control-clean-case.md",
+      "digest": {
+        "sha256": "bb539f973b93178f73d41e0f996f50c1a7f8e08c490a4813f161925dc69fb9fd"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D1.md",
+      "digest": {
+        "sha256": "2ce170d58dacce55444929e57137063a6e1bc8fbd7b41069ead32263194c499f"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D2.md",
+      "digest": {
+        "sha256": "dec9158ec2a45295c39bea4064c87ab8c6100ad126c247fd4a93bdd7914f81a2"
+      }
+    },
+    {
+      "name": "examples/minimal/inputs.json",
+      "digest": {
+        "sha256": "6329df1d472cd9357607f4a9171777e9c965933524de7f7cc480b3625dc2cb96"
+      }
+    },
+    {
+      "name": "examples/minimal/memo.md",
+      "digest": {
+        "sha256": "6f98d74080d8d419a3f77771fb6cb468f5d94926d6bbef057b56e2b39f9af774"
+      }
+    },
+    {
+      "name": "examples/minimal/method.md",
+      "digest": {
+        "sha256": "dadfad99b1a7d632ea246b72ac445f867dcfb1265d182ae733b165316070b1a9"
+      }
+    },
+    {
+      "name": "examples/minimal/procedure.md",
+      "digest": {
+        "sha256": "38d6039853da0d1189a65a6840574143c913ce053a07e29ddf453186a7bc8efc"
+      }
+    },
+    {
+      "name": "examples/minimal/record.json",
+      "digest": {
+        "sha256": "446cf4e19aa27b4168ccf347ecffde5af41a5700fc5d4edfb586cae0f0704217"
+      }
+    },
+    {
+      "name": "examples/minimal/rubric.md",
+      "digest": {
+        "sha256": "70215f416d493c067b5958212f8c6252499b548469b86ce1c063654c14b805df"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-bar-frozen-at-same-instant.json",
+      "digest": {
+        "sha256": "6a2daf8efde37439402999340e0da9c21e9bce342e887b1b0e4a8acbbc0be80f"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-no-reads-listed.json",
+      "digest": {
+        "sha256": "1ecca0dd20c8cf8ba579852f92ec255bc97c2f4b998edc399e5e217035d0a45c"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass-bar-frozen-mid-work.json",
+      "digest": {
+        "sha256": "50ca3e668243d1ab5ee931b92a1c5a1b63c313e03c30f90903a420c00055d6f0"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass-model-evaluator-without-external.json",
+      "digest": {
+        "sha256": "f56157c3623e3c45104f0c37fdd94bc78c5aec1896815b983d90d4b9028ee28e"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass.json",
+      "digest": {
+        "sha256": "c721786929cacb451d4114377a59d86c4f85c1897e6e8f797236ada6400af904"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-anchors-empty.json",
+      "digest": {
+        "sha256": "f4977d92bb992a274a9a9ac03aa81dcb8b7f5460055323761ad9c1f4783f4bbe"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-approval-bound-to-other-bar.json",
+      "digest": {
+        "sha256": "55590e930da4534bc19cbee3a80eca447ad5de32aa424f1e0a87a13e1e2f825a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-file-differs.json",
+      "digest": {
+        "sha256": "0afd1bb709bd1cb96742ae1276e715889743444d0e31e1b3671369b7774b01ae"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-after-start.json",
+      "digest": {
+        "sha256": "01162d54fca65cae8c786e94bcd9ae27721c6d196630a410cc7b052f799dfe7d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-at-start.json",
+      "digest": {
+        "sha256": "21bf7d5ce8cbcdc848fbc1c9eac26831532939c06885ca537e8808c7d22e922e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-late.json",
+      "digest": {
+        "sha256": "ef23dc841c1e0413b9d56f77d3067bde9c9c1ee316a34596882d0c95dc280790"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-buyer-is-maker-undisclosed.json",
+      "digest": {
+        "sha256": "d97e9b24328d7d1822dd9c172f1aaaeb1f2921e9f602dd9440ff3ca2d4ab0f16"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-check-endpoint-not-a-host.json",
+      "digest": {
+        "sha256": "2c39b2123570375350a51393f1f88154a8903fdb317256ba25daa4526c2996cc"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-conforms-without-evidence.json",
+      "digest": {
+        "sha256": "ae596a3bad38e6986443797facff659f68a338d2a05279188133f7e7bec1197a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-checks-still-observed.json",
+      "digest": {
+        "sha256": "fefa5ebb2c80790ddfb40f12c083f62c74d77cd2d36ffbdb44f60ca83355aa50"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-its-dimension-observed.json",
+      "digest": {
+        "sha256": "f39bcc975d5313004cd2c17bfe5cbc88e361efa52b49095a28fd95422afd804c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-names-unlisted-evaluator.json",
+      "digest": {
+        "sha256": "1d8d7e10c0afaa8f2efbde5ede3af9b4fe0204cd370fbafd970bc10a53d461a4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-dimension-scale-missing-floor.json",
+      "digest": {
+        "sha256": "094ab9ff4b6a66e2ec052082d0544ce19c170fdd6f7ed08a82ecf3baad73ed60"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-disagreement-not-recorded.json",
+      "digest": {
+        "sha256": "1000f60ebe5684d06105978e48431c81e1bc563ba1f30d422cdf22587b7f18df"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-endpoint-not-a-host.json",
+      "digest": {
+        "sha256": "cd67359997f513d4fc2cfd4ad09009cf2f43fe4c2c7b359ddfd430092d7c00a7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-is-bar-author.json",
+      "digest": {
+        "sha256": "6a994e2b2e1a5ddb212884cc6cb726a745302279289cc8125b8746f7781d6943"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-on-no-check-or-control.json",
+      "digest": {
+        "sha256": "bbc9b84dfa87042b6aa0ae97a8c199b2c6d9cd231d8543e7782fb65de8ec38f1"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evidence-file-differs.json",
+      "digest": {
+        "sha256": "a8fad957661588bbb528a86d839643febaa29eec37ab8bd1b7e44cd6be8ea93f"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evidence-name-not-relative.json",
+      "digest": {
+        "sha256": "934ee3fc0e3bdf2c507e9a4cf8549d83138515b554ef680ba8348bb7de969b38"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-family-not-lowercase.json",
+      "digest": {
+        "sha256": "3f8290fece7a193f1c834dd922c37ad52f7789fd38b6f09d00e86af5f0d5a8de"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-family-with-version.json",
+      "digest": {
+        "sha256": "57da046bd964462f62af3110c981e910bd6061428b31bb27f274a3764d48bcce"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-instrument-not-pinned.json",
+      "digest": {
+        "sha256": "200a3bbd9ef617aa163fb7cc68fbdb77026ee2fb404a4fcc5187359618839278"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-kind-missing.json",
+      "digest": {
+        "sha256": "cb2036ad7c38d90a6b9fb5520139305a3ccd56a9fb7c89ba04b2504c17c61c0d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-method-missing.json",
+      "digest": {
+        "sha256": "ea40e11bf3f7a773a0056878166e4c433432a40719528903e8c1001969e350b7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-wrote-bar-undisclosed.json",
+      "digest": {
+        "sha256": "216de87792a4f24bf9e7ef2c594b2dce593c64d54c66067e1e542ea73f1157c5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-disagreements-field.json",
+      "digest": {
+        "sha256": "93da8bcd2b33eca19bda639faf3350e7c68fb1a0fa0885f5042701b90f93dd47"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-violations-field.json",
+      "digest": {
+        "sha256": "80e0117571c5d08e6b3daa9f9a386080a4b4b5caa725394899ae47ad8dff6b89"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-model-evaluator-without-model-block.json",
+      "digest": {
+        "sha256": "0727660890c3252221662972d3b61e6217faa035c5efe99b00ca5d888f375aff"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-check-for-dimension.json",
+      "digest": {
+        "sha256": "063e54c7f7e5f0aec14ce532a1018ce510fb324a5df7ccd0314bdbb17605ac29"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-clean-control.json",
+      "digest": {
+        "sha256": "fd2bf3e4275c7e53300e22028436a31a2cea04727fcd94a3394615e75bc86923"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-control-in-batch.json",
+      "digest": {
+        "sha256": "654bf0028c63b612716b6afca5a7381e5980573b13154a66e31ea76eeb9d9c4c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-not-a-custody-statement.json",
+      "digest": {
+        "sha256": "db6f6c2e7d5c65dcf67d518afbf189609f31f05160739d0b97186d353860cef9"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-reader-without-control.json",
+      "digest": {
+        "sha256": "f23451498f8fcdb1ea3a8e7dbb80e8dcb11eb07a2a080a5b3cb7d51f07884880"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-readings-filed-under-runner.json",
+      "digest": {
+        "sha256": "01fe02dd81c48a67b0a59160d7cec413c82e9e765a6a4133a215339d7855d493"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-retention-missing.json",
+      "digest": {
+        "sha256": "bbe69ae63f342df51d9a3a72c18bdc3b02e8172370218e0e6f5ca6ceab10a5a4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-run-zero.json",
+      "digest": {
+        "sha256": "15ddd021a17fd7fd2c16af974a6e0ede40821b7bab549b7adf869ae088448081"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-false.json",
+      "digest": {
+        "sha256": "ba905b6e318743c1f3303b9f80fc55e5dca8d764395a6640499697701039900e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-untruly.json",
+      "digest": {
+        "sha256": "eab2e67c01dca1673ff6969b4ed0126ca2d403c8a2107efe84d858463c0fb434"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-session-undeclared.json",
+      "digest": {
+        "sha256": "111e74d75b2d805cdf872da50b91612c7faea023241a49c72d27668651895974"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-above-scale.json",
+      "digest": {
+        "sha256": "526072c88bc0c3b91031fdadce5b2002c3e581ee382b667b9ef2aba8e697b5b2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-contradicts-outcome.json",
+      "digest": {
+        "sha256": "ae3018adc0a54e21ee805aa4de178502235476b7b6201654880cfde857ac05a2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-meets-threshold-reads-does-not-conform.json",
+      "digest": {
+        "sha256": "5481c65bc227228c4b659910419450f658cc6a0a461ba9ec012f80329d5646c0"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-scored-without-scale.json",
+      "digest": {
+        "sha256": "3945446a5cfad726dcbf202f9c0bf7f598171fa1d2b29b05ac75311fead3d12d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-evaluator-unpinned.json",
+      "digest": {
+        "sha256": "56fb2d727bf14e81ffd180642527f2f35e20ec200ca2c9a22d2f21364503bbb6"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-written-by-maker.json",
+      "digest": {
+        "sha256": "20a7776c1cefa12b4f477f73207a882ba112162e7730ab8dad8ae840f10728ab"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-started-after-produced.json",
+      "digest": {
+        "sha256": "c0b3ebf933789672adde9f541c2258b7b29a0ddd7a2fc5242f980a000d0a6b15"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-started-at-missing.json",
+      "digest": {
+        "sha256": "a3b92b322f67bc019156167870d1e4f2586f15cef40fc56091e081099bc1a5c7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-tampered-artifact.json",
+      "digest": {
+        "sha256": "aa0b50c29d4d4d53c222c7af1f5263ea961f55f7834771ecef0fb484ed41bb99"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-threshold-above-scale.json",
+      "digest": {
+        "sha256": "c2e7931299a8392bc46485f8cd4d855d7d61e7f7241df50eb7e3eaa581db4acf"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-unobserved-not-acknowledged.json",
+      "digest": {
+        "sha256": "ae4a8e1bc8f872e0b992b2f9eac0c3ac1131df8069e5fc1a4b8572cd59c5003a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-violation-not-recorded.json",
+      "digest": {
+        "sha256": "29d06276919a76f25b6d06dca2fcd6ca0da12290b0f60b84c2d4574d26787842"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "a3a8a95e8ca8de5a10c5252a09750e0517a0c9fdf502e7e9d2f44ed3db7184f5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-basic.json",
+      "digest": {
+        "sha256": "b593b202f96224539a87e32d261d65d1c1f1a36d996f32e12021f9f20e28ff70"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-buyer-is-maker-disclosed.json",
+      "digest": {
+        "sha256": "a5be62575179f45cfcd7f8880e28ab2a1dadec52ab63d330d6e3d2b530c5926f"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-checks-unobserved.json",
+      "digest": {
+        "sha256": "aec9d3f6822727cceed3f9c4e1d376b56d1d875c24fb3d5a774b4f41e0e5946b"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-its-dimension-unobserved.json",
+      "digest": {
+        "sha256": "796bc310dec0614bf95fff825c0a8f4b1c17d8c740eb4b07f00c389f877c1328"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-extension-fields.json",
+      "digest": {
+        "sha256": "6262df012dffcf33067b424d4ada2896c4a7490a50a76510c7ba103623ef2c0a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-legacy-no-script-field.json",
+      "digest": {
+        "sha256": "d29505dd2fc9dac1684ff3ca9bd5c84267bc3bdd8c36aa63717ce74cd5816a3c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-maker-wrote-bar-disclosed.json",
+      "digest": {
+        "sha256": "3debf76d52536bbd2c30881cba562c301854317d58be9a9b30567157463abc54"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-not-yet-given-with-violation.json",
+      "digest": {
+        "sha256": "1ff7cc4072580a783fbf64cfa7c56dcec64c41a7f586c8ab4520a1eb803eb103"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-refiled-with-provenance.json",
+      "digest": {
+        "sha256": "807bf474fc4d407ffc9b5525bb924a3cfae63acb09e6f76b96a25237ccce6719"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "97dd5845289a42c36b17edc7d9e61f8a920454383a0fc7233967de148d2b767e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-scored-below-threshold.json",
+      "digest": {
+        "sha256": "c89ac9310f8d2230cc503233f71f080a990807d37da3334ce3f23adb8ff2ddee"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-scored.json",
+      "digest": {
+        "sha256": "722697c9cf94659350d796576d75568933b4cf93d24a3b52e4d32baf69d9fe23"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-script-evaluator.json",
+      "digest": {
+        "sha256": "12abb4fe95cf5cd3abd1ddaa9cc35d03e48297a13b0fa7d9122617754308e5ac"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-acknowledged.json",
+      "digest": {
+        "sha256": "2e7b818eb91dca26fd38b93707c4d936e093a7ca296aa25b21bdd3af15294e29"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-reader-needs-no-control.json",
+      "digest": {
+        "sha256": "59b5f2eda711103ddc1456b636732cecc562519f0c614ef1fe62894a71a5145c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-evidence-file-not-supplied.json",
+      "digest": {
+        "sha256": "0eb4ed3ba5adaaec6d8c00f4f151be48e92b341c4fc0db7cd2441c0d19f323a2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-model-evaluator-settings-only.json",
+      "digest": {
+        "sha256": "34e9792a2627753c5f8b97495761dd71a2ec1fc9ffa78276b2f3e1141b070c95"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-buyer-is-maker.json",
+      "digest": {
+        "sha256": "78d26c3b6187be651a94e6dd484e725abe57ba81fd048c2504892142e4c6627b"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-check-answered-by-makers-endpoint.json",
+      "digest": {
+        "sha256": "5216b56d7a8dd51d2eda5aaba3c2878f51f8c8a84410f1f4b128650b562227ab"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evaluator-not-read-only.json",
+      "digest": {
+        "sha256": "95446b922e68c08ca9aa0f050f6fbdeb21ef65b0531ef473b99708445ec5405e"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-every-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "99a768935a92c7310c4ea06a2b3ca9dba11ff9360eaa4d7ed8432b4bfdfb923d"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evidence-digest-mismatch.json",
+      "digest": {
+        "sha256": "a2458dee82cb14ba9101475139f1b86f624219f5e49d5dca5e0afb92ddb5c99c"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-outweighs-a-person.json",
+      "digest": {
+        "sha256": "a74a1918795a7b656209a6cf41d0553091305074ee9b540a1e5f248b419cb2e8"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-two-of-three.json",
+      "digest": {
+        "sha256": "4e5ea17c437d93b3d38528b6167e65b4d4903ade70b291c4c26011d9e0a7d62f"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-wrote-bar.json",
+      "digest": {
+        "sha256": "dfa3530a09d31600473ea9e2839be5ba6f68773aa8b3de1645a9fd7ebbdc07e2"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-model-maker-without-model-block.json",
+      "digest": {
+        "sha256": "29ddab48df2e6224eb04f16ca46bf3254c1e6cba1bb57fc4e65228316ccff486"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-one-run-only.json",
+      "digest": {
+        "sha256": "67802f0379d2537d1bb6f24cada57d6eeb6e266a3df8eaef0ce7d92e6870f435"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-undisclosed-family-counts-as-makers.json",
+      "digest": {
+        "sha256": "cf1e5a93feb19cd86702d3f4748a36001abf36854796c22f70e6665f3199cdb0"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-basic.json",
+      "digest": {
+        "sha256": "8d9757820165ca796449c552feb150ba9d4942886a338bc42903d0cd7f76e3ab"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-check-endpoint-recorded.json",
+      "digest": {
+        "sha256": "cc86b92d888c3d9855e83adf2ea7bb18b84737e55588f73008d93d56bface907"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-legacy-evidence-tag.json",
+      "digest": {
+        "sha256": "eb7b9cec8276ff7cf4f72f65d4cba1e1035c09e7e60b4988b3838cc49e68d418"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-family-two-of-four.json",
+      "digest": {
+        "sha256": "ae8d7a9a8b4f225c13e0a5b08adb7aa8fb79eccf3721080e36e19519316b3180"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-is-person.json",
+      "digest": {
+        "sha256": "611174d68d340e73169bb1a18ff257352b1d92aa316b7230bb9101e111e68e08"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-one-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "96e5c844b85296eb04581648dacf05f3738a4cb500195fe1fd297b3b1d68f3ae"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-runs-disagree-recorded.json",
+      "digest": {
+        "sha256": "7e784881a62f1bf01c2e5afbcccff1903bdf9c416eb7d12638a4fde0c366c04a"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "f3c2f0f14edcfde35c81645d64246af026d5691118b2e1668f7ffea7906dbebd"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-undisclosed-family-beside-others.json",
+      "digest": {
+        "sha256": "649be58ddac7d7ab9bf100b028577e05381c6ef7ebfc731c958327e7a7b4fde9"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-asserted-only.json",
+      "digest": {
+        "sha256": "5a437848fbd3424dc40bb050f084ff60ff7d3d4ee55466e5275c76a7a93c1358"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-read-by-maker.json",
+      "digest": {
+        "sha256": "e2de32046f4c7dfe0a06133ec130b7ca3ca0eb914dd70487ae8b06e22ae35cca"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-bar-not-published.json",
+      "digest": {
+        "sha256": "5aa33b95f0b28b6b7c54315eb34fb0a2782f7f9d36d3521befbfe2548181e986"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-demonstration-after-check.json",
+      "digest": {
+        "sha256": "21914c23b54c204d787b6d6b592e3890b1df50e32ea4412c2e1afc9456bdf4e8"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-no-signature-entry.json",
+      "digest": {
+        "sha256": "fc8d13f43de53c6e3512c028be8ae2fd8e8ceac0920d82be3a56d1d953ff9b27"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-adopted-specialist.json",
+      "digest": {
+        "sha256": "3d7ebaddf051c8b77a2cd565e489fe6a15099094ddcb6a6a54430be149becd8a"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-not-verified.json",
+      "digest": {
+        "sha256": "aa810d38f1c092fc8bfea3d56c26c04000837d9ac956449ccc1c8ac2d5023709"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-read-by-maker.json",
+      "digest": {
+        "sha256": "822a0b320010a58a6b01691bbe083b8cc4db0307539eef8534724ac884858889"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-unobserved-not-yet-given.json",
+      "digest": {
+        "sha256": "160cbd202b178c5896d06af20a39afab95919de604caccc58014fbb1bee93efd"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gemini.log",
+      "digest": {
+        "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gpt.log",
+      "digest": {
+        "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E1-1.md",
+      "digest": {
+        "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E1-2.md",
+      "digest": {
+        "sha256": "22fd565d00f33e79120a992f18c7eaeff83d975480b3b4a633b1177e8f5b505d"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E2-1.md",
+      "digest": {
+        "sha256": "d953cf62a22041889d4d304babbf260ffc6ea4b459a71e18fc9824c10445d6b7"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E2-2.md",
+      "digest": {
+        "sha256": "cc5cf085cf2d4232c0f79852a628fe92952b0156f5696d41f3cd1d7d474267f7"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E3-1.md",
+      "digest": {
+        "sha256": "4992a6dafe9049bcebc4cee4b41d142d3c67ef807b50bcd3fb7a9808de903f07"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E3-2.md",
+      "digest": {
+        "sha256": "f3504fc000bb2524ac74450e6e4ff7fc0f44fdb6353086aa396f00b98b9017da"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E4-1.md",
+      "digest": {
+        "sha256": "c362dd8c23207c223ec2d0d75116f02f1b1faac9aa1eff4c887d72a4a3df943c"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E4-2.md",
+      "digest": {
+        "sha256": "38eb3b643dd448c16e8998f94ae0ad1e6703e6c3a374b07402d91a2e05cd4313"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-S1-1.md",
+      "digest": {
+        "sha256": "894d5c612e70bd16d2c8b98bbca19b61a687a6b9dc14386ed4a9d0aaf8db3af4"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E1-1.md",
+      "digest": {
+        "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E1-2.md",
+      "digest": {
+        "sha256": "995f3be5a2a1f3e45ced565827e6fb9d52c627f9294f4238b290db2c685aff42"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E2-1.md",
+      "digest": {
+        "sha256": "4e7cbe41b4b14071918bf0b248b7beb8fdc14b52eb7c898f59c5b00db7850cc1"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E2-2.md",
+      "digest": {
+        "sha256": "e2b97ea92213cdb84de137c5a23a0725753f24d3e2361ed9dcb9b142994425c6"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E3-1.md",
+      "digest": {
+        "sha256": "6bd12268bc17a010c79bad1c0309e54ec641bb283448e9e776d0371ead6ca1db"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E3-2.md",
+      "digest": {
+        "sha256": "3863bda207c7afbd41f79995f8725a3be4dd22b4316f0a6625a7d4df237c8bda"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E4-1.md",
+      "digest": {
+        "sha256": "f19433a30e56ef1f09fb0bca3fb0bb758af390aecd8a836df64e77210b8ced4d"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E4-2.md",
+      "digest": {
+        "sha256": "1ff0c558deafa963c54c1c6dad2c940fc4c43d349c536931e5d0273f2a2b4e55"
+      }
+    },
+    {
+      "name": "fixtures/evidence/record.sigstore.json",
+      "digest": {
+        "sha256": "cab89650a2f2fc8b837346911cadd7e0b78a618800a378781bcf606b4f1a531a"
+      }
+    },
+    {
+      "name": "fixtures/expected.json",
+      "digest": {
+        "sha256": "0c0162afd5f34c8eaa6efe4cb1e8088fadb619e12e955b662089fc294ba8fecf"
+      }
+    },
+    {
+      "name": "fixtures/files/bar.md",
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      }
+    },
+    {
+      "name": "fixtures/files/report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    },
+    {
+      "name": "fixtures/generate.py",
+      "digest": {
+        "sha256": "7e606579f93d3313388c3e21b275220678ac66f69e044f5345c8297db7e008f1"
+      }
+    },
+    {
+      "name": "schema/custody-v1.schema.json",
+      "digest": {
+        "sha256": "ad03af92b47eaa8079f1d2a8e759daa91148aac6f39d8935c22a92ba10199f9f"
+      }
+    },
+    {
+      "name": "tests/explain_check.py",
+      "digest": {
+        "sha256": "e76143ab5c310e2dd881f8febddd84ede46c678aafd19c8f0cab56053e7e8a65"
+      }
+    },
+    {
+      "name": "tests/log_check.py",
+      "digest": {
+        "sha256": "e39f09d249870b2df072315e485485d2cddfd31252f2ae04418dd3a5d25ee28c"
+      }
+    },
+    {
+      "name": "tests/red_counts.py",
+      "digest": {
+        "sha256": "be45f47cbe0c0fab5f2c34ffe49934c5b6d2646439247842f3968d26812c26f8"
+      }
+    },
+    {
+      "name": "tests/red_readability.py",
+      "digest": {
+        "sha256": "f38ed42485e770384d5cae8a0c1cdb3a8647626b2174a04ad8c1e307cd3f569f"
+      }
+    },
+    {
+      "name": "tests/run_fixtures.py",
+      "digest": {
+        "sha256": "4c053963a9bc08a5ac8e6a6228969f3e73ba30ff7c206f84fa44b4b72887e943"
+      }
+    },
+    {
+      "name": "tests/schema_check.py",
+      "digest": {
+        "sha256": "ff2b63289e0b46497ca2e2a14cf970745d19065fc11bb7fb34d447e50c0915cc"
+      }
+    },
+    {
+      "name": "tools/count.py",
+      "digest": {
+        "sha256": "6514cd67b12d51e4dfdbe0053591106ba29c802cf0449c147e39e4b55c8b68e7"
+      }
+    },
+    {
+      "name": "tools/explain.py",
+      "digest": {
+        "sha256": "f91bafc6f4c8e9122e70af4789ba17ec053306a39846f32c7c09f355b7b78216"
+      }
+    },
+    {
+      "name": "tools/make_record.py",
+      "digest": {
+        "sha256": "92804e5ff07fe267ad23a85df75163791456f79a472b42dd24e6835be3863c16"
+      }
+    },
+    {
+      "name": "tools/readability.py",
+      "digest": {
+        "sha256": "99d004a523de14f6e0bfca4130d910598cd1157bfc6b853bdf866b385ae5f1d7"
+      }
+    },
+    {
+      "name": "tools/record.py",
+      "digest": {
+        "sha256": "6adae89c4a409f3f9811910773a16abebfd84e14a4ce285afc4d41509300a42d"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.4",
+    "levelClaimed": "CL1",
+    "bar": {
+      "digest": {
+        "sha256": "0cf7111dc24ceb035b36a3d64ce10fec3654b9043a2c15ce7d6c6905bc0d74a0"
+      },
+      "frozenAt": "2026-10-21T15:47:48.623071Z",
+      "author": "Claude Opus 5.5",
+      "dimensions": [
+        {
+          "id": "S1 scope",
+          "criterion": "S1 scope",
+          "scale": null
+        },
+        {
+          "id": "S2 D9 blind key",
+          "criterion": "S2 D9 blind key",
+          "scale": null
+        },
+        {
+          "id": "S3 stranger test",
+          "criterion": "S3 stranger test",
+          "scale": null
+        },
+        {
+          "id": "S4 R12 published",
+          "criterion": "S4 R12 published",
+          "scale": null
+        }
+      ],
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-21T15:47:48.670714Z",
+          "barDigest": {
+            "sha256": "0cf7111dc24ceb035b36a3d64ce10fec3654b9043a2c15ce7d6c6905bc0d74a0"
+          },
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-21T15:47:48.724971Z",
+          "barDigest": {
+            "sha256": "0cf7111dc24ceb035b36a3d64ce10fec3654b9043a2c15ce7d6c6905bc0d74a0"
+          },
+          "adopted": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [],
+      "dissent": []
+    },
+    "maker": {
+      "name": "Claude Opus 5.5",
+      "kind": "model",
+      "version": "Opus 5.5",
+      "method": {
+        "sha256": "3fe1f9c041f58cee1d4eb54456d6850ecc0aeebaeee97d198c1f582d4b9cf262"
+      },
+      "model": {
+        "family": "claude",
+        "identifier": "anthropic/claude-opus-5.5",
+        "endpoint": "openrouter.ai",
+        "readOnly": true
+      }
+    },
+    "instrument": {
+      "rubric": {
+        "sha256": "0cf7111dc24ceb035b36a3d64ce10fec3654b9043a2c15ce7d6c6905bc0d74a0"
+      },
+      "runner": {
+        "sha256": "3fe1f9c041f58cee1d4eb54456d6850ecc0aeebaeee97d198c1f582d4b9cf262"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "orch-script",
+        "name": "VizH (DeepSeek v4.1, Orchestrator)",
+        "kind": "script",
+        "model": null,
+        "script": {
+          "name": "orch_checks.py",
+          "author": "VizH (DeepSeek v4.1, Orchestrator)",
+          "digest": {
+            "sha256": "4f5347621210b3403d0c5d89ee0d6775e4c4efc519390c80e594047b03d7faae"
+          }
+        }
+      },
+      {
+        "id": "seed",
+        "name": "Seed 2.1 Turbo",
+        "kind": "model",
+        "model": {
+          "family": "seed",
+          "identifier": "bytedance-seed/seed-2-1-turbo",
+          "endpoint": "api.seed.bytedance.com",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "minimax",
+        "name": "MiniMax M3",
+        "kind": "model",
+        "model": {
+          "family": "minimax",
+          "identifier": "minimax/minimax-m3",
+          "endpoint": "api.minimax.io",
+          "readOnly": true
+        }
+      }
+    ],
+    "spread": [],
+    "disagreements": [
+      {
+        "dimension": "S3 stranger test",
+        "checks": [
+          2,
+          3
+        ],
+        "note": "Seed is unobserved and MiniMax reads does_not_conform on the same dimension; the outcomes differ and are never averaged."
+      }
+    ],
+    "violations": [
+      {
+        "dimension": "S3 stranger test",
+        "description": "the re-run's counted implementer fell one short of both thresholds"
+      }
+    ],
+    "separationGaps": [
+      "The maker, Claude Opus 5.5, wrote the bar (the Architect = Maker conflict).",
+      "Steve Moitozo II holds the buyer, specialist and approver seats.",
+      "The bar was ratified in chat on 2026-10-20 and logged on 2026-10-21, so bar.frozenAt and both approval times are recording times, not decision times; the two approvals are one person's act.",
+      "No reader panel, guide tester or human reader in this version (bar: stated as a limit).",
+      "Nemotron 3 Ultra was seated as a replacement on the Orchestrator's false premise that MiniMax M3 could not produce a runnable verifier; it did, and Nemotron's reading is extra, not the counted seat.",
+      "The Orchestrator sent MiniMax M3 a false diagnosis in an error round-trip (it said the file ended mid-statement; it did not), and that false diagnosis produced the defect that ended the seat.",
+      "MiniMax M3 received three error round-trips where the runbook allows two; the third exists because the second was defective.",
+      "The stranger test's first run was read against revision 0; the record's S3 checks are the re-run against the released text (Owner's decision 1).",
+      "The stranger test did not pass: run 1 failed; the re-run was unobserved (one implementer failed its controls); see record/STRANGER-TEST.md."
+    ],
+    "retention": {
+      "location": "the Owner's machine, ~/evaluatordriven/v094",
+      "public": false
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "seed",
+        "evidence": {
+          "name": "harness-seed.json",
+          "sha256": "ce9666fb630fafee95d86ccea5fb39cf2e79a18d93deecaab75cc844d6f621ef"
+        },
+        "readBy": "Steve Moitozo II"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "minimax",
+        "evidence": {
+          "name": "rerun-minimax.json",
+          "sha256": "5c37c738362c6cf496f298bec8351147c10c5589ce525fa0add3311e6a5814ae"
+        },
+        "readBy": "Steve Moitozo II"
+      }
+    ],
+    "disposition": {
+      "acknowledgesUnobserved": [
+        "S3 stranger test"
+      ],
+      "state": "given",
+      "by": "Steve Moitozo II",
+      "at": "2026-10-22T12:19:52.210972Z"
+    },
+    "startedAt": "2026-10-21T15:47:48.824727Z",
+    "producedAt": "2026-10-22T12:13:36.572774Z",
+    "checks": [
+      {
+        "batch": "release",
+        "dimension": "S1 scope",
+        "evaluator": "orch-script",
+        "evidence": {
+          "name": "s1-scope.json",
+          "sha256": "4042e2d72d4014bdcf278654125ca13f08ca1ddb4528f3d41b3c57af2f067134"
+        },
+        "failureCondition": "any fixture the new checker mismatches",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-22T12:14:09.862519Z"
+      },
+      {
+        "batch": "release",
+        "dimension": "S2 D9 blind key",
+        "evaluator": "orch-script",
+        "evidence": {
+          "name": "stepB3-d9-final-rev1.json",
+          "sha256": "224946eccb101f7adc7faf02fd0d4c051c94fe4f1f32bd2f242109c8fb3cc82c"
+        },
+        "failureCondition": "any blind case the checker mismatches after adjudication",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-22T12:14:09.872108Z"
+      },
+      {
+        "batch": "release",
+        "dimension": "S3 stranger test",
+        "evaluator": "seed",
+        "evidence": null,
+        "failureCondition": "any record whose verdict, level or routing differs from the answer",
+        "outcome": "unobserved",
+        "run": 1,
+        "score": null,
+        "unobserved": {
+          "channel": "stranger test re-run",
+          "reason": "failed both controls (CL1-9), not counted"
+        },
+        "at": "2026-10-22T12:14:09.878382Z"
+      },
+      {
+        "batch": "release",
+        "dimension": "S3 stranger test",
+        "evaluator": "minimax",
+        "evidence": {
+          "name": "score-minimax-rerun.json",
+          "sha256": "503ae37de2cd80712ffe274646422baac4c47f18d4efb17a566c4ea45ddd7e9c"
+        },
+        "failureCondition": "any record whose verdict, level or routing differs from the answer",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-22T12:14:09.884437Z"
+      },
+      {
+        "batch": "release",
+        "dimension": "S4 R12 published",
+        "evaluator": "orch-script",
+        "evidence": {
+          "name": "s4-r12-published.json",
+          "sha256": "9af1f59c9d6e856a90c1f53415024cf3b74cd6b2fa98ddd7e37cfe9467be6b40"
+        },
+        "failureCondition": "CHANGELOG or VERIFY.md missing a line the run produced",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-22T12:14:09.890161Z"
+      }
+    ],
+    "controls": [
+      {
+        "batch": "release",
+        "case": {
+          "sha256": "4042e2d72d4014bdcf278654125ca13f08ca1ddb4528f3d41b3c57af2f067134"
+        },
+        "evaluator": "orch-script",
+        "expected": "does_not_conform",
+        "id": "ctl-s1-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "release",
+        "case": {
+          "sha256": "503ae37de2cd80712ffe274646422baac4c47f18d4efb17a566c4ea45ddd7e9c"
+        },
+        "evaluator": "minimax",
+        "expected": "conforms",
+        "id": "ctl-s3-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "release",
+        "case": {
+          "sha256": "1e09f89867c22bbb35f907b8360bacffb441057df0384bbed77342d675f91121"
+        },
+        "evaluator": "seed",
+        "expected": "conforms",
+        "id": "ctl-s3-seed-clean",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "release",
+        "case": {
+          "sha256": "1e09f89867c22bbb35f907b8360bacffb441057df0384bbed77342d675f91121"
+        },
+        "evaluator": "seed",
+        "expected": "does_not_conform",
+        "id": "ctl-s3-seed-planted",
+        "outcome": "does_not_conform"
+      }
+    ]
+  }
+}

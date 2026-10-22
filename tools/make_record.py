@@ -15,6 +15,8 @@ instead of being typed into INPUTS.json. The log must verify (an intact chain) o
 From the log:
   bar.frozenAt   the time of the last `bar-frozen` event
   bar.approvals  the `approval` events after it: {role, by: actor, at, barDigest, adopted}
+  startedAt      the time of the first `work-started` event: the earliest the work is known to have
+                 begun, so a bar frozen (or frozen again) after it shows as frozen after the start
   producedAt     the time of the last `artifact-produced` event
   checks, controls, external
                  the `data` of each `check`, `control` and `external` event that carries that entry's
@@ -78,6 +80,9 @@ def from_log(data, log):
             {"role": e["data"]["role"], "by": e["actor"], "at": e["at"],
              "barDigest": {"sha256": e["data"]["barDigest"]}, "adopted": e["data"].get("adopted")}
             for e in events[frozen[-1] + 1:] if e["type"] == "approval"]
+    started = [e for e in events if e["type"] == "work-started"]
+    if started:
+        data["startedAt"] = started[0]["at"]
     produced = [e for e in events if e["type"] == "artifact-produced"]
     if produced:
         data["producedAt"] = produced[-1]["at"]

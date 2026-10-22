@@ -88,25 +88,27 @@ in the record, and never averaged away.
 How much proof a record claims. The record states its claim in `levelClaimed`.
 
 ### CL1
-The basic level. The bar came first, it was approved, someone other than the maker checked the work,
-the checks show they could catch a planted problem, and a named person decided. The evaluator can be a
-fresh session of the maker's own AI model, if the record says so. The maker may also approve the bar,
-as buyer or specialist, if the record names that overlap as a separation gap. This lets a one-person
-shop reach CL1 honestly.
+The basic level. The bar was fixed before the work started, it was approved, someone other than the
+maker checked the work, each checker caught a known case, and a named person decided. The evaluator can
+be a fresh session of the maker's own AI model, if the record says so. The maker may also write the bar,
+or approve it as buyer or specialist, if the record names that overlap as a separation gap. This lets a
+one-person shop reach CL1 honestly.
 
 ### CL2
 A stricter level. Every evaluator reads each dimension at least twice, and the record shows how often the
 readings agreed. If AI models check the work, at least one comes from a different model family than the
 maker's. And for each dimension, evaluators from the maker's model family are no more than half of those
-who read it; people and scripts count in that total. At CL2 the maker may not approve the bar.
+who read it; people and scripts count in that total. A model whose family is not disclosed counts as
+the maker's family. At CL2 the maker may not write or approve the bar.
 
 ### CL3
 The strictest level. Each evaluator proved it could catch a planted problem before it read the real work.
 The bar is published. The record is signed and entered in a transparency log, a log that shows any later
-change, and someone other than the maker has checked that entry.
+change, and someone other than the maker has checked that entry. The free checker cannot check a
+signature itself, so no record reaches CL3 with it yet.
 
 ### baseline
-A record whose bar was written after the work was made. It is honest about that, and it makes no claim
+A record whose bar was fixed after the work started. It is honest about that, and it makes no claim
 that the bar came first. It lists what was read before the bar was fixed.
 
 ## Inside a record
@@ -122,8 +124,13 @@ work it describes. This guide also calls it a fingerprint.
 ### frozen, `frozenAt`
 When the bar was fixed. After this moment the bar does not change.
 
+### `startedAt`
+When work on the artifact began. For a CL1 claim, the bar must be frozen before this, not just before
+the work was finished. A bar frozen at the very moment the work started counts as neither before nor
+after, so it fits no claim.
+
 ### `producedAt`
-When the work was finished. For a CL1 claim, the bar must be frozen before this.
+When the work was finished.
 
 ### approval
 A signed-off agreement to the bar, by the buyer or the specialist, with who, when, and the fingerprint of
@@ -135,8 +142,9 @@ What a dimension asks for, in words.
 
 ### scale, anchors, threshold, floor
 How a dimension is scored, when it is scored with numbers. The scale gives the range. Anchors describe
-what each score looks like. The threshold is the score needed to conform. The floor is the lowest score
-allowed at all.
+what each score looks like. The threshold is the score needed to conform: a scored check conforms
+exactly when its score reaches the threshold, whatever rule the maker uses to decide what to do next. The
+floor is the lowest score on the scale.
 
 ### ground truth
 The references the bar judges against, such as an approved source document or a website as it stood on
@@ -146,11 +154,12 @@ a given day. Each is named with its version and fingerprint.
 The written rules the maker followed, identified by their fingerprint.
 
 ### kind
-What sort of evaluator it is: `person`, `model` or `script`.
+What sort of evaluator, or maker, it is: `person`, `model` or `script`.
 
 ### model family, identifier, endpoint
-For an AI evaluator: its family (the model line, as its builder names it, such as `gpt` or `qwen`), its
-exact version, and the host name of the service that answered.
+For an AI evaluator: its family (the model line, as its builder names it, in lowercase with no version,
+such as `gpt` or `qwen`, or `undisclosed`), its exact version, and the host name of the service that
+answered. A router that passed the request on is not the service that answered.
 
 ### read-only, `readOnly`
 The AI evaluator could read the work but not change it.
@@ -170,14 +179,18 @@ For CL2: how many runs each evaluator did on a dimension, and how many agreed.
 What would have made a check fail. Writing it down shows the check could have gone the other way.
 
 ### evidence
-What a check points to as its reason: a quote, a test result, a log.
+What a check points to as its reason: a quote, a test result, a log. The record names the file and its
+fingerprint; a checker given the file confirms it matches.
 
 ### control, planted case
 A test with a known answer, mixed in with the real work. Usually it is a copy of the work with a flaw
 added on purpose. If an evaluator gets a control wrong, that evaluator's checks in the same batch cannot
 be trusted, so they must be recorded as not observed. A control can name the one dimension it tests;
 then only the checks of that dimension are affected. Controls in a record are run alongside
-the real checks. Demonstrations, at CL3, are planted cases done before the real reading.
+the real checks. Every evaluator that reads in a batch reads a control there, and every batch has at
+least one clean control, one that should pass, so a reader that fails everything is caught. A control
+shows that a reader caught a known case; it cannot show the case was hard. "Held out" means the maker of
+this record never saw the case. Demonstrations, at CL3, are planted cases done before the real reading.
 
 ### separation gap
 A place where the people who should be kept apart were not. For example, one person wrote the bar and
@@ -194,8 +207,8 @@ Where the full record is kept, and whether it is public.
 
 ### checker, verifier
 A program that reads a record and reports whether it follows the rules. `checker/check.py` is the free
-one that comes with the standard. To check fully, it needs the record, the work's files and the bar file,
-so it can confirm each one matches its fingerprint. If it ever disagrees with SPEC.md, SPEC.md wins.
+one that comes with the standard. To check fully, it needs the record, the work's files, the bar file and
+the evidence files, so it can confirm each one matches its fingerprint. If it ever disagrees with SPEC.md, SPEC.md wins.
 
 ### OK, FAILED, NOT-CHECKABLE
 The checker's verdict. OK: every rule checked holds. FAILED: at least one rule is broken, and it names
@@ -234,7 +247,8 @@ A sample record used to test the checker. Each one is built to pass, or to fail 
 ### custody log
 A running list of events, written as the work happens, where each entry is sealed to the one before. If
 anyone edits, removes or reorders an entry, the seal breaks. Records can be built from it, so nothing is
-pieced together afterward.
+pieced together afterward. A log rewritten from its first entry, or cut short at the end, still seals
+correctly; only a signed record fixes it in place.
 
 ## Words from evaluatordriven.com
 
@@ -256,7 +270,10 @@ Giving the work to someone else, and giving them the way it was made. A record l
 how quality was decided, even after the original people have left.
 
 ### signature
-The named person who accepts the result. In the specification, this is the approver's disposition.
+This word has two senses. On evaluatordriven.com it means the named person who accepts the result: in
+the specification, the approver's disposition. In CL3-3 it means a cryptographic signature on the record,
+which a program can check. Accepting a result is not the same as signing a record, and only the second
+counts toward CL3.
 
 ### specification
 The document that states the rules: SPEC.md.

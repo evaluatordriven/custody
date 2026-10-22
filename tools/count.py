@@ -2,10 +2,11 @@
 """Mechanical checks on this repository itself. Standard library only. Exit 1 on any violation.
 
   sizes        normative words <= 4,500; MUST / MUST NOT / REQUIRED / SHALL / SHALL NOT <= 20;
-               terms in SPEC.md section 2 <= 12; checker <= 300 non-blank, non-comment lines,
-               none over 100 characters
+               terms in SPEC.md section 2 <= 12; no checker line over 100 characters (the checker
+               has no line-count cap: v0.9.4 removed it, because it pushed the code into one-liners)
   keywords     upper-case BCP 14 key words appear only in SPEC.md sections marked (normative)
   one home     no term from the Terms table is defined in a second file
+               (both skip record/: it holds kept records, such as a release's bar, quoted word for word)
   evidence     every requirement row in SPEC.md section 5 has the class structural, semantic or
                external; each structural or semantic requirement is failed by at least one fixture
                in fixtures/expected.json; at most 5 requirements are external (D7)
@@ -13,7 +14,8 @@
                the checker, README.md and every other current document (files under record/ are
                kept records of earlier work, so they may name earlier versions), and any record in
                record/; README.md claims no level that no record in record/ supports; the
-               documents' statements of how many reference checkers exist match checker/; LICENSE carries CC BY 4.0
+               documents' statements of how many reference checkers exist match checker/; CI runs
+               README.md's quickstart commands exactly; LICENSE carries CC BY 4.0
                and LICENSE-CODE carries Apache-2.0, each naming no other license; and every current
                document and NOTICE name only those two
 
@@ -50,10 +52,10 @@ def main():
     checker = (ROOT / "checker" / "check.py").read_text(encoding="utf-8").splitlines()
     logical = [ln for ln in checker if ln.strip() and not ln.strip().startswith("#")]
     report["sizes"] = {"normative words": words, "strong key words": len(strong),
-                       "terms": len(terms), "checker lines": len(logical),
+                       "terms": len(terms), "checker lines (no cap)": len(logical),
                        "longest checker line": max(map(len, checker))}
     for name, value, limit in (("normative words", words, 4500), ("strong key words", len(strong), 20),
-                               ("terms", len(terms), 12), ("checker lines", len(logical), 300),
+                               ("terms", len(terms), 12),
                                ("longest checker line", max(map(len, checker)), 100)):
         if value > limit:
             problems.append(f"{name}: {value} > {limit}")
@@ -73,6 +75,8 @@ def main():
 
     md = [p for p in ROOT.rglob("*.md") if ".git" not in p.parts]
     for path in md:
+        if path.relative_to(ROOT).parts[0] == "record":
+            continue  # kept records are quoted verbatim; they are not this repository's own text
         text = path.read_text(encoding="utf-8")
         bodies = [b for h, b in sections(text) if not (path.name == "SPEC.md" and "(normative)" in h)]
         if path.name != "SPEC.md":
@@ -112,10 +116,13 @@ def main():
     recorded = set()
     for rec in sorted((ROOT / "record").glob("*.json")) if (ROOT / "record").is_dir() else []:
         pred = json.loads(rec.read_text()).get("predicate", {})
-        if pred.get("specVersion") != version:
-            problems.append(f"{rec.name} specVersion {pred.get('specVersion')} != {version}")
         level = pred.get("levelClaimed")
         recorded.add(level)
+        history = re.match(r"custody-v(\d+\.\d+\.\d+)\.json$", rec.name)
+        if history and history.group(1) != version:
+            continue  # an earlier release's record: it names the version it was written to
+        if pred.get("specVersion") != version:
+            problems.append(f"{rec.name} specVersion {pred.get('specVersion')} != {version}")
         if level and f"claims {level}" not in readme:
             problems.append(f"README.md does not state the record's claimed level ({level})")
     for level in set(re.findall(r"claims (CL[123]|baseline)\b", readme)) - recorded:
@@ -164,6 +171,15 @@ def main():
             problems.append(f"{path.name} does not say the code is {code_lic}")
         if not re.search(r"(?is)(text|SPEC\.md|documentation).{0,150}?(?:" + known[text_lic] + ")", body):
             problems.append(f"{path.name} does not say the text is {text_lic}")
+    # Quickstart drift (v0.9.4): CI must run README.md's quickstart commands exactly.
+    block = re.search(r"## Quickstart.*?```sh\n(.*?)```", readme, flags=re.S)
+    readme_cmds = [ln.strip() for ln in (block.group(1) if block else "").splitlines()
+                   if ln.strip().startswith("python3 ")]
+    ci = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    step = re.search(r"- name: Quickstart.*?run: \|\n(.*?)(?=\n      - name:|\Z)", ci, flags=re.S)
+    ci_cmds = [ln.strip() for ln in (step.group(1) if step else "").splitlines() if ln.strip()]
+    if not readme_cmds or readme_cmds != ci_cmds:
+        problems.append(f"quickstart drift: README.md runs {readme_cmds}, CI runs {ci_cmds}")
     report["agreement"] = {"spec version": version, "levels": sorted(want["levels"])}
     print(json.dumps({"report": report, "problems": problems}, indent=2))
     return 1 if problems else 0

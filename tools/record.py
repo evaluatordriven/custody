@@ -10,7 +10,8 @@ chain, and `verify` says where. Standard library only.
   record.py verify LOG [--files]       check the chain; with --files, re-hash the named files
   record.py show   LOG
 
-Suggested TYPEs: bar-frozen, approval, artifact-produced, check, control, external-read, disposition, note.
+Suggested TYPEs: bar-frozen, approval, work-started, artifact-produced, check, control, external-read,
+disposition, note. Log `work-started` after the bar is frozen and before any work on the artifact.
 A recorded time is when the event was written down, by this clock. Say in --source what happened, and
 when, if that differs.
 """
