@@ -268,14 +268,12 @@ def cl1_8(r, p, ctx):
 def cl1_9(r, p, ctx):
     for b in sorted({c["batch"] for c in p["checks"]}):
         here = [c for c in p["checks"] if c["batch"] == b]
-        readers = {c["evaluator"] for c in here}
         ctl = [k for k in p["controls"] if k["batch"] == b]
-        need([f"evaluator {e} reads in batch {b} but reads no control there" for e in sorted(
-            {c["evaluator"] for c in here if c["outcome"] != "unobserved"})
-            if not any(k["evaluator"] == e for k in ctl)])
-        if not any(k["expected"] == "conforms" and k["evaluator"] in readers for k in ctl):
-            raise Fail(f"batch {b} holds no clean control (one expected to conform) read by "
-                       "one of its evaluators")
+        observed = sorted({c["evaluator"] for c in here if c["outcome"] != "unobserved"})
+        need([f"evaluator {e} reads in batch {b} but reads no {kind} control there"
+              for e in observed for kind, want in (("clean", "conforms"),
+                                                   ("planted", "does_not_conform"))
+              if not any(k["evaluator"] == e and k["expected"] == want for k in ctl)])
     seen = [(c["batch"], c["evaluator"], c["dimension"]) for c in p["checks"]
             if c["outcome"] != "unobserved"]  # a missed control voids its reader's observations
     need([f"control {k['id']} came out wrong, yet its reader's checks still count" for k in
@@ -484,8 +482,9 @@ def verify(record, files=None, evidence=None, bar=None):
     p = record.get("predicate") if isinstance(record, dict) else None
     claim = p.get("levelClaimed") if isinstance(p, dict) else None
     order = ["CL1", "CL2", "CL3"][:{"CL1": 1, "CL2": 2, "CL3": 3}.get(claim, 1)]
-    scope = ["CR-1", "CR-2", "BL-1"] + [k for lv in order for k in LEVEL[lv]
-                                        if not (claim == "baseline" and k in NOT_FOR_BASELINE)]
+    scope = ["CR-1", "CR-2"] + (["BL-1"] if claim == "baseline" else []) + [
+        k for lv in order for k in LEVEL[lv]
+        if not (claim == "baseline" and k in NOT_FOR_BASELINE)]  # BL-1: baseline claims only
     results = {}
     for rid in scope:
         try:
@@ -503,7 +502,7 @@ def verify(record, files=None, evidence=None, bar=None):
         return all(results.get(i, (FAILED,))[0] == OK for i in ids)
 
     level = "baseline" if claim == "baseline" and ok(scope) else "none"
-    if claim in ("CL1", "CL2", "CL3") and ok(["CR-1", "CR-2", "BL-1"]):
+    if claim in ("CL1", "CL2", "CL3") and ok(["CR-1", "CR-2"]):
         met = [lv for i, lv in enumerate(order) if all(ok(LEVEL[x]) for x in order[:i + 1])]
         level = met[-1] if met else "none"
     checks = p.get("checks") if isinstance(p, dict) and isinstance(p.get("checks"), list) else []

@@ -9,8 +9,10 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.dont_write_bytecode = True  # no cache files in the tree (v0.9.5)
 sys.path.insert(0, str(ROOT / "checker"))
 from check import verify  # noqa: E402
+
 
 FIX = ROOT / "fixtures"
 
@@ -26,6 +28,9 @@ def main():
         for key in ("verdict", "levelAchieved", "routing"):
             if got[key] != want[key]:
                 problems.append(f"{key} {got[key]!r} != {want[key]!r}")
+        if (record.get("predicate") or {}).get("levelClaimed") != "baseline" and "BL-1" in got[
+                "requirements"]:
+            problems.append("BL-1 reported for a record that does not claim baseline (v0.9.5)")
         if failed != ([want["fails"]] if want["fails"] else []):
             problems.append(f"failed {failed} != [{want['fails']}]")
         print(f"{'ok  ' if not problems else 'FAIL'} {name}" + ("" if not problems else

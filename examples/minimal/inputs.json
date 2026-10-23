@@ -1,6 +1,6 @@
 {
   "subject": {"files": ["memo.md"]},
-  "specVersion": "0.9.4",
+  "specVersion": "0.9.5",
   "levelClaimed": "CL1",
   "bar": {
     "digest": {"file": "bar.md"},

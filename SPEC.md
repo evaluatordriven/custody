@@ -1,6 +1,6 @@
 # Evaluator Driven — the custody record
 
-**Version 0.9.4 · candidate · 2026-10-21** · Predicate type `https://evaluatordriven.com/custody/v1`
+**Version 0.9.5 · candidate · 2026-10-22** · Predicate type `https://evaluatordriven.com/custody/v1`
 Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
 
 Sections marked *(normative)* define conformance. Everything else explains it.
@@ -92,7 +92,7 @@ means a default.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `specVersion` | string | yes | This document's version, e.g. `0.9.4` |
+| `specVersion` | string | yes | This document's version, e.g. `0.9.5` |
 | `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
 | `bar.digest` | digest | yes | sha256 of the frozen bar document |
 | `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |
@@ -106,17 +106,17 @@ means a default.
 | `maker` | object | yes | `name`, `kind` (`person`·`model`·`script`), `version`, `method` (digest), `model` (or `null`) |
 | `startedAt` | timestamp | yes | When work on the artifact began |
 | `producedAt` | timestamp | yes | When the artifact was finished |
-| `readsBeforeFreeze[]` | list, may be empty | baseline claims (BL-1) | |
+| `readsBeforeFreeze[]` | list, may be empty | only in a `baseline` claim; BL-1 checks it | Not required, and not read, in any other record |
 | `instrument` | object | yes | `rubric` (digest), `runner` (digest) |
 | `evaluators[]` | list, non-empty | yes | `id`, `name`, `kind` (`person`·`model`·`script`), `model` (or `null`); `script` (`name`, `author`, `digest`) when `kind` is `script`; optional `sameModelAsMaker` (boolean) |
 | `checks[]` | list, non-empty | yes | `dimension`, `evaluator`, `run` (1 or more), `batch`, `at`, `outcome`, `score`, `failureCondition`, `evidence` (an evidence file, or `null`), `unobserved`; optional `endpoint` |
 | `controls[]` | list, non-empty | yes | `id`, `batch`, `evaluator`, `case` (digest), `expected`, `outcome` |
-| `spread[]` | list | CL2 and above | `dimension`, `evaluator`, `runs`, `agreement` |
+| `spread[]` | list | in a CL2 or CL3 claim | `dimension`, `evaluator`, `runs`, `agreement` |
 | `disagreements[]` | list, may be empty | yes | `dimension`, `checks` (indexes into `checks[]`), `note` |
 | `violations[]` | list, may be empty | yes | `dimension`, `description` |
 | `separationGaps[]` | list, may be empty | yes | strings |
 | `retention` | object | yes | `location`, `public` (boolean) |
-| `demonstrations[]` | list | CL3 | `dimension`, `evaluator`, `planted` (digest), `outcome`, `at` |
+| `demonstrations[]` | list | in a CL3 claim | `dimension`, `evaluator`, `planted` (digest), `outcome`, `at` |
 | `external[]` | list, may be empty | yes | `requirement` (`CL1-15`, or its 0.x name `CL2-4`; `CL3-3`), `subject` (the evaluator's `id` for CL1-15; `record` for CL3-3), `evidence` (an evidence file), `readBy` |
 | `disposition` | object | yes | `state`, `by`, `at`, `acknowledgesUnobserved[]` |
 
@@ -150,9 +150,10 @@ and this section differ, this section governs.
 
 ## 5. Requirements *(normative)*
 
-A record MUST meet every requirement of the level it claims and of every level below it. A record that
-claims `baseline` MUST meet CR-1, CR-2, BL-1, CL1-2 to CL1-14, CL1-16 and CL1-17. CR-1, CR-2 and BL-1
-apply to every record.
+A record MUST meet CR-1, CR-2, and every requirement of the level it claims and of every level below it.
+A record that claims `baseline` MUST meet CR-1, CR-2, BL-1, CL1-2 to CL1-14, CL1-16 and CL1-17. BL-1
+applies only to a record that claims `baseline`: a record that claims CL1, CL2 or CL3 is not held to it,
+and a verifier does not report it for that record.
 
 Each requirement has a stable ID and a **check class**:
 
@@ -171,14 +172,16 @@ field that only asserts independence never satisfies a requirement on its own.
 
 **One defect, one failure.** When a field is missing or malformed, the requirement that checks that
 field reads `FAILED`: CR-2, or the requirement this section names as checking the field itself. Any
-other requirement that cannot be decided without that field reads `NOT-CHECKABLE`.
+other requirement that cannot be decided without that field reads `NOT-CHECKABLE`. *(Non-normative
+example: a check whose `evidence` is `{"sha256": "…"}`, with no `name`, does not cite an evidence file.
+CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, reads `NOT-CHECKABLE`.)*
 
 ### 5.1 Every record
 
 | ID | Requirement | Class |
 |---|---|---|
 | CR-1 | The record is an in-toto Statement v1: `_type` is `https://in-toto.io/Statement/v1`; `subject` is non-empty and every entry has a `name` and a sha256 digest; `predicateType` is exactly `https://evaluatordriven.com/custody/v1`. | structural |
-| CR-2 | Every field section 4 requires is present with its stated type and form (a `family`, an `endpoint`, a `run`), except the fields CL1-2 (each dimension's own fields), CL1-4, CL1-5, CL1-11 and CL1-12 check themselves. | structural |
+| CR-2 | Every field section 4 marks `yes` is present with its stated type and form (a `family`, an `endpoint`, a `run`), and so are `spread` in a CL2 or CL3 claim and `demonstrations` in a CL3 claim. CR-2 does not check the following fields, because the requirement named beside each checks it itself: each dimension's `id`, `criterion` and `scale` (CL1-2); `maker` (CL1-4); `instrument`, and each script evaluator's `script` (CL1-5); `violations` and `separationGaps` (CL1-11); `retention` (CL1-12); `readsBeforeFreeze` (BL-1, and only in a `baseline` claim). | structural |
 
 ### 5.2 CL1 — the four moves
 
@@ -192,7 +195,7 @@ other requirement that cannot be decided without that field reads `NOT-CHECKABLE
 | CL1-6 | No evaluator is the maker or the bar's author, and no script evaluator's script was written by either. The approver is not an evaluator. A model evaluator carries a `model` block. A model evaluator whose `identifier` equals the maker's declares `sameModelAsMaker: true`, and one whose `identifier` differs does not. For a person, this shows separately named parties, not proven independence; a record holder who needs more attaches evidence. | semantic |
 | CL1-7 | Every dimension on the bar has at least one check. A dimension with no check fails the record: its evidence is not attributable. | semantic |
 | CL1-8 | Every check names a dimension on the bar and a listed evaluator, gives a run, batch, and time, and declares its `failureCondition` — what would have made it return `does_not_conform`. A `conforms` or `does_not_conform` outcome cites an evidence file, and the file supplied to the verifier matches its digest: a mismatch reads `FAILED`, and a file not supplied reads `NOT-CHECKABLE`. An `unobserved` outcome names the channel tried and why it could not observe, and carries no score. | semantic |
-| CL1-9 | In every batch that holds a check, each evaluator with a check that is not `unobserved` reads at least one control, and at least one control whose expected outcome is `conforms` is read by an evaluator with a check in that batch. Every control records its expected and actual outcome. A control is a case whose correct outcome is known in advance. A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension. | semantic |
+| CL1-9 | In every batch, each evaluator with a check that is not `unobserved` reads at least two controls there: one whose expected outcome is `conforms`, and one whose expected outcome is `does_not_conform`. Every control records its expected and actual outcome. A control is a case whose correct outcome is known in advance. A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension. | semantic |
 | CL1-10 | Where checks of one dimension return different outcomes, `disagreements` names that dimension and the checks. Outcomes are never averaged into one. | semantic |
 | CL1-11 | Every dimension with a `does_not_conform` check appears in `violations`. `violations` and `separationGaps` are present even when empty. If the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker. | semantic |
 | CL1-12 | `retention` states where the full record is kept and whether it is public. A record need not be public; it is kept, and it can be produced on request. | structural |
@@ -200,7 +203,7 @@ other requirement that cannot be decided without that field reads `NOT-CHECKABLE
 | CL1-14 | Each `subject` digest matches the supplied artifact file of that name, and `bar.digest` matches the supplied bar file. Without those files this reads `NOT-CHECKABLE`. | semantic |
 | CL1-15 | For every model evaluator, `external` holds evidence of its configuration — for example a harness log showing which model and endpoint answered — read by a named party who is not the maker. A model's own settings block (`model`) is a claim, not evidence. | external |
 | CL1-16 | Every check and every control names a listed evaluator, and every listed evaluator appears on at least one check or control. A reading is filed under the evaluator that gave it, never under a script that collected or scored it: no script evaluator's script is the instrument's runner (`instrument.runner`), and an evaluator listed with neither a check nor a control fails the record. | semantic |
-| CL1-17 | A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor. A producer's own rule, such as a mean, a minimum, or another run, may decide what happens next; it never decides a check's outcome. | semantic |
+| CL1-17 | A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor. A producer's own rule, such as a mean, a minimum, or another run, may decide what happens next; it never decides a check's outcome. A check whose `score` is `null` is not judged by CL1-17. | semantic |
 
 ### 5.3 CL2 — independent
 
@@ -208,7 +211,15 @@ other requirement that cannot be decided without that field reads `NOT-CHECKABLE
 |---|---|---|
 | CL2-1 | Every evaluator reads every dimension it checks in at least two runs, and `spread` gives, for each such pair, the number of runs and how many agreed. | semantic |
 | CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
-| CL2-3 | (a) No buyer or specialist approval is by the maker, and the maker did not write the bar. (b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's. Others may share the maker's family or endpoint. (c) If the maker's `kind` is `model`, then for each dimension, the evaluators of the maker's `family` are no more than half of all the evaluators with a check of that dimension; persons and scripts count toward that total. In (b) and (c), a `family` recorded as `undisclosed`, on either side, counts as the maker's. | semantic |
+| CL2-3 | (a) No buyer or specialist approval is by the maker, and the maker did not write the bar. (b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's. Others may share the maker's family or endpoint. (c) If the maker's `kind` is `model`, then for each dimension, twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension; persons and scripts count toward that total. In (b) and (c), if the maker's `family` or an evaluator's `family` is `undisclosed`, the two count as the same family: an evaluator whose family is undisclosed never differs from the maker, and if the maker's family is undisclosed, no evaluator differs from it. | semantic |
+
+*Worked example for CL2-3 (non-normative).* The maker is a model of family `gpt`, answered at
+`api.a.example`. Dimension D1 is read by E1 (`gpt`, at `api.b.example`), E2 (`undisclosed`, at
+`api.c.example`), E3 (`qwen`, at `api.d.example`) and one person. E1 and E2 count as the maker's family:
+twice 2 is 4, no more than the 4 evaluators of D1, so (c) holds. E3 differs in family, and none of its
+endpoints is the maker's, so (b) holds. Had one of E3's checks named `endpoint` `api.a.example`, no model
+evaluator would differ in both, and (b) would fail. Had the maker's own `family` been `undisclosed`,
+every model evaluator would count as the maker's: twice 3 is 6, more than 4, so (c) would fail too.
 
 ### 5.4 CL3 — proven
 
@@ -240,7 +251,7 @@ other requirement that cannot be decided without that field reads `NOT-CHECKABLE
 A verifier is given the record, the artifact's files, the bar file, and the evidence files the record names. It reports,
 for each requirement in scope, `OK`, `FAILED`, or `NOT-CHECKABLE`, and then (the requirements in scope are
 those section 5 says the claimed level must meet: a `baseline` claim is not held to CL1-1 or CL1-15, nor
-to any CL2 or CL3 requirement):
+to any CL2 or CL3 requirement; a CL1, CL2 or CL3 claim is not held to BL-1):
 
 - **verdict** — `FAILED` if any requirement failed; otherwise `NOT-CHECKABLE` if any could not be checked;
   otherwise `OK`;

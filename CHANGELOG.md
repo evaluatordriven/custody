@@ -4,6 +4,72 @@ Each release is a git tag, and each carries its own custody record in `record/`.
 may turn a record that read `OK` into one that reads `FAILED` (SPEC.md section 8); every such change is
 listed here under **Breaking**.
 
+## 0.9.5 (candidate)
+
+Theme: can a stranger implement the standard from its text alone? v0.9.4's stranger test did not pass,
+and one session per implementer could not tell a hard sentence from a bad draw. This release measures
+that properly (`record/` holds the result) and fixes what v0.9.4's evidence pointed at.
+
+**Breaking** (what a producer must change)
+- CL1-9: every evaluator with an observed check in a batch reads at least one clean control (expected
+  `conforms`) **and** one planted control (expected `does_not_conform`) there. A reader that rejects
+  everything can no longer pass on planted controls alone. *Give each reader both kinds.* (The batch-wide
+  clean-control clause of v0.9.4 is folded into this.)
+
+**Clarified** (the rules did not change)
+- CL1-17: a check whose `score` is `null` is not judged by it.
+- CL2-3 (c) is stated as arithmetic, with a worked example covering `undisclosed` on either side and a
+  check's own `endpoint`.
+- "One defect, one failure" gains a worked example: an `evidence` value with no `name` fails CR-2, and
+  CL1-8 reads `NOT-CHECKABLE`.
+
+**Clarified after the stranger test's cycle 1** (revision 1; no record changes outcome)
+- BL-1 applies only to a `baseline` claim. Section 5 no longer says it applies to every record, and a
+  verifier does not report it for a CL1, CL2 or CL3 claim; the reference checker no longer lists it there.
+  In cycle 1, readers split three ways on a CL1 record over this sentence.
+- CR-2 names the fields it does not check, and the requirement that checks each one, instead of a list of
+  requirement IDs. Section 4's table says `readsBeforeFreeze` is required, and read, only in a `baseline`
+  claim.
+
+**Clarified after the stranger test's cycle 2** (revision 2; no record changes outcome)
+- CL2-3's `undisclosed` sentence now says what it means in both directions: an evaluator whose family is
+  undisclosed never differs from the maker, and if the maker's family is undisclosed, no evaluator
+  differs from it. In cycle 2 the adjudicator found two careful readings of the old sentence; the
+  revision states the rule as ratified and as the checker applies it.
+
+**Known limitation, carried to the next release.** The rule above is stricter than it needs to be. When
+the maker's family is undisclosed and the evaluators come from two different disclosed families, the
+maker can share a family with at most one of them, so the other differs; CL2-3 still fails that record.
+The error runs toward denying independence, never toward claiming it. Found by the Owner during this
+release; changing the rule mid-test would have changed the frame the stranger test measures, so it waits
+for the next bar.
+
+**Added**
+- `tools/verify_note.py` writes a published note of a record's checker result in the checker's own
+  words, and `--check` refuses a note that was retyped.
+- `count.py`: a kept record added to `record/` carries its release's version in its name, so no release
+  overwrites an earlier one.
+
+**Changed**
+- The tools and tests no longer write Python cache files into the repository, and CI fails if any appear.
+
+**Correction to 0.9.4.** The 0.9.4 entry below gives four wrong reasons for the v0.9.3 record failing
+(CR-2, CL1-4, CL1-9, CL1-16): they were written by hand, not copied. The verdict and requirement IDs
+were right. The v0.9.4 checker's own words, on tag `v0.9.3` without the private evidence:
+- **CR-2** — `FAILED`: predicate.startedAt missing or not ts; evaluators[1].model.family missing or not family; evaluators[1].model.endpoint missing or not host; evaluators[2].model.family missing or not family; evaluators[2].model.endpoint missing or not host
+- **CL1-4** — `FAILED`: predicate.maker.kind missing or not str; predicate.maker.model.family missing or not family; predicate.maker.model.endpoint missing or not host
+- **CL1-9** — `FAILED`: evaluator R1 reads in batch v093-batch but reads no control there
+- **CL1-16** — `FAILED`: evaluator glm-5.3 is listed but appears on no check and no control; evaluator gpt-6.1-sol is listed but appears on no check and no control; evaluator grok-4.7 is listed but appears on no check and no control; evaluator qwen-3.8 is listed but appears on no check and no control
+
+The correction appended to `record/VERIFY.md` on 2026-10-22 summarised these lines rather than copying
+them; the lines above are exact.
+
+**Stranger test** (three cycles; `record/STRANGER-TEST-v0.9.5.md` holds the tables)
+- Cycle 1 — **unobserved**. Seed 2.1 Turbo s1 counted A=9 B=12; Seed 2.1 Turbo s2 counted A=11 B=11; Seed 2.1 Turbo s3 not counted A=8 B=11; MiniMax M3 s1 not counted A=4 B=2; MiniMax M3 s2 not counted A=5 B=2; MiniMax M3 s3 not counted A=4 B=0; Nemotron 3 Ultra s1 counted A=10 B=9; Nemotron 3 Ultra s2 not counted A=8 B=11; Nemotron 3 Ultra s3 not counted A=6 B=11.
+- Cycle 2 — **does not pass**. Seed 2.1 Turbo s1 counted A=10 B=8; Seed 2.1 Turbo s2 counted A=11 B=11; Seed 2.1 Turbo s3 not counted A=4 B=0; MiniMax M3 s1 counted A=11 B=9; MiniMax M3 s2 not counted A=4 B=10; MiniMax M3 s3 not counted A=5 B=9; Nemotron 3 Ultra s1 not counted A=4 B=0; Nemotron 3 Ultra s2 counted A=8 B=9; Nemotron 3 Ultra s3 counted A=10 B=9.
+- Cycle 3 — **passes**. Seed 2.1 Turbo s1 counted A=12 B=11; Seed 2.1 Turbo s2 counted A=12 B=11; Seed 2.1 Turbo s3 not counted A=4 B=0; MiniMax M3 s1 not counted A=4 B=0; MiniMax M3 s2 counted A=12 B=12; MiniMax M3 s3 counted A=11 B=10; Nemotron 3 Ultra s1 not counted A=4 B=9; Nemotron 3 Ultra s2 not counted A=6 B=9; Nemotron 3 Ultra s3 not counted A=4 B=0.
+- A first attempt at cycle 3 is void and is not a cycle: its planted control was built with a wrong evidence digest, so the control never validated, and its sessions ran when the runbook said stop. No result is taken from it; cycle 3 above ran on twelve fresh records. The custody record discloses it.
+
 ## 0.9.4 (candidate)
 
 Theme: make the record mean what it says. Four independent reviewers read the v0.9.3 release record

@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.4",
+    "specVersion": "0.9.5",
     "levelClaimed": "CL3",
     "bar": {
       "digest": {
@@ -256,11 +256,21 @@
         "outcome": "does_not_conform"
       },
       {
-        "id": "KC",
+        "id": "KCE1",
         "batch": "B1",
         "evaluator": "E1",
         "case": {
-          "sha256": "a75f9de16e1d7ced1db51ed599c49f43b16c0b9499ac6113a499803792c62954"
+          "sha256": "d4412f27f07d44d2a7da89921f7ff5fa5a427237ee7b89892bee40d1960fb1e0"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      },
+      {
+        "id": "KCE2",
+        "batch": "B1",
+        "evaluator": "E2",
+        "case": {
+          "sha256": "9b0d526698e1f00596e4dc605f23d330776159c1911e9927ed5b1018b028cdb3"
         },
         "expected": "conforms",
         "outcome": "conforms"

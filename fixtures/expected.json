@@ -594,6 +594,54 @@
       "routing": "none",
       "fails": "CL2-3"
     },
+    "cl1-fail-reader-with-planted-control-only": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-fail-reader-with-clean-control-only": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-pass-second-reader-with-both-controls": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-one-reader-without-clean-control": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-pass-unscored-checks-not-judged-by-cl1-17": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl1-pass-no-reads-before-freeze-field": {
+      "verdict": "OK",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-maker-family-undisclosed": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
+    "cl1-fail-evidence-not-an-evidence-file": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
     "cl1-fail-run-zero": {
       "verdict": "FAILED",
       "levelAchieved": "none",

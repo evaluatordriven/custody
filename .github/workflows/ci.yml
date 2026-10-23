@@ -3,6 +3,8 @@ on: [push, pull_request]
 jobs:
   check:
     runs-on: ubuntu-24.04
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     strategy:
       matrix:
         python: ["3.10", "3.12"]
@@ -32,6 +34,10 @@ jobs:
           python3 tests/schema_check.py
       - name: Plain view describes every record
         run: python3 tests/explain_check.py
+      - name: Published notes copy the checker's words
+        run: python3 tests/verify_note_check.py
+      - name: No cache files written into the repository
+        run: test -z "$(find . -name __pycache__ -not -path './.git/*')"
       - name: Reviewer's guide reading level (advisory, not a gate)
         continue-on-error: true
         run: |

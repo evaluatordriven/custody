@@ -13,6 +13,8 @@ import pathlib
 import sys
 from datetime import datetime
 
+sys.dont_write_bytecode = True  # no cache files in the tree (v0.9.5)
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 STATE = {"given": "accepted", "not_yet_given": "not yet accepted", "declined": "declined"}
 MADE_BY = {"person": "made by a person", "model": "made by an AI model", "script": "made by a script"}

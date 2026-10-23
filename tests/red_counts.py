@@ -27,6 +27,8 @@ PLANTS = [  # (file, text to append or (old, new) to change, words the report mu
     (".github/workflows/ci.yml", ("--evidence examples/minimal/evidence", ""), "quickstart drift"),
     ("SPEC.md", "\n| CL1-99 | A planted semantic requirement no fixture fails. | semantic |\n",
      "CL1-99 is semantic but no fixture fails for it"),
+    ("record/DISPOSITION-latest.md", "\nA disposition with no version in its name.\n",
+     "carries no version in its name"),
 ]
 
 
@@ -50,7 +52,7 @@ def main():
                 target.write_text(target.read_text(encoding="utf-8").replace(*text, 1),
                                   encoding="utf-8")
             elif text is None:
-                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.4",
+                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.5",
                                                             "levelClaimed": "CL3"}}))
             else:
                 with open(target, "a", encoding="utf-8") as f:
@@ -61,9 +63,9 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:  # a kept record may quote key words: not a problem
         root = pathlib.Path(tmp) / "repo"
         shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git"))
-        (root / "record" / "kept.md").write_text("A kept bar: the checker MUST stay small.\n")
-        quoted = [p for p in problems(root) if "kept.md" in p]
-        print(f"{'ok    ' if not quoted else 'WRONG '}  record/kept.md: a kept record may quote MUST")
+        (root / "record" / "kept-v0.0.1.md").write_text("A kept bar: the checker MUST stay small.\n")
+        quoted = [p for p in problems(root) if "kept-v0.0.1.md" in p]
+        print(f"{'ok    ' if not quoted else 'WRONG '}  record/kept-v0.0.1.md: a kept record may quote MUST")
         missed += bool(quoted)
     return 1 if missed else 0
 

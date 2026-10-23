@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.4",
+    "specVersion": "0.9.5",
     "levelClaimed": "baseline",
     "bar": {
       "digest": {

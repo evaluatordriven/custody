@@ -11,7 +11,7 @@ Why the name: see "Why this name" in `SPEC.md`.
   [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
   [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.4, candidate.** Early. One reference checker exists, in this repository. Nobody is known
+**Status: v0.9.5, candidate.** Early. One reference checker exists, in this repository. Nobody is known
 to have adopted this specification, and nothing here implies endorsement by anyone. Each release carries
 its own custody record in `record/`, kept with that release's tag; this release's record claims CL1,
 and states why not higher.
@@ -73,6 +73,7 @@ python3 tools/make_record.py inputs.json record.json --log job.jsonl
 | `tools/record.py` | Keeps the custody log as work happens |
 | `tools/count.py` | Checks this repository's own size limits and cross-file agreement |
 | `tools/explain.py` | Prints a record in plain words, for reviewers, with the checker's answer |
+| `tools/verify_note.py` | Writes, or checks, a published note of a record's checker result, in the checker's own words |
 | `tools/readability.py` | Checks the reviewer's guide against its reading target (advisory in CI) |
 | `docs/REVIEWERS-GUIDE.md` | A plain-language guide for people who review records rather than build them |
 | `docs/GLOSSARY.md` | Every word the specification uses, explained in plain language |

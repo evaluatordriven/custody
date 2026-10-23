@@ -36,6 +36,8 @@ import json
 import pathlib
 import sys
 
+sys.dont_write_bytecode = True  # no cache files in the tree (v0.9.5)
+
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

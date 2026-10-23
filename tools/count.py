@@ -15,7 +15,8 @@
                kept records of earlier work, so they may name earlier versions), and any record in
                record/; README.md claims no level that no record in record/ supports; the
                documents' statements of how many reference checkers exist match checker/; CI runs
-               README.md's quickstart commands exactly; LICENSE carries CC BY 4.0
+               README.md's quickstart commands exactly; a kept record added to record/ carries its
+               release's version in its name; LICENSE carries CC BY 4.0
                and LICENSE-CODE carries Apache-2.0, each naming no other license; and every current
                document and NOTICE name only those two
 
@@ -27,6 +28,8 @@ import json
 import pathlib
 import re
 import sys
+
+sys.dont_write_bytecode = True  # no cache files in the tree (v0.9.5)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 KEYS = r"\b(MUST NOT|MUST|REQUIRED|SHALL NOT|SHALL|SHOULD NOT|SHOULD|RECOMMENDED|MAY|OPTIONAL)\b"
@@ -171,6 +174,13 @@ def main():
             problems.append(f"{path.name} does not say the code is {code_lic}")
         if not re.search(r"(?is)(text|SPEC\.md|documentation).{0,150}?(?:" + known[text_lic] + ")", body):
             problems.append(f"{path.name} does not say the text is {text_lic}")
+    # Kept records (v0.9.5): a release adds its records under names that carry its version, so no
+    # release overwrites an earlier one. These names predate the rule and are kept for their links.
+    older = {"BAR.md", "BAR-AMENDMENT-1.md", "DISPOSITION.md", "GUIDE-TEST.md", "STRANGER-TEST.md",
+             "VERIFY.md"}  # VERIFY.md is appended to, never rewritten
+    for rec in sorted((ROOT / "record").glob("*.md")) if (ROOT / "record").is_dir() else []:
+        if rec.name not in older and not re.search(r"-v\d+\.\d+\.\d+\.md$", rec.name):
+            problems.append(f"record/{rec.name} carries no version in its name (e.g. -v{version}.md)")
     # Quickstart drift (v0.9.4): CI must run README.md's quickstart commands exactly.
     block = re.search(r"## Quickstart.*?```sh\n(.*?)```", readme, flags=re.S)
     readme_cmds = [ln.strip() for ln in (block.group(1) if block else "").splitlines()

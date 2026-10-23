@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.4",
+    "specVersion": "0.9.5",
     "levelClaimed": "CL1",
     "bar": {
       "digest": {
@@ -180,6 +180,16 @@
         },
         "expected": "does_not_conform",
         "outcome": "does_not_conform"
+      },
+      {
+        "id": "KSC",
+        "batch": "B1",
+        "evaluator": "S1",
+        "case": {
+          "sha256": "850219758a1c4986420c19cc35c258aa62a8c75b76fcb74c8281acf8ae759f6a"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
       }
     ],
     "disagreements": [],

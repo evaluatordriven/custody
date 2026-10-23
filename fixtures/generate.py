@@ -12,7 +12,7 @@ import pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 FILES = HERE / "files"
 EVIDENCE = HERE / "evidence"
-SPEC_VERSION = "0.9.4"
+SPEC_VERSION = "0.9.5"
 
 
 def sha(data):
@@ -106,7 +106,7 @@ def base(level):
              "model": model("gemini", "gemini-3.8-flash", "api.google.example")}]
         p["checks"] = [check(d, e, r) for e in ("E1", "E2") for d in ("D1", "D2") for r in (1, 2)]
         p["controls"] = [control(f"K{e}", e, "does_not_conform") for e in ("E1", "E2")] + [
-            control("KC", "E1", "conforms")]
+            control(f"KC{e}", e, "conforms") for e in ("E1", "E2")]
         p["spread"] = [{"dimension": d, "evaluator": e, "runs": 2, "agreement": 2}
                        for e in ("E1", "E2") for d in ("D1", "D2")]
         p["external"] = [ext("CL1-15", "E1", "harness-gpt.log"),
@@ -160,7 +160,7 @@ def panel(p, fams):  # CL2 evaluators by model family ("person" for a person); m
                        for e, f in zip(ids, fams)]
     p["checks"] = [check(d, e, r) for e in ids for d in ("D1", "D2") for r in (1, 2)]
     p["controls"] = [control(f"K{e}", e, "does_not_conform") for e in ids] + [
-        control("KC", "E1", "conforms")]
+        control(f"KC{e}", e, "conforms") for e in ids]
     p["spread"] = [{"dimension": d, "evaluator": e, "runs": 2, "agreement": 2}
                    for e in ids for d in ("D1", "D2")]
     p["external"] = [ext("CL1-15", e, "harness-gpt.log" if f == "gpt" else "harness-gemini.log")
@@ -183,7 +183,7 @@ def script_evaluator(p, author="Lee Park", digest=None):
                             "script": {"name": "lint_figures.py", "author": author,
                                        "digest": digest or text_digest("lint")}})
     p["checks"].append(check("D1", "S1", 1))
-    p["controls"].append(control("KS", "S1", "does_not_conform"))
+    p["controls"] += [control("KS", "S1", "does_not_conform"), control("KSC", "S1", "conforms")]
 
 
 def scored(p, score, outcome, threshold=3, anchors=None):  # D1 scored 1-5, threshold 3
@@ -448,6 +448,26 @@ CASES = {
                                                       p["separationGaps"].append(
                                                           "Drafting Agent made the work and wrote the bar")),
                                  "FAILED", "CL1", "none", "CL2-3"),
+    # v0.9.5, I5: a clean and a planted control for every reader
+    "cl1-fail-reader-with-planted-control-only": ("CL1", lambda r, p: (
+        second_reader_without_control(p), p["controls"].append(control("K3", "E2", "does_not_conform"))),
+        "FAILED", "none", "none", "CL1-9"),
+    "cl1-fail-reader-with-clean-control-only": ("CL1", lambda r, p: (
+        second_reader_without_control(p), p["controls"].append(control("K3", "E2", "conforms"))),
+        "FAILED", "none", "none", "CL1-9"),
+    "cl1-pass-second-reader-with-both-controls": ("CL1", lambda r, p: (
+        second_reader_without_control(p), p["controls"].extend(
+            [control("K3", "E2", "does_not_conform"), control("K4", "E2", "conforms")])),
+        "OK", "CL1", "none", None),
+    "cl2-fail-one-reader-without-clean-control": ("CL2", lambda r, p: p["controls"].pop(3),
+                                                  "FAILED", "none", "none", "CL1-9"),
+    # v0.9.5, I2-I4: the wording, made into cases
+    "cl1-pass-unscored-checks-not-judged-by-cl1-17": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
+    "cl1-pass-no-reads-before-freeze-field": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
+    "cl2-fail-maker-family-undisclosed": ("CL2", lambda r, p: p["maker"]["model"].update(
+        family="undisclosed"), "FAILED", "CL1", "none", "CL2-3"),
+    "cl1-fail-evidence-not-an-evidence-file": ("CL1", lambda r, p: p["checks"][0]["evidence"].pop("name"),
+                                               "FAILED", "none", "none", "CR-2"),
     # R9: schema and checker agree
     "cl1-fail-run-zero": ("CL1", lambda r, p: p["checks"][0].update(run=0),
                           "FAILED", "none", "none", "CR-2"),
