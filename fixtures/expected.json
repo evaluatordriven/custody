@@ -636,6 +636,30 @@
       "routing": "none",
       "fails": "CL2-3"
     },
+    "cl2-pass-undisclosed-maker-anthropic-openai": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-pass-anthropic-maker-undisclosed-openai-deepseek": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-pass-anthropic-maker-openai-deepseek-at-boundary": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
+    },
+    "cl2-fail-undisclosed-maker-largest-family-plus-undisclosed": {
+      "verdict": "FAILED",
+      "levelAchieved": "CL1",
+      "routing": "none",
+      "fails": "CL2-3"
+    },
     "cl1-fail-evidence-not-an-evidence-file": {
       "verdict": "FAILED",
       "levelAchieved": "none",

@@ -11,7 +11,7 @@ Why the name: see "Why this name" in `SPEC.md`.
   [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
   [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.5, candidate.** Early. One reference checker exists, in this repository. Nobody is known
+**Status: v0.9.6, candidate.** Early. One reference checker exists, in this repository. Nobody is known
 to have adopted this specification, and nothing here implies endorsement by anyone. Each release carries
 its own custody record in `record/`, kept with that release's tag; this release's record claims CL1,
 and states why not higher.

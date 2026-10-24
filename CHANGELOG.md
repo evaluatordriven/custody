@@ -4,6 +4,21 @@ Each release is a git tag, and each carries its own custody record in `record/`.
 may turn a record that read `OK` into one that reads `FAILED` (SPEC.md section 8); every such change is
 listed here under **Breaking**.
 
+## 0.9.6 (candidate)
+
+**Changed**
+- CL2-3 reads `undisclosed` model families the least favourable way rather than failing every undisclosed
+  maker. An evaluator with `family: "undisclosed"` still counts as the maker's family. When the maker's
+  `family` is `undisclosed`, (b) holds when model evaluators from at least two different disclosed
+  families each differ from the maker in endpoint, and (c) counts, on each dimension, the largest
+  disclosed evaluator family there plus every undisclosed evaluator there as the maker's family. This
+  loosens CL2-3: no record that read `OK` under 0.9.5 reads `FAILED`.
+
+**Clarified** (the rules did not change)
+- CL1-17 says explicitly that it does not judge a check whose dimension's scale CL1-2 fails.
+
+**Stranger test** — cycle 1 did not pass: minimax unobserved (1 of 3 sessions counted); nemotron did not meet the gate (0 of 2 counted sessions meeting); seed met the gate (3 of 3 counted sessions meeting). CL1-10 is open; see `record/STRANGER-TEST-v0.9.6.md`.
+
 ## 0.9.5 (candidate)
 
 Theme: can a stranger implement the standard from its text alone? v0.9.4's stranger test did not pass,

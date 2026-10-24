@@ -1,6 +1,6 @@
 # Evaluator Driven — the custody record
 
-**Version 0.9.5 · candidate · 2026-10-22** · Predicate type `https://evaluatordriven.com/custody/v1`
+**Version 0.9.6 · candidate · 2026-10-24** · Predicate type `https://evaluatordriven.com/custody/v1`
 Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
 
 Sections marked *(normative)* define conformance. Everything else explains it.
@@ -92,7 +92,7 @@ means a default.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `specVersion` | string | yes | This document's version, e.g. `0.9.5` |
+| `specVersion` | string | yes | This document's version, e.g. `0.9.6` |
 | `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
 | `bar.digest` | digest | yes | sha256 of the frozen bar document |
 | `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |
@@ -203,7 +203,7 @@ CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, read
 | CL1-14 | Each `subject` digest matches the supplied artifact file of that name, and `bar.digest` matches the supplied bar file. Without those files this reads `NOT-CHECKABLE`. | semantic |
 | CL1-15 | For every model evaluator, `external` holds evidence of its configuration — for example a harness log showing which model and endpoint answered — read by a named party who is not the maker. A model's own settings block (`model`) is a claim, not evidence. | external |
 | CL1-16 | Every check and every control names a listed evaluator, and every listed evaluator appears on at least one check or control. A reading is filed under the evaluator that gave it, never under a script that collected or scored it: no script evaluator's script is the instrument's runner (`instrument.runner`), and an evaluator listed with neither a check nor a control fails the record. | semantic |
-| CL1-17 | A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor. A producer's own rule, such as a mean, a minimum, or another run, may decide what happens next; it never decides a check's outcome. A check whose `score` is `null` is not judged by CL1-17. | semantic |
+| CL1-17 | A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor. A producer's own rule, such as a mean, a minimum, or another run, may decide what happens next; it never decides a check's outcome. A check whose `score` is `null` is not judged by CL1-17. CL1-17 does not judge a check whose dimension's scale CL1-2 fails. | semantic |
 
 ### 5.3 CL2 — independent
 
@@ -211,15 +211,17 @@ CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, read
 |---|---|---|
 | CL2-1 | Every evaluator reads every dimension it checks in at least two runs, and `spread` gives, for each such pair, the number of runs and how many agreed. | semantic |
 | CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
-| CL2-3 | (a) No buyer or specialist approval is by the maker, and the maker did not write the bar. (b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's. Others may share the maker's family or endpoint. (c) If the maker's `kind` is `model`, then for each dimension, twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension; persons and scripts count toward that total. In (b) and (c), if the maker's `family` or an evaluator's `family` is `undisclosed`, the two count as the same family: an evaluator whose family is undisclosed never differs from the maker, and if the maker's family is undisclosed, no evaluator differs from it. | semantic |
+| CL2-3 | (a) No buyer or specialist approval is by the maker, and the maker did not write the bar. (b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's. Others may share the maker's family or endpoint. (c) If the maker's `kind` is `model`, then for each dimension, twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension; persons and scripts count toward that total. In (b) and (c), `undisclosed` is read the least favourable way: an evaluator whose `family` is `undisclosed` always counts as the maker's `family` and never differs from the maker; if the maker's `family` is `undisclosed`, it could be any one disclosed family, so (b) holds only when model evaluators from at least two different disclosed families each have no endpoint equal to the maker's, and in (c), for each dimension, the evaluators of the maker's `family` are those of whichever single disclosed family has the most evaluators on that dimension, together with every evaluator on that dimension whose `family` is `undisclosed`. | semantic |
 
 *Worked example for CL2-3 (non-normative).* The maker is a model of family `gpt`, answered at
 `api.a.example`. Dimension D1 is read by E1 (`gpt`, at `api.b.example`), E2 (`undisclosed`, at
 `api.c.example`), E3 (`qwen`, at `api.d.example`) and one person. E1 and E2 count as the maker's family:
 twice 2 is 4, no more than the 4 evaluators of D1, so (c) holds. E3 differs in family, and none of its
 endpoints is the maker's, so (b) holds. Had one of E3's checks named `endpoint` `api.a.example`, no model
-evaluator would differ in both, and (b) would fail. Had the maker's own `family` been `undisclosed`,
-every model evaluator would count as the maker's: twice 3 is 6, more than 4, so (c) would fail too.
+evaluator would differ in both, and (b) would fail. Had the maker's own `family` been `undisclosed` and
+D1 been read only by E1 (`gpt`, at `api.b.example`) and E3 (`qwen`, at `api.d.example`), the two
+disclosed families `gpt` and `qwen` could not both be the maker's, so (b) would hold, and the largest
+disclosed family on D1 would have 1 of the 2 evaluators, so (c) would hold too.
 
 ### 5.4 CL3 — proven
 

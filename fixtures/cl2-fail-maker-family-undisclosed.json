@@ -105,7 +105,7 @@
         "kind": "model",
         "script": null,
         "model": {
-          "family": "gemini",
+          "family": "gpt",
           "identifier": "gemini-3.8-flash",
           "endpoint": "api.google.example",
           "readOnly": true

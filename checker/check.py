@@ -416,21 +416,29 @@ def cl2_3(r, p, ctx):  # approvals, the bar's author, and model evaluators indep
     if not mk:
         raise Fail("the maker is a model but carries no model block to compare evaluators with")
 
-    def kin(m):  # an undisclosed family counts as the maker's family
-        return UNDISCLOSED in (m["family"], mk["family"]) or same(m["family"], mk["family"])
-
     def hosts(e):  # every host that answered this evaluator's checks
         return {e["model"]["endpoint"]} | {c["endpoint"] for c in p["checks"]
                                            if c["evaluator"] == e["id"] and c.get("endpoint")}
 
     models = [e for e in p["evaluators"] if e["kind"] == "model" and e["model"]]
-    if models and not any(not kin(e["model"]) and not any(same(h, mk["endpoint"])
-                                                          for h in hosts(e)) for e in models):
+    disclosed = {e["model"]["family"].casefold() for e in models
+                 if e["model"]["family"] != UNDISCLOSED
+                 and not any(same(h, mk["endpoint"]) for h in hosts(e))}
+    need_fams = 2 if mk["family"] == UNDISCLOSED else 1
+    if models and len(disclosed - {mk["family"].casefold()}) < need_fams:
         raise Fail("no model evaluator differs from the maker in both family and endpoint")
-    fam = {e["id"] for e in models if kin(e["model"])}
+    by_id = {e["id"]: e["model"]["family"].casefold() for e in models}
     for d in sorted({c["dimension"] for c in p["checks"]}):
         readers = {c["evaluator"] for c in p["checks"] if c["dimension"] == d}
-        if 2 * len(readers & fam) > len(readers):
+        undisc = sum(1 for e in readers if by_id.get(e) == UNDISCLOSED)
+        if mk["family"] == UNDISCLOSED:
+            counts = Counter(by_id[e] for e in readers
+                             if e in by_id and by_id[e] != UNDISCLOSED)
+            same_fam = (max(counts.values()) if counts else 0) + undisc
+        else:
+            same_fam = undisc + sum(1 for e in readers
+                                    if by_id.get(e) == mk["family"].casefold())
+        if 2 * same_fam > len(readers):
             raise Fail(f"dimension {d}: over half its evaluators share the maker's model family")
 
 

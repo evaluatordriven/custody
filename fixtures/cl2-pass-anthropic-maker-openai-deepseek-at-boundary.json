@@ -1,0 +1,565 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.5",
+    "levelClaimed": "CL2",
+    "bar": {
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      },
+      "frozenAt": "2026-10-01T09:00:00Z",
+      "author": "Morgan Lee",
+      "dimensions": [
+        {
+          "id": "D1",
+          "criterion": "Every figure cites its source",
+          "scale": null
+        },
+        {
+          "id": "D2",
+          "criterion": "The recommendation follows from the figures",
+          "scale": null
+        }
+      ],
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Avery Chen",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:00:00Z",
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Priya Nair",
+          "barDigest": {
+            "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+          },
+          "at": "2026-10-01T08:30:00Z",
+          "adopted": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [
+        {
+          "name": "Q3 vendor price sheet",
+          "version": "2026-09-30",
+          "digest": {
+            "sha256": "a7690520f1332f96d616a67dc934b0aa345802b46f394cb8df70370eab039765"
+          }
+        }
+      ],
+      "dissent": []
+    },
+    "maker": {
+      "name": "Drafting Agent",
+      "kind": "model",
+      "version": "1.4",
+      "method": {
+        "sha256": "5b7e6bf2dc4a32a6aa4770cd5639c2c7af890fc86c273b5c8567fe5382086bf3"
+      },
+      "model": {
+        "family": "claude",
+        "identifier": "claude-6.0",
+        "endpoint": "api.other.example",
+        "readOnly": false
+      }
+    },
+    "startedAt": "2026-10-01T10:00:00Z",
+    "producedAt": "2026-10-02T09:00:00Z",
+    "instrument": {
+      "rubric": {
+        "sha256": "49672f0ef3b3a542b3b86b475936cc9adf1ddf60369e9b120ba33900294c99d8"
+      },
+      "runner": {
+        "sha256": "527aa9f431539da8e151d5434d1d5e611d973f601d8e970790882624554146b0"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "E1",
+        "name": "Reader E1",
+        "kind": "model",
+        "script": null,
+        "model": {
+          "family": "gpt",
+          "identifier": "gpt-e1",
+          "endpoint": "api.gpt.e1.example",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "E2",
+        "name": "Reader E2",
+        "kind": "model",
+        "script": null,
+        "model": {
+          "family": "deepseek",
+          "identifier": "deepseek-e2",
+          "endpoint": "api.deepseek.e2.example",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "E3",
+        "name": "Reader E3",
+        "kind": "model",
+        "script": null,
+        "model": {
+          "family": "claude",
+          "identifier": "claude-e3",
+          "endpoint": "api.claude.e3.example",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "E4",
+        "name": "Reader E4",
+        "kind": "model",
+        "script": null,
+        "model": {
+          "family": "undisclosed",
+          "identifier": "undisclosed-e4",
+          "endpoint": "api.undisclosed.e4.example",
+          "readOnly": true
+        }
+      }
+    ],
+    "checks": [
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E1-1.md",
+          "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E1-2.md",
+          "sha256": "22fd565d00f33e79120a992f18c7eaeff83d975480b3b4a633b1177e8f5b505d"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E1",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E1-1.md",
+          "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E1",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E1-2.md",
+          "sha256": "995f3be5a2a1f3e45ced565827e6fb9d52c627f9294f4238b290db2c685aff42"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E2",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E2-1.md",
+          "sha256": "d953cf62a22041889d4d304babbf260ffc6ea4b459a71e18fc9824c10445d6b7"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E2",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E2-2.md",
+          "sha256": "cc5cf085cf2d4232c0f79852a628fe92952b0156f5696d41f3cd1d7d474267f7"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E2",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E2-1.md",
+          "sha256": "4e7cbe41b4b14071918bf0b248b7beb8fdc14b52eb7c898f59c5b00db7850cc1"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E2",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E2-2.md",
+          "sha256": "e2b97ea92213cdb84de137c5a23a0725753f24d3e2361ed9dcb9b142994425c6"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E3",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E3-1.md",
+          "sha256": "4992a6dafe9049bcebc4cee4b41d142d3c67ef807b50bcd3fb7a9808de903f07"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E3",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E3-2.md",
+          "sha256": "f3504fc000bb2524ac74450e6e4ff7fc0f44fdb6353086aa396f00b98b9017da"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E3",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E3-1.md",
+          "sha256": "6bd12268bc17a010c79bad1c0309e54ec641bb283448e9e776d0371ead6ca1db"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E3",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E3-2.md",
+          "sha256": "3863bda207c7afbd41f79995f8725a3be4dd22b4316f0a6625a7d4df237c8bda"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E4",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E4-1.md",
+          "sha256": "c362dd8c23207c223ec2d0d75116f02f1b1faac9aa1eff4c887d72a4a3df943c"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E4",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E4-2.md",
+          "sha256": "38eb3b643dd448c16e8998f94ae0ad1e6703e6c3a374b07402d91a2e05cd4313"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E4",
+        "run": 1,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E4-1.md",
+          "sha256": "f19433a30e56ef1f09fb0bca3fb0bb758af390aecd8a836df64e77210b8ced4d"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E4",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "conforms",
+        "score": null,
+        "failureCondition": "D2 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D2-E4-2.md",
+          "sha256": "1ff0c558deafa963c54c1c6dad2c940fc4c43d349c536931e5d0273f2a2b4e55"
+        },
+        "unobserved": null
+      }
+    ],
+    "controls": [
+      {
+        "id": "KE1",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "f6336245720505873f07865fb3e3c2af5c0b02b3c09e6c14e0b4d68ece0d5b4c"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "KE2",
+        "batch": "B1",
+        "evaluator": "E2",
+        "case": {
+          "sha256": "0b230e8e30a11a1f85d53492319e4d2dd3d5ed27a86e191254b29d39a40f4394"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "KE3",
+        "batch": "B1",
+        "evaluator": "E3",
+        "case": {
+          "sha256": "9e5f2f37d6db1cbb068cee89783e0ab22a283fa72dc274cebb9015f585515407"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "KE4",
+        "batch": "B1",
+        "evaluator": "E4",
+        "case": {
+          "sha256": "40865f32d1408d51238b1b99b62798484fb6d547a0a48cc4f6936899edcb4dff"
+        },
+        "expected": "does_not_conform",
+        "outcome": "does_not_conform"
+      },
+      {
+        "id": "KCE1",
+        "batch": "B1",
+        "evaluator": "E1",
+        "case": {
+          "sha256": "d4412f27f07d44d2a7da89921f7ff5fa5a427237ee7b89892bee40d1960fb1e0"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      },
+      {
+        "id": "KCE2",
+        "batch": "B1",
+        "evaluator": "E2",
+        "case": {
+          "sha256": "9b0d526698e1f00596e4dc605f23d330776159c1911e9927ed5b1018b028cdb3"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      },
+      {
+        "id": "KCE3",
+        "batch": "B1",
+        "evaluator": "E3",
+        "case": {
+          "sha256": "589e4cb743f7902990c4c7869ccb2465337649b160392ed3bf2aa3b9659f3295"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      },
+      {
+        "id": "KCE4",
+        "batch": "B1",
+        "evaluator": "E4",
+        "case": {
+          "sha256": "8d7024a147952879a18fec2c910632b17448dd2737754bd67db17ff60ec0f7dc"
+        },
+        "expected": "conforms",
+        "outcome": "conforms"
+      }
+    ],
+    "disagreements": [],
+    "violations": [],
+    "separationGaps": [],
+    "retention": {
+      "location": "s3://records/vendor-report",
+      "public": false
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "E1",
+        "readBy": "Dana Reyes",
+        "evidence": {
+          "name": "harness-gpt.log",
+          "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+        }
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "E2",
+        "readBy": "Dana Reyes",
+        "evidence": {
+          "name": "harness-gemini.log",
+          "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+        }
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "E3",
+        "readBy": "Dana Reyes",
+        "evidence": {
+          "name": "harness-gemini.log",
+          "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+        }
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "E4",
+        "readBy": "Dana Reyes",
+        "evidence": {
+          "name": "harness-gemini.log",
+          "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+        }
+      }
+    ],
+    "disposition": {
+      "state": "given",
+      "by": "Avery Chen",
+      "at": "2026-10-04T09:00:00Z",
+      "acknowledgesUnobserved": []
+    },
+    "spread": [
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E1",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E2",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E2",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E3",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E3",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E4",
+        "runs": 2,
+        "agreement": 2
+      },
+      {
+        "dimension": "D2",
+        "evaluator": "E4",
+        "runs": 2,
+        "agreement": 2
+      }
+    ]
+  }
+}

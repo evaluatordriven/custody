@@ -1,0 +1,100 @@
+{
+ "r1": {
+  "m3": {
+   "passes": true,
+   "ok": 111,
+   "bad": [],
+   "total": 111
+  },
+  "m4": {
+   "checker_failing_on_fixture": [
+    "CL1-11"
+   ],
+   "answers": {
+    "gpt-6.1-sol": {
+     "q1": "NO",
+     "q2": "NO",
+     "q3": "NO",
+     "q4": "CL1-11"
+    },
+    "grok-4.7": {
+     "q1": "NO",
+     "q2": "NO",
+     "q3": "NO",
+     "q4": "CL1-11"
+    }
+   },
+   "conditions": {
+    "q1_eq_q2_each": true,
+    "q3_both_no": true,
+    "q4_same_id": true,
+    "q4_matches_checker": true
+   },
+   "passes": true
+  },
+  "m5": {
+   "passes": true,
+   "problems": []
+  }
+ },
+ "r0": {
+  "m3": {
+   "passes": true,
+   "ok": 111,
+   "bad": [],
+   "total": 111
+  },
+  "m4": {
+   "checker_failing_on_fixture": [
+    "CL1-11"
+   ],
+   "answers": {
+    "gpt-6.1-sol": {
+     "q1": "NO",
+     "q2": "YES",
+     "q3": "NO",
+     "q4": "CL1-11"
+    },
+    "grok-4.7": {
+     "q1": "NO",
+     "q2": "YES",
+     "q3": "NO",
+     "q4": "CL1-11"
+    }
+   },
+   "conditions": {
+    "q1_eq_q2_each": false,
+    "q3_both_no": true,
+    "q4_same_id": true,
+    "q4_matches_checker": true
+   },
+   "passes": false
+  }
+ },
+ "alt": {
+  "passes": true,
+  "ok": 111,
+  "bad": [],
+  "total": 111
+ },
+ "p2": {
+  "passes": false,
+  "ok": 108,
+  "bad": [
+   [
+    "cl1-fail-no-clean-control",
+    "('OK', 'CL1', 'none', ()) != ('FAILED', 'none', 'none', ('CL1-9',))"
+   ],
+   [
+    "cl1-fail-reader-with-planted-control-only",
+    "('OK', 'CL1', 'none', ()) != ('FAILED', 'none', 'none', ('CL1-9',))"
+   ],
+   [
+    "cl2-fail-one-reader-without-clean-control",
+    "('OK', 'CL2', 'none', ()) != ('FAILED', 'none', 'none', ('CL1-9',))"
+   ]
+  ],
+  "total": 111
+ },
+ "stop": []
+}

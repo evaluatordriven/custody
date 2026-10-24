@@ -1,0 +1,111 @@
+{
+ "sizes": {
+  "q1": 80763,
+  "q2": 729739,
+  "q3": 142666,
+  "m4": 27771
+ },
+ "tok_per_byte": 0.27250102150737343,
+ "calibration": {
+  "gpt-6.1-sol": {
+   "prompt_tokens": 21133,
+   "completion_tokens": 100,
+   "cost": 0.053831,
+   "cost_in_per_tok": 2.5472483793119764e-06,
+   "cost_out_per_tok": 0.00053831,
+   "answered_model": "openai/gpt-6.1-sol",
+   "provider_answered": "OpenAI",
+   "ruling": "A"
+  },
+  "grok-4.7": {
+   "prompt_tokens": 23317,
+   "completion_tokens": 2127,
+   "cost": 0.057668,
+   "cost_in_per_tok": 2.4732169661620275e-06,
+   "cost_out_per_tok": 2.711236483309826e-05,
+   "answered_model": "x-ai/grok-4.7",
+   "provider_answered": "xAI",
+   "ruling": "A"
+  },
+  "mimo-v2.6-pro": {
+   "prompt_tokens": 21574,
+   "completion_tokens": 750,
+   "cost": 0.01003719,
+   "cost_in_per_tok": 4.652447390377306e-07,
+   "cost_out_per_tok": 1.338292e-05,
+   "answered_model": "xiaomi/mimo-v2.6-pro",
+   "provider_answered": "Xiaomi",
+   "ruling": "A"
+  }
+ },
+ "rows": [
+  {
+   "item": "Q1 gpt-6.1-sol",
+   "n": 48,
+   "usd": 5.167776
+  },
+  {
+   "item": "Q1 grok-4.7",
+   "n": 48,
+   "usd": 5.536128
+  },
+  {
+   "item": "Q1 mimo-v2.6-pro",
+   "n": 48,
+   "usd": 0.9635702399999999
+  },
+  {
+   "item": "Q2 kimi-k2.5 (1 call)",
+   "n": 1,
+   "usd": 0.1183845
+  },
+  {
+   "item": "Q2 qwen3.8 (1 call)",
+   "n": 1,
+   "usd": 0.443206
+  },
+  {
+   "item": "Q2 glm-5.3 (1 call)",
+   "n": 1,
+   "usd": 0.31176079999999995
+  },
+  {
+   "item": "Q2 mismatches gpt-6.1-sol",
+   "n": 20,
+   "usd": 2.15324
+  },
+  {
+   "item": "Q2 mismatches grok-4.7",
+   "n": 20,
+   "usd": 2.30672
+  },
+  {
+   "item": "Q2 mismatches mimo-v2.6-pro",
+   "n": 20,
+   "usd": 0.4014876
+  },
+  {
+   "item": "Q3 maker (3 sessions x 3 attempts)",
+   "n": 9,
+   "usd": 0.1987065
+  },
+  {
+   "item": "M4 gpt-6.1-sol (4 questions)",
+   "n": 4,
+   "usd": 0.9383961139450149
+  },
+  {
+   "item": "M4 grok-4.7 (4 questions)",
+   "n": 4,
+   "usd": 0.11823911486474946
+  },
+  {
+   "item": "M4 mimo-v2.6-pro (4 questions)",
+   "n": 4,
+   "usd": 0.03549469976119403
+  }
+ ],
+ "total_usd": 18.693109568570957,
+ "with_contingency_usd": 23.366386960713697,
+ "cap_usd": 50.0
+}

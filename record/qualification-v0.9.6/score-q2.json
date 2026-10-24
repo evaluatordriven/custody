@@ -1,0 +1,2743 @@
+{
+ "results": {
+  "kimi-k2.5": {
+   "correct": 95,
+   "wrong": 16,
+   "held_out": 0,
+   "accuracy": 0.8558558558558559,
+   "cost": 0.334938,
+   "qualifies": false
+  },
+  "qwen3.8": {
+   "correct": 108,
+   "wrong": 2,
+   "held_out": 1,
+   "accuracy": 0.9818181818181818,
+   "cost": 0.94693,
+   "qualifies": true
+  },
+  "glm-5.3": {
+   "correct": 109,
+   "wrong": 2,
+   "held_out": 1,
+   "accuracy": 0.9819819819819819,
+   "cost": 1.5383744,
+   "qualifies": true
+  }
+ },
+ "detail": {
+  "kimi-k2.5": [
+   {
+    "case": "case-001",
+    "fixture": "cl2-fail-check-answered-by-makers-endpoint",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL1",
+     "routing": "none",
+     "failing": [
+      "CL2-3"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0584835,
+      "reply": "RULING: A\n\u201c(b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\u201d\nE2 differs in family, but every E2 check names the maker\u2019s endpoint, `api.other.example`; E1 shares the maker\u2019s family. Thus CL2-3 fails, while CL1 remains achieved and routing is none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.060364,
+      "reply": "RULING: A\n\"If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\"\nE2\u2019s family differs from the maker\u2019s, but every E2 check names `endpoint` `api.other.example`, which is the maker\u2019s endpoint, so E2 does not differ in both. E1 shares family `gpt`, so no model evaluator satisfies (b) and CL2-3 fails. CL1 still holds, so the verdict is FAILED, the level achieved is CL1, and routing i"
+     }
+    ]
+   },
+   {
+    "case": "case-002",
+    "fixture": "cl1-fail-approval-bound-to-other-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-003",
+    "fixture": "cl1-fail-maker-wrote-bar-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-004",
+    "fixture": "cl1-fail-evidence-name-not-relative",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-005",
+    "fixture": "cl1-pass-control-missed-checks-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-006",
+    "fixture": "cl1-fail-bar-frozen-at-start",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL1",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-1"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.053686,
+      "reply": "RULING: A\n\u201cA bar frozen at the same instant the work started fits neither: it is not earlier, and it is not after.\u201d\n`bar.frozenAt` and `startedAt` are both `2026-10-01T10:00:00Z`, so CL1-1 fails. The verdict is FAILED, no level is achieved, and routing remains none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.055832,
+      "reply": "RULING: A\n\"A bar frozen at the same instant the work started fits neither: it is not earlier, and it is not after.\"\n`bar.frozenAt` and `startedAt` are both `2026-10-01T10:00:00Z`, so CL1-1 fails: the bar is not earlier than the start of work, and a same-instant freeze is not a baseline case either. The record claims CL1, so a failed in-scope requirement makes the verdict `FAILED` and the level achieved `none`. No check is `unobserved` and the disposition is not `not_yet_given`, so routing is `none`."
+     }
+    ]
+   },
+   {
+    "case": "case-007",
+    "fixture": "cl3-unchecked-signature-not-verified",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-008",
+    "fixture": "cl2-fail-buyer-is-maker",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-11",
+      "CL2-3"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL1",
+     "routing": "none",
+     "failing": [
+      "CL2-3"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.058736,
+      "reply": "RULING: A\n\u201cIf the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker.\u201d\nThe separation-gap entry explicitly names Drafting Agent and its buyer approval, satisfying CL1-11. That disclosure does not cure CL2-3\u2019s prohibition on maker approval, so the verdict is FAILED with CL1 achieved and routing none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.066248,
+      "reply": "RULING: A\n\"If the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker.\"\nThe buyer approval is by Drafting Agent, the maker, so CL2-3(a) fails, but the separationGaps entry names that maker, so CL1-11 is satisfied rather than failed. With every CL1 requirement OK and only CL2-3 failed, section 6's level rule yields CL1, verdict FAILED, and routing none."
+     }
+    ]
+   },
+   {
+    "case": "case-009",
+    "fixture": "cl1-fail-retention-missing",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-11",
+      "CL1-12"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-12"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.054706,
+      "reply": "RULING: A\n\"`violations` and `separationGaps` are present even when empty.\"\nBoth lists are present, no check returns `does_not_conform`, and the maker neither authored nor approved the bar, so CL1-11 passes. The missing `retention` field fails CL1-12 alone, yielding verdict FAILED, level achieved none, and routing none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.067036,
+      "reply": "RULING: A\n\"Every dimension with a `does_not_conform` check appears in `violations`. `violations` and `separationGaps` are present even when empty. If the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker.\"\nBoth checks are `conforms`, and `violations` and `separationGaps` are present as empty lists. The maker is Drafting Agent, not Morgan Lee, Avery Chen, or Priya Nair, so no separation-gap entry is required and CL1-11 is OK. `retention` is absent, and CL1-12 is the requirement that checks that field, so only CL1-12 fails."
+     }
+    ]
+   },
+   {
+    "case": "case-010",
+    "fixture": "cl1-fail-bar-frozen-late",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-011",
+    "fixture": "cl1-fail-maker-kind-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-012",
+    "fixture": "cl2-unchecked-independence-asserted-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-013",
+    "fixture": "cl1-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-014",
+    "fixture": "cl2-fail-one-run-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-015",
+    "fixture": "cl1-fail-started-at-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-016",
+    "fixture": "cl1-fail-family-not-lowercase",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-017",
+    "fixture": "cl2-fail-one-reader-without-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-018",
+    "fixture": "cl3-unchecked-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-019",
+    "fixture": "cl2-fail-maker-family-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-020",
+    "fixture": "cl1-unchecked-model-evaluator-settings-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-021",
+    "fixture": "cl1-fail-evidence-not-an-evidence-file",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-022",
+    "fixture": "cl1-pass-second-reader-with-both-controls",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-023",
+    "fixture": "cl1-fail-no-check-for-dimension",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-024",
+    "fixture": "cl1-pass-control-missed-its-dimension-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-025",
+    "fixture": "cl1-fail-reader-with-planted-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-026",
+    "fixture": "cl1-fail-no-control-in-batch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-027",
+    "fixture": "cl2-fail-every-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-028",
+    "fixture": "baseline-pass-model-evaluator-without-external",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-029",
+    "fixture": "cl1-pass-scored-below-threshold",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-030",
+    "fixture": "baseline-fail-bar-frozen-at-same-instant",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-031",
+    "fixture": "cl1-fail-conforms-without-evidence",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-032",
+    "fixture": "cl1-fail-disagreement-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-033",
+    "fixture": "cl2-pass-check-endpoint-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-034",
+    "fixture": "cl1-fail-same-model-session-undeclared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-035",
+    "fixture": "cl1-unchecked-evidence-file-not-supplied",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-036",
+    "fixture": "cl1-fail-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-037",
+    "fixture": "cl2-pass-runs-disagree-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-038",
+    "fixture": "cl1-pass-unscored-checks-not-judged-by-cl1-17",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-039",
+    "fixture": "cl1-fail-evaluator-is-bar-author",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-040",
+    "fixture": "cl1-fail-maker-method-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-041",
+    "fixture": "cl1-fail-violation-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-042",
+    "fixture": "cl1-pass-not-yet-given-with-violation",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-043",
+    "fixture": "cl1-fail-started-after-produced",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-044",
+    "fixture": "cl2-pass-undisclosed-family-beside-others",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-9"
+     ]
+    },
+    "checker": {
+     "verdict": "OK",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.061576,
+      "reply": "RULING: A\n\u201cIn every batch, each evaluator with a check that is not `unobserved` reads at least two controls there: one whose expected outcome is `conforms`, and one whose expected outcome is `does_not_conform`.\u201d\nEach of E1, E2, and E3 reads both required controls in B1, and every control\u2019s actual outcome matches its expected outcome. CL1-9 requires these controls per evaluator and batch, not separately per dimension; therefore it does not fail this record."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.106134,
+      "reply": "RULING: A\n\"In every batch, each evaluator with a check that is not `unobserved` reads at least two controls there: one whose expected outcome is `conforms`, and one whose expected outcome is `does_not_conform`.\"\nE1, E2, and E3 each have both of those controls in batch B1, and each control's actual outcome matches its expected outcome, so the mismatch clause never applies. A control's `dimension` is optional and only narrows that mismatch rule; its absence does not fail CL1-9. No other in-scope requirement fails, so the verdict is OK and the level achieved is the claimed CL2."
+     }
+    ]
+   },
+   {
+    "case": "case-045",
+    "fixture": "cl1-fail-tampered-artifact",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-046",
+    "fixture": "cl1-pass-scored",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-047",
+    "fixture": "cl1-fail-score-contradicts-outcome",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-048",
+    "fixture": "cl1-fail-not-a-custody-statement",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-049",
+    "fixture": "cl1-pass-unobserved-reader-needs-no-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-050",
+    "fixture": "cl1-fail-evidence-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-051",
+    "fixture": "cl2-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-052",
+    "fixture": "cl1-pass-maker-wrote-bar-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-053",
+    "fixture": "cl1-pass-unobserved-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-054",
+    "fixture": "cl1-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-055",
+    "fixture": "cl1-fail-unobserved-not-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-056",
+    "fixture": "cl3-fail-no-signature-entry",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "NOT-CHECKABLE",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL2",
+     "routing": "none",
+     "failing": [
+      "CL3-3"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.059646,
+      "reply": "RULING: A\n\u201cWhen the record names **no** evidence at all, the two external requirements differ: independence (CL1-15) is a claim about the world, so an unevidenced claim reads `NOT-CHECKABLE`; a signature (CL3-3) is a property of the record, so its absence reads `FAILED`.\u201d\nThe record\u2019s `external` list contains no CL3-3 entry; an unreferenced fixture file does not supply the required signature evidence. CL3-3 therefore fails, while CL2 remains achieved and routing is `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.066072,
+      "reply": "RULING: A\n\"When the record names **no** evidence at all, the two external requirements differ: independence (CL1-15) is a claim about the world, so an unevidenced claim reads `NOT-CHECKABLE`; a signature (CL3-3) is a property of the record, so its absence reads `FAILED`.\"\n`external` names only CL1-15 evidence, not a CL3-3 bundle with subject `record`, so the signature is absent and CL3-3 is `FAILED`, not `NOT-CHECKABLE`. The \u201cverifier does not verify the bundle\u201d rule applies only when a matching bundle is named. Verdict is therefore `FAILED`, CL1\u2013CL2 remain `OK`, so the level achieved is CL2, "
+     }
+    ]
+   },
+   {
+    "case": "case-057",
+    "fixture": "cl2-fail-evidence-digest-mismatch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-058",
+    "fixture": "cl1-fail-score-meets-threshold-reads-does-not-conform",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-059",
+    "fixture": "cl3-fail-demonstration-after-check",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "NOT-CHECKABLE",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL2",
+     "routing": "none",
+     "failing": [
+      "CL3-1"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.059826,
+      "reply": "RULING: A\n\u201cFor every evaluator and dimension it checked, `demonstrations` holds a planted case on which that evaluator returned `does_not_conform`, timed before its first check of that dimension.\u201d\nE1\u2019s D1 demonstration is dated October 5, after its first D1 check on October 3, so CL3-1 fails. That failure makes the verdict FAILED even though CL3-3 is NOT-CHECKABLE; CL2 remains achieved, and routing is none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.068562,
+      "reply": "RULING: A\n\"For every evaluator and dimension it checked, `demonstrations` holds a planted case on which that evaluator returned `does_not_conform`, timed before its first check of that dimension.\"\nE1\u2019s D1 demonstration is dated 2026-10-05, after that evaluator\u2019s 2026-10-03 checks, so this semantic requirement is broken and reads FAILED. Section 6 then requires verdict FAILED whenever any in-scope requirement failed, even though an unverified Sigstore bundle leaves CL3-3 NOT-CHECKABLE. CL1 and CL2 remain OK, so the level achieved is CL2 and routing is none."
+     }
+    ]
+   },
+   {
+    "case": "case-060",
+    "fixture": "cl1-pass-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-061",
+    "fixture": "cl1-fail-script-evaluator-unpinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-062",
+    "fixture": "cl2-fail-undisclosed-family-counts-as-makers",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-063",
+    "fixture": "cl2-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-064",
+    "fixture": "cl1-fail-model-evaluator-without-model-block",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-065",
+    "fixture": "cl1-fail-reader-with-clean-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-066",
+    "fixture": "cl1-fail-control-missed-checks-still-observed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-067",
+    "fixture": "cl1-fail-dimension-scale-missing-floor",
+    "result": "wrong",
+    "why": "ambiguous"
+   },
+   {
+    "case": "case-068",
+    "fixture": "cl1-fail-bar-frozen-after-start",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-069",
+    "fixture": "cl3-unchecked-unobserved-not-yet-given",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-070",
+    "fixture": "cl1-fail-instrument-not-pinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-071",
+    "fixture": "cl2-fail-maker-wrote-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-072",
+    "fixture": "cl2-pass-maker-family-two-of-four",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-073",
+    "fixture": "cl1-fail-control-missed-its-dimension-observed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-074",
+    "fixture": "cl1-fail-bar-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-075",
+    "fixture": "cl2-pass-one-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-076",
+    "fixture": "baseline-pass-bar-frozen-mid-work",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-077",
+    "fixture": "cl1-fail-readings-filed-under-runner",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-078",
+    "fixture": "cl1-pass-legacy-no-script-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-079",
+    "fixture": "cl1-pass-no-reads-before-freeze-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-080",
+    "fixture": "cl1-fail-same-model-declared-false",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-081",
+    "fixture": "cl1-fail-missing-disagreements-field",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL1",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CR-2"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.053986,
+      "reply": "RULING: A\n\u201cA field listed as required MUST be present; a required list MAY be empty only where this table says so.\u201d\nThe record omits `disagreements`, which section 4 marks required even though it may be empty. This fails CR-2, so the verdict is FAILED and no level is achieved; routing remains none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.066524,
+      "reply": "RULING: A\n\"Absence never means a default.\"\n`disagreements` is marked required in section 4 and is missing from the predicate, so an empty list cannot be assumed. CR-2 requires every section 4 `yes` field to be present, and it does not delegate `disagreements` to another requirement. That failure makes the verdict FAILED and the level achieved none; routing is none because the disposition is `given` and no check is `unobserved`."
+     }
+    ]
+   },
+   {
+    "case": "case-082",
+    "fixture": "cl2-pass-legacy-evidence-tag",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-083",
+    "fixture": "cl1-fail-threshold-above-scale",
+    "result": "correct",
+    "why": "both adjudicators chose the key",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-17",
+      "CL1-2"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-2"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "B",
+      "choice": "Y",
+      "cost": 0.0548135,
+      "reply": "RULING: B\n\u201cA scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor.\u201d\nCL1-2 fails because the threshold of 7 exceeds the highest anchor of 5. CL1-17 is independently decidable: the score of 4 is below the declared threshold, yet the check says `conforms`. The \u201cone defect, one failure\u201d rule does not exempt another requirement that can still be decided."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "B",
+      "choice": "Y",
+      "cost": 0.077526,
+      "reply": "RULING: B\n\"A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor.\"\nD1\u2019s check scores 4 against threshold 7 but reads `conforms`, so CL1-17 fails on its own terms; a null score is the only exemption. CL1-2 also fails because threshold 7 does not lie between floor 1 and the highest anchor 5, and those fields are present, so this is not an undecidable defect waived by \u201cone defect, one failure.\u201d The checker\u2019s skip when the scale is invalid is a bu"
+     }
+    ]
+   },
+   {
+    "case": "case-084",
+    "fixture": "cl2-fail-maker-family-outweighs-a-person",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL1",
+     "routing": "none",
+     "failing": [
+      "CL2-3"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0610535,
+      "reply": "RULING: A\n\"(b) If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\"\nBoth model evaluators share the maker's `gpt` family, so CL2-3(b) fails despite their different endpoints. CL2-3(c) also fails on each dimension because twice the two same-family evaluators exceeds the three total evaluators. The CL1 requirements remain satisfied, yielding verdict FAILED, level achieved CL1, and"
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.072212,
+      "reply": "RULING: A\n\"If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\"\nEvery model evaluator is family `gpt`, the same family as the maker, so CL2-3(b) fails even though their endpoints differ. CL2-3(c) fails as well: for each dimension, twice the two same-family evaluators is 4, which is more than the three evaluators who checked it. All in-scope CL1 requirements hold and nothing is u"
+     }
+    ]
+   },
+   {
+    "case": "case-085",
+    "fixture": "cl1-pass-refiled-with-provenance",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-086",
+    "fixture": "cl1-pass-buyer-is-maker-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-087",
+    "fixture": "cl1-pass-script-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-088",
+    "fixture": "baseline-fail-no-reads-listed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-089",
+    "fixture": "cl1-pass-extension-fields",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-090",
+    "fixture": "cl1-fail-control-names-unlisted-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-091",
+    "fixture": "cl1-fail-no-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-092",
+    "fixture": "cl1-fail-same-model-declared-untruly",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-093",
+    "fixture": "cl2-unchecked-independence-read-by-maker",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "CL1",
+     "routing": "none",
+     "failing": [
+      "CL2-3"
+     ]
+    },
+    "checker": {
+     "verdict": "NOT-CHECKABLE",
+     "level": "none",
+     "routing": "none",
+     "failing": []
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0603635,
+      "reply": "RULING: A\n\u201cFor every model evaluator, `external` holds evidence of its configuration \u2014 for example a harness log showing which model and endpoint answered \u2014 read by a named party who is not the maker.\u201d\nE1\u2019s evidence was read only by the maker, so CL1-15 is NOT-CHECKABLE, preventing any conformance level. CL2-3 passes because both evaluators differ from the maker in family and endpoint, and neither shares its family. No requirement fails, and no check is unobserved, so routing is none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.085892,
+      "reply": "RULING: A\n\"An external requirement reads `OK` only when its evidence file is supplied, its digest matches, and `readBy` names a party who is not the maker (and, for CL3-3, the verifier has verified the bundle itself); a mismatched digest reads `FAILED`; evidence read only by the maker is self-report and reads `NOT-CHECKABLE`; a named file that was not supplied reads `NOT-CHECKABLE`.\"\nE1\u2019s CL1-15 harness is `readBy` \u201cDrafting Agent,\u201d the maker, so CL1-15 is NOT-CHECKABLE, not FAILED. CL2-3 holds: both model evaluators differ from the maker in family and endpoint, and none share the maker\u2019s fami"
+     }
+    ]
+   },
+   {
+    "case": "case-094",
+    "fixture": "cl1-fail-missing-violations-field",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL1",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-11"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.053651,
+      "reply": "RULING: A\n\"`violations` and `separationGaps` are present even when empty.\"\nThe record omits `violations`, so CL1-11 fails even though no check returns `does_not_conform`. CR-2 explicitly delegates checking that field to CL1-11; the verdict is FAILED, the level achieved is none, and routing is none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.05541,
+      "reply": "RULING: A\n\"`violations` and `separationGaps` are present even when empty.\"\nThe record claims CL1 and omits `violations` entirely; section 4 marks that list required, and absence never means a default empty list. CR-2 does not own that field, so the missing list fails CL1-11 alone, which makes the verdict FAILED and the level achieved `none`. Disposition is `given` with no `unobserved` check, so routing stays `none`."
+     }
+    ]
+   },
+   {
+    "case": "case-095",
+    "fixture": "cl1-fail-buyer-is-maker-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-096",
+    "fixture": "cl3-unchecked-signature-read-by-maker",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "CL2",
+     "routing": "none",
+     "failing": [
+      "CL3-2"
+     ]
+    },
+    "checker": {
+     "verdict": "NOT-CHECKABLE",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0599485,
+      "reply": "RULING: A\n\u201cevidence read only by the maker is self-report and reads `NOT-CHECKABLE`\u201d\nThe CL3-3 evidence names the maker, Drafting Agent, as its sole reader, so it is NOT-CHECKABLE. CL3-2 does not fail: `bar.publishedAt` supplies a valid HTTPS URI. The lower-level requirements pass, yielding CL2 with routing `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.09833,
+      "reply": "RULING: A\n\"An external requirement reads `OK` only when its evidence file is supplied, its digest matches, and `readBy` names a party who is not the maker (and, for CL3-3, the verifier has verified the bundle itself); a mismatched digest reads `FAILED`; evidence read only by the maker is self-report and reads `NOT-CHECKABLE`; a named file that was not supplied reads `NOT-CHECKABLE`.\"\nCL3-3\u2019s bundle is `readBy` \u201cDrafting Agent\u201d, the maker, so it is self-report and `NOT-CHECKABLE`, not `FAILED`; a verifier that does not check the Sigstore bundle is likewise `NOT-CHECKABLE`. `bar.publishedAt` is "
+     }
+    ]
+   },
+   {
+    "case": "case-097",
+    "fixture": "cl2-fail-evaluator-not-read-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-098",
+    "fixture": "cl1-fail-script-written-by-maker",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-11",
+      "CL1-6"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-6"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.055391,
+      "reply": "RULING: A\n\u201cIf the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker.\u201d\nThe maker authored S1\u2019s script, which fails CL1-6, but neither authored the bar nor approved it as buyer or specialist. CL1-11 therefore does not require a separation-gap entry, and no `does_not_conform` check requires a violation entry."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.06849,
+      "reply": "RULING: A\n\"If the maker wrote the bar (`bar.author`), or approved it as buyer or specialist, an entry in `separationGaps` names the maker.\"\nS1's script author is the maker, so CL1-6 fails and the verdict is FAILED with level none and routing none. CL1-11 does not fail: the bar author is Morgan Lee, the approvals are Avery Chen and Priya Nair, and no check is `does_not_conform`. Script authorship is not a separation-gap condition."
+     }
+    ]
+   },
+   {
+    "case": "case-099",
+    "fixture": "cl1-fail-evaluator-on-no-check-or-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-100",
+    "fixture": "baseline-pass",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-101",
+    "fixture": "cl2-fail-model-maker-without-model-block",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "OK",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL1",
+     "routing": "none",
+     "failing": [
+      "CL2-3"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.059491,
+      "reply": "RULING: A\n\u201cIf the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\u201d\nThe maker is a model, but `maker.model` is `null`, not a model block satisfying CL2-3(b). Section 4\u2019s general allowance for null does not override this level-specific requirement. CL2-3 therefore fails, leaving CL1 achieved and routing `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.063064,
+      "reply": "RULING: A\n\"If the maker's `kind` is `model`, `maker.model` is present; and if the record has model evaluators, at least one of them has a `family` different from the maker's, and none of its endpoints (its model's `endpoint`, and any `endpoint` its checks name) equals the maker's.\"\nThe maker's kind is `model` while `maker.model` is null, so CL2-3(b) fails and family/endpoint independence cannot be shown. Null is a valid section 4 form, so this is not a CR-2 defect and only CL2-3 reads FAILED. Every CL1 requirement is OK, so the verdict is FAILED and the level achieved is CL1, with routing none"
+     }
+    ]
+   },
+   {
+    "case": "case-102",
+    "fixture": "cl1-fail-anchors-empty",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-103",
+    "fixture": "cl2-pass-maker-is-person",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-104",
+    "fixture": "cl1-fail-run-zero",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-105",
+    "fixture": "cl3-fail-bar-not-published",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "NOT-CHECKABLE",
+     "level": "CL2",
+     "routing": "none",
+     "failing": []
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "CL2",
+     "routing": "none",
+     "failing": [
+      "CL3-2"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.059516,
+      "reply": "RULING: A\n\u201cThe bar is published: `bar.publishedAt` is a URI where the people who rely on the record can read it.\u201d\n`bar.publishedAt` is `null`, so CL3-2 fails rather than being not-checkable. That failure makes the verdict FAILED, while CL2 remains achieved and routing is none."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.079436,
+      "reply": "RULING: A\n\"The bar is published: `bar.publishedAt` is a URI where the people who rely on the record can read it.\"\n`bar.publishedAt` is null, so structural CL3-2 is broken and reads FAILED. Section 6 then sets the verdict to FAILED if any requirement failed, even though CL3-3 stays NOT-CHECKABLE because the bundle itself is not verified. CL1 and CL2 still hold, the claim is CL3, no check is unobserved, and the disposition is `given`, so the level achieved is CL2 and routing is none."
+     }
+    ]
+   },
+   {
+    "case": "case-106",
+    "fixture": "cl1-fail-check-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-107",
+    "fixture": "cl1-fail-family-with-version",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-108",
+    "fixture": "cl1-fail-scored-without-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-109",
+    "fixture": "cl2-fail-maker-family-two-of-three",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-110",
+    "fixture": "cl1-fail-reader-without-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-111",
+    "fixture": "cl1-fail-score-above-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   }
+  ],
+  "qwen3.8": [
+   {
+    "case": "case-001",
+    "fixture": "cl2-fail-check-answered-by-makers-endpoint",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-002",
+    "fixture": "cl1-fail-approval-bound-to-other-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-003",
+    "fixture": "cl1-fail-maker-wrote-bar-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-004",
+    "fixture": "cl1-fail-evidence-name-not-relative",
+    "result": "held out",
+    "why": "split or ambiguous: ['Y', 'X']",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-8"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CR-2"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "B",
+      "choice": "Y",
+      "cost": 0.0559835,
+      "reply": "RULING: B\n\u201cA `conforms` or `does_not_conform` outcome cites an evidence file, and the file supplied to the verifier matches its digest: a mismatch reads `FAILED`, and a file not supplied reads `NOT-CHECKABLE`.\u201d\n`../files/report.md` is a relative path; SPEC.md does not prohibit `..` segments, despite the schema and checker doing so. It resolves to the supplied report, whose digest differs from the check\u2019s cited digest, so CL1-8 fails rather than CR-2."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.140924,
+      "reply": "RULING: A\n\"When a field is missing or malformed, the requirement that checks that field reads `FAILED`: CR-2, or the requirement this section names as checking the field itself.\"\nThe D1 evidence name `../files/report.md` is not an evidence file under section 4: that form is a relative path naming a file in the evidence, and a `..` segment leaves that directory. CR-2 checks that form; evidence is not a field CR-2 delegates elsewhere. CL1-8 cannot be decided without a well-formed name, so it reads NOT-CHECKABLE and is not a FAILED id."
+     }
+    ]
+   },
+   {
+    "case": "case-005",
+    "fixture": "cl1-pass-control-missed-checks-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-006",
+    "fixture": "cl1-fail-bar-frozen-at-start",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-007",
+    "fixture": "cl3-unchecked-signature-not-verified",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-008",
+    "fixture": "cl2-fail-buyer-is-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-009",
+    "fixture": "cl1-fail-retention-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-010",
+    "fixture": "cl1-fail-bar-frozen-late",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-011",
+    "fixture": "cl1-fail-maker-kind-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-012",
+    "fixture": "cl2-unchecked-independence-asserted-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-013",
+    "fixture": "cl1-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-014",
+    "fixture": "cl2-fail-one-run-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-015",
+    "fixture": "cl1-fail-started-at-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-016",
+    "fixture": "cl1-fail-family-not-lowercase",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-017",
+    "fixture": "cl2-fail-one-reader-without-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-018",
+    "fixture": "cl3-unchecked-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-019",
+    "fixture": "cl2-fail-maker-family-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-020",
+    "fixture": "cl1-unchecked-model-evaluator-settings-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-021",
+    "fixture": "cl1-fail-evidence-not-an-evidence-file",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-022",
+    "fixture": "cl1-pass-second-reader-with-both-controls",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-023",
+    "fixture": "cl1-fail-no-check-for-dimension",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-024",
+    "fixture": "cl1-pass-control-missed-its-dimension-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-025",
+    "fixture": "cl1-fail-reader-with-planted-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-026",
+    "fixture": "cl1-fail-no-control-in-batch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-027",
+    "fixture": "cl2-fail-every-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-028",
+    "fixture": "baseline-pass-model-evaluator-without-external",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-029",
+    "fixture": "cl1-pass-scored-below-threshold",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-030",
+    "fixture": "baseline-fail-bar-frozen-at-same-instant",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-031",
+    "fixture": "cl1-fail-conforms-without-evidence",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-032",
+    "fixture": "cl1-fail-disagreement-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-033",
+    "fixture": "cl2-pass-check-endpoint-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-034",
+    "fixture": "cl1-fail-same-model-session-undeclared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-035",
+    "fixture": "cl1-unchecked-evidence-file-not-supplied",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-036",
+    "fixture": "cl1-fail-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-037",
+    "fixture": "cl2-pass-runs-disagree-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-038",
+    "fixture": "cl1-pass-unscored-checks-not-judged-by-cl1-17",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-039",
+    "fixture": "cl1-fail-evaluator-is-bar-author",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-040",
+    "fixture": "cl1-fail-maker-method-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-041",
+    "fixture": "cl1-fail-violation-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-042",
+    "fixture": "cl1-pass-not-yet-given-with-violation",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-043",
+    "fixture": "cl1-fail-started-after-produced",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-044",
+    "fixture": "cl2-pass-undisclosed-family-beside-others",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-045",
+    "fixture": "cl1-fail-tampered-artifact",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-046",
+    "fixture": "cl1-pass-scored",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-047",
+    "fixture": "cl1-fail-score-contradicts-outcome",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-048",
+    "fixture": "cl1-fail-not-a-custody-statement",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-049",
+    "fixture": "cl1-pass-unobserved-reader-needs-no-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-050",
+    "fixture": "cl1-fail-evidence-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-051",
+    "fixture": "cl2-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-052",
+    "fixture": "cl1-pass-maker-wrote-bar-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-053",
+    "fixture": "cl1-pass-unobserved-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-054",
+    "fixture": "cl1-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-055",
+    "fixture": "cl1-fail-unobserved-not-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-056",
+    "fixture": "cl3-fail-no-signature-entry",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-057",
+    "fixture": "cl2-fail-evidence-digest-mismatch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-058",
+    "fixture": "cl1-fail-score-meets-threshold-reads-does-not-conform",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-059",
+    "fixture": "cl3-fail-demonstration-after-check",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-060",
+    "fixture": "cl1-pass-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-061",
+    "fixture": "cl1-fail-script-evaluator-unpinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-062",
+    "fixture": "cl2-fail-undisclosed-family-counts-as-makers",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-063",
+    "fixture": "cl2-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-064",
+    "fixture": "cl1-fail-model-evaluator-without-model-block",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-065",
+    "fixture": "cl1-fail-reader-with-clean-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-066",
+    "fixture": "cl1-fail-control-missed-checks-still-observed",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "to approver",
+     "failing": [
+      "CL1-13"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-9"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0539285,
+      "reply": "RULING: A\n\u201cA verifier MUST NOT report a level the record does not claim, and MUST NOT turn an `unobserved` outcome into any other outcome.\u201d\nCL1-9 requires the affected checks to read `unobserved` after a missed control; their filed `conforms` outcomes therefore violate CL1-9 rather than being automatically rewritten. Since neither filed check is `unobserved` and the disposition is `given`, CL1-13 does not fail and routing is `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.061988,
+      "reply": "RULING: A\n\"A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\"\nK1\u2019s outcome is `conforms` while its expected outcome is `does_not_conform`, and E1\u2019s B1 checks still read `conforms`, so CL1-9 fails and the verdict is FAILED with level `none`. Those checks are not `unobserved`, so CL1-13 does not apply and section 6 routing is `none`, not `to approver`."
+     }
+    ]
+   },
+   {
+    "case": "case-067",
+    "fixture": "cl1-fail-dimension-scale-missing-floor",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-068",
+    "fixture": "cl1-fail-bar-frozen-after-start",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-069",
+    "fixture": "cl3-unchecked-unobserved-not-yet-given",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-070",
+    "fixture": "cl1-fail-instrument-not-pinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-071",
+    "fixture": "cl2-fail-maker-wrote-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-072",
+    "fixture": "cl2-pass-maker-family-two-of-four",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-073",
+    "fixture": "cl1-fail-control-missed-its-dimension-observed",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "to approver",
+     "failing": [
+      "CL1-13"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-9"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.055661,
+      "reply": "RULING: A\n\u201cA control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\u201d\nK1\u2019s mismatch requires E1\u2019s D1 check to be recorded as `unobserved`; its recorded `conforms` outcome therefore fails CL1-9. The verifier reports that violation rather than rewriting the filed outcome. Neither check is recorded as `unobserved`, so CL1-13 does not fail and routing is `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.066824,
+      "reply": "RULING: A\n\"A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\"\nK1 expects `does_not_conform` but records `unobserved` and names D1, while E1\u2019s B1 check of D1 still reads `conforms`, so CL1-9 fails. CL1-13 and routing look only at check outcomes, and both checks are `conforms` with disposition `given`, so CL1-13 is OK and routing is `none`."
+     }
+    ]
+   },
+   {
+    "case": "case-074",
+    "fixture": "cl1-fail-bar-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-075",
+    "fixture": "cl2-pass-one-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-076",
+    "fixture": "baseline-pass-bar-frozen-mid-work",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-077",
+    "fixture": "cl1-fail-readings-filed-under-runner",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-078",
+    "fixture": "cl1-pass-legacy-no-script-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-079",
+    "fixture": "cl1-pass-no-reads-before-freeze-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-080",
+    "fixture": "cl1-fail-same-model-declared-false",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-081",
+    "fixture": "cl1-fail-missing-disagreements-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-082",
+    "fixture": "cl2-pass-legacy-evidence-tag",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-083",
+    "fixture": "cl1-fail-threshold-above-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-084",
+    "fixture": "cl2-fail-maker-family-outweighs-a-person",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-085",
+    "fixture": "cl1-pass-refiled-with-provenance",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-086",
+    "fixture": "cl1-pass-buyer-is-maker-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-087",
+    "fixture": "cl1-pass-script-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-088",
+    "fixture": "baseline-fail-no-reads-listed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-089",
+    "fixture": "cl1-pass-extension-fields",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-090",
+    "fixture": "cl1-fail-control-names-unlisted-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-091",
+    "fixture": "cl1-fail-no-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-092",
+    "fixture": "cl1-fail-same-model-declared-untruly",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-093",
+    "fixture": "cl2-unchecked-independence-read-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-094",
+    "fixture": "cl1-fail-missing-violations-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-095",
+    "fixture": "cl1-fail-buyer-is-maker-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-096",
+    "fixture": "cl3-unchecked-signature-read-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-097",
+    "fixture": "cl2-fail-evaluator-not-read-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-098",
+    "fixture": "cl1-fail-script-written-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-099",
+    "fixture": "cl1-fail-evaluator-on-no-check-or-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-100",
+    "fixture": "baseline-pass",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-101",
+    "fixture": "cl2-fail-model-maker-without-model-block",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-102",
+    "fixture": "cl1-fail-anchors-empty",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-103",
+    "fixture": "cl2-pass-maker-is-person",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-104",
+    "fixture": "cl1-fail-run-zero",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-105",
+    "fixture": "cl3-fail-bar-not-published",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-106",
+    "fixture": "cl1-fail-check-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-107",
+    "fixture": "cl1-fail-family-with-version",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-108",
+    "fixture": "cl1-fail-scored-without-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-109",
+    "fixture": "cl2-fail-maker-family-two-of-three",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-110",
+    "fixture": "cl1-fail-reader-without-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-111",
+    "fixture": "cl1-fail-score-above-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   }
+  ],
+  "glm-5.3": [
+   {
+    "case": "case-001",
+    "fixture": "cl2-fail-check-answered-by-makers-endpoint",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-002",
+    "fixture": "cl1-fail-approval-bound-to-other-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-003",
+    "fixture": "cl1-fail-maker-wrote-bar-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-004",
+    "fixture": "cl1-fail-evidence-name-not-relative",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-005",
+    "fixture": "cl1-pass-control-missed-checks-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-006",
+    "fixture": "cl1-fail-bar-frozen-at-start",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-007",
+    "fixture": "cl3-unchecked-signature-not-verified",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-008",
+    "fixture": "cl2-fail-buyer-is-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-009",
+    "fixture": "cl1-fail-retention-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-010",
+    "fixture": "cl1-fail-bar-frozen-late",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-011",
+    "fixture": "cl1-fail-maker-kind-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-012",
+    "fixture": "cl2-unchecked-independence-asserted-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-013",
+    "fixture": "cl1-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-014",
+    "fixture": "cl2-fail-one-run-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-015",
+    "fixture": "cl1-fail-started-at-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-016",
+    "fixture": "cl1-fail-family-not-lowercase",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-017",
+    "fixture": "cl2-fail-one-reader-without-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-018",
+    "fixture": "cl3-unchecked-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-019",
+    "fixture": "cl2-fail-maker-family-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-020",
+    "fixture": "cl1-unchecked-model-evaluator-settings-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-021",
+    "fixture": "cl1-fail-evidence-not-an-evidence-file",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-022",
+    "fixture": "cl1-pass-second-reader-with-both-controls",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-023",
+    "fixture": "cl1-fail-no-check-for-dimension",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-024",
+    "fixture": "cl1-pass-control-missed-its-dimension-unobserved",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-025",
+    "fixture": "cl1-fail-reader-with-planted-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-026",
+    "fixture": "cl1-fail-no-control-in-batch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-027",
+    "fixture": "cl2-fail-every-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-028",
+    "fixture": "baseline-pass-model-evaluator-without-external",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-029",
+    "fixture": "cl1-pass-scored-below-threshold",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-030",
+    "fixture": "baseline-fail-bar-frozen-at-same-instant",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-031",
+    "fixture": "cl1-fail-conforms-without-evidence",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-032",
+    "fixture": "cl1-fail-disagreement-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-033",
+    "fixture": "cl2-pass-check-endpoint-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-034",
+    "fixture": "cl1-fail-same-model-session-undeclared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-035",
+    "fixture": "cl1-unchecked-evidence-file-not-supplied",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-036",
+    "fixture": "cl1-fail-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-037",
+    "fixture": "cl2-pass-runs-disagree-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-038",
+    "fixture": "cl1-pass-unscored-checks-not-judged-by-cl1-17",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-039",
+    "fixture": "cl1-fail-evaluator-is-bar-author",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-040",
+    "fixture": "cl1-fail-maker-method-missing",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-041",
+    "fixture": "cl1-fail-violation-not-recorded",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-042",
+    "fixture": "cl1-pass-not-yet-given-with-violation",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-043",
+    "fixture": "cl1-fail-started-after-produced",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-044",
+    "fixture": "cl2-pass-undisclosed-family-beside-others",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-045",
+    "fixture": "cl1-fail-tampered-artifact",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-046",
+    "fixture": "cl1-pass-scored",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-047",
+    "fixture": "cl1-fail-score-contradicts-outcome",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-048",
+    "fixture": "cl1-fail-not-a-custody-statement",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-049",
+    "fixture": "cl1-pass-unobserved-reader-needs-no-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-050",
+    "fixture": "cl1-fail-evidence-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-051",
+    "fixture": "cl2-pass-basic",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-052",
+    "fixture": "cl1-pass-maker-wrote-bar-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-053",
+    "fixture": "cl1-pass-unobserved-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-054",
+    "fixture": "cl1-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-055",
+    "fixture": "cl1-fail-unobserved-not-acknowledged",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-056",
+    "fixture": "cl3-fail-no-signature-entry",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-057",
+    "fixture": "cl2-fail-evidence-digest-mismatch",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-058",
+    "fixture": "cl1-fail-score-meets-threshold-reads-does-not-conform",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-059",
+    "fixture": "cl3-fail-demonstration-after-check",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-060",
+    "fixture": "cl1-pass-adopted-specialist",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-061",
+    "fixture": "cl1-fail-script-evaluator-unpinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-062",
+    "fixture": "cl2-fail-undisclosed-family-counts-as-makers",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-063",
+    "fixture": "cl2-pass-same-model-session-declared",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-064",
+    "fixture": "cl1-fail-model-evaluator-without-model-block",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-065",
+    "fixture": "cl1-fail-reader-with-clean-control-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-066",
+    "fixture": "cl1-fail-control-missed-checks-still-observed",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "to approver",
+     "failing": [
+      "CL1-13"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-9"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0042597,
+      "reply": "RULING: A\n\u201cA control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\u201d\nK1 failed, but E1\u2019s checks in B1 remain filed as `conforms`, violating CL1-9; this requirement does not authorize the verifier to rewrite them. Because neither filed check is `unobserved`, CL1-13 does not fail and routing is `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.041708,
+      "reply": "RULING: A\n\"A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\"\nK1\u2019s actual outcome differs from its expected outcome and it names no dimension, so E1\u2019s still-`conforms` checks in batch B1 break CL1-9. CL1-13 looks only at checks whose outcome is `unobserved`, and none are, so a `given` disposition does not fail it. Section 6 routes `to approver` only for `not_yet_given` or an unacknowledged `unobserved"
+     }
+    ]
+   },
+   {
+    "case": "case-067",
+    "fixture": "cl1-fail-dimension-scale-missing-floor",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-068",
+    "fixture": "cl1-fail-bar-frozen-after-start",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-069",
+    "fixture": "cl3-unchecked-unobserved-not-yet-given",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-070",
+    "fixture": "cl1-fail-instrument-not-pinned",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-071",
+    "fixture": "cl2-fail-maker-wrote-bar",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-072",
+    "fixture": "cl2-pass-maker-family-two-of-four",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-073",
+    "fixture": "cl1-fail-control-missed-its-dimension-observed",
+    "result": "wrong",
+    "why": "both adjudicators chose the checker",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "to approver",
+     "failing": [
+      "CL1-13"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-9"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.0057106,
+      "reply": "RULING: A\n\u201cA control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\u201d\nK1\u2019s `unobserved` outcome differs from its expected `does_not_conform`, but E1\u2019s D1 check remains `conforms`, violating CL1-9. This is a failure of the recorded checks to meet that requirement, not an instruction to rewrite their outcomes. Neither check is recorded as `unobserved`, so CL1-13 does not fail and routing is `none`."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "A",
+      "choice": "X",
+      "cost": 0.079556,
+      "reply": "RULING: A\n\"A control whose actual outcome differs from its expected outcome shows its reader could not be relied on: every check by that evaluator in that batch reads `unobserved`, or, if the control names a `dimension`, every such check of that dimension.\"\nK1\u2019s outcome is `unobserved` while its expected outcome is `does_not_conform`, and it names D1, yet E1\u2019s D1 check still reads `conforms`, so CL1-9 fails. CL1-13 applies only if a check is `unobserved`; neither check is, so a `given` disposition need not acknowledge anything. Section 6 therefore routes `none`, not `to approver`, and the veri"
+     }
+    ]
+   },
+   {
+    "case": "case-074",
+    "fixture": "cl1-fail-bar-file-differs",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-075",
+    "fixture": "cl2-pass-one-evaluator-shares-maker-family",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-076",
+    "fixture": "baseline-pass-bar-frozen-mid-work",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-077",
+    "fixture": "cl1-fail-readings-filed-under-runner",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-078",
+    "fixture": "cl1-pass-legacy-no-script-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-079",
+    "fixture": "cl1-pass-no-reads-before-freeze-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-080",
+    "fixture": "cl1-fail-same-model-declared-false",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-081",
+    "fixture": "cl1-fail-missing-disagreements-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-082",
+    "fixture": "cl2-pass-legacy-evidence-tag",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-083",
+    "fixture": "cl1-fail-threshold-above-scale",
+    "result": "correct",
+    "why": "both adjudicators chose the key",
+    "key": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-17",
+      "CL1-2"
+     ]
+    },
+    "checker": {
+     "verdict": "FAILED",
+     "level": "none",
+     "routing": "none",
+     "failing": [
+      "CL1-2"
+     ]
+    },
+    "votes": [
+     {
+      "slug": "gpt-6.1-sol",
+      "ruling": "B",
+      "choice": "Y",
+      "cost": 0.0045455,
+      "reply": "RULING: B\n\u201cA scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor.\u201d\nCL1-2 fails because threshold 7 exceeds the highest anchor, 5. CL1-17 is independently decidable: score 4 is below the declared threshold 7, yet the check says `conforms`. The one-defect rule does not excuse another requirement that can still be decided from the supplied fields."
+     },
+     {
+      "slug": "grok-4.7",
+      "ruling": "B",
+      "choice": "Y",
+      "cost": 0.085572,
+      "reply": "RULING: B\n\"A scored check `conforms` exactly when its score is at least its dimension's `threshold`, and reads `does_not_conform` otherwise; its score is no lower than the `floor` and no higher than the highest anchor.\"\nD1\u2019s check scores 4 against threshold 7 yet reads `conforms`, so CL1-17 fails on its own terms; the only exemption is a null score, which this check does not have. The threshold sitting above the highest anchor is a separate CL1-2 defect, and CL1-17 can still be decided from the numbers that are present, so the one-defect rule does not turn it into NOT-CHECKABLE or OK."
+     }
+    ]
+   },
+   {
+    "case": "case-084",
+    "fixture": "cl2-fail-maker-family-outweighs-a-person",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-085",
+    "fixture": "cl1-pass-refiled-with-provenance",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-086",
+    "fixture": "cl1-pass-buyer-is-maker-disclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-087",
+    "fixture": "cl1-pass-script-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-088",
+    "fixture": "baseline-fail-no-reads-listed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-089",
+    "fixture": "cl1-pass-extension-fields",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-090",
+    "fixture": "cl1-fail-control-names-unlisted-evaluator",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-091",
+    "fixture": "cl1-fail-no-clean-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-092",
+    "fixture": "cl1-fail-same-model-declared-untruly",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-093",
+    "fixture": "cl2-unchecked-independence-read-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-094",
+    "fixture": "cl1-fail-missing-violations-field",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-095",
+    "fixture": "cl1-fail-buyer-is-maker-undisclosed",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-096",
+    "fixture": "cl3-unchecked-signature-read-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-097",
+    "fixture": "cl2-fail-evaluator-not-read-only",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-098",
+    "fixture": "cl1-fail-script-written-by-maker",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-099",
+    "fixture": "cl1-fail-evaluator-on-no-check-or-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-100",
+    "fixture": "baseline-pass",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-101",
+    "fixture": "cl2-fail-model-maker-without-model-block",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-102",
+    "fixture": "cl1-fail-anchors-empty",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-103",
+    "fixture": "cl2-pass-maker-is-person",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-104",
+    "fixture": "cl1-fail-run-zero",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-105",
+    "fixture": "cl3-fail-bar-not-published",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-106",
+    "fixture": "cl1-fail-check-endpoint-not-a-host",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-107",
+    "fixture": "cl1-fail-family-with-version",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-108",
+    "fixture": "cl1-fail-scored-without-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-109",
+    "fixture": "cl2-fail-maker-family-two-of-three",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-110",
+    "fixture": "cl1-fail-reader-without-control",
+    "result": "correct",
+    "why": "matches the checker"
+   },
+   {
+    "case": "case-111",
+    "fixture": "cl1-fail-score-above-scale",
+    "result": "correct",
+    "why": "matches the checker"
+   }
+  ]
+ },
+ "findings": [
+  {
+   "fixture": "cl1-fail-threshold-above-scale",
+   "author": "kimi-k2.5",
+   "note": "checker finding for the v0.9.6 bar"
+  },
+  {
+   "fixture": "cl1-fail-threshold-above-scale",
+   "author": "glm-5.3",
+   "note": "checker finding for the v0.9.6 bar"
+  }
+ ],
+ "held": [
+  {
+   "fixture": "cl1-fail-evidence-name-not-relative",
+   "author": "qwen3.8"
+  }
+ ],
+ "seat": "glm-5.3",
+ "seats_used": [
+  "gpt-6.1-sol",
+  "grok-4.7"
+ ],
+ "adjudication_cost": 2.7386662999999998
+}

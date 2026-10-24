@@ -151,8 +151,8 @@ def maker_gpt(p):  # the maker is gpt-6.0, answered by a host no evaluator uses
     p["maker"]["model"] = model("gpt", "gpt-6.0", "api.other.example", False)
 
 
-def panel(p, fams):  # CL2 evaluators by model family ("person" for a person); maker is gpt-6.0
-    maker_gpt(p)
+def panel(p, fams, maker_fam="gpt"):  # CL2 evaluators by model family ("person" for a person)
+    p["maker"]["model"] = model(maker_fam, f"{maker_fam}-6.0", "api.other.example", False)
     ids = [f"E{i}" for i in range(1, len(fams) + 1)]
     p["evaluators"] = [{"id": e, "name": f"Reader {e}", "kind": "person" if f == "person" else "model",
                         "script": None, "model": None if f == "person" else model(
@@ -464,8 +464,20 @@ CASES = {
     # v0.9.5, I2-I4: the wording, made into cases
     "cl1-pass-unscored-checks-not-judged-by-cl1-17": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
     "cl1-pass-no-reads-before-freeze-field": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
-    "cl2-fail-maker-family-undisclosed": ("CL2", lambda r, p: p["maker"]["model"].update(
-        family="undisclosed"), "FAILED", "CL1", "none", "CL2-3"),
+    "cl2-fail-maker-family-undisclosed": ("CL2", lambda r, p: (p["maker"]["model"].update(
+        family="undisclosed"), p["evaluators"][1]["model"].update(family="gpt")),
+        "FAILED", "CL1", "none", "CL2-3"),
+    "cl2-pass-undisclosed-maker-anthropic-openai": ("CL2", lambda r, p: panel(
+        p, ["claude", "gpt"], "undisclosed"), "OK", "CL2", "none", None),
+    "cl2-pass-anthropic-maker-undisclosed-openai-deepseek": ("CL2", lambda r, p: (
+        p["maker"]["model"].update(family="undisclosed"),
+        p["evaluators"][1]["model"].update(family="deepseek", identifier="deepseek-r2",
+                                           endpoint="api.deepseek.example")),
+        "OK", "CL2", "none", None),
+    "cl2-pass-anthropic-maker-openai-deepseek-at-boundary": ("CL2", lambda r, p: panel(
+        p, ["gpt", "deepseek", "claude", "undisclosed"], "claude"), "OK", "CL2", "none", None),
+    "cl2-fail-undisclosed-maker-largest-family-plus-undisclosed": ("CL2", lambda r, p: panel(
+        p, ["claude", "gpt", "undisclosed"], "undisclosed"), "FAILED", "CL1", "none", "CL2-3"),
     "cl1-fail-evidence-not-an-evidence-file": ("CL1", lambda r, p: p["checks"][0]["evidence"].pop("name"),
                                                "FAILED", "none", "none", "CR-2"),
     # R9: schema and checker agree
