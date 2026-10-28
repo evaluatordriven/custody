@@ -689,6 +689,24 @@
       "levelAchieved": "CL1",
       "routing": "none",
       "fails": null
+    },
+    "cl1-fail-control-case-all-zeros": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CL1-9"
+    },
+    "cl1-fail-control-case-missing": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "none",
+      "fails": "CR-2"
+    },
+    "cl2-pass-different-evaluator-endpoint": {
+      "verdict": "OK",
+      "levelAchieved": "CL2",
+      "routing": "none",
+      "fails": null
     }
   },
   "boundaries": {

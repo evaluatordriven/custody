@@ -15,7 +15,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 PLANTS = [  # (file, text to append or (old, new) to change, words the report must contain)
     ("README.md", "\nImplementers MUST read this.\n", "keyword MUST outside"),
     ("CONTRIBUTING.md", "\n| **bar** | a second meaning |\n", "term 'bar' defined again"),
-    ("README.md", "\nSee v0.9.7.\n", "version 0.9.7"),
+    ("README.md", "\nSee v0.9.8.\n", "version 0.9.8"),
     ("SPEC.md", "\n## 9. Padding *(normative)*\n\n" + "word " * 2400, "normative words"),
     ("README.md", "\nThis repository claims CL3.\n", "claims CL3 but no record"),
     ("SPEC.md", "\nFive reference checkers exist, in this repository.\n", "reference checker(s) exist"),

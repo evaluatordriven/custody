@@ -1,0 +1,1717 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": ".github/workflows/ci.yml",
+      "digest": {
+        "sha256": "e98299df7d485e45080cbcf4089648980bcf02aaf1d252d75d948cd9edacf126"
+      }
+    },
+    {
+      "name": ".gitignore",
+      "digest": {
+        "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+      }
+    },
+    {
+      "name": "CHANGELOG.md",
+      "digest": {
+        "sha256": "195737970cd35f12c04fdbf5c1762b7e7f20d60ff2b1230c616e31cbb1b98477"
+      }
+    },
+    {
+      "name": "CONTRIBUTING.md",
+      "digest": {
+        "sha256": "e290dc936d442de51c4658523d5cc91a2cbaef4e44ebc14e0cf8ecdea6fc9544"
+      }
+    },
+    {
+      "name": "GOVERNANCE.md",
+      "digest": {
+        "sha256": "880c0b5d6c1d993110f399a358c62139d01fbfba583c019b4ab905a9fa9b457f"
+      }
+    },
+    {
+      "name": "LICENSE",
+      "digest": {
+        "sha256": "8b6bd9eb140a1c958fcd1d5cb0253ca86633e07dc318d8c52f708c4b5fd7d032"
+      }
+    },
+    {
+      "name": "LICENSE-CODE",
+      "digest": {
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    },
+    {
+      "name": "NOTICE",
+      "digest": {
+        "sha256": "8742ab1948bf66bce6640c275ed1f3d23d87efbc530913bd3bfe02fe3ec7b21c"
+      }
+    },
+    {
+      "name": "PATENTS.md",
+      "digest": {
+        "sha256": "9177910bbe6126b0fc78cc4c76e5dd4b5ea667cbe69b80096837fad4c5fce0fd"
+      }
+    },
+    {
+      "name": "README.md",
+      "digest": {
+        "sha256": "df93184e4e624f2ed6e5045fd2b132f98092835ea9cc3ec7b9a24cb69f8bcf40"
+      }
+    },
+    {
+      "name": "SECURITY.md",
+      "digest": {
+        "sha256": "c399df9b397a6632300ae8d71d907448af7b86f27df257ec23b62f64f1c1bce8"
+      }
+    },
+    {
+      "name": "SPEC.md",
+      "digest": {
+        "sha256": "46ecb239de5c52928c930dd78e1ea8189597951805e3ada74f25e83212bd2920"
+      }
+    },
+    {
+      "name": "checker/check.py",
+      "digest": {
+        "sha256": "b23c40c49006409dc20ee9cb74d61a2adc0b0b891e7f2bd44a606c765fb81afa"
+      }
+    },
+    {
+      "name": "docs/GLOSSARY.md",
+      "digest": {
+        "sha256": "00a0a82a22b332621b0c22955907ab3754150ee219b29c22b48078eb22afe15a"
+      }
+    },
+    {
+      "name": "docs/REVIEWERS-GUIDE.md",
+      "digest": {
+        "sha256": "c0cedb192718efe1e9f2e6d999271cd7bb77a224de78c99fe95f3c5ca5c586dc"
+      }
+    },
+    {
+      "name": "examples/minimal/bar.md",
+      "digest": {
+        "sha256": "61c50d19fda2f8bf2e20ca8524d5dfa8f215d4f27e5951715601f047820abfbe"
+      }
+    },
+    {
+      "name": "examples/minimal/control-case.md",
+      "digest": {
+        "sha256": "19899b12f2ef66a0b8a3dd383a2303f981281f77d4646ab134b551c7f48fa459"
+      }
+    },
+    {
+      "name": "examples/minimal/control-clean-case.md",
+      "digest": {
+        "sha256": "bb539f973b93178f73d41e0f996f50c1a7f8e08c490a4813f161925dc69fb9fd"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D1.md",
+      "digest": {
+        "sha256": "2ce170d58dacce55444929e57137063a6e1bc8fbd7b41069ead32263194c499f"
+      }
+    },
+    {
+      "name": "examples/minimal/evidence/reading-D2.md",
+      "digest": {
+        "sha256": "dec9158ec2a45295c39bea4064c87ab8c6100ad126c247fd4a93bdd7914f81a2"
+      }
+    },
+    {
+      "name": "examples/minimal/inputs.json",
+      "digest": {
+        "sha256": "1c77d2605f02ed6e697b936ae10d0b66c8202b0e62ff518fbb0cbb047dc766b0"
+      }
+    },
+    {
+      "name": "examples/minimal/memo.md",
+      "digest": {
+        "sha256": "6f98d74080d8d419a3f77771fb6cb468f5d94926d6bbef057b56e2b39f9af774"
+      }
+    },
+    {
+      "name": "examples/minimal/method.md",
+      "digest": {
+        "sha256": "dadfad99b1a7d632ea246b72ac445f867dcfb1265d182ae733b165316070b1a9"
+      }
+    },
+    {
+      "name": "examples/minimal/procedure.md",
+      "digest": {
+        "sha256": "38d6039853da0d1189a65a6840574143c913ce053a07e29ddf453186a7bc8efc"
+      }
+    },
+    {
+      "name": "examples/minimal/record.json",
+      "digest": {
+        "sha256": "78a44ff2b67348b1080f4a1dc2785edbf0b0976570b3cab75c9a44de381d6fde"
+      }
+    },
+    {
+      "name": "examples/minimal/rubric.md",
+      "digest": {
+        "sha256": "70215f416d493c067b5958212f8c6252499b548469b86ce1c063654c14b805df"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-bar-frozen-at-same-instant.json",
+      "digest": {
+        "sha256": "c988acd1e0f0161388b61f246a7293487cdbd528bc248f6eea0b67763fe3f5c9"
+      }
+    },
+    {
+      "name": "fixtures/baseline-fail-no-reads-listed.json",
+      "digest": {
+        "sha256": "90fe9d06b089a64b1569dbff371b9ee4ff19c2060ae6c040a23b2aa9ca38dfbe"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass-bar-frozen-mid-work.json",
+      "digest": {
+        "sha256": "07b09e630941312934f7f257f92429d3479f6023314be78989fc28d72094491e"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass-model-evaluator-without-external.json",
+      "digest": {
+        "sha256": "e9c1db925ad5547ddfd2f9c55a87b416453340852d7d0796c571f371d4cd810b"
+      }
+    },
+    {
+      "name": "fixtures/baseline-pass.json",
+      "digest": {
+        "sha256": "f59a85dab9e3c3c1696e2a961ac1341d1fb0a2e1d7b47eb04e2fc13ed7790aeb"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-anchors-empty.json",
+      "digest": {
+        "sha256": "cf02c90a88d730fc16ee87cca362bc3a4d228db2197cb929cd1d0f6c23a14608"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-approval-bound-to-other-bar.json",
+      "digest": {
+        "sha256": "37879e5dd5ea28bb21bf4f1f0a20db262110c9f4e913b191cae2a16cbbc418ea"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-file-differs.json",
+      "digest": {
+        "sha256": "d03c3f939ba803db5f32b2c83bbaf924836648cf232ddc01b8a2c584aac666fa"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-after-start.json",
+      "digest": {
+        "sha256": "ba521692bca3eac9a273abb59492024f5b986de9309f817eb3f04965801c7c15"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-at-start.json",
+      "digest": {
+        "sha256": "28df8ef94285964c4ba369f9d34d1b37660de7fc68bc4c2ecb456a61f255b06b"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-bar-frozen-late.json",
+      "digest": {
+        "sha256": "91e7781c9d3297ddca9cb974584da13b959373f7ef483dd8dab7ac5ed545d8ef"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-buyer-is-maker-undisclosed.json",
+      "digest": {
+        "sha256": "27b91f9cf18517c8b64fab83e2c8cee2303c96c32af3005ec740018d97fe64c3"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-check-endpoint-not-a-host.json",
+      "digest": {
+        "sha256": "2a1da25a1455cb8337abf3a337d148107e701c5a2f8d7fe7c3147f6ae070c731"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-conforms-without-evidence.json",
+      "digest": {
+        "sha256": "efaf590796741d541e7c2e08dc0746544edffd47e06503d0f63c705a6c396922"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-case-all-zeros.json",
+      "digest": {
+        "sha256": "8bcf1bb9339cd230ad73df29733916aa76a1cd385271b910df6ba3c600a6a560"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-case-missing.json",
+      "digest": {
+        "sha256": "c40dd6a6c2d0efe0cec150d1dd2daf454a4f552d6832839d007a9fcbf1ef9a80"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-checks-still-observed.json",
+      "digest": {
+        "sha256": "ee226051a2afe3e135631aa6445cf0940452e405c1150b27ef2185169619dafc"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-missed-its-dimension-observed.json",
+      "digest": {
+        "sha256": "6040fc6bf5c078293323cb3e43b17b1348736375cbf89cca0fc4342ccb1485bf"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-control-names-unlisted-evaluator.json",
+      "digest": {
+        "sha256": "29aa0a99e23336c3f94bd0e17ae23eb607eb007f1e67ae1b9267108933d424a3"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-dimension-scale-missing-floor.json",
+      "digest": {
+        "sha256": "1843ce0a259238a4b7ec9fb8629a26eaf0f4a183b560d70af47e0fc4e093ef71"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-disagreement-not-recorded.json",
+      "digest": {
+        "sha256": "49586ac539493345f9fc0d00a9783dcfb44b1c2d0b01267517f6b4b5e37e3ed8"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-endpoint-not-a-host.json",
+      "digest": {
+        "sha256": "43bc68cd72035fc73f5b0bae14893388388c8f626c7a54882048e2bc69cebc47"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-is-bar-author.json",
+      "digest": {
+        "sha256": "b0b850b2a4b365d5fb6d44d536e27cb5f1b58240bd12c74ff0ec81134767ebd6"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evaluator-on-no-check-or-control.json",
+      "digest": {
+        "sha256": "f4c3164c9cba68aaf3ce086c2548eb354fdb6ef4521f52cb071be283840cf4f5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evidence-file-differs.json",
+      "digest": {
+        "sha256": "d28b829bb8c953cfacb4378682fe832fe4caabe372c6656bacc85106873ed11c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evidence-name-not-relative.json",
+      "digest": {
+        "sha256": "63ad86a46e361a80c36b84f2f1f89ee0385ce27239903b7a60258c0c959a9a83"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-evidence-not-an-evidence-file.json",
+      "digest": {
+        "sha256": "fb0196ecbfb690c0366063880ec408756a9d8788f443094019f0b03b2e92df61"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-family-not-lowercase.json",
+      "digest": {
+        "sha256": "f1ada99586c17791fde0925bb81bf594f445f882535216f9b14a845a4fa80201"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-family-with-version.json",
+      "digest": {
+        "sha256": "7d269498d4c8e19ca3a71d224ba974d820493e481aa4335e75f523b416cdf654"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-instrument-not-pinned.json",
+      "digest": {
+        "sha256": "dd76f24da899018c01c30d18e47805f262eaa6fda32e8e12fc6916923775a340"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-kind-missing.json",
+      "digest": {
+        "sha256": "8486674ac2bd5fa188847a4089978f0ba5f3ded4e394a19db29f97870bd16d8c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-method-missing.json",
+      "digest": {
+        "sha256": "49fcf94b94c768542ba1c1b039c14707f3ceb3d3086a931e3a405a3073cf696b"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-maker-wrote-bar-undisclosed.json",
+      "digest": {
+        "sha256": "ed44bbcccad3480b5dd9df4f7f3c2c2c3ff1f0e95d0d0edac6deb3be62c0881e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-disagreements-field.json",
+      "digest": {
+        "sha256": "ad1562b06119f34199b76bff43d4daf6cb5d26b99e9cdbab3a2f423728075d3e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-missing-violations-field.json",
+      "digest": {
+        "sha256": "67d446d89109fd8add19689745d9d6a212abc78b0d290215b0367c76ae16d708"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-model-evaluator-without-model-block.json",
+      "digest": {
+        "sha256": "b4941c08f2987ea312794dce3c3760c59dee358e488e15182e064c6c4e5d3475"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-check-for-dimension.json",
+      "digest": {
+        "sha256": "97f327b3b04b94c3dee2d143421f27ece7dd4ac2de0140b78b8c3760b2f30757"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-clean-control.json",
+      "digest": {
+        "sha256": "4aa20c2988f02de3e29adf9a4f188cdd0388e266fc7630e3ffe5f0382b707938"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-no-control-in-batch.json",
+      "digest": {
+        "sha256": "94e52fb60de4192f8f83d8b14c87b4534f0969aa1648c4b4f5e4478387468ed5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-not-a-custody-statement.json",
+      "digest": {
+        "sha256": "ec6d23853dfb1572d8e91a5f6e3419fe52fc76a51b15f7368637b7af9427d19e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-reader-with-clean-control-only.json",
+      "digest": {
+        "sha256": "f57eb77649bdb6f08f1f8f645efa337bc9f1e5226350b12aba2189bd4c9f0795"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-reader-with-planted-control-only.json",
+      "digest": {
+        "sha256": "ffe7c1bf50539442721ff29b2431e37531f7faea2e6475ec6d011506aa9aa31f"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-reader-without-control.json",
+      "digest": {
+        "sha256": "ce86531fcc0ceb0bf8809317e60df06c506c44743ae1a80e457a080d413097d1"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-readings-filed-under-runner.json",
+      "digest": {
+        "sha256": "55aea348affd997d8084291d2a67279f0223b172f3ddef15d060eb75e2d319b2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-retention-missing.json",
+      "digest": {
+        "sha256": "df3f35bfc706d24135613ea59e7d6bfc63862e49fb6baca0165a640c9fd0341a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-run-zero.json",
+      "digest": {
+        "sha256": "bca41143dc0f5eabcc461684a6270142149daefba3c66b57b03aa7c75791223e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-false.json",
+      "digest": {
+        "sha256": "d711540063833e6c910bad8905e76bea4013d689f7823a2004146677f2c3ff28"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-declared-untruly.json",
+      "digest": {
+        "sha256": "35066d9bde481bad4d7a49e02766770266acd5e8806c02dd975f677285a0a459"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-same-model-session-undeclared.json",
+      "digest": {
+        "sha256": "d186cfb97616a9e00414e426920e37324c62cbea0c0f9b2b5312962208ee4d50"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-above-scale.json",
+      "digest": {
+        "sha256": "77940ca21d58c9002dc92f71b544914d213719b31728bed68e7a2b326a0d2821"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-contradicts-outcome.json",
+      "digest": {
+        "sha256": "8339a9d5320e6d4f38e4b52e171af439e67652c2c2e58f376b00220b09eac9a0"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-score-meets-threshold-reads-does-not-conform.json",
+      "digest": {
+        "sha256": "d66de9310f94ed0adac4014e1a0ca6685bd991693ce897cfd1fea47b7538a078"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-scored-without-scale.json",
+      "digest": {
+        "sha256": "c4d42ccae60dfd97d7fc797cb6d37b53f205f39c6c82508c1e532598dd5df18d"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-evaluator-unpinned.json",
+      "digest": {
+        "sha256": "0d44bf571160d67c50de0f4baba0779bcce07e5be5f681e375dfd6bbb639d721"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-script-written-by-maker.json",
+      "digest": {
+        "sha256": "0374c22343c00e8331704733e6eec3cdcbbe3b98874ede713bc17478168cf818"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-started-after-produced.json",
+      "digest": {
+        "sha256": "1625b7f9e8d58e77361f3aa03eba9f3af6ad6713d1919bc126d5fe32fd877059"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-started-at-missing.json",
+      "digest": {
+        "sha256": "a365ec68f1a8091d59e1719441edc47201c2b4b24de5595c1749424c59252ad5"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-tampered-artifact.json",
+      "digest": {
+        "sha256": "c748acb24190538896fd86f52bc722e617ea1e90f4fc480ae8d4cd1210d78fd4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-threshold-above-scale.json",
+      "digest": {
+        "sha256": "d9b1e199f3f64681c754413dde064c5f57429f64fc961a8124f39e365edd286c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-unobserved-not-acknowledged.json",
+      "digest": {
+        "sha256": "70c94bf487c2dc0173f4a4a7161b0a7049897d7134cb91477d2c09b65e2a1590"
+      }
+    },
+    {
+      "name": "fixtures/cl1-fail-violation-not-recorded.json",
+      "digest": {
+        "sha256": "42246dc4fd129853622f0b9de7a90d939d038b65ef456f368d769268ba47c1bc"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-adopted-specialist.json",
+      "digest": {
+        "sha256": "f7c073ddc34d0d3554875d78b3ec66ed9a025c109ab608e2e4f84efb09e102a8"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-basic.json",
+      "digest": {
+        "sha256": "9fb298b4c8d481f6d56ffd705415562a0b8b78acdc35b0763879da480e1b5fd2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-buyer-is-maker-disclosed.json",
+      "digest": {
+        "sha256": "1cdda0fafe8d41e4ec042a5a752511465167bb110e90b9fc5de2bb362ec2876c"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-checks-unobserved.json",
+      "digest": {
+        "sha256": "bafba8b7e6e10e2db05859bc3e42f371b7e9ca0c22224a8c6e3d214da76f5ef4"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-control-missed-its-dimension-unobserved.json",
+      "digest": {
+        "sha256": "588a4165740729d44fbef15268f0d19fb16ce39c6b9d68b04d5d0e686a3e70f7"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-extension-fields.json",
+      "digest": {
+        "sha256": "526f06ce2ce65f9d8ec96f6caffe426ca78a4bfda8bb0cbd2b04911d3c11154a"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-legacy-no-script-field.json",
+      "digest": {
+        "sha256": "f86f0c7f4d56510eee8e60b073fdd6fdf8accc03409c4208bd43b688d4dd710e"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-maker-wrote-bar-disclosed.json",
+      "digest": {
+        "sha256": "f2f5c2b99634dceded6b14effaaa036ee816689c6424386b3bf0520ef36bf638"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-no-reads-before-freeze-field.json",
+      "digest": {
+        "sha256": "9fb298b4c8d481f6d56ffd705415562a0b8b78acdc35b0763879da480e1b5fd2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-not-yet-given-with-violation.json",
+      "digest": {
+        "sha256": "2a11e44dec58dda29b9e0511294325fd62c0be26c04f0433e88fceee7f77b979"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-refiled-with-provenance.json",
+      "digest": {
+        "sha256": "550209e25c957f95518b0e360ddb2f85b66b8e4d1459bee7c3745a95fcb85323"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "a60d7689ca0245d6f3476dcb369b511811a3ecb7860c252ac317ead6cbde37b9"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-scored-below-threshold.json",
+      "digest": {
+        "sha256": "0a470a20e5cce25dda522fdbb8a4dcb94be8d2557d3604960a8c3ccffa834e48"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-scored.json",
+      "digest": {
+        "sha256": "dd38edbded6e3d77a7ef5a465fd6b347821ea501952a324c3f86ce75f591f358"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-script-evaluator.json",
+      "digest": {
+        "sha256": "6fc1e0c918fdacbb45509fb4b3f57239253255c2bd922f9082e640d5bad27716"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-second-reader-with-both-controls.json",
+      "digest": {
+        "sha256": "9325b67c9e30848f28ba4ced2dc51a566f87b1314c7cffe12108501ae0f74ec2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-acknowledged.json",
+      "digest": {
+        "sha256": "7c2a0a2bb57223decc744d3fa0bd052902e3a6919d919cf3b51c39a2fe9c9600"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unobserved-reader-needs-no-control.json",
+      "digest": {
+        "sha256": "0a5876bc4293d6885377400d2faeda67c19d68fbb34aedfed3b168d961047b73"
+      }
+    },
+    {
+      "name": "fixtures/cl1-pass-unscored-checks-not-judged-by-cl1-17.json",
+      "digest": {
+        "sha256": "9fb298b4c8d481f6d56ffd705415562a0b8b78acdc35b0763879da480e1b5fd2"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-evidence-file-not-supplied.json",
+      "digest": {
+        "sha256": "35c37d7cdc6216427a9af1b65396d2fcecd72fe6c24f7dcd66a09c2489dbf1b9"
+      }
+    },
+    {
+      "name": "fixtures/cl1-unchecked-model-evaluator-settings-only.json",
+      "digest": {
+        "sha256": "dc0e6634229cfcb2c090fbf162ab530dbcaf69f58a35c1a9a6a11bd5bc460e46"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-buyer-is-maker.json",
+      "digest": {
+        "sha256": "613543e3ee07b99777587c92c7732be397355687ac34c5f51686734ccdd2b86c"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-check-answered-by-makers-endpoint.json",
+      "digest": {
+        "sha256": "15ba7f8a05d76d3ae56280071cee15934cdcb0e518cc994d768d19fbc9d21bbf"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evaluator-not-read-only.json",
+      "digest": {
+        "sha256": "1042a9bdf941caca8e5b61bd109f74f9581cd522d6bfb66cb889c4c4ab90ecd8"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-every-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "3fae513b664911f2cbefaf04016c5db15da0ccc386a3c0684899fb4b7281de5d"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-evidence-digest-mismatch.json",
+      "digest": {
+        "sha256": "f105d9a33ea281a3201efab0fb3fc197358fdd360e32f79e31aa5ee23d83e9de"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-outweighs-a-person.json",
+      "digest": {
+        "sha256": "baace6ff5a9cb73a7ca3701da63705156d1cd92b41d1f5a73bb9bb0a75bfaf90"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-two-of-three.json",
+      "digest": {
+        "sha256": "1fc237ee823cd0c1f0b63b324f298a10774d39a1b7c9655aaf418ce69bd82194"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-family-undisclosed.json",
+      "digest": {
+        "sha256": "bc93d23f5f36f8451d6028631326604c925c540f14e622a70b042020aa9508d0"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-maker-wrote-bar.json",
+      "digest": {
+        "sha256": "50d66cec3e62871c69d8377cb11d8c7808fab529ac589f9f91f2dcbae1566de8"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-model-maker-without-model-block.json",
+      "digest": {
+        "sha256": "a9421f5f0bd9534f716ef3365c332f554b6169cc5736f12fa39e03aaf7a7c773"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-one-reader-without-clean-control.json",
+      "digest": {
+        "sha256": "0fc469a5360292f167a8a41964b936f52b9d83ec649bada15f2129911784f595"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-one-run-only.json",
+      "digest": {
+        "sha256": "eaa920e0ca390256259621e1d2e533e2bf32882a47f18c61a57e907902a47e75"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-undisclosed-family-counts-as-makers.json",
+      "digest": {
+        "sha256": "42cacf0aec70263c8dc4694c8d6f17cf0a79b74e3d9f18977b023e4fc2b07565"
+      }
+    },
+    {
+      "name": "fixtures/cl2-fail-undisclosed-maker-largest-family-plus-undisclosed.json",
+      "digest": {
+        "sha256": "da5ab85b78daa543544190ec3e4186e903ea4ce0c2605a9884aec49407969c52"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-anthropic-maker-openai-deepseek-at-boundary.json",
+      "digest": {
+        "sha256": "ec7da94794cd3840d183cc93ca425e78fd5e570935d6008101ffaaddf5854d8a"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-anthropic-maker-undisclosed-openai-deepseek.json",
+      "digest": {
+        "sha256": "61a031da8797cab7659ee72473c5d6381d0cdaa657c7021b4c9a603e66056423"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-basic.json",
+      "digest": {
+        "sha256": "3339f83914c2d210ad7ab225049e0ee9184caf1a89c4134f6800cea31a4334ba"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-check-endpoint-recorded.json",
+      "digest": {
+        "sha256": "3249895e597c52f46ffac6c969ffc8c5032d4de6982f7253859df34f75aab0af"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-different-evaluator-endpoint.json",
+      "digest": {
+        "sha256": "3339f83914c2d210ad7ab225049e0ee9184caf1a89c4134f6800cea31a4334ba"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-legacy-evidence-tag.json",
+      "digest": {
+        "sha256": "b806c968869a387fa9524476231182f82f73eb0eb44078cf79e80a1b19110ea8"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-family-two-of-four.json",
+      "digest": {
+        "sha256": "58d1f37e1cdb77a654bafddd76ef3b897a8633be787a1a2000d248d413d0c694"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-maker-is-person.json",
+      "digest": {
+        "sha256": "657598470031f1039cc470385fb84c10e961fe08bb30a9d66506180e498e6cc7"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-one-evaluator-shares-maker-family.json",
+      "digest": {
+        "sha256": "d5cdf85c14cc53c11e373c544b301df2187c315098e18ad8ea9b543ffabbea11"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-runs-disagree-recorded.json",
+      "digest": {
+        "sha256": "3dcf776166b7f3fd077b626182340179adf0e35f7c8dcc5e25b80b3b3442f56a"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-same-model-session-declared.json",
+      "digest": {
+        "sha256": "43f932d1eabab047622661139eee6c3260125acfdf42a026e0fd55a69b231350"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-undisclosed-family-beside-others.json",
+      "digest": {
+        "sha256": "ab321cc860d8545f3ebf01cf98889aed91c5103b08066742d9dd34ae77e96079"
+      }
+    },
+    {
+      "name": "fixtures/cl2-pass-undisclosed-maker-anthropic-openai.json",
+      "digest": {
+        "sha256": "0a0136815ad7e1e06cef899debbca5a492e710066204ebe48e11edf62c9b70a5"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-asserted-only.json",
+      "digest": {
+        "sha256": "eb39154cc77d2889b9a4c7086403f265113fb86bc60d2d940f6589d5a0cc7569"
+      }
+    },
+    {
+      "name": "fixtures/cl2-unchecked-independence-read-by-maker.json",
+      "digest": {
+        "sha256": "e88be9588d18755fda748edc4637ee7c6e65910db0cbfe49fb1ff6304ff32898"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-bar-not-published.json",
+      "digest": {
+        "sha256": "1fc1b81b428b50f969f32418f150a549d4d9639930782152d597964d45113ea3"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-demonstration-after-check.json",
+      "digest": {
+        "sha256": "141d02adf98e4e7d79d20de15af6078ca9a1606d6c9b8e8345b55863986f78e5"
+      }
+    },
+    {
+      "name": "fixtures/cl3-fail-no-signature-entry.json",
+      "digest": {
+        "sha256": "fa6cb49b7fbb9d3e8bf17523549c0a59a6478fd23f4dc81d3794746cf5ada590"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-adopted-specialist.json",
+      "digest": {
+        "sha256": "6bcbc3b35d8fef0003e04be8973517a58f7c0073a929bf611d503c0a798b98b6"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-not-verified.json",
+      "digest": {
+        "sha256": "ff62650cce67186ef94aab2812ede789cba9a12f2e5a7952d9986409909f07a0"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-signature-read-by-maker.json",
+      "digest": {
+        "sha256": "a14a228e214bf45b7071634ed135dd72c5a78c4bf176d41fed6c3373812d7978"
+      }
+    },
+    {
+      "name": "fixtures/cl3-unchecked-unobserved-not-yet-given.json",
+      "digest": {
+        "sha256": "8907c81401553691a9955282100f846d40b85263fb3cda68b38d836a51446a52"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gemini.log",
+      "digest": {
+        "sha256": "b13224d6e982fd71c6081040c299b1992415d22da23c683c47d28eb54205f198"
+      }
+    },
+    {
+      "name": "fixtures/evidence/harness-gpt.log",
+      "digest": {
+        "sha256": "45ea40bf6d660a344ffed71c3a645f6ef48907f8b434c3b77a103dc3b3fe9651"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E1-1.md",
+      "digest": {
+        "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E1-2.md",
+      "digest": {
+        "sha256": "22fd565d00f33e79120a992f18c7eaeff83d975480b3b4a633b1177e8f5b505d"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E2-1.md",
+      "digest": {
+        "sha256": "d953cf62a22041889d4d304babbf260ffc6ea4b459a71e18fc9824c10445d6b7"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E2-2.md",
+      "digest": {
+        "sha256": "cc5cf085cf2d4232c0f79852a628fe92952b0156f5696d41f3cd1d7d474267f7"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E3-1.md",
+      "digest": {
+        "sha256": "4992a6dafe9049bcebc4cee4b41d142d3c67ef807b50bcd3fb7a9808de903f07"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E3-2.md",
+      "digest": {
+        "sha256": "f3504fc000bb2524ac74450e6e4ff7fc0f44fdb6353086aa396f00b98b9017da"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E4-1.md",
+      "digest": {
+        "sha256": "c362dd8c23207c223ec2d0d75116f02f1b1faac9aa1eff4c887d72a4a3df943c"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-E4-2.md",
+      "digest": {
+        "sha256": "38eb3b643dd448c16e8998f94ae0ad1e6703e6c3a374b07402d91a2e05cd4313"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D1-S1-1.md",
+      "digest": {
+        "sha256": "894d5c612e70bd16d2c8b98bbca19b61a687a6b9dc14386ed4a9d0aaf8db3af4"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E1-1.md",
+      "digest": {
+        "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E1-2.md",
+      "digest": {
+        "sha256": "995f3be5a2a1f3e45ced565827e6fb9d52c627f9294f4238b290db2c685aff42"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E2-1.md",
+      "digest": {
+        "sha256": "4e7cbe41b4b14071918bf0b248b7beb8fdc14b52eb7c898f59c5b00db7850cc1"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E2-2.md",
+      "digest": {
+        "sha256": "e2b97ea92213cdb84de137c5a23a0725753f24d3e2361ed9dcb9b142994425c6"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E3-1.md",
+      "digest": {
+        "sha256": "6bd12268bc17a010c79bad1c0309e54ec641bb283448e9e776d0371ead6ca1db"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E3-2.md",
+      "digest": {
+        "sha256": "3863bda207c7afbd41f79995f8725a3be4dd22b4316f0a6625a7d4df237c8bda"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E4-1.md",
+      "digest": {
+        "sha256": "f19433a30e56ef1f09fb0bca3fb0bb758af390aecd8a836df64e77210b8ced4d"
+      }
+    },
+    {
+      "name": "fixtures/evidence/reading-D2-E4-2.md",
+      "digest": {
+        "sha256": "1ff0c558deafa963c54c1c6dad2c940fc4c43d349c536931e5d0273f2a2b4e55"
+      }
+    },
+    {
+      "name": "fixtures/evidence/record.sigstore.json",
+      "digest": {
+        "sha256": "cab89650a2f2fc8b837346911cadd7e0b78a618800a378781bcf606b4f1a531a"
+      }
+    },
+    {
+      "name": "fixtures/expected.json",
+      "digest": {
+        "sha256": "0bfb0c9995fd5b479bd8fe2a56c102260438d01685fa4f3bda1d215cf10351e5"
+      }
+    },
+    {
+      "name": "fixtures/files/bar.md",
+      "digest": {
+        "sha256": "87a4a26fce9b2b80c508a74a300be0d8ea09dcda7c90ce0839fbf0466f394518"
+      }
+    },
+    {
+      "name": "fixtures/files/report.md",
+      "digest": {
+        "sha256": "c19d6043835816d97d837057e061d63963cdf59d11887f5720fd56f0de8a5582"
+      }
+    },
+    {
+      "name": "fixtures/generate.py",
+      "digest": {
+        "sha256": "bd9849e8df2ec186759d3eb737e17fcf4991a09ffdbf03d8d85e38ee753b5e99"
+      }
+    },
+    {
+      "name": "schema/custody-v1.schema.json",
+      "digest": {
+        "sha256": "ad03af92b47eaa8079f1d2a8e759daa91148aac6f39d8935c22a92ba10199f9f"
+      }
+    },
+    {
+      "name": "tests/explain_check.py",
+      "digest": {
+        "sha256": "e76143ab5c310e2dd881f8febddd84ede46c678aafd19c8f0cab56053e7e8a65"
+      }
+    },
+    {
+      "name": "tests/log_check.py",
+      "digest": {
+        "sha256": "e39f09d249870b2df072315e485485d2cddfd31252f2ae04418dd3a5d25ee28c"
+      }
+    },
+    {
+      "name": "tests/record_tools_check.py",
+      "digest": {
+        "sha256": "443ea0f0f3e6b12c7a6920fda22311fbf2a50081863188e4b9b59af4b125189d"
+      }
+    },
+    {
+      "name": "tests/red_counts.py",
+      "digest": {
+        "sha256": "a54c42582df5a399a2a04646209ca1264d676697a9965c4f4402d6731ba340d0"
+      }
+    },
+    {
+      "name": "tests/red_readability.py",
+      "digest": {
+        "sha256": "f38ed42485e770384d5cae8a0c1cdb3a8647626b2174a04ad8c1e307cd3f569f"
+      }
+    },
+    {
+      "name": "tests/run_fixtures.py",
+      "digest": {
+        "sha256": "b82fe0b053ee76aa83660b218cabea0c6d19b448eb641fa4d6b4235ed938888f"
+      }
+    },
+    {
+      "name": "tests/schema_check.py",
+      "digest": {
+        "sha256": "ff2b63289e0b46497ca2e2a14cf970745d19065fc11bb7fb34d447e50c0915cc"
+      }
+    },
+    {
+      "name": "tests/verify_note_check.py",
+      "digest": {
+        "sha256": "a07c095d764abd4cd0919b1a5b6b3df8159aba6235dc98f7c5b6b3ef5dd2fe58"
+      }
+    },
+    {
+      "name": "tools/count.py",
+      "digest": {
+        "sha256": "55cfacbf8b151c5d095e61dc0d4a6c93c193e29dcf6cd86f6dbaeb1fd6d558c8"
+      }
+    },
+    {
+      "name": "tools/explain.py",
+      "digest": {
+        "sha256": "1116cfea50b819344ee3a1f8e0502727a67a1aeab0945bd3233374f5e87f0a99"
+      }
+    },
+    {
+      "name": "tools/file_event.py",
+      "digest": {
+        "sha256": "2013df898c833a2789b5da70f28d244c100a011949531858bf6d092a517c3ab1"
+      }
+    },
+    {
+      "name": "tools/make_record.py",
+      "digest": {
+        "sha256": "fa4cf6977374920420782bf949a9fcc10dc3c3d95b437b9ff2f1cc1565853d02"
+      }
+    },
+    {
+      "name": "tools/readability.py",
+      "digest": {
+        "sha256": "99d004a523de14f6e0bfca4130d910598cd1157bfc6b853bdf866b385ae5f1d7"
+      }
+    },
+    {
+      "name": "tools/record.py",
+      "digest": {
+        "sha256": "6adae89c4a409f3f9811910773a16abebfd84e14a4ce285afc4d41509300a42d"
+      }
+    },
+    {
+      "name": "tools/release_record.py",
+      "digest": {
+        "sha256": "8965e775f9498bddb37ecf5c7be0743bd804ac67f9eb37df8146d269a4e52084"
+      }
+    },
+    {
+      "name": "tools/verify_note.py",
+      "digest": {
+        "sha256": "580b00f925c176389865a849ddef08df6f36b073f65556aa730f4d4c7c28e9d5"
+      }
+    }
+  ],
+  "predicateType": "https://evaluatordriven.com/custody/v1",
+  "predicate": {
+    "specVersion": "0.9.7",
+    "levelClaimed": "CL1",
+    "bar": {
+      "author": "Claude Opus 5.5",
+      "dimensions": [
+        {
+          "id": "S1 Scope",
+          "criterion": "S1 Scope",
+          "scale": null
+        },
+        {
+          "id": "S2 D9",
+          "criterion": "S2 D9",
+          "scale": null
+        },
+        {
+          "id": "S3 Stranger test",
+          "criterion": "S3 Stranger test",
+          "scale": null
+        },
+        {
+          "id": "Promise kept",
+          "criterion": "Promise kept",
+          "scale": null
+        }
+      ],
+      "publishedAt": null,
+      "groundTruth": [],
+      "dissent": [],
+      "digest": {
+        "sha256": "4d8ff9e5b767bd2a02d2c6d92bb5e9cb2cbf9ae294bb5f98e8abeec5a19878ee"
+      },
+      "frozenAt": "2026-10-26T16:26:39.155707Z",
+      "approvals": [
+        {
+          "role": "buyer",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-26T16:26:39.195401Z",
+          "barDigest": {
+            "sha256": "4d8ff9e5b767bd2a02d2c6d92bb5e9cb2cbf9ae294bb5f98e8abeec5a19878ee"
+          },
+          "adopted": null
+        },
+        {
+          "role": "specialist",
+          "by": "Steve Moitozo II",
+          "at": "2026-10-26T16:26:39.245170Z",
+          "barDigest": {
+            "sha256": "4d8ff9e5b767bd2a02d2c6d92bb5e9cb2cbf9ae294bb5f98e8abeec5a19878ee"
+          },
+          "adopted": null
+        }
+      ]
+    },
+    "maker": {
+      "name": "Gemini 4 Argon",
+      "kind": "model",
+      "version": "Gemini 4 Argon",
+      "method": {
+        "sha256": "5fca599eaf0e405e5446313fac353928a2cd2ccdc3a822b8eb1a913f1a49df09"
+      },
+      "model": {
+        "family": "gemini",
+        "identifier": "google/gemini-4-argon",
+        "endpoint": "openrouter.ai",
+        "readOnly": true
+      }
+    },
+    "instrument": {
+      "rubric": {
+        "sha256": "4d8ff9e5b767bd2a02d2c6d92bb5e9cb2cbf9ae294bb5f98e8abeec5a19878ee"
+      },
+      "runner": {
+        "sha256": "73ced348b43e307f6cef25bb41e3e6892c237ce93c4881b3727de7fa6fb768ea"
+      }
+    },
+    "evaluators": [
+      {
+        "id": "ORCH-SCRIPT",
+        "name": "ORCH-SCRIPT (orch_checks.py and the scoring scripts, authored by VizH)",
+        "kind": "script",
+        "model": null,
+        "script": {
+          "name": "orch_checks.py",
+          "author": "VizH (DeepSeek v4.1 Flash 1017, Orchestrator)",
+          "digest": {
+            "sha256": "f334b581b18e0d0b237a4be4c4723750a86925978e87175e61cd55cd1284e8a7"
+          }
+        }
+      },
+      {
+        "id": "seed-2-1-turbo",
+        "name": "Seed 2.1 Turbo",
+        "kind": "model",
+        "model": {
+          "family": "bytedance",
+          "identifier": "bytedance-seed/seed-2-1-turbo",
+          "endpoint": "openrouter.ai",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "nemotron-3-ultra",
+        "name": "Nemotron 3 Ultra",
+        "kind": "model",
+        "model": {
+          "family": "nvidia",
+          "identifier": "nvidia/nemotron-3-ultra-550b-a55b",
+          "endpoint": "openrouter.ai",
+          "readOnly": true
+        }
+      },
+      {
+        "id": "minimax-m3",
+        "name": "MiniMax M3",
+        "kind": "model",
+        "model": {
+          "family": "minimax",
+          "identifier": "minimax/minimax-m3",
+          "endpoint": "openrouter.ai",
+          "readOnly": true
+        }
+      }
+    ],
+    "spread": [],
+    "disagreements": [
+      {
+        "dimension": "S3 Stranger test",
+        "checks": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "note": "The ten S3 checks read three outcomes on one dimension: Seed 2.1 Turbo's three sessions conform, Nemotron 3 Ultra's three do not, MiniMax M3's three are unobserved, and the cycle result does not conform. The gate is a verdict on the implementers rather than on the artifact, so the disagreement is recorded here rather than averaged. The indices are computed from this record by disagreement_indices.py."
+      }
+    ],
+    "violations": [
+      {
+        "dimension": "S3 Stranger test",
+        "description": "cycle r2 did not pass: 2 of the 3 implementers were observed and 1 met the gate; Nemotron 3 Ultra did not meet it in any counted session and MiniMax M3 was unobserved with 0 of 3 sessions counted. CL1-10 is open; J1 was withdrawn under Amendment 2 rule 5."
+      }
+    ],
+    "separationGaps": [
+      "Steve Moitozo II holds the buyer, specialist and approver seats.",
+      "The bar, the runbooks and the scorers were written by Claude Opus 5.5, which makes no artifact content; the Maker is Gemini 4 Argon.",
+      "The adjudicators, GPT 6.1 Sol and MiMo v2.6 Pro, are not evaluators of this record. Their rulings decided the stranger-test answers where the author's key and the checker disagreed, and they ruled on the three D9 cases where the blind key and the checker disagreed.",
+      "Every model call was made to openrouter.ai; the provider that served it is recorded in each harness file (Seed, Minimax, BaseTen, OpenAI, Xiaomi).",
+      "Approval times are recording times.",
+      "One person holds the buyer, specialist and approver seats.",
+      "Amendment 1 made J1 breaking, and the Owner ratified it.",
+      "J1 was withdrawn under Amendment 2 rule 5 after three adjudicator splits, at events 36, 50 and 56. The referee amended_cl1_10 did not implement SPEC section 4's blocking rule and settled the second split the wrong way. J1 moves to the next version.",
+      "The Maker's last reply (revision 2, attempt 2) was applied with four diff --git lines added by normalize_diff_v097_r2.py, under an Owner ruling made after the result. The two separationGaps lines logged at event 60 describe the miscounted hunk header and the false error that used up both round-trips, and the ruling made after the result.",
+      "CL1-10's known limitations, measured on v0.9.6: [false, 3] reads OK, and malformed outcomes read FAILED or OK, not NOT-CHECKABLE.",
+      "The driver session_c2.py was changed three times mid-job: v3 at event 75, v4 at event 76, v5 at event 78. Two verify --files mismatches are recorded at events 75 and 76 because each cited that file in place and a later edit changed it; event 77 records the first break and the state of the log.",
+      "The blind-key disagreement on cl1-defects: both adjudicators ruled for the key at event 73.",
+      "The prediction at event 66 held, and no counted session reached CL1-10's key reading on cl1-defects.",
+      "Event 79 was filed by hand with record.py add check before file_event.py's validator was read. That breaches bar rule 11. It predates the package event and is excluded from the declarations. The cycle result was re-filed through file_event.py at event 110.",
+      "The site reading (event 109) covers six pages from the site's sitemap, read at commit bfba7e069a10a8355892d5239ab0235a098b2ec2. The repo HEAD is 217d36e, a separate commit. The \"before\" text was not re-read.",
+      "The model sessions the checks score ran before P, on a tree byte-identical to P's content by the diff at event 83.",
+      "MiniMax M3 is unobserved: 0 of 3 sessions counted, each having failed at least one control. It is reported as unobserved, not as nonconformance.",
+      "Twelve Owner decisions were used, of a cap of ten: ten recorded by log event and two by chat, the tenth (uncapped, three per session) and the twelfth (P3).",
+      "The Orchestrator deleted P's zip (fd11bb12e202f9142408371f0cf5e60b24a63b5e8841d919d5c4e608f6b81d10) when rebuilding it to add the probe record. Its digest survives only in the log, and the file cannot be rebuilt identically.",
+      "P2 cites a new zip whose content equals P's, shown by the diff and the package check at step 3 of the Owner's ruling. The record's per-file digests do not depend on archive bytes.",
+      "Six planted controls were misfiled at events 96 to 106, with outcomes typed backwards. P2 was logged after them, so the builder skips every earlier event, and all readings were re-filed after P2.",
+      "Event 79 was hand-filed before P2, in breach of bar rule 11, and is skipped as stale. The re-filed cycle reading stands.",
+      "The six S3 session checks at events 123 to 128 were filed from the stored score files rather than from a fresh run, on the Owner's ruling that the S3 scorers read the implementers' verifiers against the frozen records and not the package tree. All nine sessions were then re-scored after P2 into evidence/s3-rescore-p2/, and all nine reproduce the stored scores exactly on counted, meets, A, B and control failures.",
+      "The version bump at section 4.2 made a CI plant stale. tests/red_counts.py appended See v0.9.7. and expected count.py to name it, which it could not once README and SPEC both read 0.9.7, so the plant fired on nothing and the suite read 13 of 14 with exit 1. Section 4.2 did not list that line among the edits it made.",
+      "The Owner's instruction for the fix was wrong: it kept the old expectation version 0.9.7 while changing the plant to append See v0.9.8., and count.py builds its message from the planted version, so the old expectation can never match a new plant. The Orchestrator ran it, saw MISSED and exit 1, proved the mismatch on the real output, and reported it before any package event. The Owner then ruled the expectation to version 0.9.8.",
+      "The whole file change is one literal on line 18 of tests/red_counts.py, one insertion and one deletion in one file. tests/red_counts.py then reads 14 of 14 plants caught at exit 0 and count.py reads problems [].",
+      "P3 was logged at event 159, after the stale plant was fixed, as a second deviation from the runbook's rule that no further artifact-produced events be logged. The Owner ruled it as Owner decision 12 of a cap of 10, source chat, recorded in the same log note as P3.",
+      "The Orchestrator edited evidence/s5/d9-p2.json after it had been filed, to add control digests. It was restored byte for byte to the filed digest 3ab8d059624cb55f4e1c13a3bd1048dfadc6187bea26df4ec5212c3b12133b6e, and the digests were moved to a separate evidence/s5/d9-control-cases.json so the filed file is never edited again.",
+      "The S1 and S2 control pairs were first filed with colliding ids, because both read in the orch batch under ORCH-SCRIPT and both took the S3- prefix. controls_file_v097.py gained an --id-prefix, and the pairs were re-filed at events 161, 162, 164 and 165 with S1- and S2- prefixes. The colliding pair remains in the log before P3 and is skipped by the builder."
+    ],
+    "retention": {
+      "location": "the Owner's machine, ~/evaluatordriven/v097-job",
+      "public": false
+    },
+    "external": [
+      {
+        "requirement": "CL1-15",
+        "subject": "seed-2-1-turbo",
+        "evidence": {
+          "name": "evidence/harness-seed-r2-s1.json",
+          "sha256": "da17a207d7a02581bd9a35f735c51612d19692178dd3d40a1ed65a88fa80685b"
+        },
+        "readBy": "VizH (DeepSeek v4.1 Flash 1017, Orchestrator)"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "nemotron-3-ultra",
+        "evidence": {
+          "name": "evidence/harness-nemotron-r2-s1.json",
+          "sha256": "3315cf35212b1e9acca88aa50333fefc46b8d53f86b3766303df2f3c8f5c61f7"
+        },
+        "readBy": "VizH (DeepSeek v4.1 Flash 1017, Orchestrator)"
+      },
+      {
+        "requirement": "CL1-15",
+        "subject": "minimax-m3",
+        "evidence": {
+          "name": "evidence/harness-minimax-r2-s1.json",
+          "sha256": "fc86b9c682c1727614382366cc6c635f519dfefa3cb8b5732fbacd9041c87572"
+        },
+        "readBy": "VizH (DeepSeek v4.1 Flash 1017, Orchestrator)"
+      }
+    ],
+    "disposition": {
+      "acknowledgesUnobserved": [
+        "S3 Stranger test"
+      ],
+      "on": "evaluatordriven-v0.9.7-p3-release-corrected.zip",
+      "state": "given",
+      "by": "Steve Moitozo II",
+      "at": "2026-10-28T14:13:51.642327Z"
+    },
+    "startedAt": "2026-10-26T19:11:50.040767Z",
+    "producedAt": "2026-10-28T12:58:48.487581Z",
+    "checks": [
+      {
+        "batch": "orch",
+        "dimension": "S1 Scope",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "name": "evidence/s5/s1-scope-p3.json",
+          "sha256": "f334b581b18e0d0b237a4be4c4723750a86925978e87175e61cd55cd1284e8a7"
+        },
+        "failureCondition": "S1 reads does_not_conform if the clean control does not read conforms at rc 0, or the planted control does not read does_not_conform at rc 1, or any of the 118 fixtures reads other than expected.",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:11.503358Z"
+      },
+      {
+        "batch": "orch",
+        "dimension": "S2 D9",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "name": "evidence/s5/d9-p3.json",
+          "sha256": "2d291df500bd255d23ef3af47e73dc2f6f2f76b5403425b3e41c7f9a87bb72c5"
+        },
+        "failureCondition": "S2 reads does_not_conform if the checker on the packaged tree disagrees with the blind key on any case, or the planted control does not flip cases, or the clean control flips a case.",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:18.009962Z"
+      },
+      {
+        "batch": "seed-r2-s1",
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-seed-r2-s1.json",
+          "sha256": "6b288c2e6a8eb8be15286034586ac4e1427e3503289c84d20d98fa1e605b4252"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "conforms",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:26.366569Z"
+      },
+      {
+        "batch": "seed-r2-s2",
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-seed-r2-s2.json",
+          "sha256": "ee80b7005b8641b146f0c60214593450a1c8a89ddb20602d05344e92bcc5630c"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:26.563148Z"
+      },
+      {
+        "batch": "seed-r2-s3",
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-seed-r2-s3.json",
+          "sha256": "879b99642d28801a0909d50f40d10e759eb943fe712d35cc12a1c7e7a2e28479"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "conforms",
+        "run": 3,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:26.767598Z"
+      },
+      {
+        "batch": "nemotron-r2-s1",
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-nemotron-r2-s1.json",
+          "sha256": "48551fb2f8088b331648a04f9c5097f7e35aa1c406bd030393512ff74a1dfab0"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "does_not_conform",
+        "run": 1,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:26.952167Z"
+      },
+      {
+        "batch": "nemotron-r2-s2",
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-nemotron-r2-s2.json",
+          "sha256": "54cb3fb3e9b61e4f4a9cd7386a22c84b8592774864f1a587ada426b6fee9b667"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "does_not_conform",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:27.143873Z"
+      },
+      {
+        "batch": "nemotron-r2-s3",
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "evidence": {
+          "name": "evidence/s3-rescore-p2/score-nemotron-r2-s3.json",
+          "sha256": "f9329d51d84f4e38060be30484cebb6e7b92b53cf33a115cacc7d893b81190ab"
+        },
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "does_not_conform",
+        "run": 3,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:27.346101Z"
+      },
+      {
+        "batch": "minimax-r2-s1",
+        "dimension": "S3 Stranger test",
+        "evaluator": "minimax-m3",
+        "evidence": null,
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "unobserved",
+        "run": 1,
+        "score": null,
+        "unobserved": {
+          "channel": "openrouter.ai chat completions, minimax/minimax-m3 via Minimax",
+          "reason": "the session failed at least one control (clean, planted), so it is not counted and its scores are not used; reported as unobserved rather than as nonconformance"
+        },
+        "at": "2026-10-28T13:03:37.080835Z"
+      },
+      {
+        "batch": "minimax-r2-s2",
+        "dimension": "S3 Stranger test",
+        "evaluator": "minimax-m3",
+        "evidence": null,
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "unobserved",
+        "run": 2,
+        "score": null,
+        "unobserved": {
+          "channel": "openrouter.ai chat completions, minimax/minimax-m3 via Minimax",
+          "reason": "the session failed at least one control (clean), so it is not counted and its scores are not used; reported as unobserved rather than as nonconformance"
+        },
+        "at": "2026-10-28T13:03:37.203173Z"
+      },
+      {
+        "batch": "minimax-r2-s3",
+        "dimension": "S3 Stranger test",
+        "evaluator": "minimax-m3",
+        "evidence": null,
+        "failureCondition": "S3 reads does_not_conform if the session does not read both controls correctly, or its A is below 11, or its B is below 10.",
+        "outcome": "unobserved",
+        "run": 3,
+        "score": null,
+        "unobserved": {
+          "channel": "openrouter.ai chat completions, minimax/minimax-m3 via Minimax",
+          "reason": "the session failed at least one control (clean, planted), so it is not counted and its scores are not used; reported as unobserved rather than as nonconformance"
+        },
+        "at": "2026-10-28T13:03:37.336292Z"
+      },
+      {
+        "batch": "orch",
+        "dimension": "S3 Stranger test",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "name": "evidence/s5/cycle-r2-p3.json",
+          "sha256": "b959a2fe105dd6ed6604c02f17601ddd6fc0e49060e4411c8f62aca51c16c5bd"
+        },
+        "failureCondition": "S3 reads does_not_conform if any observed implementer does not meet the gate (A>=11 and B>=10 in a counted session), or fewer than two implementers are observed.",
+        "outcome": "does_not_conform",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:43.441093Z"
+      },
+      {
+        "batch": "orch",
+        "dimension": "Promise kept",
+        "evaluator": "ORCH-SCRIPT",
+        "evidence": {
+          "name": "evidence/s5/promise-kept-p3.json",
+          "sha256": "d05667252a4cf1c0c08f47294d3e65f3b9275107791a869d08d42147cfe72137"
+        },
+        "failureCondition": "Promise kept reads does_not_conform if any fetched live page contains any of the pinned phrases next version, next release, will fix, fixes or CL1-10.",
+        "outcome": "conforms",
+        "run": 2,
+        "score": null,
+        "unobserved": null,
+        "at": "2026-10-28T13:03:51.948494Z"
+      }
+    ],
+    "controls": [
+      {
+        "batch": "orch",
+        "case": {
+          "sha256": "dd4aad9d7658344760cb838e31fe099f9fc9dd2d9ade5b59e999049b772de0a8"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "S1-orch-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "orch",
+        "case": {
+          "sha256": "b23c40c49006409dc20ee9cb74d61a2adc0b0b891e7f2bd44a606c765fb81afa"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "conforms",
+        "id": "S1-orch-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "orch",
+        "case": {
+          "sha256": "dd4aad9d7658344760cb838e31fe099f9fc9dd2d9ade5b59e999049b772de0a8"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "does_not_conform",
+        "id": "S2-orch-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "orch",
+        "case": {
+          "sha256": "b23c40c49006409dc20ee9cb74d61a2adc0b0b891e7f2bd44a606c765fb81afa"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "ORCH-SCRIPT",
+        "expected": "conforms",
+        "id": "S2-orch-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "seed-r2-s1",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "does_not_conform",
+        "id": "S3-seed-r2-s1-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "seed-r2-s1",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "conforms",
+        "id": "S3-seed-r2-s1-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "seed-r2-s2",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "does_not_conform",
+        "id": "S3-seed-r2-s2-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "seed-r2-s2",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "conforms",
+        "id": "S3-seed-r2-s2-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "seed-r2-s3",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "does_not_conform",
+        "id": "S3-seed-r2-s3-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "seed-r2-s3",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "seed-2-1-turbo",
+        "expected": "conforms",
+        "id": "S3-seed-r2-s3-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "nemotron-r2-s1",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "does_not_conform",
+        "id": "S3-nemotron-r2-s1-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "nemotron-r2-s1",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "conforms",
+        "id": "S3-nemotron-r2-s1-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "nemotron-r2-s2",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "does_not_conform",
+        "id": "S3-nemotron-r2-s2-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "nemotron-r2-s2",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "conforms",
+        "id": "S3-nemotron-r2-s2-clean",
+        "outcome": "conforms"
+      },
+      {
+        "batch": "nemotron-r2-s3",
+        "case": {
+          "sha256": "1937a1f49b94bceb85406e8a171d2fa5636faa658271419c46690006b31034b0"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "does_not_conform",
+        "id": "S3-nemotron-r2-s3-planted",
+        "outcome": "does_not_conform"
+      },
+      {
+        "batch": "nemotron-r2-s3",
+        "case": {
+          "sha256": "127c37a79afcbe369422eb2f9bdb360e7e2fc71c9b0b8b5dbfe2943f6f89face"
+        },
+        "dimension": "S3 Stranger test",
+        "evaluator": "nemotron-3-ultra",
+        "expected": "conforms",
+        "id": "S3-nemotron-r2-s3-clean",
+        "outcome": "conforms"
+      }
+    ]
+  }
+}

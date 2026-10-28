@@ -25,6 +25,8 @@ jobs:
         run: git diff --exit-code examples/
       - name: Custody log is tamper-evident and builds a valid record
         run: python3 tests/log_check.py
+      - name: Record tools refuse malformed events and unfiled declarations
+        run: python3 tests/record_tools_check.py
       - name: Size limits and cross-file agreement
         run: python3 tools/count.py && python3 tests/red_counts.py
       - name: Third-party JSON Schema 2020-12 validation (schema and checker agree)

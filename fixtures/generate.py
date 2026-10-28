@@ -488,6 +488,13 @@ CASES = {
     # R10: extensions
     "cl1-pass-extension-fields": ("CL1", lambda r, p: extensions(p), "OK", "CL1", "none", None),
     "cl1-pass-refiled-with-provenance": ("CL1", lambda r, p: refiled(p), "OK", "CL1", "none", None),
+    # v0.9.7, J2: control case digest present and not all zeros
+    "cl1-fail-control-case-all-zeros": ("CL1", lambda r, p: p["controls"][0].update(
+        case={"sha256": "0" * 64}), "FAILED", "none", "none", "CL1-9"),
+    "cl1-fail-control-case-missing": ("CL1", lambda r, p: p["controls"][0].pop("case"),
+                                      "FAILED", "none", "none", "CR-2"),
+    # v0.9.7, J3: CL2-3 endpoint requirement
+    "cl2-pass-different-evaluator-endpoint": ("CL2", lambda r, p: None, "OK", "CL2", "none", None),
 }
 # Level boundaries: each passes the level below and fails the next for exactly one reason.
 BOUNDARIES = {"none|CL1": "cl1-fail-bar-frozen-late", "CL1|CL2": "cl2-fail-one-run-only",

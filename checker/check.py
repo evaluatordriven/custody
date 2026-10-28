@@ -266,6 +266,8 @@ def cl1_8(r, p, ctx):
 
 
 def cl1_9(r, p, ctx):
+    need([f"control {k['id']} has an all-zero case digest"
+          for k in p["controls"] if k["case"]["sha256"] == "0" * 64])
     for b in sorted({c["batch"] for c in p["checks"]}):
         here = [c for c in p["checks"] if c["batch"] == b]
         ctl = [k for k in p["controls"] if k["batch"] == b]

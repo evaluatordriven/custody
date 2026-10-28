@@ -4,6 +4,25 @@ Each release is a git tag, and each carries its own custody record in `record/`.
 may turn a record that read `OK` into one that reads `FAILED` (SPEC.md section 8); every such change is
 listed here under **Breaking**.
 
+## 0.9.7 (candidate)
+
+**Breaking** (what a producer must change)
+- CL1-9: a control's `case` is the digest of the case it ran on and may not be all zeros; a record whose
+  controls cite all-zero digests now reads `FAILED`.
+
+**Clarified** (the rules did not change)
+- CL2-3 explains why at least one model evaluator's endpoint differs from the maker's: it keeps one
+  operator from controlling both the work and its judge.
+
+**Added**
+- `tools/file_event.py` appends a `check` or `control` event to a custody log after checking that its
+  data has the record's fields, valid values, a non-zero control case digest, and matching evidence
+  files.
+- `tools/release_record.py` verifies the custody log, checks that every check and control in a
+  declarations file was filed after the last `artifact-produced` event, and builds the record.
+
+**Stranger test** — cycle r2 did not pass: minimax unobserved (0 of 3 sessions counted); nemotron did not meet the gate (0 of 3 counted sessions meeting); seed met the gate (3 of 3 counted sessions meeting). CL1-10 is open; see `record/STRANGER-TEST-v0.9.7.md`.
+
 ## 0.9.6 (candidate)
 
 **Changed**
