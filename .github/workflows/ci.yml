@@ -23,6 +23,8 @@ jobs:
           python3 checker/check.py examples/minimal/record.json --files examples/minimal --bar examples/minimal/bar.md --evidence examples/minimal/evidence
       - name: The committed example record is the one the quickstart builds
         run: git diff --exit-code examples/
+      - name: Examples declare the release's version
+        run: python3 tests/example_version_check.py
       - name: Custody log is tamper-evident and builds a valid record
         run: python3 tests/log_check.py
       - name: Record tools refuse malformed events and unfiled declarations

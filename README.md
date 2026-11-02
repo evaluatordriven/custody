@@ -11,8 +11,10 @@ Why the name: see "Why this name" in `SPEC.md`.
   [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
   [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.7, candidate.** Early. One reference checker exists, in this repository. Nobody is known
-to have adopted this specification, and nothing here implies endorsement by anyone. Each release carries
+**Status: v0.9.7, candidate.** Early. One reference checker exists, in this repository. Known
+implementations and their status are listed in the doctrine's README:
+<https://github.com/evaluatordriven/doctrine#the-custody-record>. Nothing here implies endorsement by
+anyone. Each release carries
 its own custody record in `record/`, kept with that release's tag; this release's record claims CL1,
 and states why not higher.
 
@@ -39,7 +41,7 @@ and states why not higher.
 Python 3.10 or newer, standard library only:
 
 ```sh
-git clone https://github.com/smoitozo/evaluatordriven && cd evaluatordriven
+git clone https://github.com/evaluatordriven/custody && cd custody
 python3 tools/make_record.py examples/minimal/inputs.json examples/minimal/record.json
 python3 checker/check.py examples/minimal/record.json --files examples/minimal --bar examples/minimal/bar.md --evidence examples/minimal/evidence
 ```
