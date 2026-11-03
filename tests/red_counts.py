@@ -6,16 +6,26 @@ name it. Standard library only. Exit 0 when every plant is caught.
 """
 import json
 import pathlib
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+
+def planted_version(root):
+    m = re.search(r"\bv(\d+)\.(\d+)\.(\d+)\b", (root / "SPEC.md").read_text(encoding="utf-8"))
+    major, minor, patch = (int(x) for x in m.groups())
+    return f"{major}.{minor}.{patch + 1}"
+
+
+VER = planted_version(ROOT)
 PLANTS = [  # (file, text to append or (old, new) to change, words the report must contain)
     ("README.md", "\nImplementers MUST read this.\n", "keyword MUST outside"),
     ("CONTRIBUTING.md", "\n| **bar** | a second meaning |\n", "term 'bar' defined again"),
-    ("README.md", "\nSee v0.9.8.\n", "version 0.9.8"),
+    ("README.md", f"\nSee v{VER}.\n", f"version {VER}"),
     ("SPEC.md", "\n## 9. Padding *(normative)*\n\n" + "word " * 2400, "normative words"),
     ("README.md", "\nThis repository claims CL3.\n", "claims CL3 but no record"),
     ("SPEC.md", "\nFive reference checkers exist, in this repository.\n", "reference checker(s) exist"),
@@ -52,7 +62,7 @@ def main():
                 target.write_text(target.read_text(encoding="utf-8").replace(*text, 1),
                                   encoding="utf-8")
             elif text is None:
-                target.write_text(json.dumps({"predicate": {"specVersion": "0.9.5",
+                target.write_text(json.dumps({"predicate": {"specVersion": VER,
                                                             "levelClaimed": "CL3"}}))
             else:
                 with open(target, "a", encoding="utf-8") as f:

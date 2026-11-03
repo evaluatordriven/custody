@@ -4,6 +4,38 @@ Each release is a git tag, and each carries its own custody record in `record/`.
 may turn a record that read `OK` into one that reads `FAILED` (SPEC.md section 8); every such change is
 listed here under **Breaking**.
 
+## 0.9.8 (candidate)
+
+**Breaking** (what a producer must change)
+- CL1-10: the referee in `checker/check.py` is now total and rejects malformed shapes in `checks` and
+  `disagreements` by failing `CL1-10` rather than crashing or accepting non-integer indices. Every
+  malformed shape now reads `FAILED` on `CL1-10`:
+  - an index in `disagreements[].checks` that is `true`, `false`, `1.0`, `"0"`, `-1`, `len(checks)`,
+    `null`, or `[0]`;
+  - `disagreements[].checks` itself missing, `null`, a string, a number, an object, or a list of one
+    element;
+  - `disagreements[].dimension` missing, `null`, a number, or a list;
+  - a `disagreements[]` entry that is not an object;
+  - `disagreements` as `null`, an object, a string, or missing where required;
+  - a `checks[]` entry that is not an object, has `dimension` missing, `null`, or a list, or has
+    `outcome` missing, a list, or an object.
+
+**Clarified** (the rules did not change)
+- CL2-3's conditional prose in SPEC.md §5.3 is replaced by a single fenced pseudocode block with
+  unchanged meaning; the requirement row keeps its rationale sentence and points to the block.
+- Human-readable level display in `tools/explain.py` and the README level table formats `CL1`, `CL2`,
+  and `CL3` as `CLn · process`, and in `tools/explain.py` prints a single line stating that a
+  conformance level certifies custody of the evaluation process rather than the quality of the artifact
+  or the substance or depth of the evaluators' readings.
+
+**Changed**
+- `tools/make_record.py` derives each control's `expected` and `outcome` from score rows rather than
+  trusting control event fields, exits nonzero naming the control `id` if a score row is missing or
+  disagrees with event values, names packages by role (`package-<role>.tar.gz`) while refusing if cited
+  bytes change, and emits disposition package references under `x-on` (converting legacy `on`).
+- `tests/red_counts.py` computes planted version strings dynamically from the repository's current
+  version in `SPEC.md`.
+
 ## 0.9.7 (candidate)
 
 **Breaking** (what a producer must change)

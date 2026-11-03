@@ -284,15 +284,30 @@ def cl1_9(r, p, ctx):
 
 
 def cl1_10(r, p, ctx):
-    named = {d["dimension"] for d in p["disagreements"]}
-    for d in {c["dimension"] for c in p["checks"]}:
-        if len({c["outcome"] for c in p["checks"] if c["dimension"] == d}) > 1 and d not in named:
-            raise Fail(f"checks of {d} disagree and the disagreement is not recorded")
-    dims = [c["dimension"] for c in p["checks"]]
-    for d in p["disagreements"]:
-        if len(d["checks"]) < 2 or any(not isinstance(i, int) or not 0 <= i < len(dims)
-                                       or dims[i] != d["dimension"] for i in d["checks"]):
+    if not isinstance(p, dict):
+        raise Fail("predicate is not an object")
+    checks, dis = p.get("checks"), p.get("disagreements")
+    if not KIND["nonempty"](checks) or not isinstance(dis, list):
+        raise Fail("checks or disagreements missing or not a list")
+    for c in checks:
+        if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
+                or c.get("outcome") not in OUTCOMES):
+            raise Fail("malformed check entry in checks")
+    for d in dis:
+        if not isinstance(d, dict) or not KIND["str"](d.get("dimension")):
+            raise Fail("disagreement entry missing or invalid dimension")
+        dc = d.get("checks")
+        if not isinstance(dc, list) or len(dc) < 2:
             raise Fail(f"disagreement on {d['dimension']} does not name two of its checks")
+        for i in dc:
+            if not KIND["int"](i) or not (0 <= i < len(checks)):
+                raise Fail(f"disagreement on {d['dimension']} does not name two of its checks")
+            if checks[i]["dimension"] != d["dimension"]:
+                raise Fail(f"disagreement on {d['dimension']} does not name two of its checks")
+    named = {d["dimension"] for d in dis}
+    for d in {c["dimension"] for c in checks}:
+        if len({c["outcome"] for c in checks if c["dimension"] == d}) > 1 and d not in named:
+            raise Fail(f"checks of {d} disagree and the disagreement is not recorded")
 
 
 def cl1_11(r, p, ctx):  # owns violations and separationGaps, presence included (SPEC CR-2)

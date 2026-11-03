@@ -11,7 +11,7 @@ Why the name: see "Why this name" in `SPEC.md`.
   [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
   [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.7, candidate.** Early. One reference checker exists, in this repository. Known
+**Status: v0.9.8, candidate.** Early. One reference checker exists, in this repository. Known
 implementations and their status are listed in the doctrine's README:
 <https://github.com/evaluatordriven/doctrine#the-custody-record>. Nothing here implies endorsement by
 anyone. Each release carries
@@ -91,9 +91,9 @@ The requirements live in `SPEC.md` section 5; this is only orientation.
 
 | Level | In one line |
 |---|---|
-| CL1 | All four moves: bar first and approved, work pinned, read independently beside a control, record kept with a named decision |
-| CL2 | CL1, plus repeated runs with their spread, and model readers on a separate family and endpoint |
-| CL3 | CL2, plus each reader shown failing a held-out planted case first, and a signed, logged record |
+| CL1 · process | All four moves: bar first and approved, work pinned, read independently beside a control, record kept with a named decision |
+| CL2 · process | CL1, plus repeated runs with their spread, and model readers on a separate family and endpoint |
+| CL3 · process | CL2, plus each reader shown failing a held-out planted case first, and a signed, logged record |
 | baseline | The bar came after the work started: a valid description, with no level |
 
 ## Licenses

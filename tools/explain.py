@@ -19,6 +19,14 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 STATE = {"given": "accepted", "not_yet_given": "not yet accepted", "declined": "declined"}
 MADE_BY = {"person": "made by a person", "model": "made by an AI model", "script": "made by a script"}
 OUTCOME = {"conforms": "conforms", "does_not_conform": "does not conform", "unobserved": "not observed"}
+LEVELS = {"CL1", "CL2", "CL3"}
+DISCLAIMER = ("   A conformance level certifies custody of the evaluation process; it does not "
+              "certify the quality of the artifact or the substance or depth of the evaluators' "
+              "readings.")
+
+
+def fmt_level(lv):
+    return f"{lv} · process" if lv in LEVELS else str(lv)
 
 
 def checker():
@@ -35,8 +43,12 @@ def fp(d):
 def explain(r, report):
     p = r.get("predicate", {})
     bar, mk = p.get("bar", {}), p.get("maker", {})
-    out = [f"CUSTODY RECORD — claims level {p.get('levelClaimed', '?')}, "
-           f"specification {p.get('specVersion', '?')}", ""]
+    claim = p.get("levelClaimed", "?")
+    out = [f"CUSTODY RECORD — claims level {fmt_level(claim)}, "
+           f"specification {p.get('specVersion', '?')}"]
+    if claim in LEVELS:
+        out.append(DISCLAIMER)
+    out.append("")
     out.append("1. What was made?")
     subj = r.get("subject", [])
     out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
@@ -116,8 +128,11 @@ def explain(r, report):
     ret = p.get("retention") or {}
     out.append(f"   Kept at {ret.get('location', '?')}; "
                + ("public." if ret.get("public") else "not public."))
+    reached = report.get("levelAchieved")
     out += ["", f"THE CHECKER'S ANSWER: {report['verdict']}, level reached "
-                f"{report.get('levelAchieved')}, next step: {report.get('routing')}"]
+                f"{fmt_level(reached)}, next step: {report.get('routing')}"]
+    if reached in LEVELS:
+        out.append(DISCLAIMER)
     for rid, v in report.get("requirements", {}).items():
         if v["status"] != "OK":
             out.append(f"   - {rid} {v['status']}: {v['detail']}")
