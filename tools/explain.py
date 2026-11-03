@@ -44,9 +44,10 @@ def explain(r, report):
     p = r.get("predicate", {})
     bar, mk = p.get("bar", {}), p.get("maker", {})
     claim = p.get("levelClaimed", "?")
-    out = [f"CUSTODY RECORD — claims level {fmt_level(claim)}, "
+    reached = report.get("levelAchieved")
+    out = [f"CUSTODY RECORD — claims level {fmt_level(claim) if reached in LEVELS else claim}, "
            f"specification {p.get('specVersion', '?')}"]
-    if claim in LEVELS:
+    if reached in LEVELS:
         out.append(DISCLAIMER)
     out.append("")
     out.append("1. What was made?")
@@ -128,7 +129,6 @@ def explain(r, report):
     ret = p.get("retention") or {}
     out.append(f"   Kept at {ret.get('location', '?')}; "
                + ("public." if ret.get("public") else "not public."))
-    reached = report.get("levelAchieved")
     out += ["", f"THE CHECKER'S ANSWER: {report['verdict']}, level reached "
                 f"{fmt_level(reached)}, next step: {report.get('routing')}"]
     if reached in LEVELS:
