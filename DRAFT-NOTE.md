@@ -23,7 +23,7 @@
 
 ## 2. Record verdicts (G5.4)
 
-Run at base (`v0.9.7`) and at this commit (`v0.9.8` candidate), the one record in the repository (`examples/minimal/record.json`) reads `OK` / `CL1` at both. No record's verdict changed.
+Run at the base commit and at this commit, the one record in the repository (`examples/minimal/record.json`) reads `OK` / `CL1` at both. No record's verdict changed.
 
 ## 3. What changed and what did not
 
