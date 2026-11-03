@@ -20,9 +20,9 @@ STATE = {"given": "accepted", "not_yet_given": "not yet accepted", "declined": "
 MADE_BY = {"person": "made by a person", "model": "made by an AI model", "script": "made by a script"}
 OUTCOME = {"conforms": "conforms", "does_not_conform": "does not conform", "unobserved": "not observed"}
 LEVELS = {"CL1", "CL2", "CL3"}
-DISCLAIMER = ("   A conformance level certifies custody of the evaluation process; it does not "
-              "certify the quality of the artifact or the substance or depth of the evaluators' "
-              "readings.")
+DISCLAIMER = ("   A record certifies nothing: a conforming record makes work answerable, not "
+              "correct, and no requirement claims that conforming work is good (SPEC.md §1; "
+              "README.md).")
 
 
 def fmt_level(lv):

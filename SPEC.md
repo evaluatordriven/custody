@@ -213,83 +213,69 @@ CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, read
 | CL2-2 | Every model evaluator records `family`, `identifier`, `endpoint`, and `readOnly: true`. | structural |
 | CL2-3 | The `CL2_3` block below returns `OK`. Requiring an evaluator whose endpoint differs from the maker's keeps one operator from controlling both the work and its judge. | semantic |
 
+```python
+01: def CL2_3(predicate):
+02:   for a in predicate.bar.approvals:                                                 # <- (a) "No buyer or specialist approval is by the maker"
+03:     if a.role in {"buyer", "specialist"} and a.by == predicate.maker.name:          # <- (a) "No buyer or specialist approval is by the maker"
+04:       return FAILED                                                                 # <- (a) "No buyer or specialist approval is by the maker"
+05:   if predicate.bar.author == predicate.maker.name:                                  # <- (a) "and the maker did not write the bar"
+06:     return FAILED                                                                   # <- (a) "and the maker did not write the bar"
+07:   if predicate.maker.kind != "model":                                               # <- (b),(c) "If the maker's kind is model"
+08:     return OK                                                                       # <- (b),(c) "If the maker's kind is model"
+09:   if predicate.maker.model is null:                                                 # <- (b) "`maker.model` is present"
+10:     return FAILED                                                                   # <- (b) "`maker.model` is present"
+11:   m_fam = predicate.maker.model.family                                              # <- (b) "the maker's" `family`
+12:   m_ep = predicate.maker.model.endpoint                                             # <- (b) "the maker's" `endpoint`
+13:   model_evs = [e for e in predicate.evaluators if e.kind == "model"]                # <- (b) "model evaluators"
+14:   def endpoints(e):                                                                 # <- (b) "its endpoints (its model's `endpoint`, and any `endpoint` its checks name)"
+15:     return {e.model.endpoint} | {                                                   # <- (b) "its model's `endpoint`"
+16:       c.endpoint for c in predicate.checks                                          # <- (b) "and any `endpoint` its checks name"
+17:       if c.evaluator == e.id and c.endpoint is present                              # <- (b) "any `endpoint` its checks name"
+18:     }
+19:   if model_evs is not empty:                                                        # <- (b) "if the record has model evaluators"
+20:     diff_ep = [                                                                     # <- (b) evaluators with "none of its endpoints ... equals the maker's" and disclosed family
+21:       e for e in model_evs                                                          # <- (b) "model evaluators"
+22:       if e.model.family != "undisclosed"                                            # <- "an evaluator whose `family` is `undisclosed` ... never differs from the maker"
+23:       and m_ep not in endpoints(e)                                                  # <- (b) "none of its endpoints ... equals the maker's"
+24:     ]
+25:     if m_fam == "undisclosed":                                                      # <- "if the maker's `family` is `undisclosed`"
+26:       if len({e.model.family for e in diff_ep}) < 2:                                # <- "(b) holds only when model evaluators from at least two different disclosed families each have no endpoint equal to the maker's"
+27:         return FAILED                                                               # <- "(b) holds only when model evaluators from at least two different disclosed families each have no endpoint equal to the maker's"
+28:     else:                                                                           # <- (b) disclosed maker `family`
+29:       if not any(e.model.family != m_fam for e in diff_ep):                         # <- (b) "at least one of them has a `family` different from the maker's, and none of its endpoints ... equals the maker's"
+30:         return FAILED                                                               # <- (b) "at least one of them has a `family` different from the maker's, and none of its endpoints ... equals the maker's"
+31:   evs_by_id = {e.id: e for e in predicate.evaluators}                               # <- (c) "all the evaluators with a check of that dimension; persons and scripts count toward that total"
+32:   for d in predicate.bar.dimensions:                                                # <- (c) "for each dimension"
+33:     r_ids = {c.evaluator for c in predicate.checks if c.dimension == d.id}          # <- (c) "all the evaluators with a check of that dimension"
+34:     r_evs = [evs_by_id[id] for id in r_ids]                                         # <- (c) "all the evaluators with a check of that dimension; persons and scripts count toward that total"
+35:     undisc = [e for e in r_evs if e.kind == "model" and e.model.family == "undisclosed"]  # <- "every evaluator on that dimension whose `family` is `undisclosed`"
+36:     if m_fam == "undisclosed":                                                      # <- "if the maker's `family` is `undisclosed` ... in (c), for each dimension"
+37:       disc_fams = [e.model.family for e in r_evs if e.kind == "model" and e.model.family != "undisclosed"]  # <- "whichever single disclosed family has the most evaluators on that dimension"
+38:       largest = max((count(f in disc_fams) for f in set(disc_fams)), default=0)     # <- "whichever single disclosed family has the most evaluators on that dimension"
+39:       same = largest + len(undisc)                                                  # <- "those of whichever single disclosed family has the most evaluators on that dimension, together with every evaluator on that dimension whose `family` is `undisclosed`"
+40:     else:                                                                           # <- (c) disclosed maker `family`
+41:       same = count(e for e in r_evs if e.kind == "model" and e.model.family == m_fam) + len(undisc)  # <- (c) "evaluators of the maker's `family`" + "an evaluator whose `family` is `undisclosed` always counts as the maker's `family`"
+42:     if 2 * same > len(r_evs):                                                       # <- (c) "twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension"
+43:       return FAILED                                                                 # <- (c) "twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension"
+44:   return OK
 ```
-CL2_3(predicate):
-  # (a) No buyer or specialist approval is by the maker, and the maker did not write the bar.
-  for a in predicate.bar.approvals:
-    if a.role in {"buyer", "specialist"} and a.by == predicate.maker.name:
-      return FAILED
-  if predicate.bar.author == predicate.maker.name:
-    return FAILED
 
-  if predicate.maker.kind != "model":
-    return OK
+*Provenance of the `CL2_3` block against the base CL2-3 paragraph (non-normative):*
 
-  # (b) maker.model is present; and if the record has model evaluators, at least one of them
-  # has a family different from the maker's and none of its endpoints equals the maker's
-  # (others may share the maker's family or endpoint).
-  m_model = predicate.maker.model
-  if m_model is null:
-    return FAILED
-  m_fam = m_model.family
-  m_ep = m_model.endpoint
-
-  evs_by_id = {e.id: e for e in predicate.evaluators}
-  model_evs = [e for e in predicate.evaluators if e.kind == "model"]
-
-  def endpoints(e):
-    eps = {e.model.endpoint}
-    for c in predicate.checks:
-      if c.evaluator == e.id and c.endpoint is present:
-        eps.add(c.endpoint)
-    return eps
-
-  # In (b) and (c), "undisclosed" is read the least favourable way:
-  # an evaluator with family "undisclosed" always counts as the maker's family and never differs.
-  if model_evs is not empty:
-    # Candidate evaluators whose family is disclosed and none of whose endpoints equals m_ep:
-    diff_ep = [
-      e for e in model_evs
-      if e.model is not null
-      and e.model.family != "undisclosed"
-      and m_ep not in endpoints(e)
-    ]
-    if m_fam == "undisclosed":
-      # Maker's family could be any one disclosed family: needs >= 2 distinct disclosed families.
-      if len({e.model.family for e in diff_ep}) < 2:
-        return FAILED
-    else:
-      # At least one single evaluator has both family != m_fam and m_ep not in endpoints(e).
-      if not any(e.model.family != m_fam for e in diff_ep):
-        return FAILED
-
-  # (c) Per dimension, 2 * same-family evaluators <= all evaluators with a check of that dimension
-  # (persons and scripts count toward the total).
-  for d in predicate.bar.dimensions:
-    r_ids = {c.evaluator for c in predicate.checks if c.dimension == d.id and c.evaluator in evs_by_id}
-    r_evs = [evs_by_id[id] for id in r_ids]
-    undisc = [
-      e for e in r_evs
-      if e.kind == "model" and (e.model is null or e.model.family == "undisclosed")
-    ]
-    if m_fam == "undisclosed":
-      # Largest single disclosed family on d, together with every undisclosed evaluator on d.
-      disc_fams = [
-        e.model.family for e in r_evs
-        if e.kind == "model" and e.model is not null and e.model.family != "undisclosed"
-      ]
-      largest = max((count(f in disc_fams) for f in set(disc_fams)), default=0)
-      same = largest + len(undisc)
-    else:
-      same = count(
-        e for e in r_evs
-        if e.kind == "model" and e.model is not null and e.model.family == m_fam
-      ) + len(undisc)
-    if 2 * same > len(r_evs):
-      return FAILED
-
-  return OK
-```
+| Clause in base CL2-3 paragraph | Lines in `CL2_3` |
+|---|---|
+| `(a) No buyer or specialist approval is by the maker` | 02–04 |
+| `and the maker did not write the bar.` | 05–06 |
+| `(b) If the maker's kind is model,` | 07–08 |
+| `maker.model is present;` | 09–10 |
+| `and if the record has model evaluators,` | 13, 19 |
+| `at least one of them has a family different from the maker's, and none of its endpoints (its model's endpoint, and any endpoint its checks name) equals the maker's.` | 11–12, 14–18, 20–24, 28–30 |
+| `Requiring an evaluator whose endpoint differs from the maker's keeps one operator from controlling both the work and its judge.` | No line in `CL2_3`: this sentence is non-operational rationale and is kept in the CL2-3 table cell above. |
+| `Others may share the maker's family or endpoint.` | No separate line in `CL2_3`: carried by the existential quantifier `any(...)` on line 29 (and `len(...) < 2` on line 26), which inspects whether the required evaluator(s) exist without restricting any other evaluators in `model_evs`. |
+| `(c) If the maker's kind is model, then for each dimension, twice the number of evaluators of the maker's family is no more than the number of all the evaluators with a check of that dimension; persons and scripts count toward that total.` | 07–08, 31–34, 40–43 |
+| `In (b) and (c), undisclosed is read the least favourable way: an evaluator whose family is undisclosed always counts as the maker's family and never differs from the maker;` | 22 (in `diff_ep`, excluding `undisclosed` from differing in (b)), 35, 41 (counting `undisclosed` as the maker's `family` in (c)) |
+| `if the maker's family is undisclosed, it could be any one disclosed family, so (b) holds only when model evaluators from at least two different disclosed families each have no endpoint equal to the maker's,` | 25–27 |
+| `and in (c), for each dimension, the evaluators of the maker's family are those of whichever single disclosed family has the most evaluators on that dimension, together with every evaluator on that dimension whose family is undisclosed.` | 35–39 |
 
 *Worked example for CL2-3 (non-normative).* The maker is a model of family `gpt`, answered at
 `api.a.example`. Dimension D1 is read by E1 (`gpt`, at `api.b.example`), E2 (`undisclosed`, at

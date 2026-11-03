@@ -51,15 +51,16 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def role_name(val, role="artifact"):
+def role_name(val, role=None):
+    if role:
+        r = str(role).strip()
+        if "/" in r or "\\" in r:
+            sys.exit(f"package role {role!r} encodes a path instead of a role name")
+        return r if r.startswith("package-") else f"package-{r}.tar.gz"
     s = str(val).strip()
     if "/" in s or "\\" in s:
-        stem = pathlib.Path(s.replace("\\", "/")).stem
-        for suf in (".tar", ".tgz"):
-            if stem.endswith(suf):
-                stem = stem[:-len(suf)]
-        return f"package-{stem or role}.tar.gz"
-    return s
+        sys.exit(f"package {val!r} encodes a source path and lacks an explicit role name")
+    return s if s.startswith("package-") else f"package-{s}.tar.gz"
 
 
 def resolve(node, base):
@@ -71,8 +72,7 @@ def resolve(node, base):
             return {"name": path.name, "sha256": digest(path)}
         if "package" in node and set(node) <= {"package", "role", "sha256"}:
             p = base / node["package"]
-            r = node.get("role") or role_name(node["package"])
-            pkg = base / (r if r.startswith("package-") else f"package-{r}.tar.gz")
+            pkg = base / role_name(node["package"], node.get("role"))
             b = p.read_bytes()
             h = hashlib.sha256(b).hexdigest()
             if "sha256" in node and node["sha256"] != h:
@@ -210,38 +210,41 @@ def check_packages(events, dirs):
         if e.get("type") in ("package", "package-built", "artifact-produced", "disposition"):
             for k in ("package", "x-on", "on", "artifact"):
                 if k in d:
-                    pkgs.append((d[k], d.get("sha256") or d.get("digest")))
+                    pkgs.append((d[k], d.get("sha256") or d.get("digest"), d.get("role")))
         for sub in d.values():
             if isinstance(sub, dict) and ("name" in sub or "package" in sub) and "sha256" in sub:
-                pkgs.append((sub.get("name") or sub.get("package"), sub["sha256"]))
-        for pkg, h in pkgs:
+                pkgs.append((sub.get("name") or sub.get("package"), sub["sha256"], sub.get("role")))
+        for pkg, h, role in pkgs:
             if isinstance(pkg, dict):
                 h = h or pkg.get("sha256") or (pkg.get("digest") or {}).get("sha256")
+                role = role or pkg.get("role")
                 pkg = pkg.get("name") or pkg.get("package") or pkg.get("role")
             if isinstance(h, dict):
                 h = h.get("sha256")
-            if not pkg:
+            if not pkg and not role:
                 continue
-            rname = role_name(pkg)
-            if "/" in str(pkg) or "\\" in str(pkg):
+            if pkg and ("/" in str(pkg) or "\\" in str(pkg)) and not role:
                 sys.exit(f"package {pkg!r} encodes a source path instead of a role name")
+            rname = role_name(pkg, role)
             if h and HEX64.match(str(h)):
                 if rname in seen and seen[rname] != h:
                     sys.exit(f"package {rname} digest changed across rebuilds ({seen[rname]} != {h})")
                 seen[rname] = str(h)
                 for folder in dirs:
-                    f = folder / str(pkg)
-                    if f.is_file() and digest(f) != str(h):
-                        sys.exit(f"cited package {pkg} does not match its sha256 {h}")
+                    for cand in ({str(pkg), rname} if pkg else {rname}):
+                        f = folder / cand
+                        if f.is_file() and digest(f) != str(h):
+                            sys.exit(f"cited package {cand} does not match its sha256 {h}")
 
 
 def fix_disp(disp):
     out = dict(disp)
+    role = out.pop("role", None)
     if "on" in out:
         val = out.pop("on")
-        out.setdefault("x-on", role_name(val) if isinstance(val, str) else val)
+        out.setdefault("x-on", role_name(val, role) if isinstance(val, str) else val)
     if "x-on" in out and isinstance(out["x-on"], str):
-        out["x-on"] = role_name(out["x-on"])
+        out["x-on"] = role_name(out["x-on"], role)
     return out
 
 
