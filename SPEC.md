@@ -229,7 +229,7 @@ CL2_3(predicate):
   # has a family different from the maker's and none of its endpoints equals the maker's
   # (others may share the maker's family or endpoint).
   m_model = predicate.maker.model
-  if m_model is null or not is_family(m_model.family) or not is_host(m_model.endpoint):
+  if m_model is null:
     return FAILED
   m_fam = m_model.family
   m_ep = m_model.endpoint

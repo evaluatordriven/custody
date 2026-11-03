@@ -840,6 +840,12 @@
       "routing": "to approver",
       "fails": "CL1-10"
     },
+    "cl1-fail-disagreements-missing": {
+      "verdict": "FAILED",
+      "levelAchieved": "none",
+      "routing": "to approver",
+      "fails": "CL1-10"
+    },
     "cl1-fail-checks-entry-not-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
@@ -914,6 +920,7 @@
     "cl1-fail-disagreements-null",
     "cl1-fail-disagreements-object",
     "cl1-fail-disagreements-string",
+    "cl1-fail-disagreements-missing",
     "cl1-fail-checks-entry-not-object",
     "cl1-fail-checks-dimension-missing",
     "cl1-fail-checks-dimension-null",

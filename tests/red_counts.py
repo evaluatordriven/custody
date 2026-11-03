@@ -16,8 +16,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 def planted_version(root):
-    m = re.search(r"\bv(\d+)\.(\d+)\.(\d+)\b", (root / "SPEC.md").read_text(encoding="utf-8"))
-    major, minor, patch = (int(x) for x in m.groups())
+    version = re.search(r"\*\*Version (\d+\.\d+\.\d+)", (root / "SPEC.md").read_text(encoding="utf-8")).group(1)
+    major, minor, patch = (int(x) for x in version.split("."))
     return f"{major}.{minor}.{patch + 1}"
 
 
@@ -52,7 +52,12 @@ def main():
     if problems(ROOT):
         print("count.py is not green on the repository itself")
         return 1
-    for name, text, expect in PLANTS + [("record/r.json", None, "claimed level (CL3)")]:
+    ver = planted_version(ROOT)
+    plants = [
+        (name, text if not isinstance(text, str) else text.replace(VER, ver), expect.replace(VER, ver))
+        for name, text, expect in PLANTS
+    ]
+    for name, text, expect in plants + [("record/r.json", None, "claimed level (CL3)")]:
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp) / "repo"
             shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git"))
@@ -62,7 +67,7 @@ def main():
                 target.write_text(target.read_text(encoding="utf-8").replace(*text, 1),
                                   encoding="utf-8")
             elif text is None:
-                target.write_text(json.dumps({"predicate": {"specVersion": VER,
+                target.write_text(json.dumps({"predicate": {"specVersion": ver,
                                                             "levelClaimed": "CL3"}}))
             else:
                 with open(target, "a", encoding="utf-8") as f:
