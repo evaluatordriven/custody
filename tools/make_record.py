@@ -51,16 +51,20 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def role_name(val, role=None):
+def role_name(val, role=None, require_role=False):
     if role:
         r = str(role).strip()
         if "/" in r or "\\" in r:
             sys.exit(f"package role {role!r} encodes a path instead of a role name")
         return r if r.startswith("package-") else f"package-{r}.tar.gz"
-    s = str(val).strip()
-    if "/" in s or "\\" in s:
-        sys.exit(f"package {val!r} encodes a source path and lacks an explicit role name")
-    return s if s.startswith("package-") else f"package-{s}.tar.gz"
+    s = str(val).strip() if val is not None else ""
+    if s.startswith("package-") and "/" not in s and "\\" not in s:
+        return s
+    if require_role:
+        sys.exit(f"package {val!r} lacks an explicit role name; pass 'role' (e.g. 'role': 'candidate')")
+    if "/" in s or "\\" in s or ("." in s and not s.endswith(".tar.gz")):
+        sys.exit(f"package {val!r} names a source file or path and lacks an explicit role name")
+    return f"package-{s}.tar.gz"
 
 
 def resolve(node, base):
@@ -72,7 +76,7 @@ def resolve(node, base):
             return {"name": path.name, "sha256": digest(path)}
         if "package" in node and set(node) <= {"package", "role", "sha256"}:
             p = base / node["package"]
-            pkg = base / role_name(node["package"], node.get("role"))
+            pkg = base / role_name(node["package"], node.get("role"), require_role=True)
             b = p.read_bytes()
             h = hashlib.sha256(b).hexdigest()
             if "sha256" in node and node["sha256"] != h:
@@ -223,8 +227,6 @@ def check_packages(events, dirs):
                 h = h.get("sha256")
             if not pkg and not role:
                 continue
-            if pkg and ("/" in str(pkg) or "\\" in str(pkg)) and not role:
-                sys.exit(f"package {pkg!r} encodes a source path instead of a role name")
             rname = role_name(pkg, role)
             if h and HEX64.match(str(h)):
                 if rname in seen and seen[rname] != h:
