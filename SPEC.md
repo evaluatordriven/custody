@@ -216,9 +216,9 @@ CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, read
 ```python
 01: def CL2_3(predicate):
 02:   for a in predicate.bar.approvals:                                                 # <- (a) "No buyer or specialist approval is by the maker"
-03:     if a.role in {"buyer", "specialist"} and a.by == predicate.maker.name:          # <- (a) "No buyer or specialist approval is by the maker"
+03:     if a.role in {"buyer", "specialist"} and a.by.strip().casefold() == predicate.maker.name.strip().casefold():  # <- (a) "No buyer or specialist approval is by the maker"
 04:       return FAILED                                                                 # <- (a) "No buyer or specialist approval is by the maker"
-05:   if predicate.bar.author == predicate.maker.name:                                  # <- (a) "and the maker did not write the bar"
+05:   if predicate.bar.author.strip().casefold() == predicate.maker.name.strip().casefold():  # <- (a) "and the maker did not write the bar"
 06:     return FAILED                                                                   # <- (a) "and the maker did not write the bar"
 07:   if predicate.maker.kind != "model":                                               # <- (b),(c) "If the maker's kind is model"
 08:     return OK                                                                       # <- (b),(c) "If the maker's kind is model"
