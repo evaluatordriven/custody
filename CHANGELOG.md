@@ -27,8 +27,9 @@ listed here under **Breaking**.
   unchanged meaning; the requirement row keeps its rationale sentence and points to the block.
 - Human-readable level display in `tools/explain.py` and the README level table formats `CL1`, `CL2`,
   and `CL3` as `CLn · process`, and in `tools/explain.py` prints, directly after each level it
-  prints, one line stating that a conformance level certifies custody of the evaluation process
-  rather than the quality of the artifact or the substance or depth of the evaluators' readings.
+  prints, one line saying what the level does not certify: the quality of the work, and the
+  substance or depth of the readings. The line claims nothing for the record; it rests on
+  SPEC.md §1 ("answerable, not correct") and README.md ("a record certifies nothing").
   `explain.py` prints a level in two places, so the line appears twice in a full report.
 
 **Changed**
