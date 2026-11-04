@@ -229,8 +229,13 @@ def load_scores(data, events, base, log_path):
         d = e.get("data")
         if not isinstance(d, dict):
             continue
-        if e.get("type") in ("score", "score-row", "control-score", "scores", "control"):
-            for sub in (d.get("scoreRow"), d.get("score_row"), d.get("score"), d):
+        t = e.get("type")
+        if t in ("score", "score-row", "control-score", "scores", "control"):
+            # Control events do not register their own top-level data as a score row (G2.3).
+            subs = (d.get("scoreRow"), d.get("score_row"), d.get("score"))
+            if t != "control":
+                subs = subs + (d,)
+            for sub in subs:
                 if isinstance(sub, dict):
                     add(sub, cid=d.get("id"), ev=d.get("evaluator"), b=d.get("batch"))
             for k in ("scores", "scoreRows", "rows"):
@@ -347,9 +352,10 @@ def from_log(data, log, base=None):
                     cid = str(d["id"])
                     ev = str(d["evaluator"])
                     b = str(d["batch"])
+                    # Fall back to the event's own data only when no score rows exist at all (G2.3).
                     sr = (scores.get((cid, b, ev)) or scores.get((cid, ev)) or scores.get(cid)
                           or parse_row(d.get("scoreRow") or d.get("score_row") or d.get("score"))
-                          or parse_row(d))
+                          or (not scores and parse_row(d)))
                     if not sr:
                         sys.exit(f"control {cid}: missing score row")
                     exp, out = sr

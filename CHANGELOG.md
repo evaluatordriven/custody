@@ -26,9 +26,10 @@ listed here under **Breaking**.
 - CL2-3's conditional prose in SPEC.md §5.3 is replaced by a single fenced pseudocode block with
   unchanged meaning; the requirement row keeps its rationale sentence and points to the block.
 - Human-readable level display in `tools/explain.py` and the README level table formats `CL1`, `CL2`,
-  and `CL3` as `CLn · process`, and in `tools/explain.py` prints a single line stating that a
-  conformance level certifies custody of the evaluation process rather than the quality of the artifact
-  or the substance or depth of the evaluators' readings.
+  and `CL3` as `CLn · process`, and in `tools/explain.py` prints, directly after each level it
+  prints, one line stating that a conformance level certifies custody of the evaluation process
+  rather than the quality of the artifact or the substance or depth of the evaluators' readings.
+  `explain.py` prints a level in two places, so the line appears twice in a full report.
 
 **Changed**
 - `tools/make_record.py` derives each control's `expected` and `outcome` from score rows rather than
