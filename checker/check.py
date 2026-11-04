@@ -124,6 +124,20 @@ ENUMS = {"levelClaimed": {"CL1", "CL2", "CL3", "baseline"}, "role": {"buyer", "s
          {"given", "not_yet_given", "declined"}, "requirement": {"CL1-15", "CL2-4", "CL3-3"}}
 
 
+def shape_bad(p, field, spec, optional=None):
+    """CR-2's own shape test for a list field, so a CL1 rule defers to it (RULING-G5.1)."""
+    bad = []
+    items = p.get(field)
+    if not isinstance(items, list):
+        return [f"{field} is not a list"]
+    for i, e in enumerate(items):
+        if not isinstance(e, dict):
+            bad.append(f"{field}[{i}] is not an object")
+            continue
+        fields(e, spec, f"{field}[{i}]", bad, optional)
+    return bad
+
+
 def fields(obj, spec, where, bad, optional=None):
     for key, kind in list(spec.items()) + [(k, v) for k, v in (optional or {}).items() if k in obj]:
         v = obj.get(key, ...)
@@ -174,6 +188,8 @@ def cl1_1(r, p, ctx):
 
 
 def cl1_2(r, p, ctx):  # owns each dimension's fields, scale included (SPEC CR-2)
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     bad = []
     for i, d in enumerate(x if isinstance(x, dict) else {} for x in p["bar"]["dimensions"]):
         fields(d, S("id:str criterion:str scale:dict?"), f"bar.dimensions[{i}]", bad)  # + SUB
@@ -232,6 +248,8 @@ def cl1_6(r, p, ctx):
 
 
 def cl1_7(r, p, ctx):
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     need([f"no check filed for {d['id']}" for d in p["bar"]["dimensions"]
           if d["id"] not in {c["dimension"] for c in p["checks"]}])
 
@@ -242,10 +260,8 @@ def cl1_8(r, p, ctx):
     # Structural precedence (RULING-G5.1): every entry's shape is checked before any entry
     # is judged, so one malformed entry leaves the field to CR-2 rather than letting an
     # earlier entry fail CL1-8 first.
-    for i, e in enumerate(p["checks"]):
-        if (not isinstance(e, dict) or not KIND["str"](e.get("dimension"))
-                or not KIND["str"](e.get("evaluator"))):
-            raise Unchecked(f"checks[{i}] has a missing or malformed field; see CR-2")
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("checks has a missing or malformed field; see CR-2")
     for where, c in ((f"checks[{i}]", c) for i, c in enumerate(p["checks"])):
         if c["dimension"] not in dims or c["evaluator"] not in evals:
             raise Fail(f"{where} names an unknown dimension or evaluator")
@@ -273,6 +289,8 @@ def cl1_8(r, p, ctx):
 
 
 def cl1_9(r, p, ctx):
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     need([f"control {k['id']} has an all-zero case digest"
           for k in p["controls"] if k["case"]["sha256"] == "0" * 64])
     for b in sorted({c["batch"] for c in p["checks"]}):
@@ -296,10 +314,8 @@ def cl1_10(r, p, ctx):
     checks, dis = p["checks"], p["disagreements"]
     if not isinstance(checks, list) or not isinstance(dis, list):
         raise Unchecked("blocked by a missing or malformed field; see CR-2")
-    for c in checks:
-        if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
-                or not isinstance(c.get("outcome"), str) or c.get("outcome") not in OUTCOMES):
-            raise Unchecked("blocked by a missing or malformed field; see CR-2")
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     # Structural precedence (RULING-G5.1): the field's own shape is validated in full before any
     # of it is judged, so one malformed entry anywhere leaves the field to CR-2 rather than
     # letting an earlier entry's defect report CL1-10. What is INSIDE `checks` stays CL1-10's:
@@ -325,6 +341,8 @@ def cl1_10(r, p, ctx):
 
 
 def cl1_11(r, p, ctx):  # owns violations and separationGaps, presence included (SPEC CR-2)
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     bad = []
     fields(p, S("violations:list separationGaps:list"), "predicate", bad)
     for i, v in enumerate(x if isinstance(x, dict) else {} for x in p.get("violations") or []):
@@ -341,6 +359,8 @@ def cl1_11(r, p, ctx):  # owns violations and separationGaps, presence included 
 
 
 def cl1_13(r, p, ctx):
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     d, unobserved = p["disposition"], {c["dimension"] for c in p["checks"]
                                        if c["outcome"] == "unobserved"}
     if d["state"] == "given" and not unobserved <= set(d["acknowledgesUnobserved"]):
@@ -386,6 +406,8 @@ def cl1_15(r, p, ctx):
 
 
 def cl1_16(r, p, ctx):
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     ids = {e["id"] for e in p["evaluators"]}
     need([f"control {k['id']} names an unlisted evaluator {k['evaluator']}"
           for k in p["controls"] if k["evaluator"] not in ids])
@@ -400,6 +422,8 @@ def cl1_16(r, p, ctx):
 
 
 def cl1_17(r, p, ctx):
+    if shape_bad(p, "checks", ITEMS["checks"], OPTIONAL.get("checks")):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     scales = {d["id"]: d["scale"] for d in p["bar"]["dimensions"]}
     for i, c in enumerate(p["checks"]):
         sc = scales.get(c["dimension"])
