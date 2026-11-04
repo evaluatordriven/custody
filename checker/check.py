@@ -239,10 +239,14 @@ def cl1_7(r, p, ctx):
 def cl1_8(r, p, ctx):
     dims, evals = {d["id"] for d in p["bar"]["dimensions"]}, {e["id"] for e in p["evaluators"]}
     observed = []
+    # Structural precedence (RULING-G5.1): every entry's shape is checked before any entry
+    # is judged, so one malformed entry leaves the field to CR-2 rather than letting an
+    # earlier entry fail CL1-8 first.
+    for i, e in enumerate(p["checks"]):
+        if (not isinstance(e, dict) or not KIND["str"](e.get("dimension"))
+                or not KIND["str"](e.get("evaluator"))):
+            raise Unchecked(f"checks[{i}] has a missing or malformed field; see CR-2")
     for where, c in ((f"checks[{i}]", c) for i, c in enumerate(p["checks"])):
-        if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
-                or not KIND["str"](c.get("evaluator"))):
-            raise Unchecked(f"{where} has a missing or malformed field; see CR-2")
         if c["dimension"] not in dims or c["evaluator"] not in evals:
             raise Fail(f"{where} names an unknown dimension or evaluator")
         u = c["unobserved"]
@@ -296,12 +300,17 @@ def cl1_10(r, p, ctx):
         if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
                 or not isinstance(c.get("outcome"), str) or c.get("outcome") not in OUTCOMES):
             raise Unchecked("blocked by a missing or malformed field; see CR-2")
+    # Structural precedence (RULING-G5.1): the field's own shape is validated in full before any
+    # of it is judged, so one malformed entry anywhere leaves the field to CR-2 rather than
+    # letting an earlier entry's defect report CL1-10. What is INSIDE `checks` stays CL1-10's:
+    # CR-2's spec for a disagreement is `dimension:str checks:list note:text`.
     for d in dis:
         if not isinstance(d, dict) or not KIND["str"](d.get("dimension")):
             raise Unchecked("blocked by a missing or malformed field; see CR-2")
-        dc = d.get("checks")
-        if not isinstance(dc, list):
+        if not isinstance(d.get("checks"), list) or not KIND["text"](d.get("note")):
             raise Unchecked("blocked by a missing or malformed field; see CR-2")
+    for d in dis:
+        dc = d["checks"]
         if len(dc) < 2:
             raise Fail(f"disagreement on {d['dimension']} does not name two of its checks")
         for i in dc:

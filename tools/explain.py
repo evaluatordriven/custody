@@ -63,8 +63,6 @@ def explain(r, report):
     ]
     subj = [as_dict(s) for s in as_list(r.get("subject"))]
     out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
-    subj = [as_dict(s) for s in as_list(r.get("subject"))]
-    out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
     out += [f"   - and {len(subj) - 6} more files, each with its own fingerprint"] if len(subj) > 6 else []
     out += [f"   Started: {p.get('startedAt', '?')}", f"   Finished: {p.get('producedAt', '?')}", ""]
     out.append("2. What was it measured against?")
