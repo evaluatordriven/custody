@@ -7,20 +7,20 @@ listed here under **Breaking**.
 ## 0.9.8 (candidate)
 
 **Breaking** (what a producer must change)
-- CL1-10: the referee in `checker/check.py` is now total and rejects malformed shapes in `checks` and
-  `disagreements` by failing `CL1-10` rather than crashing or accepting non-integer indices. Every
-  malformed shape now reads `FAILED` on `CL1-10`:
-  - an index in `disagreements[].checks` that is `true`, `false`, `1.0`, `"0"`, `-1`, `len(checks)`,
-    `null`, or `[0]`;
-  - `disagreements[].checks` itself missing, `null`, a string, a number, an object, or a list of one
-    element;
-  - `disagreements[].dimension` missing, `null`, a number, or a list;
-  - a `disagreements[]` entry that is not an object;
-  - `disagreements` as `null`, an object, a string, or missing where required;
-  - a `checks[]` entry that is not an object, has `dimension` missing, `null`, or a list, or has
-    `outcome` missing, a list, or an object.
-  - Changed verdict across shared fixtures and `examples/` records (G5.4):
-    - `fixtures/records/cl1-fail-missing-disagreements-field.json` (`CL1-10`: `NOT-CHECKABLE` -> `FAILED`) — the record omits `predicate.disagreements`, which `cl1_10` now refuses directly (`checks or disagreements missing or not a list`) instead of raising `KeyError` and falling back to `NOT-CHECKABLE`.
+- CL1-10: the referee in `checker/check.py` is now total—it no longer crashes or returns `NOT-CHECKABLE`
+  for malformed input—and under structural precedence (`CR-2` owns field presence and type; `CL1-10` owns
+  the semantics of well-formed disagreement data), malformed shapes in `checks` and `disagreements` are
+  rejected as follows:
+  - 9 semantic shapes fail `CL1-10` alone: an index in `disagreements[].checks` that is `true`, `false`,
+    `1.5`, `"1"`, `-1`, `len(checks)`, `null`, or `[1]`, or a `disagreements[].checks` list of one
+    element.
+  - 20 structural shapes fail `CR-2` alone (which already owned field presence and type):
+    `disagreements[].checks` missing, `null`, a string, a number, or an object;
+    `disagreements[].dimension` missing, `null`, a number, or a list; a `disagreements[]` entry that is
+    not an object; `disagreements` as `null`, an object, or a string; and a `checks[]` entry that is not
+    an object, has `dimension` missing, `null`, or a list, or has `outcome` missing, a list, or an object.
+  - No record's verdict changed: all 118 shared fixtures compared between the base commit and this commit
+    show zero differences in `(verdict, levelAchieved, failing requirements)`.
 
 **Clarified** (the rules did not change)
 - CL2-3's conditional prose in SPEC.md §5.3 is replaced by a single fenced pseudocode block with
