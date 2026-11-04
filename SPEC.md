@@ -244,18 +244,18 @@ CR-2 reads `FAILED`; CL1-8, which cannot look for a file that is not named, read
 28:     else:                                                                           # <- (b) disclosed maker `family`
 29:       if not any(e.model.family.casefold() != m_fam for e in diff_ep):              # <- (b) "at least one of them has a `family` different from the maker's, and none of its endpoints ... equals the maker's"
 30:         return FAILED                                                               # <- (b) "at least one of them has a `family` different from the maker's, and none of its endpoints ... equals the maker's"
-31:   evs_by_id = {e.id: e for e in predicate.evaluators}                               # <- (c) "all the evaluators with a check of that dimension; persons and scripts count toward that total"
+31:   evs_by_id = {e.id: e.model.family.casefold() for e in model_evs}                  # <- (c) model evaluator `family` by `id`
 32:   for d in predicate.bar.dimensions:                                                # <- (c) "for each dimension"
-33:     r_ids = {c.evaluator for c in predicate.checks if c.dimension == d.id}          # <- (c) "all the evaluators with a check of that dimension"
-34:     r_evs = [evs_by_id[id] for id in r_ids]                                         # <- (c) "all the evaluators with a check of that dimension; persons and scripts count toward that total"
-35:     undisc = [e for e in r_evs if e.kind == "model" and e.model is not null and e.model.family.casefold() == "undisclosed"]  # <- "every evaluator on that dimension whose `family` is `undisclosed`"
+33:     r_ids = {c.evaluator for c in predicate.checks if c.dimension == d.id}          # <- (c) "all the evaluators with a check of that dimension; persons and scripts count toward that total"
+34:     r_fams = [evs_by_id[id] for id in r_ids if id in evs_by_id]                     # <- (c) model `family` of each model evaluator on that dimension
+35:     undisc = [f for f in r_fams if f == "undisclosed"]                              # <- "every evaluator on that dimension whose `family` is `undisclosed`"
 36:     if m_fam == "undisclosed":                                                      # <- "if the maker's `family` is `undisclosed` ... in (c), for each dimension"
-37:       disc_fams = [e.model.family.casefold() for e in r_evs if e.kind == "model" and e.model is not null and e.model.family.casefold() != "undisclosed"]  # <- "whichever single disclosed family has the most evaluators on that dimension"
+37:       disc_fams = [f for f in r_fams if f != "undisclosed"]                         # <- "whichever single disclosed family has the most evaluators on that dimension"
 38:       largest = max((count(f in disc_fams) for f in set(disc_fams)), default=0)     # <- "whichever single disclosed family has the most evaluators on that dimension"
 39:       same = largest + len(undisc)                                                  # <- "those of whichever single disclosed family has the most evaluators on that dimension, together with every evaluator on that dimension whose `family` is `undisclosed`"
 40:     else:                                                                           # <- (c) disclosed maker `family`
-41:       same = count(e for e in r_evs if e.kind == "model" and e.model is not null and e.model.family.casefold() == m_fam) + len(undisc)  # <- (c) "evaluators of the maker's `family`" + "an evaluator whose `family` is `undisclosed` always counts as the maker's `family`"
-42:     if 2 * same > len(r_evs):                                                       # <- (c) "twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension"
+41:       same = count(f for f in r_fams if f == m_fam) + len(undisc)                   # <- (c) "evaluators of the maker's `family`" + "an evaluator whose `family` is `undisclosed` always counts as the maker's `family`"
+42:     if 2 * same > len(r_ids):                                                       # <- (c) "twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension"
 43:       return FAILED                                                                 # <- (c) "twice the number of evaluators of the maker's `family` is no more than the number of all the evaluators with a check of that dimension"
 44:   return OK
 ```
@@ -403,3 +403,4 @@ evidence**: nothing here depends on it, and readers cannot inspect it.
 ## Appendix C. Patent non-assertion *(non-normative pointer)*
 
 See `PATENTS.md`.
+

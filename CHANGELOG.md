@@ -19,6 +19,8 @@ listed here under **Breaking**.
   - `disagreements` as `null`, an object, a string, or missing where required;
   - a `checks[]` entry that is not an object, has `dimension` missing, `null`, or a list, or has
     `outcome` missing, a list, or an object.
+  - Changed verdict across shared fixtures and `examples/` records (G5.4):
+    - `fixtures/records/cl1-fail-missing-disagreements-field.json` (`CL1-10`: `NOT-CHECKABLE` -> `FAILED`) — the record omits `predicate.disagreements`, which `cl1_10` now refuses directly (`checks or disagreements missing or not a list`) instead of raising `KeyError` and falling back to `NOT-CHECKABLE`.
 
 **Clarified** (the rules did not change)
 - CL2-3's conditional prose in SPEC.md §5.3 is replaced by a single fenced pseudocode block with
@@ -267,3 +269,4 @@ same-model sessions declared at CL1; "published" defined; the screening test's r
 ## 0.9.1
 
 First published release.
+

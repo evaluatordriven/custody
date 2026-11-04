@@ -232,11 +232,16 @@ def check_packages(events, dirs):
                 if rname in seen and seen[rname] != h:
                     sys.exit(f"package {rname} digest changed across rebuilds ({seen[rname]} != {h})")
                 seen[rname] = str(h)
+                found = False
                 for folder in dirs:
                     for cand in ({str(pkg), rname} if pkg else {rname}):
                         f = folder / cand
-                        if f.is_file() and digest(f) != str(h):
-                            sys.exit(f"cited package {cand} does not match its sha256 {h}")
+                        if f.is_file():
+                            found = True
+                            if digest(f) != str(h):
+                                sys.exit(f"cited package {cand} does not match its sha256 {h}")
+                if not found:
+                    sys.exit(f"cited package {rname} not found")
 
 
 def fix_disp(disp):
@@ -354,3 +359,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

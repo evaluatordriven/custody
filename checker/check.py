@@ -291,7 +291,7 @@ def cl1_10(r, p, ctx):
         raise Fail("checks or disagreements missing or not a list")
     for c in checks:
         if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
-                or c.get("outcome") not in OUTCOMES):
+                or not isinstance(c.get("outcome"), str) or c.get("outcome") not in OUTCOMES):
             raise Fail("malformed check entry in checks")
     for d in dis:
         if not isinstance(d, dict) or not KIND["str"](d.get("dimension")):
@@ -558,3 +558,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+

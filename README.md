@@ -107,3 +107,4 @@ The requirements live in `SPEC.md` section 5; this is only orientation.
 
 Condensed from a private working corpus and checked against evaluatordriven.com. The corpus is lineage,
 not evidence: nothing here depends on it, and it is not public.
+
