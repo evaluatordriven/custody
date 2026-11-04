@@ -10,7 +10,7 @@
   ],
   "predicateType": "https://evaluatordriven.com/custody/v1",
   "predicate": {
-    "specVersion": "0.9.8",
+    "specVersion": "0.9.5",
     "levelClaimed": "CL1",
     "bar": {
       "digest": {
@@ -107,32 +107,32 @@
         "unobserved": null
       },
       {
-        "dimension": "D1",
-        "evaluator": "E1",
-        "run": 2,
-        "batch": "B1",
-        "at": "2026-10-03T10:05:00Z",
-        "outcome": "does_not_conform",
-        "score": null,
-        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
-        "evidence": {
-          "name": "reading-D1-E1-1.md",
-          "sha256": "06e41a265168a25ff1a0b6e2a22b23dff9144eb2f2b4e2fa956c90fd0a478547"
-        },
-        "unobserved": null
-      },
-      {
         "dimension": "D2",
         "evaluator": "E1",
         "run": 1,
         "batch": "B1",
-        "at": "2026-10-03T10:10:00Z",
+        "at": "2026-10-03T10:00:00Z",
         "outcome": "conforms",
         "score": null,
         "failureCondition": "D2 reads does_not_conform if its criterion is not met",
         "evidence": {
           "name": "reading-D2-E1-1.md",
-          "sha256": "9c2aa0fcce9fc7efbfbaa1ebbc5dc6da9ed7b680ff4b1aa059887efdc6023a83"
+          "sha256": "af41f97ce2bea43996384a357efc85b252139a93b8eadb717e04798a8e22b0ba"
+        },
+        "unobserved": null
+      },
+      {
+        "dimension": "D1",
+        "evaluator": "E1",
+        "run": 2,
+        "batch": "B1",
+        "at": "2026-10-03T10:00:00Z",
+        "outcome": "does_not_conform",
+        "score": null,
+        "failureCondition": "D1 reads does_not_conform if its criterion is not met",
+        "evidence": {
+          "name": "reading-D1-E1-2.md",
+          "sha256": "22fd565d00f33e79120a992f18c7eaeff83d975480b3b4a633b1177e8f5b505d"
         },
         "unobserved": null
       }
@@ -164,15 +164,15 @@
         "dimension": "D1",
         "checks": [
           false,
-          1
+          2
         ],
-        "note": "Runs 1 and 2 disagreed on D1"
+        "note": "runs 1 and 2 split"
       }
     ],
     "violations": [
       {
         "dimension": "D1",
-        "description": "Run 2 did not conform on D1"
+        "description": "run 2 found an uncited figure"
       }
     ],
     "separationGaps": [],

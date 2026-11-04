@@ -109,9 +109,9 @@ def norm_out(v):
         return None
     s = str(v).strip()
     low = s.lower()
-    if low in ("conforms", "pass", "passed", "ok", "true", "clean", "1"):
+    if low in ("conforms", "pass", "passed", "ok", "true", "clean", "1", "yes"):
         return "conforms"
-    if low in ("does_not_conform", "fail", "failed", "false", "planted", "0"):
+    if low in ("does_not_conform", "fail", "failed", "false", "planted", "0", "no"):
         return "does_not_conform"
     if low == "unobserved":
         return "unobserved"
@@ -121,17 +121,28 @@ def norm_out(v):
 def parse_row(row):
     if not isinstance(row, dict):
         return None
-    exp = norm_out(row.get("expected") or row.get("want") or row.get("kind") or row.get("type"))
+    exp = norm_out(row.get("expected") or row.get("want") or row.get("kind") or row.get("type")
+                   or row.get("target") or row.get("ground_truth") or row.get("groundTruth"))
     out = norm_out(row.get("outcome") or row.get("actual") or row.get("result")
-                   or row.get("verdict") or row.get("status"))
-    if not exp and "planted" in row:
-        exp = "does_not_conform" if row["planted"] in (True, "true", "1", 1) else "conforms"
-    if not out and "passed" in row:
-        val = row["passed"] in (True, "true", "1", 1, "pass")
-        out = exp if val else ("conforms" if exp == "does_not_conform" else "does_not_conform")
-    if not out and "caught" in row:
-        val = row["caught"] in (True, "true", "1", 1, "yes")
-        out = exp if val else ("conforms" if exp == "does_not_conform" else "does_not_conform")
+                   or row.get("verdict") or row.get("status") or row.get("reading")
+                   or row.get("observed"))
+    if not exp and "planted" in row and row["planted"] is not None:
+        exp = ("does_not_conform" if str(row["planted"]).strip().lower()
+               in ("true", "1", "yes", "planted") else "conforms")
+    if not exp and "clean" in row and row["clean"] is not None:
+        exp = ("conforms" if str(row["clean"]).strip().lower()
+               in ("true", "1", "yes", "clean") else "does_not_conform")
+    if (not out and ("score" in row or "threshold" in row)
+            and row.get("score") not in (None, "") and row.get("threshold") not in (None, "")):
+        try:
+            out = ("conforms" if float(row["score"]) >= float(row["threshold"])
+                   else "does_not_conform")
+        except (ValueError, TypeError):
+            pass
+    for flag in ("passed", "caught", "correct", "match"):
+        if not out and flag in row and row[flag] is not None and exp:
+            val = str(row[flag]).strip().lower() in ("true", "1", "pass", "passed", "yes", "ok")
+            out = exp if val else ("conforms" if exp == "does_not_conform" else "does_not_conform")
     if exp and out:
         return (exp, out)
     return None
@@ -141,12 +152,17 @@ def load_scores(data, events, base, log_path):
     scores = {}
 
     def add(row, cid=None, ev=None, b=None):
+        if not isinstance(row, dict):
+            return
         res = parse_row(row)
         if not res:
             return
-        cid = cid or row.get("id") or row.get("control") or row.get("control_id") or row.get("case")
-        ev = ev or row.get("evaluator") or row.get("reader")
-        b = b or row.get("batch")
+        cid = (cid or row.get("id") or row.get("control") or row.get("control_id")
+               or row.get("controlId") or row.get("case") or row.get("name") or row.get("item"))
+        ev = ev or row.get("evaluator") or row.get("reader") or row.get("evaluator_id")
+        b = b or row.get("batch") or row.get("batch_id")
+        if isinstance(cid, dict):
+            cid = cid.get("id") or cid.get("name") or cid.get("file") or cid.get("sha256")
         if cid:
             scores[str(cid)] = res
             if ev:
@@ -162,6 +178,9 @@ def load_scores(data, events, base, log_path):
         elif isinstance(rows, dict):
             for k, r in rows.items():
                 add(r, cid=k)
+    for c in data.get("controls") or []:
+        if isinstance(c, dict):
+            add(c)
     sfile = data.pop("scoreFile", None) or data.pop("scoresFile", None)
     dirs = [log_path.parent, base] if log_path else [base]
     cand = [base / sfile] if sfile else []
@@ -171,36 +190,53 @@ def load_scores(data, events, base, log_path):
                      "controls.tsv", "controls.csv"):
             if (d / name) not in cand:
                 cand.append(d / name)
+        if d.is_dir():
+            for p in sorted(d.iterdir()):
+                if (p.is_file() and p not in cand
+                        and p.suffix in (".tsv", ".csv", ".json", ".jsonl")
+                        and ("score" in p.stem.lower() or "control" in p.stem.lower())):
+                    cand.append(p)
     for p in cand:
         if not p.is_file():
             continue
         txt = p.read_text(encoding="utf-8").strip()
         if not txt:
             continue
-        if p.suffix == ".json":
-            obj = json.loads(txt)
-            if isinstance(obj, list):
-                for r in obj:
+        try:
+            if p.suffix == ".json":
+                obj = json.loads(txt)
+                if isinstance(obj, list):
+                    for r in obj:
+                        add(r)
+                elif isinstance(obj, dict):
+                    for k, r in obj.items():
+                        if isinstance(r, list):
+                            for item in r:
+                                add(item)
+                        else:
+                            add(r, cid=k)
+            elif p.suffix == ".jsonl":
+                for line in txt.splitlines():
+                    if line.strip():
+                        add(json.loads(line))
+            else:
+                delim = "\t" if p.suffix == ".tsv" or "\t" in txt.splitlines()[0] else ","
+                for r in csv.DictReader(txt.splitlines(), delimiter=delim):
                     add(r)
-            elif isinstance(obj, dict):
-                for k, r in obj.items():
-                    if isinstance(r, list):
-                        for item in r:
-                            add(item)
-                    else:
-                        add(r, cid=k)
-        elif p.suffix == ".jsonl":
-            for line in txt.splitlines():
-                if line.strip():
-                    add(json.loads(line))
-        else:
-            delim = "\t" if p.suffix == ".tsv" or "\t" in txt.splitlines()[0] else ","
-            for r in csv.DictReader(txt.splitlines(), delimiter=delim):
-                add(r)
+        except Exception:
+            pass
     for e in events:
-        if e.get("type") in ("score", "score-row", "control-score", "scores"):
-            d = e.get("data") or {}
-            add(d.get("scoreRow") or d.get("score_row") or d)
+        d = e.get("data")
+        if not isinstance(d, dict):
+            continue
+        if e.get("type") in ("score", "score-row", "control-score", "scores", "control"):
+            for sub in (d.get("scoreRow"), d.get("score_row"), d.get("score"), d):
+                if isinstance(sub, dict):
+                    add(sub, cid=d.get("id"), ev=d.get("evaluator"), b=d.get("batch"))
+            for k in ("scores", "scoreRows", "rows"):
+                if isinstance(d.get(k), list):
+                    for r in d[k]:
+                        add(r)
     return scores
 
 
@@ -215,17 +251,25 @@ def check_packages(events, dirs):
             for k in ("package", "x-on", "on", "artifact"):
                 if k in d:
                     pkgs.append((d[k], d.get("sha256") or d.get("digest"), d.get("role")))
-        for sub in d.values():
-            if isinstance(sub, dict) and ("name" in sub or "package" in sub) and "sha256" in sub:
-                pkgs.append((sub.get("name") or sub.get("package"), sub["sha256"], sub.get("role")))
+        for k, sub in d.items():
+            if k in ("evidence", "case", "planted", "method", "rubric", "runner", "barDigest",
+                     "digest"):
+                continue
+            if isinstance(sub, dict) and "package" in sub and "sha256" in sub:
+                pkgs.append((sub.get("package"), sub["sha256"], sub.get("role")))
         for pkg, h, role in pkgs:
             if isinstance(pkg, dict):
+                if "package" not in pkg and "role" not in pkg and not role:
+                    continue
                 h = h or pkg.get("sha256") or (pkg.get("digest") or {}).get("sha256")
                 role = role or pkg.get("role")
-                pkg = pkg.get("name") or pkg.get("package") or pkg.get("role")
+                pkg = pkg.get("package") or pkg.get("name") or pkg.get("role")
             if isinstance(h, dict):
                 h = h.get("sha256")
             if not pkg and not role:
+                continue
+            s = str(pkg).strip() if pkg else ""
+            if not role and e.get("type") == "artifact-produced" and not s.startswith("package-"):
                 continue
             rname = role_name(pkg, role)
             if h and HEX64.match(str(h)):
@@ -284,16 +328,16 @@ def from_log(data, log, base=None):
             "external": {"requirement", "subject", "evidence", "readBy"}}
     built = max((i for i, e in enumerate(events) if e["type"] == "artifact-produced"), default=-1)
     for kind, field in (("check", "checks"), ("control", "controls"), ("external", "external")):
-        typed = [e for i, e in enumerate(events) if e["type"] == kind
-                 and (kind == "external" or i > built)]
-        stale = sum(1 for i, e in enumerate(events) if e["type"] == kind and kind != "external"
-                    and i <= built)
+        all_kind = [(i, e) for i, e in enumerate(events) if e["type"] == kind]
+        fit_all = [(i, e) for i, e in all_kind if need[kind] <= set(e.get("data") or {})]
+        unfit = len(all_kind) - len(fit_all)
+        if unfit:
+            print(f"skipped {unfit} '{kind}' event(s) without the record's fields",
+                  file=sys.stderr)
+        fit = [e for i, e in fit_all if kind == "external" or i > built]
+        stale = len(fit_all) - len(fit)
         if stale:
             print(f"skipped {stale} '{kind}' event(s) recorded before the artifact was produced",
-                  file=sys.stderr)
-        fit = [e for e in typed if need[kind] <= set(e.get("data") or {})]
-        if len(fit) < len(typed):
-            print(f"skipped {len(typed) - len(fit)} '{kind}' event(s) without the record's fields",
                   file=sys.stderr)
         if fit:
             if kind == "control":
@@ -304,7 +348,8 @@ def from_log(data, log, base=None):
                     ev = str(d["evaluator"])
                     b = str(d["batch"])
                     sr = (scores.get((cid, b, ev)) or scores.get((cid, ev)) or scores.get(cid)
-                          or parse_row(d.get("scoreRow") or d.get("score_row") or d.get("score")))
+                          or parse_row(d.get("scoreRow") or d.get("score_row") or d.get("score"))
+                          or parse_row(d))
                     if not sr:
                         sys.exit(f"control {cid}: missing score row")
                     exp, out = sr
@@ -359,4 +404,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

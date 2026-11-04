@@ -8,11 +8,19 @@ Run: python3 fixtures/generate.py
 import hashlib
 import json
 import pathlib
+import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from checker.check import verify  # noqa: E402
+
 FILES = HERE / "files"
 EVIDENCE = HERE / "evidence"
 SPEC_VERSION = "0.9.5"
+STRUCTURAL = {"CR-1", "CR-2", "CL1-4", "CL1-5", "CL1-12"}
 
 
 def sha(data):
@@ -178,6 +186,23 @@ def runs_disagree(p):
     p["disagreements"].append({"dimension": "D1", "checks": [0, 1], "note": "runs split"})
 
 
+def cl1_disagreement(p, mut=None):
+    """Add a second D1 run that disagrees with run 1, recorded and routed cleanly, then mutate."""
+    p["checks"].append(check("D1", "E1", 2, outcome="does_not_conform"))
+    p["violations"].append({"dimension": "D1", "description": "run 2 found an uncited figure"})
+    p["disposition"]["state"] = "not_yet_given"
+    p["disagreements"].append({"dimension": "D1", "checks": [0, 2], "note": "runs 1 and 2 split"})
+    if mut is not None:
+        mut(p)
+
+
+def cl1_extra_d1_check(p, mut=None):
+    """Add a second conforming D1 check so mutating checks[0] leaves D1 and D2 covered for CL1-7."""
+    p["checks"].append(check("D1", "E1", 2))
+    if mut is not None:
+        mut(p)
+
+
 def script_evaluator(p, author="Lee Park", digest=None):
     p["evaluators"].append({"id": "S1", "name": "lint-figures", "kind": "script", "model": None,
                             "script": {"name": "lint_figures.py", "author": author,
@@ -214,7 +239,7 @@ def refiled(p):
                           "originalRecordDigest": text_digest("earlier record")}
 
 
-# name: (level, mutation, verdict, level achieved, routing, the one failing requirement or None)
+# name: (level, mutation, verdict, level achieved, routing, failing requirement(s) or None)
 CASES = {
     "cl1-pass-basic": ("CL1", lambda r, p: None, "OK", "CL1", "none", None),
     "cl1-fail-control-missed-checks-still-observed": ("CL1", lambda r, p: p["controls"][0].update(
@@ -495,26 +520,141 @@ CASES = {
                                       "FAILED", "none", "none", "CR-2"),
     # v0.9.7, J3: CL2-3 endpoint requirement
     "cl2-pass-different-evaluator-endpoint": ("CL2", lambda r, p: None, "OK", "CL2", "none", None),
+    # Item 5: 30 malformed shapes for CL1-10
+    "cl1-fail-disagreements-check-index-true": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, True])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-false": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[False, 2])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-float": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, 2.0])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-string": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, "2"])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-negative": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, -1])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-len": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, 3])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-null": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, None])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-check-index-list": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0, [2]])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-checks-missing": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].pop("checks")),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-checks-null": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=None)),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-checks-string": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks="0,2")),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-checks-number": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=2)),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-checks-object": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks={"a": 0, "b": 2})),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-checks-singleton": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(checks=[0])),
+        "FAILED", "none", "to approver", "CL1-10"),
+    "cl1-fail-disagreements-dimension-missing": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].pop("dimension")),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-dimension-null": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(dimension=None)),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-dimension-number": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(dimension=1)),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-dimension-list": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p["disagreements"][0].update(dimension=["D1"])),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-entry-not-object": ("CL1", lambda r, p: cl1_disagreement(
+        p, lambda p: p.update(disagreements=["D1: runs 0 and 2 split"])),
+        "FAILED", "none", "to approver", "CR-2"),
+    "cl1-fail-disagreements-null": ("CL1", lambda r, p: p.update(disagreements=None),
+                                    "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-disagreements-object": ("CL1", lambda r, p: p.update(disagreements={}),
+                                      "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-disagreements-string": ("CL1", lambda r, p: p.update(disagreements="none"),
+                                      "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-entry-not-object": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"].__setitem__(0, "not a check object")),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-dimension-missing": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].pop("dimension")),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-dimension-null": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].update(dimension=None)),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-dimension-list": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].update(dimension=["D1"])),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-outcome-missing": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].pop("outcome")),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-outcome-list": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].update(outcome=["conforms"])),
+        "FAILED", "none", "none", "CR-2"),
+    "cl1-fail-checks-outcome-object": ("CL1", lambda r, p: cl1_extra_d1_check(
+        p, lambda p: p["checks"][0].update(outcome={"value": "conforms"})),
+        "FAILED", "none", "none", "CR-2"),
 }
 # Level boundaries: each passes the level below and fails the next for exactly one reason.
 BOUNDARIES = {"none|CL1": "cl1-fail-bar-frozen-late", "CL1|CL2": "cl2-fail-one-run-only",
               "CL2|CL3": "cl3-fail-bar-not-published"}
-# Schema-invalid by shape, though the failing requirement is one that owns those fields itself.
-SCHEMA_INVALID = ["cl1-fail-missing-violations-field", "cl1-fail-dimension-scale-missing-floor",
-                  "cl1-fail-anchors-empty", "cl1-fail-maker-kind-missing"]
+
+
+SCHEMA_INVALID_EXTRA = {
+    # base fixtures the schema rejects for reasons other than their named requirement
+    "cl1-fail-anchors-empty",
+    "cl1-fail-dimension-scale-missing-floor",
+    "cl1-fail-missing-violations-field",
+    # item-5 index shapes: the schema rejects the malformed index itself
+    "cl1-fail-disagreements-check-index-false",
+    "cl1-fail-disagreements-check-index-list",
+    "cl1-fail-disagreements-check-index-negative",
+    "cl1-fail-disagreements-check-index-null",
+    "cl1-fail-disagreements-check-index-string",
+    "cl1-fail-disagreements-check-index-true",
+    "cl1-fail-disagreements-checks-singleton",
+}
 
 
 def main():
     write_inputs()
     for old in HERE.glob("*.json"):
         old.unlink()
+    # Verify the two sibling base records for item 5 pass every requirement (G5.1c).
+    for sib_fn in (cl1_disagreement, cl1_extra_d1_check):
+        sib = mutate("CL1", lambda r, p, f=sib_fn: f(p))
+        res = verify(sib, FILES, EVIDENCE, FILES / "bar.md")
+        sib_fails = [r for r, v in res["requirements"].items() if v["status"] == "FAILED"]
+        assert res["verdict"] == "OK" and not sib_fails, f"sibling failed: {res}"
     expected = {}
+    cases_that_failed_structurally = set()
     for name, (level, fn, verdict, achieved, routing, fails) in CASES.items():
-        (HERE / f"{name}.json").write_text(json.dumps(mutate(level, fn), indent=2) + "\n")
+        rec = mutate(level, fn)
+        (HERE / f"{name}.json").write_text(json.dumps(rec, indent=2) + "\n")
+        res = verify(rec, FILES, EVIDENCE, FILES / "bar.md")
+        actual = sorted(r for r, v in res["requirements"].items() if v["status"] == "FAILED")
+        if isinstance(fails, str):
+            assert actual == [fails], f"{name}: checker says {actual}, fixture says {fails}"
+        else:
+            assert actual == [], f"{name}: checker says {actual}, fixture says {fails}"
         expected[name] = {"verdict": verdict, "levelAchieved": achieved, "routing": routing,
                           "fails": fails}
+        if STRUCTURAL & set(actual):
+            cases_that_failed_structurally.add(name)
+    schema_invalid = sorted(set(SCHEMA_INVALID_EXTRA) | {n for n in cases_that_failed_structurally})
     (HERE / "expected.json").write_text(json.dumps({"cases": expected, "boundaries": BOUNDARIES,
-                                                    "schemaInvalid": SCHEMA_INVALID},
+                                                    "schemaInvalid": schema_invalid},
                                                    indent=2) + "\n")
     print(f"wrote {len(CASES)} fixtures")
 

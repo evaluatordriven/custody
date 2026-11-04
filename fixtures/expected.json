@@ -760,31 +760,31 @@
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-checks-null": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-checks-string": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-checks-number": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-checks-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-checks-singleton": {
       "verdict": "FAILED",
@@ -796,97 +796,91 @@
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-dimension-null": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-dimension-number": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-dimension-list": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-entry-not-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
       "routing": "to approver",
-      "fails": "CL1-10"
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-null": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-disagreements-string": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
-    },
-    "cl1-fail-disagreements-missing": {
-      "verdict": "FAILED",
-      "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-entry-not-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-dimension-missing": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-dimension-null": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-dimension-list": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-outcome-missing": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-outcome-list": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     },
     "cl1-fail-checks-outcome-object": {
       "verdict": "FAILED",
       "levelAchieved": "none",
-      "routing": "to approver",
-      "fails": "CL1-10"
+      "routing": "none",
+      "fails": "CR-2"
     }
   },
   "boundaries": {
@@ -895,38 +889,51 @@
     "CL2|CL3": "cl3-fail-bar-not-published"
   },
   "schemaInvalid": [
-    "cl1-fail-missing-violations-field",
-    "cl1-fail-dimension-scale-missing-floor",
     "cl1-fail-anchors-empty",
-    "cl1-fail-maker-kind-missing",
-    "cl1-fail-disagreements-check-index-true",
+    "cl1-fail-check-endpoint-not-a-host",
+    "cl1-fail-checks-dimension-list",
+    "cl1-fail-checks-dimension-missing",
+    "cl1-fail-checks-dimension-null",
+    "cl1-fail-checks-entry-not-object",
+    "cl1-fail-checks-outcome-list",
+    "cl1-fail-checks-outcome-missing",
+    "cl1-fail-checks-outcome-object",
+    "cl1-fail-control-case-missing",
+    "cl1-fail-dimension-scale-missing-floor",
     "cl1-fail-disagreements-check-index-false",
-    "cl1-fail-disagreements-check-index-float",
-    "cl1-fail-disagreements-check-index-string",
+    "cl1-fail-disagreements-check-index-list",
     "cl1-fail-disagreements-check-index-negative",
     "cl1-fail-disagreements-check-index-null",
-    "cl1-fail-disagreements-check-index-list",
+    "cl1-fail-disagreements-check-index-string",
+    "cl1-fail-disagreements-check-index-true",
     "cl1-fail-disagreements-checks-missing",
     "cl1-fail-disagreements-checks-null",
-    "cl1-fail-disagreements-checks-string",
     "cl1-fail-disagreements-checks-number",
     "cl1-fail-disagreements-checks-object",
     "cl1-fail-disagreements-checks-singleton",
+    "cl1-fail-disagreements-checks-string",
+    "cl1-fail-disagreements-dimension-list",
     "cl1-fail-disagreements-dimension-missing",
     "cl1-fail-disagreements-dimension-null",
     "cl1-fail-disagreements-dimension-number",
-    "cl1-fail-disagreements-dimension-list",
     "cl1-fail-disagreements-entry-not-object",
     "cl1-fail-disagreements-null",
     "cl1-fail-disagreements-object",
     "cl1-fail-disagreements-string",
-    "cl1-fail-disagreements-missing",
-    "cl1-fail-checks-entry-not-object",
-    "cl1-fail-checks-dimension-missing",
-    "cl1-fail-checks-dimension-null",
-    "cl1-fail-checks-dimension-list",
-    "cl1-fail-checks-outcome-missing",
-    "cl1-fail-checks-outcome-list",
-    "cl1-fail-checks-outcome-object"
+    "cl1-fail-endpoint-not-a-host",
+    "cl1-fail-evidence-name-not-relative",
+    "cl1-fail-evidence-not-an-evidence-file",
+    "cl1-fail-family-not-lowercase",
+    "cl1-fail-family-with-version",
+    "cl1-fail-instrument-not-pinned",
+    "cl1-fail-maker-kind-missing",
+    "cl1-fail-maker-method-missing",
+    "cl1-fail-missing-disagreements-field",
+    "cl1-fail-missing-violations-field",
+    "cl1-fail-not-a-custody-statement",
+    "cl1-fail-retention-missing",
+    "cl1-fail-run-zero",
+    "cl1-fail-script-evaluator-unpinned",
+    "cl1-fail-started-at-missing"
   ]
 }

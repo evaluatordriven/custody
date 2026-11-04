@@ -79,8 +79,8 @@ KIND = {
     "str": lambda v: isinstance(v, str) and v.strip() != "", "text": lambda v: isinstance(v, str),
     "list": lambda v: isinstance(v, list), "dict": lambda v: isinstance(v, dict),
     "nonempty": lambda v: isinstance(v, list) and len(v) > 0, "bool": lambda v: isinstance(v, bool),
-    "int": lambda v: is_num(v) and isinstance(v, int) and v >= 0,
-    "pos": lambda v: is_num(v) and isinstance(v, int) and v >= 1,
+    "int": lambda v: isinstance(v, int) and not isinstance(v, bool) and v >= 0,
+    "pos": lambda v: isinstance(v, int) and not isinstance(v, bool) and v >= 1,
     "num": lambda v: is_num(v),
     "ts": lambda v: isinstance(v, str) and bool(TS.match(v)),
     "digest": lambda v: isinstance(v, dict) and bool(HEX.match(str(v.get("sha256", "")))),
@@ -240,6 +240,9 @@ def cl1_8(r, p, ctx):
     dims, evals = {d["id"] for d in p["bar"]["dimensions"]}, {e["id"] for e in p["evaluators"]}
     observed = []
     for where, c in ((f"checks[{i}]", c) for i, c in enumerate(p["checks"])):
+        if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
+                or not KIND["str"](c.get("evaluator"))):
+            raise Unchecked(f"{where} has a missing or malformed field; see CR-2")
         if c["dimension"] not in dims or c["evaluator"] not in evals:
             raise Fail(f"{where} names an unknown dimension or evaluator")
         u = c["unobserved"]
@@ -284,20 +287,22 @@ def cl1_9(r, p, ctx):
 
 
 def cl1_10(r, p, ctx):
-    if not isinstance(p, dict):
-        raise Fail("predicate is not an object")
-    checks, dis = p.get("checks"), p.get("disagreements")
-    if not KIND["nonempty"](checks) or not isinstance(dis, list):
-        raise Fail("checks or disagreements missing or not a list")
+    if "checks" not in p or "disagreements" not in p:
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
+    checks, dis = p["checks"], p["disagreements"]
+    if not isinstance(checks, list) or not isinstance(dis, list):
+        raise Unchecked("blocked by a missing or malformed field; see CR-2")
     for c in checks:
         if (not isinstance(c, dict) or not KIND["str"](c.get("dimension"))
                 or not isinstance(c.get("outcome"), str) or c.get("outcome") not in OUTCOMES):
-            raise Fail("malformed check entry in checks")
+            raise Unchecked("blocked by a missing or malformed field; see CR-2")
     for d in dis:
         if not isinstance(d, dict) or not KIND["str"](d.get("dimension")):
-            raise Fail("disagreement entry missing or invalid dimension")
+            raise Unchecked("blocked by a missing or malformed field; see CR-2")
         dc = d.get("checks")
-        if not isinstance(dc, list) or len(dc) < 2:
+        if not isinstance(dc, list):
+            raise Unchecked("blocked by a missing or malformed field; see CR-2")
+        if len(dc) < 2:
             raise Fail(f"disagreement on {d['dimension']} does not name two of its checks")
         for i in dc:
             if not KIND["int"](i) or not (0 <= i < len(checks)):
@@ -558,4 +563,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-
