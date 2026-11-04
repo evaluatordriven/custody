@@ -26,3 +26,56 @@ This draft addresses the five scoped items: (1) formatting `CL1`–`CL3` as `CLn
 ## 4. Where to look hardest
 
 The largest surface area and highest risk sit in `tools/make_record.py` (hunks 11–16 for `item 2` and `item 4`). Because prior callers and tests pass score rows, control events, and package references in several shapes (inline `scores` arrays/dicts in `INPUTS.json`, external `scores.tsv`/`scores.json` files, embedded `scoreRow` dicts on events, and legacy `on` vs `x-on` fields), `load_scores`, `parse_row`, `role_name`, and `check_packages` accept a wide range of alias keys and file names. A reviewer should look closely at whether that permissiveness in `parse_row` / `load_scores` could silently match an unintended row or mask a malformed score file, and whether `role_name`'s heuristics (`require_role=True` in `resolve` vs `require_role=False` in `check_packages` and `fix_disp`) reject any legitimate package string or let a path-like string slip through when converting `disposition["on"]` to `x-on` (`item 4`). In `tools/explain.py` (`item 1`), also verify whether gating the `CLn · process` formatting of `levelClaimed` in the header on `reached in LEVELS` is what you want when a record claims `CL2` but achieves `FAILED` or `baseline`.
+
+## Hunk map
+
+Every hunk in `da2a3dd..HEAD`, by file and the scoped item it serves.
+The 29 `fixtures/cl1-fail-*` files are **generated**, not written by hand: `fixtures/generate.py`
+emits each shape and computes its evidence digests, so they all serve item 5 and are described
+once, under `fixtures/generate.py`.
+
+| file | hunks | item |
+|---|---|---|
+| `CHANGELOG.md` | 2 | 1–5 |
+| `DRAFT-NOTE.md` | 1 | meta |
+| `README.md` | 2 | 1 |
+| `SPEC.md` | 3 | 3, 5 |
+| `checker/check.py` | 4 | 3, 5 |
+| `examples/minimal/inputs.json` | 1 | 5 |
+| `examples/minimal/record.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-dimension-list.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-dimension-missing.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-dimension-null.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-entry-not-object.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-outcome-list.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-outcome-missing.json` | 1 | 5 |
+| `fixtures/cl1-fail-checks-outcome-object.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-false.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-float.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-len.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-list.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-negative.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-null.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-string.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-check-index-true.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-missing.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-null.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-number.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-object.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-singleton.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-checks-string.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-dimension-list.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-dimension-missing.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-dimension-null.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-dimension-number.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-entry-not-object.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-null.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-object.json` | 1 | 5 |
+| `fixtures/cl1-fail-disagreements-string.json` | 1 | 5 |
+| `fixtures/expected.json` | 3 | 5 |
+| `fixtures/generate.py` | 12 | 5 |
+| `tests/red_counts.py` | 5 | 2 |
+| `tools/explain.py` | 22 | 1 |
+| `tools/make_record.py` | 16 | 2 |
+
+Total: 101 hunks across 41 files.

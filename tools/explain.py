@@ -54,12 +54,15 @@ def explain(r, report):
     bar, mk = as_dict(p.get("bar")), as_dict(p.get("maker"))
     claim = p.get("levelClaimed", "?")
     reached = report.get("levelAchieved")
-    out = [f"CUSTODY RECORD — claims level {fmt_level(claim) if reached in LEVELS else claim}, "
-           f"specification {p.get('specVersion', '?')}"]
-    if reached in LEVELS:
-        out.append(DISCLAIMER)
-    out.append("")
-    out.append("1. What was made?")
+    out = [
+        f"CUSTODY RECORD — claims level {fmt_level(claim)}, "
+        f"specification {p.get('specVersion', '?')}",
+        DISCLAIMER,
+        "",
+        "1. What was made?",
+    ]
+    subj = [as_dict(s) for s in as_list(r.get("subject"))]
+    out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
     subj = [as_dict(s) for s in as_list(r.get("subject"))]
     out += [f"   - {s.get('name')} (fingerprint {fp(s.get('digest'))})" for s in subj[:6]]
     out += [f"   - and {len(subj) - 6} more files, each with its own fingerprint"] if len(subj) > 6 else []

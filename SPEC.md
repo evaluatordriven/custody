@@ -403,4 +403,3 @@ evidence**: nothing here depends on it, and readers cannot inspect it.
 ## Appendix C. Patent non-assertion *(non-normative pointer)*
 
 See `PATENTS.md`.
-
