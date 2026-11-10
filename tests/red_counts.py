@@ -22,6 +22,18 @@ def planted_version(root):
 
 
 VER = planted_version(ROOT)
+
+
+def header_bits(text):
+    """The version and date in SPEC.md's header, or stop: there is nothing to plant against."""
+    m = re.search(r"\*\*Version (\d+\.\d+\.\d+) · [^·]+ · (\d{4}-\d{2}-\d{2})\*\*", text)
+    if not m:
+        sys.exit("SPEC.md's header carries no version and date in the expected shape")
+    return m.group(1), m.group(2)
+
+
+SPEC_TEXT = (ROOT / "SPEC.md").read_text(encoding="utf-8")
+CUR, CUR_DATE = header_bits(SPEC_TEXT)  # the release SPEC.md names today, and the day it claims
 PLANTS = [  # (file, text to append or (old, new) to change, words the report must contain)
     ("README.md", "\nImplementers MUST read this.\n", "keyword MUST outside"),
     ("CONTRIBUTING.md", "\n| **bar** | a second meaning |\n", "term 'bar' defined again"),
@@ -39,6 +51,12 @@ PLANTS = [  # (file, text to append or (old, new) to change, words the report mu
      "CL1-99 is semantic but no fixture fails for it"),
     ("record/DISPOSITION-latest.md", "\nA disposition with no version in its name.\n",
      "carries no version in its name"),
+    # The three release rules (v0.9.9). Held by plants rather than by one green run: each was proved red in
+    # a pull request body when it was written, and a proof that lives only in a PR body expires with it.
+    ("CHANGELOG.md", (f"## {CUR} (candidate)", f"## {VER} (candidate)"), f"newest entry is {VER}"),
+    ("SPEC.md", (f"**Version {CUR}", f"**Version {VER}"), f"has no record/custody-v{VER}.json"),
+    ("SPEC.md", (f"{CUR_DATE}** · Predicate type", "2099-01-01** · Predicate type"),
+     "which is in the future"),
 ]
 
 
