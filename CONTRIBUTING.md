@@ -1,6 +1,6 @@
 # Contributing
 
-## Two kinds of change
+## Three kinds of change
 
 | Kind | What it is | What it needs |
 |---|---|---|
