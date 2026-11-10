@@ -53,6 +53,19 @@ def main(argv=None) -> int:
         bad += 0 if ok else 1
     for u in table.get("unfreezable") or []:
         print(f"UNFROZEN {u['record']:44} {u['why']}")
+    # A new record must be frozen, not parked. The five records published before the table existed are the
+    # only ones tolerated here, by name: anything newer needs a row, which needs its inputs in this repo.
+    legacy = set(table.get("legacyUnfreezable") or [])
+    frozen = {r["record"] for r in rows}
+    parked = {u["record"] for u in table.get("unfreezable") or []}
+    for name in sorted(parked - legacy):
+        print(f"FAIL     {name:44} is neither frozen nor one of the records published before the table")
+        bad += 1
+    for path in sorted((ROOT / "record").glob("*.json")):
+        rel = f"record/{path.name}"
+        if rel not in frozen and rel not in parked:
+            print(f"FAIL     {rel:44} has no verdict row: a new record must be frozen and re-checkable")
+            bad += 1
     if a.json:
         Path(a.json).write_text(json.dumps({"rows": out}, indent=1) + "\n", encoding="utf-8")
     print(f"VERDICTS {len(rows) - bad} of {len(rows)} match; "
