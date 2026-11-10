@@ -1,5 +1,10 @@
 # The stranger test — v0.9.4
 
+**Superseded — kept for its citations.** This note records the v0.9.4 method and nothing later. The current
+status of the stranger test is in `record/STRANGER-TEST-v0.9.9.md`: suspended, not dropped and not passed.
+The name stays unversioned because `record/custody-v0.9.4.json` and `CHANGELOG.md` cite it at this path, and
+a citation inside a published record cannot be rewritten.
+
 **Method.** Two cold implementers, each in a fresh session, given only SPEC.md, its JSON Schema, and twelve
 custody records written by a third party who never saw the reference checker. Each wrote one verifier and ran
 it on all twelve. An answer key, frozen before either ran, gives each record's verdict, level, routing and
