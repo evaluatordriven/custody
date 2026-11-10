@@ -1,8 +1,8 @@
 # Changelog
 
-Each release is a git tag, and each carries its own custody record in `record/`. Before 1.0.0 any release
-may turn a record that read `OK` into one that reads `FAILED` (SPEC.md section 8); every such change is
-listed here under **Breaking**.
+Each release is a git tag, and each carries its own custody record in `record/`, or a note in `record/` saying
+why it does not. Before 1.0.0 any release may turn a record that read `OK` into one that reads `FAILED`
+(SPEC.md section 8); every such change is listed here under **Breaking**.
 
 ## 0.9.8 (candidate)
 
