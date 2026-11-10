@@ -21,6 +21,8 @@ jobs:
         run: |
           python3 tools/make_record.py examples/minimal/inputs.json examples/minimal/record.json
           python3 checker/check.py examples/minimal/record.json --files examples/minimal --bar examples/minimal/bar.md --evidence examples/minimal/evidence
+      - name: Published records still read as published (frozen verdict table)
+        run: python3 tools/check_verdicts.py
       - name: The committed example record is the one the quickstart builds
         run: git diff --exit-code examples/
       - name: Examples declare the release's version
