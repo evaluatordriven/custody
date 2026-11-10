@@ -57,6 +57,8 @@ PLANTS = [  # (file, text to append or (old, new) to change, words the report mu
     ("SPEC.md", (f"**Version {CUR}", f"**Version {VER}"), f"has no record/custody-v{VER}.json"),
     ("SPEC.md", (f"{CUR_DATE}** · Predicate type", "2099-01-01** · Predicate type"),
      "which is in the future"),
+    (f"record/RECORD-GAP-v{VER}.md", "# A gap note for a release nobody argued for\n",
+     "permitted only for a release named in GAP_EXCEPTIONS"),
 ]
 
 
