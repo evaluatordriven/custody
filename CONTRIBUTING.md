@@ -4,11 +4,17 @@
 
 | Kind | What it is | What it needs |
 |---|---|---|
-| **Behavioral** | Anything that could change whether a record reads `OK`, `FAILED`, or `NOT-CHECKABLE` | A failing record from real use, or a reproducible counterexample, attached to the issue |
+| **Behavioral** | Anything that could change whether a record reads `OK`, `FAILED`, or `NOT-CHECKABLE` — the checker, the fixtures, the schema, or a normative requirement | A failing record from real use, or a reproducible counterexample, attached to the issue |
+| **Structural** | Changes what the repository refuses without moving any verdict: `tools/count.py`, `tools/check_verdicts.py`, `tests/`, CI | The check proved to fail on the defect it names, before it is trusted, and a reader who is not its author |
 | **Editorial** | Wording, typos, examples, layout | A declaration in the pull request: *no semantic change* |
 
 A behavioral change without a failing record or counterexample is closed, not argued. Records made to
 test this specification itself do not count as real use.
+
+A behavioral change to the checker, the fixtures or the schema is itself a job: the bar is frozen before the
+change, a reader who could not see the maker's answer reads it, and the release carrying it ships a record.
+Version 0.9.8 shipped without one — `record/RECORD-GAP-v0.9.8.md` says why — and `count.py` now refuses a
+release that neither carries a record nor declares its absence.
 
 ## How to file a failing record
 
