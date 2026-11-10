@@ -25,7 +25,7 @@ and states why not higher.
 - External evidence (CL1-15, CL3-3) is only as good as the party who read it.
 - No signing tool ships here yet, **by decision rather than omission**, and the reference checker does not
   verify signatures, so it reads CL3-3 as `NOT-CHECKABLE`: no record reaches CL3 with it. SPEC.md names
-  Sigstore as the method; [`record/SIGNING-DECISION.md`](record/SIGNING-DECISION.md) records why it is not
+  Sigstore as the method; [`docs/SIGNING-DECISION.md`](docs/SIGNING-DECISION.md) records why it is not
   built, what was weighed instead, and the three conditions that would start it.
 - The custody log catches an edited, removed or reordered event, but a log rewritten from the start, or
   cut short at the end, still verifies. Nothing outside the log anchors it until the record is signed.
