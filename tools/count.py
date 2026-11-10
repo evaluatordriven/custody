@@ -13,7 +13,9 @@
   agreement    version, levels, outcomes and disposition states agree across SPEC.md, the schema,
                the checker, README.md and every other current document (files under record/ are
                kept records of earlier work, so they may name earlier versions), and any record in
-               record/; README.md claims no level that no record in record/ supports; the
+               record/; the release SPEC.md names is the newest entry in CHANGELOG.md and has a
+               record or a RECORD-GAP note saying why it has none; SPEC.md's header carries a real,
+               non-future date; README.md claims no level that no record in record/ supports; the
                documents' statements of how many reference checkers exist match checker/; CI runs
                README.md's quickstart commands exactly; a kept record added to record/ carries its
                release's version in its name; LICENSE carries CC BY 4.0
@@ -24,6 +26,7 @@ Counting rules. Normative text = SPEC.md sections whose heading carries "(normat
 code blocks; tables count. Words = whitespace-separated tokens. Key words are counted as written,
 including the BCP 14 boilerplate sentence; "MUST NOT" counts once, not as MUST plus MUST NOT.
 """
+import datetime
 import json
 import pathlib
 import re
@@ -93,6 +96,26 @@ def main():
                     problems.append(f"term '{t}' defined again in {path.relative_to(ROOT)}")
 
     version = re.search(r"\*\*Version (\d+\.\d+\.\d+)", spec).group(1)
+    # The release SPEC.md names must be the newest in CHANGELOG.md, and it must ship a record or say why it
+    # has none (v0.9.9). Nothing else reads the two together: v0.9.8 shipped without a record, and with the
+    # previous release's date in its header, while every check stayed green.
+    header = re.search(r"\*\*Version \d+\.\d+\.\d+ · [^·]+ · (\d{4}-\d{2}-\d{2})\*\*", spec)
+    if header is None:
+        problems.append("SPEC.md header carries no date (expected `**Version X.Y.Z · status · YYYY-MM-DD**`)")
+    else:
+        try:
+            if datetime.date.fromisoformat(header.group(1)) > datetime.date.today():
+                problems.append(f"SPEC.md is dated {header.group(1)}, which is in the future")
+        except ValueError:
+            problems.append(f"SPEC.md date {header.group(1)!r} is not a calendar day")
+    newest = re.search(r"^#{0,3}\s*(\d+\.\d+\.\d+)",
+                       (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"), flags=re.M)
+    if newest and newest.group(1) != version:
+        problems.append(f"CHANGELOG.md's newest entry is {newest.group(1)} but SPEC.md says {version}")
+    if not (ROOT / "record" / f"custody-v{version}.json").is_file() \
+            and not (ROOT / "record" / f"RECORD-GAP-v{version}.md").is_file():
+        problems.append(f"release {version} has no record/custody-v{version}.json and no "
+                        f"record/RECORD-GAP-v{version}.md saying why")
     schema = json.loads((ROOT / "schema" / "custody-v1.schema.json").read_text())
     pred = schema["$defs"]["predicate"]["properties"]
     want = {"levels": set(pred["levelClaimed"]["enum"]), "outcomes": set(schema["$defs"]["outcome"]["enum"]),
