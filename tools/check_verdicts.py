@@ -24,12 +24,16 @@ TABLE = ROOT / "tools" / "verdicts.json"
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--json")
+    ap.add_argument("--table", help="the verdict table (default: tools/verdicts.json)")
+    ap.add_argument("--records", help="the record directory to check coverage of (default: record/)")
     a = ap.parse_args(argv)
-    if not TABLE.is_file():
-        print(f"no table at {TABLE}")
+    table = Path(a.table) if a.table else TABLE
+    records = Path(a.records) if a.records else (ROOT / "record")
+    if not table.is_file():
+        print(f"no table at {table}")
         return 2
-    table = json.loads(TABLE.read_text(encoding="utf-8"))
-    rows = table.get("rows") or []
+    data = json.loads(table.read_text(encoding="utf-8"))
+    rows = data.get("rows") or []
     checker = ROOT / "checker" / "check.py"
     out, bad = [], 0
     print(f"checker sha256 {__import__('hashlib').sha256(checker.read_bytes()).hexdigest()}")
@@ -51,25 +55,25 @@ def main(argv=None) -> int:
               f"{got['verdict']}/{got['levelAchieved'] or '-'} failed={failed}")
         out.append({"record": row["record"], "command": row.get("command"), "ok": ok, "failed": failed})
         bad += 0 if ok else 1
-    for u in table.get("unfreezable") or []:
+    for u in data.get("unfreezable") or []:
         print(f"UNFROZEN {u['record']:44} {u['why']}")
-    # A new record must be frozen, not parked. The five records published before the table existed are the
-    # only ones tolerated here, by name: anything newer needs a row, which needs its inputs in this repo.
-    legacy = set(table.get("legacyUnfreezable") or [])
+    # A new record must be frozen, not parked. Only the entries marked legacy - the ones published before this
+    # table existed - are tolerated here: anything newer needs a row, which needs its inputs in this repo.
+    legacy = {u["record"] for u in data.get("unfreezable") or [] if u.get("legacy")}
     frozen = {r["record"] for r in rows}
-    parked = {u["record"] for u in table.get("unfreezable") or []}
+    parked = {u["record"] for u in data.get("unfreezable") or []}
     for name in sorted(parked - legacy):
-        print(f"FAIL     {name:44} is neither frozen nor one of the records published before the table")
+        print(f"FAIL     {name:44} is not marked legacy: a record published after the table needs a verdict row")
         bad += 1
-    for path in sorted((ROOT / "record").glob("*.json")):
+    for path in sorted(records.glob("*.json")):
         rel = f"record/{path.name}"
         if rel not in frozen and rel not in parked:
             print(f"FAIL     {rel:44} has no verdict row: a new record must be frozen and re-checkable")
             bad += 1
     if a.json:
-        Path(a.json).write_text(json.dumps({"rows": out}, indent=1) + "\n", encoding="utf-8")
+        Path(a.json).write_text(json.dumps({"rows": out}, indent=2) + "\n", encoding="utf-8")
     print(f"VERDICTS {len(rows) - bad} of {len(rows)} match; "
-          f"{len(table.get('unfreezable') or [])} record(s) cannot be frozen")
+          f"{len(data.get('unfreezable') or [])} record(s) cannot be frozen")
     return 0 if bad == 0 else 1
 
 

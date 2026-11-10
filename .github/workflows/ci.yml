@@ -23,6 +23,8 @@ jobs:
           python3 checker/check.py examples/minimal/record.json --files examples/minimal --bar examples/minimal/bar.md --evidence examples/minimal/evidence
       - name: Published records still read as published (frozen verdict table)
         run: python3 tools/check_verdicts.py
+      - name: The verdict gate refuses a new unfrozen record (proven, not asserted)
+        run: python3 tests/verdicts_check.py
       - name: The committed example record is the one the quickstart builds
         run: git diff --exit-code examples/
       - name: Examples declare the release's version

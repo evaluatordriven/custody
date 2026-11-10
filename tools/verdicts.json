@@ -1,46 +1,44 @@
 {
- "_comment": "A frozen verdict per published record, with the exact command that produces it. Any checker change must reproduce every row. A record whose inputs are not published in this repository cannot be frozen; it is listed under `unfreezable` with the reason rather than omitted.",
- "rows": [
-  {
-   "record": "examples/minimal/record.json",
-   "files": "examples/minimal",
-   "evidence": "examples/minimal/evidence",
-   "bar": "examples/minimal/bar.md",
-   "command": "python3 checker/check.py examples/minimal/record.json --files examples/minimal --evidence examples/minimal/evidence --bar examples/minimal/bar.md",
-   "expect": {
-    "verdict": "OK",
-    "levelAchieved": "CL1",
-    "failed": []
-   }
-  }
- ],
- "legacyUnfreezable": [
-  "record/custody-v0.9.3.json",
-  "record/custody-v0.9.4.json",
-  "record/custody-v0.9.5.json",
-  "record/custody-v0.9.6.json",
-  "record/custody-v0.9.7.json"
- ],
- "unfreezable": [
-  {
-   "record": "record/custody-v0.9.3.json",
-   "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
-  },
-  {
-   "record": "record/custody-v0.9.4.json",
-   "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
-  },
-  {
-   "record": "record/custody-v0.9.5.json",
-   "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
-  },
-  {
-   "record": "record/custody-v0.9.6.json",
-   "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
-  },
-  {
-   "record": "record/custody-v0.9.7.json",
-   "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
-  }
- ]
+  "_comment": "A frozen verdict per published record, with the exact command that produces it. Any checker change must reproduce every row. A record whose inputs are not published in this repository cannot be frozen; it is listed under `unfreezable` with the reason, and `legacy: true` marks the five published before this table existed - a record without that flag cannot be parked here.",
+  "rows": [
+    {
+      "record": "examples/minimal/record.json",
+      "files": "examples/minimal",
+      "evidence": "examples/minimal/evidence",
+      "bar": "examples/minimal/bar.md",
+      "command": "python3 checker/check.py examples/minimal/record.json --files examples/minimal --evidence examples/minimal/evidence --bar examples/minimal/bar.md",
+      "expect": {
+        "verdict": "OK",
+        "levelAchieved": "CL1",
+        "failed": []
+      }
+    }
+  ],
+  "unfreezable": [
+    {
+      "record": "record/custody-v0.9.3.json",
+      "legacy": true,
+      "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
+    },
+    {
+      "record": "record/custody-v0.9.4.json",
+      "legacy": true,
+      "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
+    },
+    {
+      "record": "record/custody-v0.9.5.json",
+      "legacy": true,
+      "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
+    },
+    {
+      "record": "record/custody-v0.9.6.json",
+      "legacy": true,
+      "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
+    },
+    {
+      "record": "record/custody-v0.9.7.json",
+      "legacy": true,
+      "why": "job inputs not published: no evidence dir and no bar for the job; re-check from the repo reads CL1-8 and CL1-15 NOT-CHECKABLE, and CL1-14 FAILED against a newer emitter"
+    }
+  ]
 }
