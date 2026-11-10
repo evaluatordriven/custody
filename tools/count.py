@@ -14,7 +14,8 @@
                the checker, README.md and every other current document (files under record/ are
                kept records of earlier work, so they may name earlier versions), and any record in
                record/; the release SPEC.md names is the newest entry in CHANGELOG.md and has a
-               record or a RECORD-GAP note saying why it has none; SPEC.md's header carries a real,
+               record or a RECORD-GAP note saying why it has none, and only a release named in
+               GAP_EXCEPTIONS may declare a gap; SPEC.md's header carries a real,
                non-future date; README.md claims no level that no record in record/ supports; the
                documents' statements of how many reference checkers exist match checker/; CI runs
                README.md's quickstart commands exactly; a kept record added to record/ carries its
@@ -37,6 +38,10 @@ sys.dont_write_bytecode = True  # no cache files in the tree (v0.9.5)
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 KEYS = r"\b(MUST NOT|MUST|REQUIRED|SHALL NOT|SHALL|SHOULD NOT|SHOULD|RECOMMENDED|MAY|OPTIONAL)\b"
 STRONG = {"MUST NOT", "MUST", "REQUIRED", "SHALL NOT", "SHALL"}
+# A release may declare that it has no record. The permission is named here, once, so a gap note is an
+# exception someone argued for in a reviewed edit to this file — not a path any release can take by writing
+# a note. v0.9.8 is the only one, and record/RECORD-GAP-v0.9.8.md says why.
+GAP_EXCEPTIONS = {"0.9.8"}
 
 
 def sections(text):
@@ -116,6 +121,11 @@ def main():
             and not (ROOT / "record" / f"RECORD-GAP-v{version}.md").is_file():
         problems.append(f"release {version} has no record/custody-v{version}.json and no "
                         f"record/RECORD-GAP-v{version}.md saying why")
+    for gap in sorted((ROOT / "record").glob("RECORD-GAP-v*.md")):
+        who = re.search(r"-v(\d+\.\d+\.\d+)\.md$", gap.name)
+        if who and who.group(1) not in GAP_EXCEPTIONS:
+            problems.append(f"{gap.name} declares a gap for {who.group(1)}; a gap note is permitted only "
+                            f"for a release named in GAP_EXCEPTIONS, and {who.group(1)} is not one")
     schema = json.loads((ROOT / "schema" / "custody-v1.schema.json").read_text())
     pred = schema["$defs"]["predicate"]["properties"]
     want = {"levels": set(pred["levelClaimed"]["enum"]), "outcomes": set(schema["$defs"]["outcome"]["enum"]),

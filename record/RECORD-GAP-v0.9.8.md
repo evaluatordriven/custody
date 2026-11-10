@@ -8,9 +8,10 @@ Every release from v0.9.3 to v0.9.7 carries its record in this directory. This o
 here so that the absence reads as a decision with a reason rather than as an oversight. No check in this
 repository failed when it shipped without one.
 
-**This is the only note of its kind.** It covers v0.9.8 and cannot be reused. `tools/count.py` now refuses a
-release that neither carries a record nor declares its absence in a note named for its version — this note
-exists because that check did not.
+**This is the only note of its kind.** It covers v0.9.8 and cannot be reused. `tools/count.py` refuses a
+release that neither carries a record nor declares its absence in a note named for its version, and permits a
+gap note only for the releases listed in its `GAP_EXCEPTIONS` — v0.9.8 is the one entry, and a second gap would
+need an edit to that list rather than another file. This note exists because the first of those checks did not.
 
 ## The release could not have claimed a level
 
@@ -69,8 +70,10 @@ the note that explains the break, would be the same defect in a quieter form.
 `SPEC.md` at that tag reads `Version 0.9.8 · candidate · 2026-10-27`. The date is v0.9.7's; v0.9.8 was tagged
 2026-11-04, which is also the last day the specification changed. **The tag is not moved** — it is published,
 and a header that names a different commit than the one tagged would be worse than the error. The correction
-is made on `main` instead, so `main` and the tag now differ in this one line and nowhere else. A reader
-comparing them should take the tag as what shipped and `main` as what the specification actually says.
+is made on `main` instead, so `SPEC.md` on `main` and `SPEC.md` at the tag now differ in this one line and
+nowhere else. The trees differ by more than that — this note, the stranger-test note, the verdict machinery and
+the release check all landed after the tag — but no other line of the specification does. A reader comparing
+them should take the tag as what shipped and `main` as what the specification actually says.
 
 ## How to read this beside the other records
 
