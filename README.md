@@ -23,8 +23,10 @@ and states why not higher.
 - The reference checker verifies a record's shape and internal consistency. It cannot tell whether a
   reading was honest; that is what independent evaluators and the approver are for.
 - External evidence (CL1-15, CL3-3) is only as good as the party who read it.
-- No signing tool ships here yet, and the reference checker does not verify signatures, so it reads
-  CL3-3 as `NOT-CHECKABLE`: no record reaches CL3 with it. SPEC.md names Sigstore as the method.
+- No signing tool ships here yet, **by decision rather than omission**, and the reference checker does not
+  verify signatures, so it reads CL3-3 as `NOT-CHECKABLE`: no record reaches CL3 with it. SPEC.md names
+  Sigstore as the method; [`record/SIGNING-DECISION.md`](record/SIGNING-DECISION.md) records why it is not
+  built, what was weighed instead, and the three conditions that would start it.
 - The custody log catches an edited, removed or reordered event, but a log rewritten from the start, or
   cut short at the end, still verifies. Nothing outside the log anchors it until the record is signed.
 - A control shows that a reader caught a known case. No checker can tell whether the case was hard enough
