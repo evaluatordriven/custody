@@ -12,9 +12,10 @@ gate is unchanged and remains published as **unmet**.
   every one failed; repeating them on the same rhythm would spend the scarcest resource to learn the same
   thing.
 - **One cycle is owed after v0.9.10.** It covers the requirements the last clarity measure scored below full
-  agreement and that have since been rewritten: `CL1-10` (3 of 6 sessions) and `CL2-3` (18 of 24), both
-  rewritten in v0.9.8 without a rerun, and `CL1-9`, which v0.9.10 touches. A rerun after the weak points are
-  rewritten is the one case where the result could change.
+  agreement and that have since been rewritten. Measured at `custody@b5c8afb:record/STRANGER-TEST-v0.9.7.md`:
+  `CL1-10` 3 of 6 sessions (line 43) and `CL2-3` 18 of 24 (line 51), both rewritten in v0.9.8 without a
+  rerun; and `CL1-9` 5 of 6 (line 50), which v0.9.10 touches. A rerun after the weak points are rewritten is
+  the one case where the result could change.
 - **Revival condition.** A release that changes a requirement the clarity measure scored below full agreement
   reopens the test for that release. Nothing else does.
 
@@ -36,4 +37,8 @@ Absence of a passing cycle and absence of the test look identical from outside. 
 failures and then silence cannot tell a decision from an oversight, and the difference between "suspended with
 a stated trigger" and "quietly dropped" is the whole of the claim that this method means anything.
 
-*Decided 2026-11-10 on the Owner's instruction, following an outside review of all three repositories.*
+*Prepared for v0.9.9. If that release slips, this note moves with it rather than naming a version that does
+not exist.*
+
+*Owner decision, 2026-11-10, given in the project's Telegram conduit thread following an outside review of all
+three repositories, and recorded here by custody pull request 5 — this file is the citable record of it.*
