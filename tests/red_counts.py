@@ -59,6 +59,7 @@ PLANTS = [  # (file, text to append or (old, new) to change, words the report mu
      "which is in the future"),
     (f"record/RECORD-GAP-v{VER}.md", "# A gap note for a release nobody argued for\n",
      "permitted only for a release named in GAP_EXCEPTIONS"),
+    ("README.md", f"\nAn earlier note is at `record/RECORD-GAP-v{VER}.md`: see v{VER}.\n", f"version {VER}"),
 ]
 
 
@@ -102,6 +103,22 @@ def main():
         quoted = [p for p in problems(root) if "kept-v0.0.1.md" in p]
         print(f"{'ok    ' if not quoted else 'WRONG '}  record/kept-v0.0.1.md: a kept record may quote MUST")
         missed += bool(quoted)
+    older = [(re.search(r"-v(\d+\.\d+\.\d+)\.(?:json|md)$", p.name), p)
+             for p in sorted((ROOT / "record").iterdir()) if p.is_file()]
+    older = [(m.group(1), p.name) for m, p in older if m and m.group(1) != CUR]
+    if older:  # a document may cite a kept record, and naming its release is then a citation
+        old, name = older[0]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp) / "repo"
+            shutil.copytree(ROOT, root, ignore=shutil.ignore_patterns(".git"))
+            c = root / "CONTRIBUTING.md"
+            c.write_text(c.read_text(encoding="utf-8") +
+                         f"\nVersion {old} shipped without one — `record/{name}` says why.\n",
+                         encoding="utf-8")
+            flagged = [p for p in problems(root) if "CONTRIBUTING.md" in p and f"version {old}" in p]
+            print(f"{'ok    ' if not flagged else 'WRONG '}  CONTRIBUTING.md: citing record/{name} "
+                  f"excuses naming {old}")
+            missed += bool(flagged)
     return 1 if missed else 0
 
 

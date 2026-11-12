@@ -15,7 +15,9 @@
                kept records of earlier work, so they may name earlier versions), and any record in
                record/; the release SPEC.md names is the newest entry in CHANGELOG.md and has a
                record or a RECORD-GAP note saying why it has none, and only a release named in
-               GAP_EXCEPTIONS may declare a gap; SPEC.md's header carries a real,
+               GAP_EXCEPTIONS may declare a gap; a document may name an earlier release when it
+               cites a kept record for that release, and only when the cited file exists;
+               SPEC.md's header carries a real,
                non-future date; README.md claims no level that no record in record/ supports; the
                documents' statements of how many reference checkers exist match checker/; CI runs
                README.md's quickstart commands exactly; a kept record added to record/ carries its
@@ -146,8 +148,17 @@ def main():
     current = [p for p in md if "record" not in p.relative_to(ROOT).parts[:1]  # records, and the
                and p.name != "CHANGELOG.md"]  # changelog, are history: they name earlier versions
     for path in current + [ROOT / "schema" / "custody-v1.schema.json"]:
-        for v in set(re.findall(r"\b[vV]?(0\.\d+\.\d+)\b", path.read_text(encoding="utf-8"))):
-            if v != version:
+        body = path.read_text(encoding="utf-8")
+        # A version token is a claim about the current release unless the same document cites a kept
+        # record for that version. `record/RECORD-GAP-v0.9.8.md` says which release it is about and the
+        # filename carries the version, so prose that names that release is citing a file, not drifting
+        # (v0.9.9). The excuse holds only if the file is really there: a citation to nothing excuses
+        # nothing.
+        cited = {m.group(2) for m in
+                 re.finditer(r"(record/[^\s`'\"]*?-v(\d+\.\d+\.\d+)\.(?:md|json))", body)
+                 if (ROOT / m.group(1)).is_file()}
+        for v in set(re.findall(r"\b[vV]?(0\.\d+\.\d+)\b", body)):
+            if v != version and v not in cited:
                 problems.append(f"version {v} in {path.relative_to(ROOT)} disagrees with SPEC.md {version}")
     recorded = set()
     for rec in sorted((ROOT / "record").glob("*.json")) if (ROOT / "record").is_dir() else []:
