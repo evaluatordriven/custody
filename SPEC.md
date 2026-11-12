@@ -1,6 +1,6 @@
 # Evaluator Driven — the custody record
 
-**Version 0.9.8 · candidate · 2026-11-04** · Predicate type `https://evaluatordriven.com/custody/v1`
+**Version 0.9.9 · candidate · 2026-11-12** · Predicate type `https://evaluatordriven.com/custody/v1`
 Author: Steve Moitozo II · Text: CC BY 4.0 · Code: Apache-2.0 · Patents: see `PATENTS.md`
 
 Sections marked *(normative)* define conformance. Everything else explains it.
@@ -92,7 +92,7 @@ means a default.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `specVersion` | string | yes | This document's version, e.g. `0.9.8` |
+| `specVersion` | string | yes | This document's version, e.g. `0.9.9` |
 | `levelClaimed` | `CL1` · `CL2` · `CL3` · `baseline` | yes | |
 | `bar.digest` | digest | yes | sha256 of the frozen bar document |
 | `bar.frozenAt` | timestamp | yes | RFC 3339, UTC |

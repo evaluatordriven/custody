@@ -11,7 +11,7 @@ Why the name: see "Why this name" in `SPEC.md`.
   [reviewer's guide](docs/REVIEWERS-GUIDE.md); every word the specification uses is in the
   [glossary](docs/GLOSSARY.md).
 
-**Status: v0.9.8, candidate.** Early. One reference checker exists, in this repository. Known
+**Status: v0.9.9, candidate.** Early. One reference checker exists, in this repository. Known
 implementations and their status are listed in the doctrine's README:
 <https://github.com/evaluatordriven/doctrine#the-custody-record>. Nothing here implies endorsement by
 anyone. Each release carries
