@@ -4,6 +4,21 @@ Each release is a git tag, and each carries its own custody record in `record/`,
 why it does not. Before 1.0.0 any release may turn a record that read `OK` into one that reads `FAILED`
 (SPEC.md section 8); every such change is listed here under **Breaking**.
 
+## 0.9.9 (candidate)
+
+**No requirement changed.** This release moves the release documents and nothing else: `SPEC.md` keeps
+every requirement row and every field's definition, and the verifier, the schema, the fixtures and the
+tools are untouched.
+
+**Clarified** (the rules did not change)
+- `SPEC.md`'s header, and the version example in the field table of section 4, name this release.
+- `CONTRIBUTING.md`'s Releases section carries the cadence amendment: a release that changes no
+  requirement does not count toward the monthly cadence.
+
+**Fixed**
+- `CONTRIBUTING.md` no longer names the earlier release by a bare version token. The sentence still
+  says which release shipped without a record, and where its note is kept.
+
 ## 0.9.8 (candidate)
 
 **Breaking** (what a producer must change)
