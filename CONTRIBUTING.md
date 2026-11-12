@@ -28,6 +28,19 @@ At most one release a month while the version starts with 0, quarterly after 1.0
 Semantic Versioning 2.0.0; `SPEC.md` section 8 says what counts as a major change. Every release is a
 git tag, and is cited by its commit.
 
+### Release packaging classes (do not collapse them)
+
+A PR that moves `SPEC.md`'s version is not automatically a shippable release. Name the class:
+
+| Class | What is true | CI / merge |
+|---|---|---|
+| **Docs candidate** | Version header and release docs only; no new `record/custody-vX.Y.Z.json`, or the file is not claimed as the release record | May be red on `count.py` until a real record or an allowed gap note exists. Do not merge as if shipped. |
+| **Record present + checker OK** | `record/custody-vX.Y.Z.json` exists, `specVersion` matches the release, and `python3 checker/check.py` returns **OK** at a claimed level (not FAILED/none with hollow bar/maker/instrument/controls) | `count.py` can go green. Prefer this before merge. |
+| **Frozen verdicts** | The published record also has a re-checkable row in `tools/verdicts.json` (inputs in-tree) | Strongest public claim; optional until freeze inputs exist. |
+| **Gap note** | `record/RECORD-GAP-vX.Y.Z.md` explains why this release has no record | Bounded exception (see existing 0.9.8 note). Do not spend it to paper over a hollow emit. |
+
+**Hollow record:** a JSON file under `record/` whose bar/maker/instrument/controls are empty nulls is **not** a release record. Prefer honest absence (or a gap note when allowed) over freezing FAILED/none to green CI. A unittest **runner** is not a custody **bar** (bar needs author, frozenAt, dimensions, approvals bound to a digest).
+
 ## Before you open a pull request
 
 ```sh
