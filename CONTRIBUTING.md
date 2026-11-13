@@ -35,8 +35,8 @@ A PR that moves `SPEC.md`'s version is not automatically a shippable release. Na
 | Class | What is true | CI / merge |
 |---|---|---|
 | **Docs candidate** | Version header and release docs only; no new `record/custody-vX.Y.Z.json`, or the file is not claimed as the release record | May be red on `count.py` until a real record or an allowed gap note exists. Do not merge as if shipped. |
-| **Record present + checker OK** | `record/custody-vX.Y.Z.json` exists, `specVersion` matches the release, and `python3 checker/check.py` returns **OK** at a claimed level (not FAILED/none with hollow bar/maker/instrument/controls) | `count.py` can go green. Prefer this before merge. |
-| **Frozen verdicts** | The published record also has a re-checkable row in `tools/verdicts.json` (inputs in-tree) | Strongest public claim; optional until freeze inputs exist. |
+| **Record file present** | `record/custody-vX.Y.Z.json` exists and `specVersion` matches the release | `count.py` can go green. That only means the named file exists and `specVersion` matches. It does not run `checker/check.py`, and it does not reject a hollow file. Not enough to merge. |
+| **Frozen verdicts** | The published record also has a re-checkable row in `tools/verdicts.json` (inputs in-tree) | Required for any new `record/*.json`. `check_verdicts.py` stays red until that row exists and reproduces. Parking under `unfreezable` without `legacy: true` is refused; legacy is only for v0.9.3–v0.9.7. Do not freeze FAILED/none, or a hollow file, to buy a green run. |
 | **Gap note** | `record/RECORD-GAP-vX.Y.Z.md` explains why this release has no record | Bounded exception (see existing 0.9.8 note). Do not spend it to paper over a hollow emit. |
 
 **Hollow record:** a JSON file under `record/` whose bar/maker/instrument/controls are empty nulls is **not** a release record. Prefer honest absence (or a gap note when allowed) over freezing FAILED/none to green CI. A unittest **runner** is not a custody **bar** (bar needs author, frozenAt, dimensions, approvals bound to a digest).
