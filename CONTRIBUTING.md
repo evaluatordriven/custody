@@ -28,6 +28,19 @@ At most one release a month while the version starts with 0, quarterly after 1.0
 Semantic Versioning 2.0.0; `SPEC.md` section 8 says what counts as a major change. Every release is a
 git tag, and is cited by its commit.
 
+### Release packaging classes (do not collapse them)
+
+A PR that moves `SPEC.md`'s version is not automatically a shippable release. Name the class:
+
+| Class | What is true | CI / merge |
+|---|---|---|
+| **Docs candidate** | Version header and release docs only; no new `record/custody-vX.Y.Z.json`, or the file is not claimed as the release record | May be red on `count.py` until a real record or an allowed gap note exists. Do not merge as if shipped. |
+| **Record file present** | `record/custody-vX.Y.Z.json` exists and `specVersion` matches the release | `count.py` can go green. That only means the named file exists and `specVersion` matches. It does not run `checker/check.py`, and it does not reject a hollow file. Not enough to merge. |
+| **Frozen verdicts** | The published record also has a re-checkable row in `tools/verdicts.json` (inputs in-tree) | Required for any new `record/*.json`. `check_verdicts.py` stays red until that row exists and reproduces. Parking under `unfreezable` without `legacy: true` is refused; legacy is only for the pre-table records `record/custody-v0.9.3.json` through `record/custody-v0.9.7.json`. Do not freeze FAILED/none, or a hollow file, to buy a green run. |
+| **Gap note** | `record/RECORD-GAP-vX.Y.Z.md` explains why this release has no record | Bounded exception (see existing 0.9.8 note). Do not spend it to paper over a hollow emit. |
+
+**Hollow record:** a JSON file under `record/` whose bar/maker/instrument/controls are empty nulls is **not** a release record. Prefer honest absence (or a gap note when allowed) over freezing FAILED/none to green CI. A unittest **runner** is not a custody **bar** (bar needs author, frozenAt, dimensions, approvals bound to a digest).
+
 ## Before you open a pull request
 
 ```sh
